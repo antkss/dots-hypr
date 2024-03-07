@@ -141,6 +141,8 @@ if $ask_ags;then showfun install-ags;v install-ags;fi
 #
 # In case some folders does not exists
 v mkdir -p "$HOME"/.{config,cache,local/{bin,share}}
+v mkdir -p "$HOME"/.bin/bin
+cp ./xfce4-appearance-settings "$HOME"/.bin/bin
 
 # `--delete' for rsync to make sure that
 # original dotfiles and new ones in the SAME DIRECTORY
