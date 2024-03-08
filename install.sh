@@ -15,9 +15,9 @@ printf '            2. has not been fully tested, use at your own risk.\n'
 printf "\e[31m"
 printf "Please CONFIRM that you HAVE ALREADY BACKED UP \"$HOME/.config/\" and \"$HOME/.local/\" folders!\n"
 printf "\e[97m"
-printf "Enter capital \"YES\" (without quotes) to continue:"
+printf "Enter capital \"yes\" (without quotes) to continue:"
 read -p " " p
-case $p in "YES")sleep 0;; *)echo "Received \"$p\", aborting...";exit 1;;esac
+case $p in "yes")sleep 0;; *)echo "Received \"$p\", aborting...";exit 1;;esac
 printf '\n'
 printf 'Do you want to confirm every time before a command executes?\n'
 printf '  y = Yes, ask me before executing each of them. (RECOMMENDED)\n'
