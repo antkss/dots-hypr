@@ -9,6 +9,8 @@ source ./scriptdata/options
 if ! command -v pacman >/dev/null 2>&1;then printf "\e[31m[$0]: pacman not found, it seems that the system is not ArchLinux or Arch-based distros. Aborting...\e[0m\n";exit 1;fi
 prevent_sudo_or_root
 startask (){
+printf "checking master git branch  ...\n"
+git pull origin master
 printf "\e[34m[$0]: Hi there!\n"
 printf 'This script 1. only works for ArchLinux and Arch-based distros.\n'
 printf '            2. has not been fully tested, use at your own risk.\n'
