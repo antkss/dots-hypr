@@ -13,8 +13,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'fatih/vim-go', { 'tag': '*' }
 "COC VIM
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Vim airline
+"Vim line
 Plug 'vim-airline/vim-airline'
+" Plug 'feline-nvim/feline.nvim', { 'branch': '0.5-compat' }
 Plug 'vim-airline/vim-airline-themes'
 "Vim theme 
 "Plug 'folke/tokyonight.nvim'
@@ -78,7 +79,7 @@ set number
 
 "airline configuration
 let g:airline_powerline_fonts = 1                       " Enable font for status bar
-" let g:airline_theme='onedark'                           " Theme OneDark
+let g:airline_theme='base16_flat'                           " Theme OneDark
 
 let g:airline#extensions#tabline#enabled = 1            " Enable Tab bar
 let g:airline#extensions#tabline#left_sep = ' '         " Enable Tab seperator 
@@ -93,6 +94,7 @@ let g:airline_section_error=''
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+
 " auto close bracket setup 
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -129,6 +131,7 @@ nnoremap  x  "+x
 vnoremap  X  "+X
 nnoremap  X  "+X
 
+set autoread
 
 " " Paste from clipboard
 nnoremap p "+p
@@ -146,5 +149,6 @@ let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
 let g:vimspector_terminal_maxwidth = 60
 let g:vimspector_terminal_minwidth = 60
+" let g:color1 = '#ffffff'
 colorscheme onedark  
-
+" source ~/.config/nvim/airline.vim

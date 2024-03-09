@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# if [ "$1" == "--noswitch" ]; then
-#     imgpath=$(swww query | awk -F 'image: ' '{print $2}')
-#     # imgpath=$(ags run-js 'wallpaper.get(0)')
-# else
+if [ "$1" == "--noswitch" ]; then
+    imgpath=$(swww query | awk -F 'image: ' '{print $2}')
+    imgpath=$(ags run-js 'wallpaper.get(0)')
+else
     # Select and set image (hyprland)
     cd "$HOME/.images"
     imgpath=$(yad --width 800 --height 500 --file --title='Choose wallpaper')
@@ -20,12 +20,14 @@
 
     # ags run-js "wallpaper.set('')"
     # sleep 0.1 && ags run-js "wallpaper.set('${imgpath}')" &
-    rm /usr/share/hyprland/wall_2K.png
-    ffmpeg -i $imgpath -vf scale=1920x1080 /usr/share/hyprland/wall_2K.png 
-    # swww img "$imgpath" --transition-step 100 --transition-fps 60 \
-    # --transition-type grow --transition-angle 30 --transition-duration 1 \
-    # --transition-pos "$cursorposx, $cursorposy_inverted"
-# fi
+    # options for your wtf idea =))) 
+    # rm /usr/share/hyprland/wall_2K.png
+    # ffmpeg -i $imgpath -vf scale=1920x1080 /usr/share/hyprland/wall_2K.png 
+    # options for your normal idea
+    swww img "$imgpath" --transition-step 100 --transition-fps 60 \
+    --transition-type grow --transition-angle 30 --transition-duration 1 \
+    --transition-pos "$cursorposx, $cursorposy_inverted"
+fi
 
 # Generate colors for ags n stuff
 "$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply
