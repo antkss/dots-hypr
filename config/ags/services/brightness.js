@@ -23,16 +23,16 @@ class BrightnessService extends Service {
         percent = clamp(percent, 0, 1);
         this._screenValue = percent;
 
-        Utils.execAsync(`brightnessctl s ${percent * 100}% -q`)
-            .then(() => {
+        // Utils.execAsync(`brightnessctl s ${percent * 100}% -q`)
+        //     .then(() => {
                 // signals has to be explicity emitted
                 this.emit('screen-changed', percent);
                 this.notify('screen-value');
 
                 // or use Service.changed(propName: string) which does the above two
                 // this.changed('screen');
-            })
-            .catch(print);
+            // })
+            // .catch(print);
     }
 
     constructor() {

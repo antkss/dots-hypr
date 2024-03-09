@@ -83,19 +83,45 @@ apply_term() {
     # Copy template
     mkdir -p "$HOME"/.cache/ags/user/generated/terminal
     cp "scripts/templates/terminal/sequences.txt" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
-    # Apply colors
-    for i in "${!colorlist[@]}"; do
-        sed -i "s/${colorlist[$i]} #/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
-    done
-
-    sed -i "s/\$alpha/$term_alpha/g" "$HOME/.cache/ags/user/generated/terminal/sequences.txt"
-
-    for file in /dev/pts/*; do
-      if [[ $file =~ ^/dev/pts/[0-9]+$ ]]; then
-        cat "$HOME"/.cache/ags/user/generated/terminal/sequences.txt > "$file"
-      fi
-    done
-}
+    # check if onedark plugin exist 
+    if [ -d "$HOME/.config/nvim/plugged/onedark.nvim" ]; then
+# if the folder exist then do the operations
+mv $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua.bak
+echo "return {
+	dark = {
+		black = \"#1a212e\",
+		bg0 = \"${colorvalues[18]}\",
+		bg1 = \"#21283b\",
+		bg2 = \"#283347\",
+		bg3 = \"#2a324a\",
+		bg_d = \"#141b24\",
+		bg_blue = \"#73b8f1\",
+		bg_yellow = \"#ebd09c\",
+		fg = \"#abb2bf\",
+		purple = \"#c678dd\",
+		green = \"#98c379\",
+		orange = \"#d19a66\",
+		blue = \"#61afef\",
+		yellow =\"#e5c07b\",
+		cyan = \"#56b6c2\",
+		red = \"#e86671\",
+		grey = \"#5c6370\",
+		light_grey = \"#848b98\",
+		dark_cyan = \"#2b6f77\",
+		dark_red = \"#993939\",
+		dark_yellow = \"#93691d\",
+		dark_purple = \"#8a3fa0\",
+		diff_add = \"#31392b\",
+		diff_delete = \"#382b2c\",
+		diff_change = \"#1c3448\",
+		diff_text = \"#2c5372\",
+	}
+} " > $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua
+          else 
+		  #if it doesn't exist then 
+		  notify-send "onedark plugin not found, please install it for neovim material theme support\n link: https://github.com/navarasu/onedark.nvim"
+    fi
+  }
 
 apply_hyprland() {
     # Check if scripts/templates/hypr/hyprland/colors.conf exists

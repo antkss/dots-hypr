@@ -34,17 +34,17 @@ Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'MunifTanjim/nui.nvim'
 " Plug 'dpayne/CodeGPT.nvim'
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
+Plug 'navarasu/onedark.nvim'
 call plug#end()
+
 " Plug 'mfussenegger/nvim-dap'
 " Plug 'puremourning/vimspector'
 "
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`. call plug#end()
-" set background=dark
 let b:copilot_enabled = 0  
 syntax on
-colorscheme onedark  
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "colorscheme tokyonight-storm
 "let g:lightline = {
@@ -66,18 +66,19 @@ inoremap <silent><expr> <Tab>
 " nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-nnoremap \ :Files<CR>
+nnoremap = :Files<CR>
 nnoremap q: q <CR>
 set number
-
+" let g:onedark_termcolors=256
 
 " Search a hightlighted text
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+" vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " nmap /\ :noh<CR>
+" Overwrite some color highlight 
 
 "airline configuration
 let g:airline_powerline_fonts = 1                       " Enable font for status bar
-let g:airline_theme='onedark'                           " Theme OneDark
+" let g:airline_theme='onedark'                           " Theme OneDark
 
 let g:airline#extensions#tabline#enabled = 1            " Enable Tab bar
 let g:airline#extensions#tabline#left_sep = ' '         " Enable Tab seperator 
@@ -117,7 +118,6 @@ nnoremap <S-e> :call vimspector#Reset( { 'interactive': v:false } )<CR>
 nmap <C-s> :w<CR>
 " map the alt key to the esc key
 inoremap <C-c> <Esc>
-inoremap <C-e> <Tab>
 " " Copy to clipboard
 vnoremap  y  "+y
 nnoremap  Y  "+yg_
@@ -146,4 +146,5 @@ let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
 let g:vimspector_terminal_maxwidth = 60
 let g:vimspector_terminal_minwidth = 60
+colorscheme onedark  
 
