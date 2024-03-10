@@ -16,7 +16,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Vim line
 Plug 'vim-airline/vim-airline'
 " Plug 'feline-nvim/feline.nvim', { 'branch': '0.5-compat' }
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 "Vim theme 
 "Plug 'folke/tokyonight.nvim'
 " Plug 'morhetz/gruvbox'

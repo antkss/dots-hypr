@@ -189,7 +189,7 @@ echo "return {
 		diff_text = \"#2c5372\",
 	}
 } " > $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua
-
+if [ -d "$HOME/.config/nvim/plugged/vim-airline" ]; then
 echo "let g:airline#themes#base16_flat#palette = {}
 let s:gui00 = \"#ffffff\"
 let s:gui01 = \"${colorvalues[18]}\"
@@ -200,7 +200,7 @@ let s:gui05 = \"#e0e0e0\"
 let s:gui06 = \"#f5f5f5\"
 let s:gui07 = \"#ECF0F1\"
 let s:gui08 = \"${colorvalues[8]}\"
-let s:gui09 = \"#E67E22\"
+let s:gui09 = \"${colorvalues[1]}\"
 let s:gui0A = \"#F1C40F\"
 let s:gui0B = \"${colorvalues[1]}\"
 let s:gui0C = \"#1ABC9C\"
@@ -256,8 +256,10 @@ endif
 let g:airline#themes#base16_flat#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
       \ [ s:gui07, s:gui02, s:cterm07, s:cterm02, '' ],
       \ [ s:gui07, s:gui04, s:cterm07, s:cterm04, '' ],
-      \ [ s:gui05, s:gui01, s:cterm05, s:cterm01, 'bold' ])" > $HOME/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/base16_flat.vim
-
+      \ [ s:gui05, s:gui01, s:cterm05, s:cterm01, 'bold' ])" > $HOME/.config/nvim/plugged/vim-airline/autoload/airline/themes/base16_flat.vim
+else 
+	notify-send "airline plugin not found, please install it for material themes support"
+	fi
           else 
 		  #if it doesn't exist then 
 		  notify-send "onedark,vim-airline and vim-airline-themes plugin not found, please install them for neovim material themes support\n link onedark: https://github.com/navarasu/onedark.nvim"
@@ -272,3 +274,4 @@ apply_hyprlock &
 apply_gtk &
 apply_fuzzel &
 apply_term &
+notify-send "you should logout to take full effects"
