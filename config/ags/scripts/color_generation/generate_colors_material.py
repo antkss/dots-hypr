@@ -90,7 +90,7 @@ inversePrimary = hexFromArgb(colorscheme.get_inversePrimary())
 
 # make material less boring
 if darkmode:
-    background = darken(background, 0.6)
+    background = darken(background, 0.9)
 
 print('$primary: ' + primary + ';')
 print('$onPrimary: ' + onPrimary + ';')
