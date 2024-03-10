@@ -81,7 +81,7 @@ if $ask;then
   for i in "${pkglist[@]}";do v $AUR_HELPER -S --needed $i;done
 else
   # execute for all elements of the array $pkglist in one line
-  v $AUR_HELPER -S --needed --noconfirm ${pkglist[*]}
+  v $AUR_HELPER -S --needed --noconfirm --config ./pacman.conf ${pkglist[*]}
 fi
 
 v sudo usermod -aG video,input "$(whoami)"
