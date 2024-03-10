@@ -97,103 +97,28 @@ if command -v ags >/dev/null 2>&1;then
 else ask_ags=true
 fi
 if $ask_ags;then showfun install-ags;v install-ags;fi
+printf "Your actions will overwrite all the existing configurations, do you want to continue?\n"
+printf " y = Yes, continue:\n"
+printf " type anything else to abort:\n"
+overwrite(){
+read -p "====> " p
+case $p in
+  y)ask=true;;
+  n)ask=false;;
+  *)exit 1;;
+esac
 
-# if $(fc-list|grep -q Rubik); then
-#   echo -e "\e[33m[$0]: Font \"Rubik\" already exists, no need to install.\e[0m"
-#   echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
-#   ask_Rubik=$ask
-# else ask_Rubik=true
-# fi
-# if $ask_Rubik;then showfun install-Rubik;v install-Rubik;fi
-#
-# if $(fc-list|grep -q Gabarito); then
-#   echo -e "\e[33m[$0]: Font \"Gabarito\" already exists, no need to install.\e[0m"
-#   echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
-#   ask_Gabarito=$ask
-# else ask_Gabarito=true
-# fi
-# if $ask_Gabarito;then showfun install-Gabarito;v install-Gabarito;fi
-#
-# if $(test -d /usr/local/share/icons/OneUI); then
-#   echo -e "\e[33m[$0]: Icon pack \"OneUI\" already exists, no need to install.\e[0m"
-#   echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
-#   ask_OneUI=$ask
-# else ask_OneUI=true
-# fi
-# if $ask_OneUI;then showfun install-OneUI;v install-OneUI;fi
-#
-# if $(test -d /usr/local/share/icons/Bibata-Modern-Classic); then
-#   echo -e "\e[33m[$0]: Cursor theme \"Bibata-Modern-Classic\" already exists, no need to install.\e[0m"
-#   echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
-#   ask_bibata=$ask
-# else ask_bibata=true
-# fi
-# if $ask_bibata;then showfun install-bibata;v install-bibata;fi
-#
-# if command -v LaTeX >/dev/null 2>&1;then
-#   echo -e "\e[33m[$0]: Program \"MicroTeX\" already exists, no need to install.\e[0m"
-#   echo -e "\e[34mYou can reinstall it in order to update to the latest version anyway.\e[0m"
-#   ask_MicroTeX=$ask
-# else ask_MicroTeX=true
-# fi
-# if $ask_MicroTeX;then showfun install-MicroTeX;v install-MicroTeX;fi
-#
-# #####################################################################################
+}
+
+case $ask in
+  false)sleep 0;;
+  *)overwrite ;;
+esac
+
 printf "\e[36m[$0]: 3. Copying\e[97m\n"
-#
-# In case some folders does not exists
-v mkdir -p "$HOME"/.{config,cache,local/{bin,share}}
-v mkdir -p "$HOME"/.bin/bin
-cp ./xfce4-appearance-settings "$HOME"/.bin/bin
-
-# `--delete' for rsync to make sure that
-# original dotfiles and new ones in the SAME DIRECTORY
-# (eg. in ~/.config/hypr) won't be mixed together
-
-# For .config/* but not AGS, not Hyprland
-for i in $(find .config/ -mindepth 1 -maxdepth 1 ! -name 'ags' ! -name 'hypr' -exec basename {} \;); do
-  echo "[$0]: Found target: $i"
-  if [ -d "$i" ];then v rsync -av --delete "$i/" "$HOME/$i/"
-  elif [ -f "$i" ];then v rsync -av "$i" "$HOME/$i"
-  fi
-done
-
-# For AGS
-v rsync -av --delete --exclude '/user_options.js' ./config/ags/ "$HOME"/.config/ags/
-t="$HOME/.config/ags/user_options.js"
-if [ -f $t ];then
-  echo -e "\e[34m[$0]: \"$t\" already exists.\e[0m"
-  v cp -f config/ags/user_options.js $t.new
-else
-  echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
-  v cp config/ags/user_options.js $t
-fi
-
-# For Hyprland
-v rsync -av --delete --exclude '/custom' --exclude '/hyprland.conf' config/hypr/ "$HOME"/.config/hypr/
-t="$HOME/.config/hypr/hyprland.conf"
-if [ -f $t ];then
-  echo -e "\e[34m[$0]: \"$t\" already exists.\e[0m"
-  v cp -f config/hypr/hyprland.conf $t.new
-else
-  echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
-  v cp config/hypr/hyprland.conf $t
-fi
-t="$HOME/.config/hypr/custom"
-if [ -d $t ];then
-  echo -e "\e[34m[$0]: \"$t\" already exists, will not do anything.\e[0m"
-else
-  echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
-  v rsync -av --delete config/hypr/custom/ $t/
-fi
-
-
-# some foldes (eg. .local/bin) should be processed seperately to avoid `--delete' for rsync,
-# since the files here come from different places, not only about one program.
-v rsync -av ".local/bin/" "$HOME/.local/bin/"
-
-# Prevent hyprland from not fully loaded
+cp -r ./config/* $HOME/.config
 sleep 1
+
 try hyprctl reload
 #####################################################################################
 printf "\e[36m[$0]: Finished. See the \"Import Manually\" folder and grab anything you need.\e[97m\n"
