@@ -139,7 +139,7 @@ if $ask_ags;then showfun install-ags;v install-ags;fi
 # if $ask_MicroTeX;then showfun install-MicroTeX;v install-MicroTeX;fi
 #
 # #####################################################################################
-# printf "\e[36m[$0]: 3. Copying\e[97m\n"
+printf "\e[36m[$0]: 3. Copying\e[97m\n"
 #
 # In case some folders does not exists
 v mkdir -p "$HOME"/.{config,cache,local/{bin,share}}

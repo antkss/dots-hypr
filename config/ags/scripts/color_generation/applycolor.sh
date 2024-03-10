@@ -39,9 +39,7 @@ transparentize() {
   local hex="$1"
   local alpha="$2"
   local red green blue
-
-  red=$((16#${hex:1:2}))
-  green=$((16#${hex:3:2}))
+red=$((16#${hex:1:2})) green=$((16#${hex:3:2}))
   blue=$((16#${hex:5:2}))
 
   printf 'rgba(%d, %d, %d, %.2f)\n' "$red" "$green" "$blue" "$alpha"
@@ -69,7 +67,7 @@ apply_fuzzel() {
     # Apply colors
     for i in "${!colorlist[@]}"; do
         sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/fuzzel/fuzzel.ini
-echo "$i: ${colorlist[$i]}: ${colorvalues[$i]}"
+# echo "$i: ${colorlist[$i]}: ${colorvalues[$i]}"
     done
 
     cp  "$HOME"/.cache/ags/user/generated/fuzzel/fuzzel.ini "$HOME"/.config/fuzzel/fuzzel.ini
@@ -92,6 +90,28 @@ apply_hyprland() {
     done
 
     cp "$HOME"/.cache/ags/user/generated/hypr/hyprland/colors.conf "$HOME"/.config/hypr/hyprland/colors.conf
+    ########################################################
+##############apply for foot #################################
+if [ -d "$HOME/.config/foot" ]; then
+	if [[ -z $(cat $HOME/.config/foot/foot.ini | grep /.config/foot/colors.ini) ]]; then
+		echo "[main]
+include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
+	fi
+echo "
+[colors]
+background=${colorvalues[18]:1}
+foreground=ffffff
+flash=7f7f00
+regular0=0x696969   
+regular1=0xFF2400 
+regular2=0x03C03C
+regular3=0xFDFF00
+regular4=0x${colorvalues[1]:1} 
+regular5=0xFF1493 
+regular6=0x00CCCC  
+regular7=0xffffff  
+" > "$HOME"/.config/foot/colors.ini
+fi
 }
 
 apply_hyprlock() {
