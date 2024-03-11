@@ -15,7 +15,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Vim line
 Plug 'vim-airline/vim-airline'
-
+"vim translator 
+Plug 'voldikss/vim-translator'
 "find and replace
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-pack/nvim-spectre'
@@ -62,6 +63,7 @@ nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap = :Files<CR>
 nnoremap q: q <CR>
+nnoremap t :Translate<CR>
 set number
 
 " auto close bracket setup 
@@ -106,7 +108,7 @@ set autoread
 nnoremap p "+p
 vnoremap p "+p
 vnoremap P p
-
+let g:translator_target_lang = 'vi'
 let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
 let g:vimspector_terminal_maxwidth = 60
