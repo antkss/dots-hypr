@@ -30,43 +30,8 @@
         "typeParameter": "\uf728",
         "default": "\uf29c"
     },
-    "jedi": {
-        "enable": true,
-        "startupMessage": true,
-        "executable.command": "jedi-language-server",
-
-    },
-    "languageserver": { 
-        // C++
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": ".ccls-cache",
-                    "format": "binary"
-                },
-                "client": {
-                    "snippetSupport": true
-                },
-                "index": {
-                    "onChange": true
-                },
-                "highlight": {
-                    "lsRanges": true
-                }
-            }
-        },
-        "cmake": {
-            "command": "cmake-language-server",
-            "filetypes": ["cmake"],
-            "rootPatterns": [
-                "build/"
-            ],
-            "initializationOptions": {
-                "buildDirectory": "build"
-            }
-        }
-    }
+    "snippets.ultisnips.pythonPrompt": false,
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/17.0.3/clangd_17.0.3/bin/clangd"
 }
+},
+        

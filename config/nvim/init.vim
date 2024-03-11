@@ -15,11 +15,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Vim line
 Plug 'vim-airline/vim-airline'
-" Plug 'feline-nvim/feline.nvim', { 'branch': '0.5-compat' }
-" Plug 'vim-airline/vim-airline-themes'
-"Vim theme 
-"Plug 'folke/tokyonight.nvim'
-" Plug 'morhetz/gruvbox'
+
 "find and replace
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-pack/nvim-spectre'
@@ -32,10 +28,7 @@ Plug 'puremourning/vimspector'
 Plug 'numToStr/Comment.nvim'
 "chatgpt plugin 
 Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'MunifTanjim/nui.nvim'
-" Plug 'dpayne/CodeGPT.nvim'
-" Plug 'joshdick/onedark.vim'
+"theme plugin
 Plug 'navarasu/onedark.nvim'
 call plug#end()
 
@@ -48,8 +41,8 @@ let b:copilot_enabled = 0
 syntax on
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "colorscheme tokyonight-storm
-"let g:lightline = {
-"  \ 'colorscheme': 'onedark',
+" let g:lightline = {
+ " \ 'colorscheme': 'onedark',
 " \ }
 " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
@@ -70,30 +63,6 @@ nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap = :Files<CR>
 nnoremap q: q <CR>
 set number
-" let g:onedark_termcolors=256
-
-" Search a hightlighted text
-" vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-" nmap /\ :noh<CR>
-" Overwrite some color highlight 
-
-"airline configuration
-let g:airline_powerline_fonts = 1                       " Enable font for status bar
-let g:airline_theme='base16_flat'                           " Theme OneDark
-
-let g:airline#extensions#tabline#enabled = 1            " Enable Tab bar
-let g:airline#extensions#tabline#left_sep = ' '         " Enable Tab seperator 
-let g:airline#extensions#tabline#left_alt_sep = '|'     " Enable Tab seperator
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tabline#fnamemod = ':t'        " Set Tab name as file name
-
-let g:airline#extensions#whitespace#enabled = 0         " Remove warning whitespace"
-
-let g:airline_section_error=''
-" NERDTree hightlight configuration
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
 
 " auto close bracket setup 
 inoremap " ""<left>
@@ -137,18 +106,27 @@ set autoread
 nnoremap p "+p
 vnoremap p "+p
 vnoremap P p
-" map <S-k> <PageUp>
-" map <S-j> <PageDown>
-" Set the basic sizes
 
-" let g:vimspector_code_minwidth = 90
-" let g:vimspector_code_height = 90
-" let g:vimspector_terminal_width = 0
-" let g:vimspector_terminal_width = 0
 let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
 let g:vimspector_terminal_maxwidth = 60
 let g:vimspector_terminal_minwidth = 60
-" let g:color1 = '#ffffff'
+
+let g:airline_powerline_fonts = 1                       " Enable font for status bar
+let g:airline_theme='base16_flat'                           " Theme OneDark
+
+let g:airline#extensions#tabline#enabled = 1            " Enable Tab bar
+let g:airline#extensions#tabline#left_sep = ' '         " Enable Tab seperator 
+let g:airline#extensions#tabline#left_alt_sep = '|'     " Enable Tab seperator
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#fnamemod = ':t'        " Set Tab name as file name
+
+let g:airline#extensions#whitespace#enabled = 0         " Remove warning whitespace"
+
+let g:airline_section_error=''
+" NERDTree hightlight configuration
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
 colorscheme onedark  
 " source ~/.config/nvim/airline.vim
