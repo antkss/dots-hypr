@@ -155,7 +155,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({ // TODO: Make this
     ...props,
     className: 'txt-small sidebar-iconbutton',
     onClicked: () => {
-        execAsync(['bash', '-c', '$HOME/.bin/bin/xfce4-appearance-settings', '&']);
+        execAsync(['bash', '-c', '/usr/bin/xfce4-appearance-settings', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('edit', 'norm'),
@@ -183,7 +183,7 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Open Settings',
     onClicked: () => {
-        execAsync(['bash', '-c', '$HOME/.bin/bin/xfce4-appearance-settings', '&']);
+        execAsync(['bash', '-c', '/usr/bin/xfce4-appearance-settings', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('settings', 'norm'),
