@@ -68,8 +68,7 @@ set number
 
 " auto close bracket setup 
 inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
+inoremap ' ''<left> inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
@@ -108,7 +107,10 @@ set autoread
 nnoremap p "+p
 vnoremap p "+p
 vnoremap P p
+"vim translator configuration
+vnoremap t :'<,'>Translate<CR>
 let g:translator_target_lang = 'vi'
+"vim spector configuration
 let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
 let g:vimspector_terminal_maxwidth = 60
