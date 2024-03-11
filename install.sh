@@ -119,6 +119,7 @@ esac
 
 printf "\e[36m[$0]: 3. Copying\e[97m\n"
 cp -r ./config/* $HOME/.config
+cp -r ./.images $HOME
 chsh -s /usr/bin/fish
 sleep 1
 
