@@ -63,7 +63,6 @@ nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap = :Files<CR>
 nnoremap q: q <CR>
-nnoremap t :Translate<CR>
 set number
 
 " auto close bracket setup 
@@ -108,8 +107,10 @@ nnoremap p "+p
 vnoremap p "+p
 vnoremap P p
 "vim translator configuration
-vnoremap t :'<,'>Translate<CR>
+vnoremap t :'<,'>Translate --engine=bing<CR>
 let g:translator_target_lang = 'vi'
+nnoremap t :Translate --engine=bing<CR>
+
 "vim spector configuration
 let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
