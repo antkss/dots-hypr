@@ -117,10 +117,7 @@ esac
 
 printf "\e[36m[$0]: 3. Copying\e[97m\n"
 cp -r ./config/* $HOME/.config
-chsh -s /usr/bin/zsh
-git clone https://github.com/antkss/addon
-cd addon
-cp -r .* $HOME
+chsh -s /usr/bin/fish
 sleep 1
 
 try hyprctl reload
