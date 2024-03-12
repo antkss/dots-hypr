@@ -8,6 +8,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'ryanoasis/vim-devicons'
 " save and restore nerdtree state between sessions
 "Git status flag
+
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "vim plugin for go language
 " Plug 'fatih/vim-go', { 'tag': '*' }
@@ -41,10 +42,6 @@ call plug#end()
 let b:copilot_enabled = 0  
 syntax on
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"colorscheme tokyonight-storm
-" let g:lightline = {
- " \ 'colorscheme': 'onedark',
-" \ }
 " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -60,7 +57,7 @@ inoremap <silent><expr> <Tab>
 " NERDTreeToggle configuration
 " nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <F5> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap = :Files<CR>
 nnoremap q: q <CR>
 set number
@@ -72,6 +69,9 @@ inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
+nmap <S-j> <PageDown> 
+nnoremap + :join <CR>
+" nmap <S-k> <PageUp>
 " inoremap {;<CR> {<CR>};<ESC>O
 lua require('Comment').setup()
 "debug configuration "
@@ -83,7 +83,7 @@ nnoremap <S-b> :call vimspector#ToggleBreakpoint()<CR>
 nnoremap <S-d> :call vimspector#ClearBreakpoints()<CR>
 
 nmap <C-S-r> <Plug>VimspectorRestart
-nmap <S-o> <Plug>VimspectorStepOut
+" nmap <S-o> <Plug>VimspectorStepOut
 nmap <S-i> <Plug>VimspectorStepInto
 nmap <S-n> <Plug>VimspectorStepOver
 nnoremap <S-e> :call vimspector#Reset( { 'interactive': v:false } )<CR>
