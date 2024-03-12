@@ -30,6 +30,16 @@
         "typeParameter": "\uf728",
         "default": "\uf29c"
     },
+"languageserver":{
+   "clangd": {
+    "command": "/usr/bin/clangd",
+    "filetypes": ["c", "cpp", "objc", "objcpp"],
+    "trace.server": "verbose",
+    "initializationOptions": {
+      "cacheDirectory": "/tmp/clangd"
+    }
+  }
+},
     "snippets.ultisnips.pythonPrompt": false,
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/17.0.3/clangd_17.0.3/bin/clangd"
 }
