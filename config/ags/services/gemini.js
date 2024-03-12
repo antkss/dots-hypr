@@ -27,7 +27,7 @@ const initMessages =
 
 Utils.exec(`echo`);
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
-const APIDOM_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
+const APIDOM_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_api_dom.txt`;
 function replaceapidom(URL) {
     if (fileExists(APIDOM_FILE_LOCATION)) {
         var contents = Utils.readFile(APIDOM_FILE_LOCATION).trim();
