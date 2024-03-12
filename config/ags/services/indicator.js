@@ -9,7 +9,7 @@ class IndicatorService extends Service {
         );
     }
 
-    _delay = 10000;
+    _delay = 3000;
     _count = 0;
 
     popup(value) {
