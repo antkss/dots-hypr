@@ -6,6 +6,7 @@ source ./scriptdata/installers
 source ./scriptdata/options
 
 #####################################################################################
+clear
 if ! command -v pacman >/dev/null 2>&1;then printf "\e[31m[$0]: pacman not found, it seems that the system is not ArchLinux or Arch-based distros. Aborting...\e[0m\n";exit 1;fi
 prevent_sudo_or_root
 startask (){
@@ -20,21 +21,19 @@ printf "\e[97m"
 printf "Enter capital \"yes\" (without quotes) to continue:"
 read -p " " p
 case $p in "yes")sleep 0;; *)echo "Received \"$p\", aborting...";exit 1;;esac
+clear
 printf '\n'
 printf 'Do you want to confirm every time before a command executes?\n'
-printf '  y = Yes, ask me before executing each of them. (RECOMMENDED)\n'
-printf '  n = No, just execute them automatically.\n'
+printf '  y = Yes, continue\n'
 printf '  a = Abort. (DEFAULT)\n'
 read -p "====> " p
 case $p in
   y)ask=true;;
-  n)ask=false;;
-  *)exit 1;;
+   *)exit 1;;
 esac
 }
-
 case $ask in
-  false)sleep 0;;
+  false);;
   *)startask ;;
 esac
 
@@ -76,16 +75,11 @@ if ! command -v yay >/dev/null 2>&1;then
 else AUR_HELPER=yay
 fi
 
-if $ask;then
-	sudo ./source.sh
-  # execute per element of the array $pkglist
-  for i in "${pkglist[@]}";do v $AUR_HELPER -Sy --needed $i;done
-else
   # execute for all elements of the array $pkglist in one line
-  sudo ./source.sh
-  v $AUR_HELPER -Sy --needed --noconfirm --config ./pacman.conf ${pkglist[*]}
-fi
-
+  printf "setting up mirrors ..."
+sudo ./source.sh
+v $AUR_HELPER -Sy --needed --noconfirm --config ./pacman.conf ${pkglist[*]}
+printf "enter sudo password !!!!\n"
 v sudo usermod -aG video,input "$(whoami)"
 
 #####################################################################################
@@ -99,8 +93,14 @@ if command -v ags >/dev/null 2>&1;then
 else ask_ags=true
 fi
 if $ask_ags;then showfun install-ags;v install-ags;fi
+clear
+printf "changing shell to fish...\n"
+printf "please enter sudo password !!!!\n"
+chsh -s /usr/bin/fish
+clear
 printf "Your actions will overwrite all the existing configurations, do you want to continue?\n"
 printf " y = Yes, continue:\n"
+printf " n = No, skip:\n"
 printf " type anything else to abort:\n"
 overwrite(){
 read -p "====> " p
@@ -112,18 +112,34 @@ esac
 
 }
 
-case $ask in
-  false)sleep 0;;
-  *)overwrite ;;
-esac
+overwrite
 
+if [[ $ask == true ]];then
 printf "\e[36m[$0]: 3. Copying\e[97m\n"
 cp -r ./config/* $HOME/.config
 cp -r ./.images $HOME
-chsh -s /usr/bin/fish
+fi
 sleep 1
+clear
+printf "Do you want to fully setup packages for your desktop ?\n"
+printf " y = Yes, continue:\n"
+prinff " n = No, skip:\n"
+printf " type anything else to abort:\n"
+installfull(){
+read -p "====> " p
+case $p in
+  y)ask=true;;
+  *)ask=false;;
+esac
 
+}
+
+installfull
+
+if [[ $ask == true ]];then
+./packages.sh
 try hyprctl reload
+fi
 #####################################################################################
 printf "\e[36m[$0]: Finished. See the \"Import Manually\" folder and grab anything you need.\e[97m\n"
 printf "\e[36mPress \e[30m\e[46m Ctrl+Super+T \e[0m\e[36m to select a wallpaper\e[97m\n"

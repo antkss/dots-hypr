@@ -17,6 +17,6 @@ function fish_prompt
 	set mycolors red yellow green blue white cyan
 	set ran (random 1 6)
 	set path (pwd | rev | cut -d/ -f1-3 | rev)
-	echo (set_color blue)"$path"
-	echo (set_color $mycolors[$ran])"shell@~🍎 "
+	echo "[ " (set_color blue)"$path" (set_color reset)" ]"
+	echo (set_color $mycolors[$ran])"🍎 >> "
 end
