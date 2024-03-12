@@ -123,7 +123,7 @@ sleep 1
 clear
 printf "Do you want to fully setup packages for your desktop ?\n"
 printf " y = Yes, continue:\n"
-prinff " n = No, skip:\n"
+printf " n = No, skip:\n"
 printf " type anything else to abort:\n"
 installfull(){
 read -p "====> " p
