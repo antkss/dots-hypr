@@ -67,7 +67,8 @@ set number
 
 " auto close bracket setup 
 inoremap " ""<left>
-inoremap ' ''<left> inoremap ( ()<left>
+inoremap ' ''<left> 
+inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
