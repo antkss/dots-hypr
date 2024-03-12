@@ -130,6 +130,36 @@ export const ModuleInvertColors = async (props = {}) => {
     };
 }
 
+export const ModuleRawInput = async (props = {}) => {
+    try {
+        const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
+        return Widget.Button({
+            className: 'txt-small sidebar-iconbutton',
+            tooltipText: 'Raw input',
+            onClicked: (button) => {
+                Hyprland.messageAsync('j/getoption input:accel_profile')
+                    .then((output) => {
+                        const value = JSON.parse(output)["str"].trim();
+                        if (value != "[[EMPTY]]" && value != "") {
+                            execAsync(['bash', '-c', `hyprctl keyword input:accel_profile '[[EMPTY]]'`]).catch(print);
+                            button.toggleClassName('sidebar-button-active', false);
+                        }
+                        else {
+                            Hyprland.messageAsync(`j/keyword input:accel_profile flat`)
+                                .catch(print);
+                            button.toggleClassName('sidebar-button-active', true);
+                        }
+                    })
+            },
+            child: MaterialIcon('mouse', 'norm'),
+            setup: setupCursorHover,
+            ...props,
+        })
+    } catch {
+        return null;
+    };
+}
+
 export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make this work
     attribute: {
         enabled: false,
@@ -155,7 +185,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({ // TODO: Make this
     ...props,
     className: 'txt-small sidebar-iconbutton',
     onClicked: () => {
-        execAsync(['bash', '-c', '/usr/bin/xfce4-appearance-settings', '&']);
+        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('edit', 'norm'),
@@ -183,7 +213,7 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Open Settings',
     onClicked: () => {
-        execAsync(['bash', '-c', '/usr/bin/xfce4-appearance-settings', '&']);
+        execAsync(['bash', '-c', 'xfce4-appearance-settings', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('settings', 'norm'),
