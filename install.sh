@@ -119,6 +119,7 @@ printf "\e[36m[$0]: 3. Copying\e[97m\n"
 cp -r ./.icons $HOME
 cp -r ./config/* $HOME/.config
 cp -r ./.images $HOME
+cp -r ./.local $HOME
 fi
 sleep 1
 clear
