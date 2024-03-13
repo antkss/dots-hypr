@@ -2,14 +2,14 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 " nerdtree hightlight and icons
-
-Plug 'neovim/nvim-lsp' " nvim-lsp
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'neovim/nvim-lsp' " nvim-lsp
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'ryanoasis/vim-devicons'
 " save and restore nerdtree state between sessions
 "Git status flag
-
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
 "vim plugin for go language
 " Plug 'fatih/vim-go', { 'tag': '*' }
 "COC VIM
@@ -34,13 +34,13 @@ Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 Plug 'navarasu/onedark.nvim'
 call plug#end()
 
-" Plug 'mfussenegger/nvim-dap'
-" Plug 'puremourning/vimspector'
-"
+
+
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`. call plug#end()
 let b:copilot_enabled = 0  
-syntax on
+syntax enable
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
@@ -135,4 +135,11 @@ let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 colorscheme onedark  
-" source ~/.config/nvim/airline.vim
+
+" highlight config
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
