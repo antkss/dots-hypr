@@ -194,7 +194,8 @@ export const ModuleCalendar = () => Box({
             children: [
                 StackButton('calendar', 'calendar_month', 'Calendar'),
                 StackButton('todo', 'lists', 'To Do'),
-                // StackButton(box, 'stars', 'star', 'GitHub'),
+
+                // StackButton(box, 'bat', 'star', 'GitHub'),
             ]
         }), false, false, 0);
         box.pack_end(contentStack, false, false, 0);
