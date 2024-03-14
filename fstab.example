@@ -1,0 +1,6 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+UUID=507aee1f-def8-4c70-aacf-94b3c4130d1d / ext4 defaults,noatime,nodiratime 0 0 
+tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0
