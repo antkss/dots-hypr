@@ -6,12 +6,10 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'neovim/nvim-lsp' " nvim-lsp
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'ryanoasis/vim-devicons'
+" Plug 'skywind3000/asyncrun.vim'
 " save and restore nerdtree state between sessions
 "Git status flag
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
-"vim plugin for go language
-" Plug 'fatih/vim-go', { 'tag': '*' }
 "COC VIM
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Vim line
@@ -36,10 +34,9 @@ call plug#end()
 
 
 
-
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`. call plug#end()
-let b:copilot_enabled = 0  
+let &makeprg = 'g++ -g -o %< %'
 syntax enable
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " use <tab> to trigger completion and navigate to the next complete item
@@ -136,10 +133,3 @@ let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 colorscheme onedark  
 
-" highlight config
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_posix_standard = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
