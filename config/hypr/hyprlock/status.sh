@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ############ Variables ############
-enable_battery=false
-battery_charging=false
+enable_battery=true
+battery_charging=true
 
 ####### Check availability ########
 for battery in /sys/class/power_supply/*BAT*; do
@@ -22,7 +22,7 @@ if [[ $enable_battery == true ]]; then
   fi
   echo -n "$(cat /sys/class/power_supply/*/capacity | head -1)"%
   if [[ $battery_charging == false ]]; then
-    echo -n " remaining"
+    echo -n " remaining "
   fi
 fi
 
