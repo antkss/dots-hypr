@@ -25,9 +25,8 @@ const initMessages =
         { role: "model", parts: [{ text: "## Double angle formulas\n```latex\n\\[\n\\sin(2\theta) = 2\\sin(\\theta)\\cos(\\theta)\n\\]\n\\\\\n\\[\n\\cos(2\\theta) = \\cos^2(\\theta) - \\sin^2(\\theta)\n\\]\n\\\\\n\\[\n\\tan(2\theta) = \\frac{2\\tan(\\theta)}{1 - \\tan^2(\\theta)}\n\\]\n```" }], },
     ];
 
-Utils.exec(`echo`);
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
-const APIDOM_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_api_dom.txt`;
+const APIDOM_FILE_LOCATION = `${GLib.get_user_config_dir()}/google_api_dom.txt`;
 function replaceapidom(URL) {
     if (fileExists(APIDOM_FILE_LOCATION)) {
         var contents = Utils.readFile(APIDOM_FILE_LOCATION).trim();
@@ -35,7 +34,7 @@ function replaceapidom(URL) {
     }
     return URL;
 }
-const CHAT_MODELS = ["gemini-pro"];
+const CHAT_MODELS = ["gemini-pro"]
 const ONE_CYCLE_COUNT = 3;
 
 class GeminiMessage extends Service {

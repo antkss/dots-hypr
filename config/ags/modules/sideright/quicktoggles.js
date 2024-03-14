@@ -185,7 +185,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({ // TODO: Make this
     ...props,
     className: 'txt-small sidebar-iconbutton',
     onClicked: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
+        execAsync(['bash', '-c', 'xfce4-appearance-settings', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('edit', 'norm'),

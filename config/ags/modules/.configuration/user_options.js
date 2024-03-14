@@ -1,5 +1,8 @@
 
-let userConfigOptions = {
+import userOverrides from '../../user_options.js';
+
+// Defaults
+let configOptions = {
     // General stuff
     'ai': {
         'defaultGPTProvider': "openai",
@@ -33,6 +36,7 @@ let userConfigOptions = {
     },
     'sidebar': {
         'imageColumns': 2,
+        'imageBooruCount': 6,
     },
     'search': {
         'engineBaseUrl': "https://www.google.com/search?q=",
@@ -68,7 +72,7 @@ let userConfigOptions = {
             '': "image-missing",
         }
     },
-    'keybinds': { 
+    'keybinds': {
         // Format: Mod1+Mod2+key. CaSe SeNsItIvE!
         // Modifiers: Shift Ctrl Alt Hyper Meta
         // See https://docs.gtk.org/gdk3/index.html#constants for the other keys (they are listed as KEY_key)
@@ -90,5 +94,17 @@ let userConfigOptions = {
     },
 }
 
-globalThis['userOptions'] = userConfigOptions;
-export default userOptions;
+// Override defaults with user's options
+function overrideConfigRecursive(userOverrides, configOptions = {}) {
+    for (const [key, value] of Object.entries(userOverrides)) {
+        if (typeof value === 'object') {
+            overrideConfigRecursive(value, configOptions[key]);
+        } else {
+            configOptions[key] = value;
+        }
+    }
+}
+overrideConfigRecursive(userOverrides, configOptions);
+
+globalThis['userOptions'] = configOptions;
+export default configOptions;

@@ -5,7 +5,7 @@ import GLib from 'gi://GLib';
 import App from 'resource:///com/github/Aylur/ags/app.js'
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 // Stuff
-import userOptions from './user_options.js';
+import userOptions from './modules/.configuration/user_options.js';
 // Widgets
 import { Bar, BarCornerTopleft, BarCornerTopright } from './modules/bar/main.js';
 import Cheatsheet from './modules/cheatsheet/main.js';
@@ -42,7 +42,7 @@ const Windows = () => [
     // forMonitors(DesktopBackground),
     // Dock(),
     Overview(),
-   forMonitors(Indicator),
+    forMonitors(Indicator),
     Cheatsheet(),
     SideLeft(),
     SideRight(),
@@ -57,7 +57,7 @@ const Windows = () => [
     forMonitors((id) => Corner(id, 'bottom right')),
 ];
 const CLOSE_ANIM_TIME = 210; // Longer than actual anim time to make sure widgets animate fully
-App.config ({
+App.config({
     css: `${COMPILED_STYLE_DIR}/style.css`,
     stackTraceOnError: true,
     closeWindowDelay: { // For animations

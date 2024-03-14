@@ -58,19 +58,25 @@ export default () => {
     return Widget.EventBox({
         onScrollUp: () => {
             if (!Audio.speaker) return;
-            Audio.speaker.volume += 0.03;
+            if (Audio.speaker.volume <= 0.09) Audio.speaker.volume += 0.01;
+            else Audio.speaker.volume += 0.03;
             Indicator.popup(1);
         },
         onScrollDown: () => {
             if (!Audio.speaker) return;
-            Audio.speaker.volume -= 0.03;
+            if (Audio.speaker.volume <= 0.09) Audio.speaker.volume -= 0.01;
+            else Audio.speaker.volume -= 0.03;
             Indicator.popup(1);
         },
         onHover: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', true) },
         onHoverLost: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', false) },
         onPrimaryClick: () => App.toggleWindow('sideright'),
-        onSecondaryClickRelease: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']).catch(print),
-        onMiddleClickRelease: () => execAsync('playerctl play-pause').catch(print),
+        onSecondaryClick: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']).catch(print),
+        onMiddleClick: () => execAsync('playerctl play-pause').catch(print),
+        setup: (self) => self.on('button-press-event', (self, event) => {
+            if (event.get_button()[1] === 8)
+                execAsync('playerctl previous').catch(print)
+        }),
         child: Widget.Box({
             homogeneous: false,
             children: [

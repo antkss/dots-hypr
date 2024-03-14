@@ -153,11 +153,11 @@ export const CustomCommandButton = ({ text = '' }) => searchItem({
 
 export const SearchButton = ({ text = '' }) => searchItem({
     materialIconName: 'travel_explore',
-    name: 'Execute the command',
+    name: 'Search the web',
     actionName: 'Go',
     content: `${text}`,
     onActivate: () => {
         App.closeWindow('overview');
-        execAsync(['foot','bash', '-c', `${text}`]).catch(print);
+        execAsync(['bash', '-c', `xdg-open '${userOptions.search.engineBaseUrl}${text} ${['', ...userOptions.search.excludedSites].join(' -site:')}' &`]).catch(print);
     },
 });
