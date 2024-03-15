@@ -9,7 +9,7 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'skywind3000/asyncrun.vim'
 " save and restore nerdtree state between sessions
 "Git status flag
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 "COC VIM
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Vim line
@@ -132,4 +132,8 @@ let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 colorscheme onedark  
-
+" mov binding 
+nnoremap <C-l> <C-W><C-L>
+nnoremap <C-k> <C-W><C-K>
+nnoremap <C-j> <C-W><C-J>
+nnoremap <C-h> <C-W><C-H>
