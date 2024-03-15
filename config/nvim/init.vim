@@ -60,16 +60,17 @@ nnoremap q: q <CR>
 set number
 
 " auto close bracket setup 
+nmap <S-j> <PageDown> 
+" map <ScrollWheelUp> <C-k>
+" map <ScrollWheelDown> <C-j>
+nnoremap + :join <CR>
 inoremap " ""<left>
-inoremap ' ''<left> 
+inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
-nmap <S-j> <PageDown> 
-nnoremap + :join <CR>
-" nmap <S-k> <PageUp>
-" inoremap {;<CR> {<CR>};<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 lua require('Comment').setup()
 "debug configuration "
 
@@ -135,5 +136,7 @@ colorscheme onedark
 " mov binding 
 nnoremap <C-l> <C-W><C-L>
 nnoremap <C-k> <C-W><C-K>
-nnoremap <C-j> <C-W><C-J>
-nnoremap <C-h> <C-W><C-H>
+" nnoremap <C-j> <C-W><C-J>
+" nnoremap <C-h> <C-W><C-H>
+nnoremap <C-k> <C-u>
+nnoremap <C-j> <C-d>
