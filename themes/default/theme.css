@@ -588,7 +588,7 @@ qproperty-line-fg-demangled-name: #FF01D5;
     qproperty-line-fg-extra-line                  : blue;        /* Extra line                                    */
     qproperty-line-fg-alt-opnd                    : blue;        /* Alternative operand                           */
     qproperty-line-fg-hidden                      : gray;        /* Hidden name                                   */
-    qproperty-line-fg-libfunc                     : #8080FF;     /* Library function name                         */
+    qproperty-line-fg-libfunc                     : black;     /* Library function name                         */
     qproperty-line-fg-locvar                      : green;       /* Local variable name                           */
     qproperty-line-fg-dummy-code-name             : navy;        /* Dummy code name                               */
     qproperty-line-fg-asm-directive               : blue;        /* Assembler directive                           */
