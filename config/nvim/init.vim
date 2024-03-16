@@ -36,7 +36,7 @@ call plug#end()
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`. call plug#end()
-let &makeprg = 'g++ -g -o %< %'
+let &makeprg = 'g++ -g -o %< % -fno-stack-protector -no-pie'
 syntax enable
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " use <tab> to trigger completion and navigate to the next complete item
