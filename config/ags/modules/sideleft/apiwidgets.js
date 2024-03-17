@@ -158,6 +158,7 @@ const chatPlaceholderRevealer = Revealer({
 });
 export const textbox = Widget.Entry({
         className: 'sidebar-chat-textarea',
+	placeholder_text:'Type here to chat ...',
 	visibility: true,
         onAccept: (self) => { // This is when you hit Enter
             const text = self.text;
