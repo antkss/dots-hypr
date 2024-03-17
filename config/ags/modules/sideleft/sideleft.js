@@ -8,10 +8,10 @@ import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import toolBox from './toolbox.js';
 import apiWidgets from './apiwidgets.js';
-import { chatEntry } from './apiwidgets.js';
+// import { chatEntry } from './apiwidgets.js';
 import { TabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
-
+import { textbox } from './apiwidgets.js';
 const contents = [
     {
         name: 'apis',
@@ -84,6 +84,7 @@ export default () => Box({
         }),
         widgetContent,
     ],
+
     setup: (self) => self
         .on('key-press-event', (widget, event) => { // Handle keybinds
             if (checkKeybind(event, userOptions.keybinds.sidebar.pin))
@@ -100,15 +101,16 @@ export default () => Box({
                 if ((
                     !(event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
                     event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 &&
-                    widget != chatEntry && event.get_keyval()[1] != Gdk.KEY_space)
+                    widget != textbox && event.get_keyval()[1] != Gdk.KEY_space)
                     ||
                     ((event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
                         event.get_keyval()[1] === Gdk.KEY_v)
                 ) {
-                    chatEntry.grab_focus();
-                    const buffer = chatEntry.get_buffer();
-                    buffer.set_text(buffer.text + String.fromCharCode(event.get_keyval()[1]), -1);
-                    buffer.place_cursor(buffer.get_iter_at_offset(-1));
+                    textbox.grab_focus();
+                    const buffer = textbox.get_buffer();
+                    buffer.set_text(String.fromCharCode(event.get_keyval()[1]), 1);
+		    textbox.set_position(1);
+
                 }
                 // Switch API type
                 else if (checkKeybind(event, userOptions.keybinds.sidebar.apis.nextTab)) {

@@ -58,6 +58,16 @@ const GeminiInfo = () => {
     });
 }
 
+// const textbox = Widget.Entry({
+//         className: 'overview-search-box txt-small txt',
+//         hpack: 'center',
+//         onAccept: (self) => { // This is when you hit Enter
+// 	if (text.length == 0) return;
+//             const text = self.text;
+// 	    sendMessage(text);
+// 	    self.text = '';
+// 	}  
+//     });
 export const GeminiSettings = () => MarginRevealer({
     transition: 'slide_down',
     revealChild: true,

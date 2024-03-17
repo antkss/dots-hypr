@@ -137,8 +137,8 @@ const chatSendButton = Button({
     label: 'arrow_upward',
     setup: setupCursorHover,
     onClicked: (self) => {
-        APIS[currentApiId].sendCommand(chatEntry.get_buffer().text);
-        chatEntry.get_buffer().set_text("", -1);
+        APIS[currentApiId].sendCommand(textbox.get_buffer().text);
+        textbox.get_buffer().set_text("", -1);
     },
 });
 
@@ -156,20 +156,30 @@ const chatPlaceholderRevealer = Revealer({
     child: chatPlaceholder,
     setup: enableClickthrough,
 });
+export const textbox = Widget.Entry({
+        className: 'sidebar-chat-textarea',
+	visibility: true,
+        onAccept: (self) => { // This is when you hit Enter
+            const text = self.text;
+		APIS[currentApiId].sendCommand(self.text);
+		self.get_buffer().set_text("", -1);
 
-const textboxArea = Box({ // Entry area
-    className: 'sidebar-chat-textarea',
-    children: [
-        Overlay({
-            passThrough: true,
-            child: chatEntryWrapper,
-            overlays: [chatPlaceholderRevealer],
-        }),
-        Box({ className: 'width-10' }),
-        chatSendButton,
-    ]
-});
-
+	},
+         
+    });
+// const textboxArea = Box({ // Entry area
+//     className: 'sidebar-chat-textarea',
+//     children: [
+//         Overlay({
+//             passThrough: true,
+//             child: chatEntryWrapper,
+//             overlays: [chatPlaceholderRevealer],
+//         }),
+//         Box({ className: 'width-10' }),
+//         chatSendButton,
+//     ]
+// });
+//
 const apiContentStack = Stack({
     vexpand: true,
     transition: 'slide_left_right',
@@ -232,8 +242,11 @@ const apiWidgets = Widget.Box({
         apiSwitcher,
         apiContentStack,
         apiCommandStack,
-        textboxArea,
+        textbox,
+	    chatSendButton
     ],
+
+
 });
 
 export default apiWidgets;

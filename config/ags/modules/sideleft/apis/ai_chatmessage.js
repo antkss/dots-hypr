@@ -8,10 +8,12 @@ const { execAsync, exec } = Utils;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import md2pango from '../../.miscutils/md2pango.js';
 
+
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`;
 const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/assets/themes/sourceviewtheme.xml`;
 const CUSTOM_SCHEME_ID = 'custom';
 const USERNAME = GLib.get_user_name();
+
 Gtk.IconTheme.get_default().append_search_path(LATEX_DIR);
 
 /////////////////////// Custom source view colorscheme /////////////////////////
@@ -278,7 +280,6 @@ const MessageContent = (content) => {
     contentBox.attribute.fullUpdate(contentBox, content, false);
     return contentBox;
 }
-
 export const ChatMessage = (message, modelName = 'Model') => {
     const messageContentBox = MessageContent(message.content);
     const thisMessage = Box({
@@ -304,6 +305,8 @@ export const ChatMessage = (message, modelName = 'Model') => {
                 ],
                 setup: (self) => self
                     .hook(message, (self, isThinking) => {
+			
+
                         messageContentBox.toggleClassName('thinking', message.thinking);
                     }, 'notify::thinking')
                     .hook(message, (self) => { // Message update
