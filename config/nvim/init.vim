@@ -134,9 +134,11 @@ let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 colorscheme onedark  
 " mov binding 
-nnoremap <C-l> <C-W><C-L>
-nnoremap <C-k> <C-W><C-K>
+" nnoremap <C-l> <C-W><C-L>
+" nnoremap <C-k> <C-W><C-K>
 " nnoremap <C-j> <C-W><C-J>
 " nnoremap <C-h> <C-W><C-H>
+vnoremap <C-j> <C-d>
+vnoremap <C-k> <C-u>
 nnoremap <C-k> <C-u>
 nnoremap <C-j> <C-d>
