@@ -4,6 +4,7 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 " nerdtree hightlight and icons
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'neovim/nvim-lsp' " nvim-lsp
+Plug 'VonHeikemen/lsp-zero.nvim'
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'ryanoasis/vim-devicons'
 " Plug 'skywind3000/asyncrun.vim'
@@ -32,12 +33,11 @@ Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 Plug 'navarasu/onedark.nvim'
 call plug#end()
 
-
-
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`. call plug#end()
 let &makeprg = 'g++ -g -o %< % -fno-stack-protector -no-pie'
 syntax enable
+set mousescroll=ver:0
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
