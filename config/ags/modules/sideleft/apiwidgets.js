@@ -123,7 +123,7 @@ chatEntry.get_buffer().connect("changed", (buffer) => {
         chatPlaceholder.set_valign(Gtk.Align.CENTER);
     }
 });
-
+ 
 const chatEntryWrapper = Scrollable({
     className: 'sidebar-chat-wrapper',
     hscroll: 'never',
@@ -158,7 +158,7 @@ const chatPlaceholderRevealer = Revealer({
 });
 export const textbox = Widget.Entry({
         className: 'sidebar-chat-textarea',
-	placeholder_text:'Type here to chat ...',
+	placeholder_text: 'Type here to chat ...',
 	visibility: true,
         onAccept: (self) => { // This is when you hit Enter
             const text = self.text;
@@ -166,8 +166,9 @@ export const textbox = Widget.Entry({
 		self.get_buffer().set_text("", -1);
 
 	},
-         
+      
     });
+
 // const textboxArea = Box({ // Entry area
 //     className: 'sidebar-chat-textarea',
 //     children: [
@@ -244,10 +245,14 @@ const apiWidgets = Widget.Box({
         apiContentStack,
         apiCommandStack,
         textbox,
-	    chatSendButton
+	    // chatSendButton
     ],
 
-
+}).keybind(["SHIFT"],"Return", (self, event) => {
+	// textbox.set_position(1);
+	textbox.set_text(textbox.text + "\n");
+	textbox.set_position(-1);
+    
 });
 
 export default apiWidgets;

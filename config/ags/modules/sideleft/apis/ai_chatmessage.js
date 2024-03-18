@@ -7,6 +7,7 @@ const { Box, Button, Label, Icon, Scrollable } = Widget;
 const { execAsync, exec } = Utils;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import md2pango from '../../.miscutils/md2pango.js';
+import { textbox } from '../apiwidgets.js';
 
 
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`;
@@ -166,7 +167,9 @@ const CodeBlock = (content = '', lang = 'txt') => {
                     execAsync([`wl-copy`, `${copyContent}`]).catch(print);
                 },
             }),
-        ]
+        ],
+
+	    
     })
     // Source view
     const sourceView = HighlightedCode(content, lang);
