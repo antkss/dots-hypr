@@ -4,10 +4,10 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 const { exec, execAsync } = Utils;
-const { Box, Label, Button, Revealer } = Widget;
+const { Box, Label, Button } = Widget;
 import SidebarModule from '../sideleft/tools/module.js';
 import { fileExists } from '../.miscutils/files.js';
-import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
+// import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
 import { showMusicControls } from '../../variables.js';
 import { darkMode } from '../.miscutils/system.js';
 const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
@@ -15,21 +15,21 @@ const COVER_COLORSCHEME_SUFFIX = '_colorscheme.css';
 const players = mpris.bind("players")
 var lastCoverPath = '';
 
-function isRealPlayer(player) {
-    return (
-        !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
-        !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') && // Doesn't have cover art
-        !player.busName.endsWith('.mpd') // Non-instance mpd bus
-    );
-}
+// function isRealPlayer(player) {
+//     return (
+//         !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
+//         !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') && // Doesn't have cover art
+//         !player.busName.endsWith('.mpd') // Non-instance mpd bus
+//     );
+// }
 
 const getPlayer = (name = userOptions.music.preferredPlayer) => Mpris.getPlayer(name) || Mpris.players[0] || null;
-function lengthStr(length) {
-    const min = Math.floor(length / 60);
-    const sec = Math.floor(length % 60);
-    const sec0 = sec < 10 ? '0' : '';
-    return `${min}:${sec0}${sec}`;
-}
+// function lengthStr(length) {
+//     const min = Math.floor(length / 60);
+//     const sec = Math.floor(length % 60);
+//     const sec0 = sec < 10 ? '0' : '';
+//     return `${min}:${sec0}${sec}`;
+// }
 
 function detectMediaSource(link) {
     if (link.startsWith("file://")) {
@@ -155,8 +155,7 @@ const CoverArt = ({ player, ...rest }) => {
                 }
 
                 // Generate colors
-                execAsync(['bash', '-c',
-                    `${App.configDir}/scripts/color_generation/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/scss/_musicmaterial.scss ${darkMode ? '' : '-l'}`])
+                execAsync(['bash', '-c',`${App.configDir}/scripts/color_generation/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/scss/_musicmaterial.scss ${darkMode ? '' : '-l'}`])
                     .then(() => {
                         exec(`wal -i "${player.coverPath}" -n -t -s -e -q ${darkMode ? '' : '-l'}`)
                         exec(`cp ${GLib.get_user_cache_dir()}/wal/colors.scss ${App.configDir}/scss/_musicwal.scss`);
@@ -238,7 +237,7 @@ const TrackSource = ({ player, ...rest }) => Widget.Revealer({
                 justification: 'center',
                 className: 'icon-nerd',
                 setup: (self) => self.hook(player, (self) => {
-                    self.label = detectMediaSource(player.trackCoverUrl);
+                    self.label = String(detectMediaSource(player.trackCoverUrl));
                 }, 'notify::cover-path'),
             }),
         ],
@@ -340,6 +339,7 @@ const MusicControlsWidget = (player) => Box({
 export default () => SidebarModule({
 
     name: 'Music control',
+
     child: Box({
    // className: 'spacing-small',
   children: players.as(p => p.map(MusicControlsWidget)),

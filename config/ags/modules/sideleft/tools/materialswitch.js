@@ -7,7 +7,7 @@ import SidebarModule from './module.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 
 export default () => SidebarModule({
-    icon: MaterialIcon('code', 'norm'),
+    icon: MaterialIcon('colorize', 'norm'),
     name: 'Material picker',
     child: Box({
         vertical: true,
