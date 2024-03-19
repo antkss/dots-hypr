@@ -192,7 +192,7 @@ const GPTSettings = () => MarginRevealer({
                     }),
                     ConfigToggle({
                         icon: 'model_training',
-                        name: 'Enhancements',
+                        name: 'Training Mode',
                         desc: 'Tells the model:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
                         initValue: GPTService.assistantPrompt,
                         onChange: (self, newValue) => {

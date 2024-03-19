@@ -106,7 +106,7 @@ export const GeminiSettings = () => MarginRevealer({
                 children: [
                     ConfigToggle({
                         icon: 'model_training',
-                        name: 'Enhancements',
+                        name: 'Training Mode',
                         desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
                         initValue: GeminiService.assistantPrompt,
                         onChange: (self, newValue) => {

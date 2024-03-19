@@ -188,13 +188,13 @@ const CoverArt = ({ player, ...rest }) => {
 }
 
 const TrackControls = ({ player, ...rest }) => Widget.Revealer({
-    revealChild: true,
+    revealChild: false,
     transition: 'slide_right',
-    transitionDuration: userOptions.animations.durationLarge,
+    transitionDuration: userOptions.animations.durationSmall,
     child: Widget.Box({
         ...rest,
         vpack: 'center',
-        className: 'osd-music-controls spacing-h-3',
+        className: 'osd-music-controls spacing-h-5',
         children: [
             Button({
                 className: 'osd-music-controlbtn',
@@ -222,6 +222,7 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
             self.revealChild = true;
     }, 'notify::play-back-status'),
 });
+
 
 const TrackSource = ({ player, ...rest }) => Widget.Revealer({
     revealChild: false,
@@ -323,7 +324,7 @@ const MusicControlsWidget = (player) => Box({
                     ]
                 }),
                 Box({
-                    // className: 'spacing',
+                    className: 'control_bar',
                     setup: (box) => {
                         box.pack_start(TrackControls({ player: player }), false, false, 0);
                         box.pack_end(PlayState({ player: player }), false, false, 0);
@@ -341,7 +342,6 @@ export default () => SidebarModule({
     name: 'Music control',
 
     child: Box({
-   // className: 'spacing-small',
   children: players.as(p => p.map(MusicControlsWidget)),
     }),
 })
