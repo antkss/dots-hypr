@@ -37,12 +37,12 @@ function detectMediaSource(link) {
             return '󰈹 Firefox'
         return "󰈣 File";
     }
-    let url = link.replace(/(^\w+:|^)\/\//, '');
-    let domain = url.match(/(?:[a-z]+\.)?([a-z]+\.[a-z]+)/i)[1];
-    if (domain == 'ytimg.com') return '󰗃 Youtube';
-    if (domain == 'discordapp.net') return '󰙯 Discord';
-    if (domain == 'sndcdn.com') return '󰓀 SoundCloud';
-    return domain;
+    // let url = link.replace(/(^\w+:|^)\/\//, '');
+    // let domain = url.match(/(?:[a-z]+\.)?([a-z]+\.[a-z]+)/i)[1];
+    // if (domain == 'ytimg.com') return '󰗃 Youtube';
+    // if (domain == 'discordapp.net') return '󰙯 Discord';
+    // if (domain == 'sndcdn.com') return '󰓀 SoundCloud';
+    // return domain;
 }
 
 const DEFAULT_MUSIC_FONT = 'Gabarito, sans-serif';
@@ -65,23 +65,23 @@ function trimTrackTitle(title) {
     return title;
 }
 
-const TrackProgress = ({ player, ...rest }) => {
-    const _updateProgress = (circprog) => {
-        // const player = Mpris.getPlayer();
-        if (!player) return;
-        // Set circular progress (see definition of AnimatedCircProg for explanation)
-        circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
-    }
-    return AnimatedCircProg({
-        ...rest,
-        className: 'osd-music-circprog',
-        vpack: 'center',
-        extraSetup: (self) => self
-            .hook(Mpris, _updateProgress)
-            .poll(3000, _updateProgress)
-        ,
-    })
-}
+// const TrackProgress = ({ player, ...rest }) => {
+//     const _updateProgress = (circprog) => {
+//         // const player = Mpris.getPlayer();
+//         if (!player) return;
+//         // Set circular progress (see definition of AnimatedCircProg for explanation)
+//         circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
+//     }
+//     return AnimatedCircProg({
+//         ...rest,
+//         className: 'osd-music-circprog',
+//         vpack: 'center',
+//         extraSetup: (self) => self
+//             .hook(Mpris, _updateProgress)
+//             .poll(3000, _updateProgress)
+//         ,
+//     })
+// }
 
 const TrackTitle = ({ player, ...rest }) => Label({
     ...rest,
@@ -189,7 +189,7 @@ const CoverArt = ({ player, ...rest }) => {
 }
 
 const TrackControls = ({ player, ...rest }) => Widget.Revealer({
-    revealChild: false,
+    revealChild: true,
     transition: 'slide_right',
     transitionDuration: userOptions.animations.durationLarge,
     child: Widget.Box({
@@ -216,7 +216,7 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
         ],
     }),
     setup: (self) => self.hook(Mpris, (self) => {
-        // const player = Mpris.getPlayer();
+        const player = Mpris.getPlayer();	
         if (!player)
             self.revealChild = false;
         else
@@ -252,50 +252,47 @@ const TrackSource = ({ player, ...rest }) => Widget.Revealer({
     }),
 });
 
-const TrackTime = ({ player, ...rest }) => {
-    return Widget.Revealer({
-        revealChild: false,
-        transition: 'slide_left',
-        transitionDuration: userOptions.animations.durationLarge,
-        child: Widget.Box({
-            ...rest,
-            vpack: 'center',
-            className: 'osd-music-pill spacing-h-5',
-            children: [
-                Label({
-                    setup: (self) => self.poll(1000, (self) => {
-                        // const player = Mpris.getPlayer();
-                        if (!player) return;
-                        self.label = lengthStr(player.position);
-                    }),
-                }),
-                Label({ label: '/' }),
-                Label({
-                    setup: (self) => self.hook(Mpris, (self) => {
-                        // const player = Mpris.getPlayer();
-                        if (!player) return;
-                        self.label = lengthStr(player.length);
-                    }),
-                }),
-            ],
-        }),
-        setup: (self) => self.hook(Mpris, (self) => {
-            if (!player) self.revealChild = false;
-            else self.revealChild = true;
-        }),
-    })
-}
-
+// const TrackTime = ({ player, ...rest }) => {
+//     return Widget.Revealer({
+//         revealChild: false,
+//         transition: 'slide_left',
+//         transitionDuration: userOptions.animations.durationLarge,
+//         child: Widget.Box({
+//             ...rest,
+//             vpack: 'center',
+//             className: 'osd-music-pill spacing-h-5',
+//             children: [
+//                 Label({
+//                     setup: (self) => self.poll(1000, (self) => {
+//                         // const player = Mpris.getPlayer();
+//                         if (!player) return;
+//                         self.label = lengthStr(player.position);
+//                     }),
+//                 }),
+//                 Label({ label: '/' }),
+//                 Label({
+//                     setup: (self) => self.hook(Mpris, (self) => {
+//                         // const player = Mpris.getPlayer();
+//                         if (!player) return;
+//                         self.label = lengthStr(player.length);
+//                     }),
+//                 }),
+//             ],
+//         }),
+//         setup: (self) => self.hook(Mpris, (self) => {
+//             if (!player) self.revealChild = false;
+//             else self.revealChild = true;
+//         }),
+//     })
+// }
+//
 const PlayState = ({ player }) => {
-    const trackCircProg = TrackProgress({ player: player });
+    // const trackCircProg = TrackProgress({ player: player });
     return Widget.Button({
         className: 'osd-music-playstate',
-        child: Widget.Overlay({
-            child: trackCircProg,
-            overlays: [
-                Widget.Button({
+               onClicked: () => player.playPause(),
+            child: Widget.Button({
                     className: 'osd-music-playstate-btn',
-                   onClicked: () => player.playPause(),
                     child: Widget.Label({
                         justification: 'center',
                         hpack: 'fill',
@@ -305,9 +302,6 @@ const PlayState = ({ player }) => {
                         }, 'notify::play-back-status'),
                     }),
                 }),
-            ],
-            passThrough: true,
-        })
     });
 }
 
@@ -347,8 +341,7 @@ export default () => SidebarModule({
 
     name: 'Music control',
     child: Box({
-
-                    // className: 'spacing-small',
+   // className: 'spacing-small',
   children: players.as(p => p.map(MusicControlsWidget)),
     }),
 })

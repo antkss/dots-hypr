@@ -75,7 +75,8 @@ $onSecondaryContainer: mix($color7, $color2, 90%);
 .osd-music-title {
     @include element_decel;
     @include titlefont;
-    font-size: 1.364rem;
+    font-size: 1.0rem;
+    padding: 0.273rem 0.282rem;
     color: $onSecondaryContainer;
 }
 
@@ -83,6 +84,7 @@ $onSecondaryContainer: mix($color7, $color2, 90%);
     @include element_decel;
     @include mainfont;
     font-size: 0.955rem;
+    padding: 0.273rem 0.282rem;
     color: mix($onSecondaryContainer, $secondaryContainer, 80%);
 }
 
