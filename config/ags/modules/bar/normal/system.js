@@ -1,13 +1,13 @@
 // This is for the right pills of the bar. 
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Label, Button, Overlay, Revealer, Scrollable, Stack, EventBox } = Widget;
-const { exec, execAsync } = Utils;
+const { Box, Label, Button, Overlay, Revealer, Stack} = Widget;
+const { execAsync } = Utils;
 const { GLib } = imports.gi;
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { AnimatedCircProg } from "../../.commonwidgets/cairo_circularprogress.js";
-import { WWO_CODE, WEATHER_SYMBOL, NIGHT_WEATHER_SYMBOL } from '../../.commondata/weather.js';
+import { WWO_CODE, WEATHER_SYMBOL } from '../../.commondata/weather.js';
 
 const WEATHER_CACHE_FOLDER = `${GLib.get_user_cache_dir()}/ags/weather`;
 Utils.exec(`mkdir -p ${WEATHER_CACHE_FOLDER}`).catch;
@@ -91,7 +91,7 @@ const BarBattery = () => Box({
             revealChild: false,
             transition: 'slide_right',
             child: MaterialIcon('bolt', 'norm', { tooltipText: "Charging" }),
-            setup: (self) => self.hook(Battery, revealer => {
+            setup: (self) => self.hook(Battery,revealer => {
                 self.revealChild = Battery.charging;
             }),
         }),
@@ -138,7 +138,7 @@ const BatteryModule = () => Stack({
             className: 'spacing-h-4', children: [
                 BarGroup({ child: Utilities() }),
                 BarGroup({ child: BarBattery() }),
-            ]
+            ],
         }),
         'desktop': BarGroup({
             child: Box({
@@ -153,7 +153,7 @@ const BatteryModule = () => Stack({
                 ],
                 setup: (self) => self.poll(900000, async (self) => {
                     const WEATHER_CACHE_PATH = WEATHER_CACHE_FOLDER + '/wttr.in.txt';
-                    const updateWeatherForCity = (city) => execAsync(`curl https://wttr.in/${city.replace(/ /g, '%20')}?format=j1`).catch()
+                    const updateWeatherForCity = (city) => execAsync(`curl https://wttr.in/${city.replace(/ /g, '%20')}?format=j1`)
                         .then(output => {
                             const weather = JSON.parse(output);
                             Utils.writeFile(JSON.stringify(weather), WEATHER_CACHE_PATH)
@@ -187,7 +187,7 @@ const BatteryModule = () => Stack({
                         updateWeatherForCity(userOptions.weather.city.replace(/ /g, '%20'));
                     }
                     else {
-                        Utils.execAsync('curl ipinfo.io').catch(print)
+                        Utils.execAsync('curl ipinfo.io')
                             .then(output => {
                                 return JSON.parse(output)['city'].toLowerCase();
                             })

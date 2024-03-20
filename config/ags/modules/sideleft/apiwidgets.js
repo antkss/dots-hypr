@@ -1,8 +1,6 @@
 const { Gtk, Gdk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, CenterBox, Entry, EventBox, Icon, Label, Overlay, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, CenterBox, Label, Revealer, Scrollable, Stack } = Widget;
 import { setupCursorHover, setupCursorHoverInfo } from '../.widgetutils/cursorhover.js';
 // APIs
 import GPTService from '../../services/gpt.js';

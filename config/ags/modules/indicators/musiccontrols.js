@@ -8,28 +8,13 @@ const { Box, Label, Button } = Widget;
 import SidebarModule from '../sideleft/tools/module.js';
 import { fileExists } from '../.miscutils/files.js';
 // import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
-import { showMusicControls } from '../../variables.js';
+// import { showMusicControls } from '../../variables.js';
 import { darkMode } from '../.miscutils/system.js';
 const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
 const COVER_COLORSCHEME_SUFFIX = '_colorscheme.css';
-const players = mpris.bind("players")
+const players = Mpris.bind("players")
 var lastCoverPath = '';
 
-// function isRealPlayer(player) {
-//     return (
-//         !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
-//         !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') && // Doesn't have cover art
-//         !player.busName.endsWith('.mpd') // Non-instance mpd bus
-//     );
-// }
-
-const getPlayer = (name = userOptions.music.preferredPlayer) => Mpris.getPlayer(name) || Mpris.players[0] || null;
-// function lengthStr(length) {
-//     const min = Math.floor(length / 60);
-//     const sec = Math.floor(length % 60);
-//     const sec0 = sec < 10 ? '0' : '';
-//     return `${min}:${sec0}${sec}`;
-// }
 
 function detectMediaSource(link) {
     if (link.startsWith("file://")) {
@@ -37,12 +22,12 @@ function detectMediaSource(link) {
             return '󰈹 Firefox'
         return "󰈣 File";
     }
-    // let url = link.replace(/(^\w+:|^)\/\//, '');
-    // let domain = url.match(/(?:[a-z]+\.)?([a-z]+\.[a-z]+)/i)[1];
-    // if (domain == 'ytimg.com') return '󰗃 Youtube';
-    // if (domain == 'discordapp.net') return '󰙯 Discord';
-    // if (domain == 'sndcdn.com') return '󰓀 SoundCloud';
-    // return domain;
+    let url = link.replace(/(^\w+:|^)\/\//, '');
+    let domain = url.match(/(?:[a-z]+\.)?([a-z]+\.[a-z]+)/i)[1];
+    if (domain == 'ytimg.com') return '󰗃 Youtube';
+    if (domain == 'discordapp.net') return '󰙯 Discord';
+    if (domain == 'sndcdn.com') return '󰓀 SoundCloud';
+    return domain;
 }
 
 const DEFAULT_MUSIC_FONT = 'Gabarito, sans-serif';
@@ -64,24 +49,6 @@ function trimTrackTitle(title) {
     cleanPatterns.forEach((expr) => title = title.replace(expr, ''));
     return title;
 }
-
-// const TrackProgress = ({ player, ...rest }) => {
-//     const _updateProgress = (circprog) => {
-//         // const player = Mpris.getPlayer();
-//         if (!player) return;
-//         // Set circular progress (see definition of AnimatedCircProg for explanation)
-//         circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
-//     }
-//     return AnimatedCircProg({
-//         ...rest,
-//         className: 'osd-music-circprog',
-//         vpack: 'center',
-//         extraSetup: (self) => self
-//             .hook(Mpris, _updateProgress)
-//             .poll(3000, _updateProgress)
-//         ,
-//     })
-// }
 
 const TrackTitle = ({ player, ...rest }) => Label({
     ...rest,
@@ -118,8 +85,6 @@ const CoverArt = ({ player, ...rest }) => {
             label: 'music_note',
         })]
     });
-    // const coverArtDrawingArea = Widget.DrawingArea({ className: 'osd-music-cover-art' });
-    // const coverArtDrawingAreaStyleContext = coverArtDrawingArea.get_style_context();
     const realCoverArt = Box({
         className: 'osd-music-cover-art',
         homogeneous: true,
@@ -127,7 +92,6 @@ const CoverArt = ({ player, ...rest }) => {
         attribute: {
             'pixbuf': null,
                        'updateCover': (self) => {
-                // const player = Mpris.getPlayer(); // Maybe no need to re-get player.. can't remember why I had this
                 // Player closed
                 // Note that cover path still remains, so we're checking title
                 if (!player || player.trackTitle == "") {
@@ -252,42 +216,8 @@ const TrackSource = ({ player, ...rest }) => Widget.Revealer({
     }),
 });
 
-// const TrackTime = ({ player, ...rest }) => {
-//     return Widget.Revealer({
-//         revealChild: false,
-//         transition: 'slide_left',
-//         transitionDuration: userOptions.animations.durationLarge,
-//         child: Widget.Box({
-//             ...rest,
-//             vpack: 'center',
-//             className: 'osd-music-pill spacing-h-5',
-//             children: [
-//                 Label({
-//                     setup: (self) => self.poll(1000, (self) => {
-//                         // const player = Mpris.getPlayer();
-//                         if (!player) return;
-//                         self.label = lengthStr(player.position);
-//                     }),
-//                 }),
-//                 Label({ label: '/' }),
-//                 Label({
-//                     setup: (self) => self.hook(Mpris, (self) => {
-//                         // const player = Mpris.getPlayer();
-//                         if (!player) return;
-//                         self.label = lengthStr(player.length);
-//                     }),
-//                 }),
-//             ],
-//         }),
-//         setup: (self) => self.hook(Mpris, (self) => {
-//             if (!player) self.revealChild = false;
-//             else self.revealChild = true;
-//         }),
-//     })
-// }
-//
+
 const PlayState = ({ player }) => {
-    // const trackCircProg = TrackProgress({ player: player });
     return Widget.Button({
         className: 'osd-music-playstate',
                onClicked: () => player.playPause(),
@@ -304,7 +234,6 @@ const PlayState = ({ player }) => {
                 }),
     });
 }
-
 const MusicControlsWidget = (player) => Box({
     // className: 'osd-music',
     children: [
@@ -320,7 +249,6 @@ const MusicControlsWidget = (player) => Box({
                     children: [
                         TrackTitle({ player: player }),
                         TrackArtists({ player: player }),
-			    // TrackProgress({ player: player }),
                     ]
                 }),
                 Box({
@@ -328,8 +256,6 @@ const MusicControlsWidget = (player) => Box({
                     setup: (box) => {
                         box.pack_start(TrackControls({ player: player }), false, false, 0);
                         box.pack_end(PlayState({ player: player }), false, false, 0);
-                        // box.pack_end(TrackTime({ player: player }), false, false, 0)
-			// box.pack_end(progressBar, false, false, 0)
                         box.pack_end(TrackSource({ vpack: 'center', player: player }), false, false, 0);
                     }
                 })

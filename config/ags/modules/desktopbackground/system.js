@@ -4,7 +4,7 @@ const { execAsync, exec } = Utils;
 const { Box, EventBox, Label, Revealer, Overlay } = Widget;
 import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
-
+import userOptions from '../.configuration/user_options.js'
 const ResourceValue = (name, icon, interval, valueUpdateCmd, displayFunc, props = {}) => Box({
     ...props,
     className: 'bg-system-bg txt',

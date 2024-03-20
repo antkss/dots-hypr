@@ -27,11 +27,11 @@ function forMonitors(widget) {
 }
 
 // SCSS compilation
-Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`).catch; // reset music styles
-Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`).catch; // reset music styles
+Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`); // reset music styles
+Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`); // reset music styles
 async function applyStyle() {
-    Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`).catch;
-    Utils.exec(`sass ${App.configDir}/scss/main.scss ${COMPILED_STYLE_DIR}/style.css`).catch;
+    Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`);
+    Utils.exec(`sass ${App.configDir}/scss/main.scss ${COMPILED_STYLE_DIR}/style.css`);
     App.resetCss();
     App.applyCss(`${COMPILED_STYLE_DIR}/style.css`);
     console.log('[LOG] Styles loaded')

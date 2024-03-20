@@ -1,9 +1,7 @@
 // TODO: Make selection update when entry changes
-const { Gtk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync, exec } = Utils;
-const { Box, Button, Entry, EventBox, Icon, Label, Overlay, Scrollable } = Widget;
+const { Box, Button, Entry, EventBox, Label, Overlay} = Widget;
 import SidebarModule from './module.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
@@ -236,7 +234,7 @@ export default () => {
             if (id && self.attribute.id === id) return;
             self.text = hslToHex(selectedColor.hue, selectedColor.xAxis, selectedColor.yAxis / (1 + selectedColor.xAxis / 100));
         },
-        copyCallback: () => Utils.execAsync(['wl-copy', `${hslToHex(selectedColor.hue, selectedColor.xAxis, selectedColor.yAxis / (1 + selectedColor.xAxis / 100))}`]),
+        copyCallback: () => Utils.execAsync(['wl-copy', `${hslToHex(selectedColor.hue, selectedColor.xAxis, selectedColor.yAxis / (1 + selectedColor.xAxis / 100))}`]).catch(print),
     })
     const resultRgb = ResultBox({
         colorSystemName: 'RGB',
@@ -244,7 +242,7 @@ export default () => {
             if (id && self.attribute.id === id) return;
             self.text = hslToRgbValues(selectedColor.hue, selectedColor.xAxis, selectedColor.yAxis / (1 + selectedColor.xAxis / 100));
         },
-        copyCallback: () => Utils.execAsync(['wl-copy', `rgb(${hslToRgbValues(selectedColor.hue, selectedColor.xAxis, selectedColor.yAxis / (1 + selectedColor.xAxis / 100))})`]),
+        copyCallback: () => Utils.execAsync(['wl-copy', `rgb(${hslToRgbValues(selectedColor.hue, selectedColor.xAxis, selectedColor.yAxis / (1 + selectedColor.xAxis / 100))})`]).catch(print),
     })
     const resultHsl = ResultBox({
         colorSystemName: 'HSL',
@@ -252,7 +250,7 @@ export default () => {
             if (id && self.attribute.id === id) return;
             self.text = `${selectedColor.hue},${selectedColor.xAxis}%,${Math.round(selectedColor.yAxis / (1 + selectedColor.xAxis / 100))}%`;
         },
-        copyCallback: () => Utils.execAsync(['wl-copy', `hsl(${selectedColor.hue},${selectedColor.xAxis}%,${Math.round(selectedColor.yAxis / (1 + selectedColor.xAxis / 100))}%)`]),
+        copyCallback: () => Utils.execAsync(['wl-copy', `hsl(${selectedColor.hue},${selectedColor.xAxis}%,${Math.round(selectedColor.yAxis / (1 + selectedColor.xAxis / 100))}%)`]).catch(print),
     })
     const result = Box({
         className: 'sidebar-module-colorpicker-result-area spacing-v-5 txt',

@@ -177,16 +177,7 @@ export default () => {
     }
 
     const Workspace = (index) => {
-        // const fixed = Widget.Fixed({
-        //     attribute: {
-        //         put: (widget, x, y) => {
-        //             fixed.put(widget, x, y);
-        //         },
-        //         move: (widget, x, y) => {
-        //             fixed.move(widget, x, y);
-        //         },
-        //     }
-        // });
+
         const fixed = Widget.Box({
             attribute: {
                 put: (widget, x, y) => {

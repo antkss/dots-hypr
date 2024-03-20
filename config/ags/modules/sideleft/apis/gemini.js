@@ -99,22 +99,22 @@ export const GeminiSettings = () => MarginRevealer({
                 },
             }),
             ConfigGap({ vertical: true, size: 10 }), // Note: size can only be 5, 10, or 15 
-            Box({
-                vertical: true,
-                hpack: 'fill',
-                className: 'sidebar-chat-settings-toggles',
-                children: [
-                    ConfigToggle({
-                        icon: 'model_training',
-                        name: 'Training Mode',
-                        desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
-                        initValue: GeminiService.assistantPrompt,
-                        onChange: (self, newValue) => {
-                            GeminiService.assistantPrompt = newValue;
-                        },
-                    }),
-                ]
-            })
+            // Box({
+            //     vertical: true,
+            //     hpack: 'fill',
+            //     className: 'sidebar-chat-settings-toggles',
+            //     children: [
+            //         ConfigToggle({
+            //             icon: 'model_training',
+            //             name: 'Training Mode',
+            //             desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
+            //             initValue: GeminiService.assistantPrompt,
+            //             onChange: (self, newValue) => {
+            //                 GeminiService.assistantPrompt = newValue;
+            //             },
+            //         }),
+            //     ]
+            // })
         ]
     })
 });
@@ -139,7 +139,7 @@ export const GoogleAiInstructions = () => Box({
             }),
             setup: setupCursorHover,
             onClicked: () => {
-                Utils.execAsync(['bash', '-c', `xdg-open https://makersuite.google.com/app/apikey &`]);
+                Utils.execAsync(['bash', '-c', `xdg-open https://makersuite.google.com/app/apikey &`]).catch(print);
             }
         })
     })]

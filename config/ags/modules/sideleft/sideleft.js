@@ -6,7 +6,6 @@ import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import toolBox from './toolbox.js';
 import apiWidgets from './apiwidgets.js';
-// import { chatEntry } from './apiwidgets.js';
 import { TabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
 import { textbox } from './apiwidgets.js';

@@ -245,7 +245,7 @@ const WaifuImage = (taglist) => {
                 }
                 // Show
                 if (!force && fileExists(thisBlock.attribute.imagePath)) showImage();
-                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock.attribute.imagePath}' '${url}'`])
+                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock.attribute.imagePath}' '${url}'`]).catch(print)
                     .then(showImage)
                     .catch(print);
                 blockHeading.get_children().forEach((child) => {

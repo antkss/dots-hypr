@@ -1,6 +1,5 @@
-const { Gdk, Gtk } = imports.gi;
+const {  Gtk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import Service from 'resource:///com/github/Aylur/ags/service.js';
 import { Keybinds } from "./keybinds.js";
 import { setupCursorHover } from "../.widgetutils/cursorhover.js";
 import PopupWindow from '../.widgethacks/popupwindow.js';

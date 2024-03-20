@@ -1,4 +1,4 @@
-const { GLib, Gdk, Gtk } = imports.gi;
+const { Gdk, Gtk } = imports.gi;
 const Lang = imports.lang;
 const Cairo = imports.cairo;
 const Pango = imports.gi.Pango;
@@ -91,7 +91,6 @@ const WorkspaceContents = (count = 10) => {
                 layout.set_text("0".repeat(count.toString().length), -1);
                 const [layoutWidth, layoutHeight] = layout.get_pixel_size();
                 const indicatorRadius = Math.max(layoutWidth, layoutHeight) / 2 * 1.2; // a bit smaller than sqrt(2)*radius
-                const indicatorGap = workspaceRadius - indicatorRadius;
 
                 // Draw workspace numbers
                 for (let i = 1; i <= count; i++) {

@@ -3,7 +3,7 @@ import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Service from 'resource:///com/github/Aylur/ags/service.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-
+const { Gtk } = imports.gi;
 import Variable from 'resource:///com/github/Aylur/ags/variable.js';
 const { execAsync, exec } = Utils;
 const { Box, Label, Button, Revealer, EventBox } = Widget;
@@ -33,7 +33,7 @@ const TimeAndDate = () => Box({
     ]
 })
 
-const QuickLaunches = () => Box({
+export const QuickLaunches = () => Box({
     vertical: true,
     className: 'spacing-v-10',
     children: [
