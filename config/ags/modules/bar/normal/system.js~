@@ -187,7 +187,7 @@ const BatteryModule = () => Stack({
                         updateWeatherForCity(userOptions.weather.city.replace(/ /g, '%20'));
                     }
                     else {
-                        Utils.execAsync('curl ipinfo.io').catch(print)
+                        Utils.execAsync('curl ipinfo.io').catch(print);
                             .then(output => {
                                 return JSON.parse(output)['city'].toLowerCase();
                             })

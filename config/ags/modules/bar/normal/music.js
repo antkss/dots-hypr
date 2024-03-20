@@ -58,7 +58,7 @@ const BarResource = (name, icon, command, circprogClassName = 'bar-batt-circprog
             resourceLabel,
         ],
         setup: (self) => self
-            .poll(5000, () => execAsync(['bash', '-c', command])
+            .poll(5000, () => execAsync(['bash', '-c', command]).catch(print)
                 .then((output) => {
                     resourceCircProg.css = `font-size: ${Number(output)}px;`;
                     resourceLabel.label = `${Math.round(Number(output))}%`;

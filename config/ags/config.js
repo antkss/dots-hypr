@@ -27,11 +27,11 @@ function forMonitors(widget) {
 }
 
 // SCSS compilation
-Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`); // reset music styles
-Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`); // reset music styles
+Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`).catch; // reset music styles
+Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`).catch; // reset music styles
 async function applyStyle() {
-    Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`);
-    Utils.exec(`sass ${App.configDir}/scss/main.scss ${COMPILED_STYLE_DIR}/style.css`);
+    Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`).catch;
+    Utils.exec(`sass ${App.configDir}/scss/main.scss ${COMPILED_STYLE_DIR}/style.css`).catch;
     App.resetCss();
     App.applyCss(`${COMPILED_STYLE_DIR}/style.css`);
     console.log('[LOG] Styles loaded')
@@ -56,7 +56,7 @@ const Windows = () => [
     // forMonitors((id) => Corner(id, 'bottom left')),
     // forMonitors((id) => Corner(id, 'bottom right')),
 ];
-const CLOSE_ANIM_TIME = 210; // Longer than actual anim time to make sure widgets animate fully
+const CLOSE_ANIM_TIME = 150; // Longer than actual anim time to make sure widgets animate fully
 App.config({
     css: `${COMPILED_STYLE_DIR}/style.css`,
     stackTraceOnError: true,

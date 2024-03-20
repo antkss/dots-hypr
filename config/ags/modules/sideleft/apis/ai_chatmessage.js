@@ -67,7 +67,6 @@ const HighlightedCode = (content, lang) => {
     buffer.set_text(content, -1);
     return sourceView;
 }
-
 const TextBlock = (content = '') => Label({
     hpack: 'fill',
     className: 'txt sidebar-chat-txtblock sidebar-chat-txt',
@@ -208,8 +207,8 @@ const CodeBlock = (content = '', lang = 'txt') => {
 const Divider = () => Box({
     className: 'sidebar-chat-divider',
 })
-
 const MessageContent = (content) => {
+	
     const contentBox = Box({
         vertical: true,
         attribute: {
@@ -220,7 +219,13 @@ const MessageContent = (content) => {
                     const child = children[i];
                     child.destroy();
                 }
-                contentBox.add(TextBlock())
+                contentBox.add(TextBlock());
+		    // write content value to a file without lost the old one
+
+		    // const filePath = '.cache/lmao.txt';
+		    // Utils.writeFile(content+'\n' , filePath).catch(print);
+		    // Utils.execAsync([`bash`, `-c`, `$HOME/.config/ags/scripts/a.sh`]).catch(print);
+		    
                 // Loop lines. Put normal text in markdown parser 
                 // and put code into code highlighter (TODO)
                 let lines = content.split('\n');

@@ -171,7 +171,6 @@ export const chatContent = Box({
         }, 'newMsg')
     ,
 });
-
 const clearChat = () => {
     GeminiService.clear();
     const children = chatContent.get_children();

@@ -225,7 +225,7 @@ export const OpenaiApiKeyInstructions = () => Box({
             }),
             setup: setupCursorHover,
             onClicked: () => {
-                Utils.execAsync(['bash', '-c', `xdg-open ${GPTService.getKeyUrl}`]);
+                Utils.execAsync(['bash', '-c', `xdg-open ${GPTService.getKeyUrl}`]).catch();
             }
         })
     })]
