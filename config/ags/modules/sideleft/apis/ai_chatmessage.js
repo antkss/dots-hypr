@@ -3,11 +3,10 @@ import GtkSource from "gi://GtkSource?version=3.0";
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, Label, Icon, Scrollable } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, Label, Scrollable } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import md2pango from '../../.miscutils/md2pango.js';
-import { textbox } from '../apiwidgets.js';
 
 
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`;
