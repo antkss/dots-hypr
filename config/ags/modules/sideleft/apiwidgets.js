@@ -250,6 +250,11 @@ const apiWidgets = Widget.Box({
         apiCommandStack,
         textbox,
     ],
+}).keybind(["SHIFT"],"Return", (self, event) => {
+	// textbox.set_position(1);
+	textbox.set_text(textbox.text + "\n");
+	textbox.set_position(-1);
+    
 });
 
 export default apiWidgets;
