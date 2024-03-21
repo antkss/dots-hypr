@@ -30,7 +30,7 @@ export default () => SidebarModule({
 			    label: "💕",
                         onClicked: () => {
                             App.closeWindow('sideleft');
-                            execAsync([`bash`, `-c`, `$HOME/.config/ags/scripts/color_generation/switchcolor.sh`]).catch(print)
+                            execAsync([`bash`, `-c`, `$HOME/.config/ags/scripts/color_generation/switchcolor.sh --pick`]).catch(print)
                         },
                     }),
 
