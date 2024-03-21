@@ -3,15 +3,16 @@
 // - Active ws hook optimization: only update when moving to next group
 //
 const { Gdk, Gtk } = imports.gi;
+
 const { Gravity } = imports.gi.Gdk;
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Variable from 'resource:///com/github/Aylur/ags/variable.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-
+import GLib from 'gi://GLib';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-const { execAsync, exec } = Utils;
+const { execAsync } = Utils;
 import { setupCursorHoverGrab } from '../.widgetutils/cursorhover.js';
 import { dumpToWorkspace, swapWorkspace } from "./actions.js";
 import { substitute } from "../.miscutils/icons.js";
@@ -24,7 +25,6 @@ const overviewTick = Variable(false);
 
 export default () => {
     const clientMap = new Map();
-    let workspaceGroup = 0;
     const ContextMenuWorkspaceArray = ({ label, actionFunc, thisWorkspace }) => Widget.MenuItem({
         label: `${label}`,
         setup: (menuItem) => {
@@ -65,8 +65,16 @@ export default () => {
         if (x + w > SCREEN_WIDTH) w = SCREEN_WIDTH - x;
         if (y + h > SCREEN_HEIGHT) h = SCREEN_HEIGHT - y;
 
+	function iconExists(iconName) {
+    let iconTheme = Gtk.IconTheme.get_default();
+    return iconTheme.has_icon(iconName);
+		}
+		appicon = substitute(c);
+	if (!iconExists(substitute(c))) {
+		 var appicon = `${GLib.get_user_config_dir()}/ags/assets/icons/logo.jpg`;
+	}
         const appIcon = Widget.Icon({
-            icon: substitute(c),
+            icon: appicon,
             size: Math.min(w, h) * userOptions.overview.scale / 2.5,
         });
         return Widget.Button({
