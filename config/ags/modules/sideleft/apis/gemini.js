@@ -182,10 +182,11 @@ export const geminiCommands = Box({
     className: 'spacing-h-5',
     children: [
         Box({ hexpand: true }),
+	CommandButton('/reset'),
         CommandButton('/key'),
         CommandButton('/model'),
         CommandButton('/clear'),
-	CommandButton('/reset')
+	
     ]
 });
 
