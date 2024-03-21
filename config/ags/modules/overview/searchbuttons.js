@@ -1,10 +1,11 @@
 const { Gtk } = imports.gi;
+import GLib from 'gi://GLib';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync, exec } = Utils;
+const { execAsync} = Utils;
 import { searchItem } from './searchitem.js';
-import { execAndClose, couldBeMath, launchCustomCommand } from './miscfunctions.js';
+import { execAndClose, launchCustomCommand } from './miscfunctions.js';
 
 export const DirectoryButton = ({ parentPath, name, type, icon }) => {
     const actionText = Widget.Revealer({
@@ -73,8 +74,16 @@ export const CalculationResultButton = ({ result, text }) => searchItem({
         execAsync(['wl-copy', `${result}`]).catch(print);
     },
 });
-
+function iconExists(iconName) {
+    let iconTheme = Gtk.IconTheme.get_default();
+    return iconTheme.has_icon(iconName);
+}
 export const DesktopEntryButton = (app) => {
+	var appicon = app.iconName;
+	if (!iconExists(app.iconName)) {
+  appicon = `${GLib.get_user_config_dir()}/ags/assets/icons/logo.jpg`;
+	}
+
     const actionText = Widget.Revealer({
         revealChild: false,
         transition: "crossfade",
@@ -105,7 +114,7 @@ export const DesktopEntryButton = (app) => {
                             className: 'overview-search-results-icon',
                             homogeneous: true,
                             child: Widget.Icon({
-                                icon: app.iconName,
+                                icon: appicon,
                             }),
                         }),
                         Widget.Label({
