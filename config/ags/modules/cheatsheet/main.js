@@ -1,9 +1,18 @@
-const { Gdk, Gtk } = imports.gi;
+const { Gtk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import Service from 'resource:///com/github/Aylur/ags/service.js';
 import { Keybinds } from "./keybinds.js";
 import { setupCursorHover } from "../.widgetutils/cursorhover.js";
 import PopupWindow from '../.widgethacks/popupwindow.js';
+import {SCREEN_WIDTH} from '../../variables.js';
+//calculated size
+let scale_factor = 1;
+try {
+    scale_factor = JSON.parse(exec('hyprctl monitors -j'))
+        .filter(monitor => monitor.focused)[0]
+        .scale;
+} catch {}
+ const SCALE_FACTOR = scale_factor;
+ const SCREEN_REAL_WIDTH = SCREEN_WIDTH / SCALE_FACTOR;
 
 const cheatsheetHeader = () => Widget.CenterBox({
     vertical: false,
@@ -68,24 +77,34 @@ const clickOutsideToClose = Widget.EventBox({
     onSecondaryClick: () => App.closeWindow('cheatsheet'),
     onMiddleClick: () => App.closeWindow('cheatsheet'),
 });
+export default () => {
+    // values from ags inspector
+    const cheatsheetWidth = 1588;
+    const defaultDPI = 96;
 
-export default () => PopupWindow({
-    name: 'cheatsheet',
-    exclusivity: 'ignore',
-    keymode: 'exclusive',
-    visible: false,
-    child: Widget.Box({
-        vertical: true,
-        children: [
-            clickOutsideToClose,
-            Widget.Box({
-                vertical: true,
-                className: "cheatsheet-bg spacing-v-15",
-                children: [
-                    cheatsheetHeader(),
-                    Keybinds(),
-                ]
-            }),
-        ],
-    })
-});
+    let scale_factor = 1;
+    if (cheatsheetWidth > SCREEN_REAL_WIDTH) {
+        scale_factor = SCREEN_REAL_WIDTH / cheatsheetWidth;
+    }
+    return PopupWindow({
+        name: 'cheatsheet',
+        exclusivity: 'ignore',
+        keymode: 'exclusive',
+        visible: false,
+        child: Widget.Box({
+            vertical: true,
+            children: [
+                clickOutsideToClose,
+                Widget.Box({
+                    vertical: true,
+                    className: "cheatsheet-bg spacing-v-15",
+                    css: `${scale_factor < 1 ? `-gtk-dpi: ${defaultDPI * scale_factor}` : ''}`,
+                    children: [
+                        cheatsheetHeader(),
+                        Keybinds(),
+                    ]
+                }),
+            ],
+        })
+    });
+}
