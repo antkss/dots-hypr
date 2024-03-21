@@ -113,9 +113,9 @@ export default () => {
                 // SystemResourcesOrCustomModule(),
                 EventBox({
                     child: BarGroup({ child: musicStuff }),
-                    onPrimaryClick: () => showMusicControls.setValue(!showMusicControls.value),
-                    onSecondaryClick: () => execAsync(['bash', '-c', 'playerctl next']).catch(print),
-                    onMiddleClick: () => execAsync('playerctl play-pause').catch(print),
+                    onPrimaryClick: () => execAsync('playerctl play-pause').catch(print),
+                    onSecondaryClick: () => showMusicControls.setValue(!showMusicControls.value),
+                    onMiddleClick: () => execAsync(['bash', '-c', 'playerctl next']).catch(print),
                     setup: (self) => self.on('button-press-event', (self, event) => {
                         if (event.get_button()[1] === 8) // Side button
                             execAsync('playerctl previous').catch(print)

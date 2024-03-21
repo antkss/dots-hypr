@@ -15,7 +15,7 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
     tooltipText: 'Wifi | Right-click to configure',
     onClicked: () => Network.toggleWifi(),
     onSecondaryClickRelease: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi', '&']);
+        execAsync(['bash', '-c', 'nm-connection-editor', '&']);
         App.closeWindow('sideright');
     },
     child: NetworkIndicator(),
@@ -213,7 +213,7 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Open Settings',
     onClicked: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
+        execAsync(['bash', '-c', 'xfce4-appearance-settings', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('settings', 'norm'),

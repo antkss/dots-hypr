@@ -1,8 +1,7 @@
 const { Gtk } = imports.gi;
-import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-
+import GLib from 'gi://GLib';
 const { Box, Button, Icon, Label, Revealer, Scrollable } = Widget;
 import GeminiService from '../../../services/gemini.js';
 import { setupCursorHover, setupCursorHoverInfo } from '../../.widgetutils/cursorhover.js';
@@ -97,8 +96,8 @@ export const GeminiSettings = () => MarginRevealer({
                 children: [
                     ConfigToggle({
                         icon: 'model_training',
-                        name: 'Enhancements',
-                        desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
+                        name: 'DAD',
+                        desc: 'Turn on save training data and use it for conversating',
                         initValue: GeminiService.assistantPrompt,
                         onChange: (self, newValue) => {
                             GeminiService.assistantPrompt = newValue;
@@ -186,6 +185,7 @@ export const geminiCommands = Box({
         CommandButton('/key'),
         CommandButton('/model'),
         CommandButton('/clear'),
+	CommandButton('/reset')
     ]
 });
 
@@ -201,6 +201,7 @@ export const sendMessage = (text) => {
     // Commands
     if (text.startsWith('/')) {
         if (text.startsWith('/clear')) clearChat();
+	else if (text.startsWith('/reset')) { Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print); clearChat();}
         else if (text.startsWith('/model')) chatContent.add(SystemMessage(`Currently using \`${GeminiService.modelName}\``, '/model', geminiView))
         else if (text.startsWith('/prompt')) {
             const firstSpaceIndex = text.indexOf(' ');

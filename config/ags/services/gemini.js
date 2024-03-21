@@ -16,7 +16,7 @@ if(!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`))
 const readfile = Utils.readFile(`${GLib.get_user_config_dir()}/gemini_history.json`)
 const history_chat = JSON.parse(readfile)
 const initMessages = history_chat
-
+// api key file location
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
 const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/gemini_key_dom.txt`;
 function replaceapidom(URL) {
