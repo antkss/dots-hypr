@@ -4,7 +4,6 @@
 //
 const { Gdk, Gtk } = imports.gi;
 const { Gravity } = imports.gi.Gdk;
-import GLib from 'gi://GLib';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Variable from 'resource:///com/github/Aylur/ags/variable.js';
@@ -16,6 +15,7 @@ const { execAsync, exec } = Utils;
 import { setupCursorHoverGrab } from '../.widgetutils/cursorhover.js';
 import { dumpToWorkspace, swapWorkspace } from "./actions.js";
 import { substitute } from "../.miscutils/icons.js";
+
 const NUM_OF_WORKSPACES_SHOWN = userOptions.overview.numOfCols * userOptions.overview.numOfRows;
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)];
 const POPUP_CLOSE_TIME = 100; // ms
@@ -64,16 +64,9 @@ export default () => {
         // Truncate if offscreen
         if (x + w > SCREEN_WIDTH) w = SCREEN_WIDTH - x;
         if (y + h > SCREEN_HEIGHT) h = SCREEN_HEIGHT - y;
-	function iconExists(iconName) {
-    let iconTheme = Gtk.IconTheme.get_default();
-    return iconTheme.has_icon(iconName);
-}
- var appicon = `${GLib.get_user_config_dir()}/ags/assets/icons/logo.jpg`;
-	if (iconExists(substitute(c))) {
-		appicon = substitute(c);
-	}
+
         const appIcon = Widget.Icon({
-            icon: appicon,
+            icon: substitute(c),
             size: Math.min(w, h) * userOptions.overview.scale / 2.5,
         });
         return Widget.Button({
@@ -177,7 +170,16 @@ export default () => {
     }
 
     const Workspace = (index) => {
-
+        // const fixed = Widget.Fixed({
+        //     attribute: {
+        //         put: (widget, x, y) => {
+        //             fixed.put(widget, x, y);
+        //         },
+        //         move: (widget, x, y) => {
+        //             fixed.move(widget, x, y);
+        //         },
+        //     }
+        // });
         const fixed = Widget.Box({
             attribute: {
                 put: (widget, x, y) => {

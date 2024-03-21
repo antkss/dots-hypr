@@ -10,8 +10,8 @@ let configOptions = {
         'writingCursor': " ...", // Warning: Using weird characters can mess up Markdown rendering
     },
     'animations': {
-        'durationSmall': 90,
-        'durationLarge': 110,
+        'durationSmall': 110,
+        'durationLarge': 180,
     },
     'apps': {
         'imageViewer': "loupe",
@@ -36,7 +36,7 @@ let configOptions = {
     },
     'sidebar': {
         'imageColumns': 2,
-        'imageBooruCount': 6,
+        'imageBooruCount': 20,
     },
     'search': {
         'engineBaseUrl': "https://www.google.com/search?q=",

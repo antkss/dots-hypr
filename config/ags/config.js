@@ -29,8 +29,6 @@ function forMonitors(widget) {
 // SCSS compilation
 Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`); // reset music styles
 Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`); // reset music styles
-
-
 async function applyStyle() {
     Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`);
     Utils.exec(`sass ${App.configDir}/scss/main.scss ${COMPILED_STYLE_DIR}/style.css`);
@@ -55,10 +53,10 @@ const Windows = () => [
     // forMonitors(BarCornerTopright),
     forMonitors((id) => Corner(id, 'top left')),
     forMonitors((id) => Corner(id, 'top right')),
-    // forMonitors((id) => Corner(id, 'bottom left')),
-    // forMonitors((id) => Corner(id, 'bottom right')),
+    forMonitors((id) => Corner(id, 'bottom left')),
+    forMonitors((id) => Corner(id, 'bottom right')),
 ];
-const CLOSE_ANIM_TIME = 200; // Longer than actual anim time to make sure widgets animate fully
+const CLOSE_ANIM_TIME = 210; // Longer than actual anim time to make sure widgets animate fully
 App.config({
     css: `${COMPILED_STYLE_DIR}/style.css`,
     stackTraceOnError: true,

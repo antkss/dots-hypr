@@ -1,84 +1,59 @@
+import Service from 'resource:///com/github/Aylur/ags/service.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+const { exec, execAsync } = Utils;
+
+import { clamp } from '../modules/.miscutils/mathfuncs.js';
+
 class BrightnessService extends Service {
-    // every subclass of GObject.Object has to register itself
     static {
-        // takes three arguments
-        // the class itself
-        // an object defining the signals
-        // an object defining its properties
         Service.register(
             this,
-            {
-                // 'name-of-signal': [type as a string from GObject.TYPE_<type>],
-                'screen-changed': ['float'],
-            },
-            {
-                // 'kebab-cased-name': [type as a string from GObject.TYPE_<type>, 'r' | 'w' | 'rw']
-                // 'r' means readable
-                // 'w' means writable
-                // guess what 'rw' means
-                'screen-value': ['float', 'rw'],
-            },
+            { 'screen-changed': ['float'], },
+            { 'screen-value': ['float', 'rw'], },
         );
     }
 
-    // this Service assumes only one device with backlight
-    #interface = Utils.exec("bash -c 'ls -w1 /sys/class/backlight | head -1'");
-
-    // # prefix means private in JS
-    #screenValue = 0;
-    #max = Number(Utils.exec('brightnessctl max'));
+    _screenValue = 0;
 
     // the getter has to be in snake_case
-    get screen_value() {
-        return this.#screenValue;
-    }
+    get screen_value() { return this._screenValue; }
 
     // the setter has to be in snake_case too
     set screen_value(percent) {
-        if (percent < 0)
-            percent = 0;
+        percent = clamp(percent, 0, 1);
+        this._screenValue = percent;
 
-        if (percent > 1)
-            percent = 1;
+        Utils.execAsync(`brightnessctl s ${percent * 100}% -q`)
+            .then(() => {
+                // signals has to be explicity emitted
+                this.emit('screen-changed', percent);
+                this.notify('screen-value');
 
-        Utils.execAsync(`brightnessctl set ${percent * 100}% -q`);
-        // the file monitor will handle the rest
+                // or use Service.changed(propName: string) which does the above two
+                // this.changed('screen');
+            })
+            .catch(print);
     }
 
     constructor() {
         super();
-
-        // setup monitor
-        const brightness = `/sys/class/backlight/${this.#interface}/brightness`;
-        Utils.monitorFile(brightness, () => this.#onChange());
-
-        // initialize
-        this.#onChange();
+        const current = Number(exec('brightnessctl g'));
+        const max = Number(exec('brightnessctl m'));
+        this._screenValue = current / max;
     }
 
-    #onChange() {
-        this.#screenValue = Number(Utils.exec('brightnessctl get')) / this.#max;
-
-        // signals have to be explicity emitted
-        this.emit('changed'); // emits "changed"
-        this.notify('screen-value'); // emits "notify::screen-value"
-
-        // or use Service.changed(propName: string) which does the above two
-        // this.changed('screen-value');
-
-        // emit screen-changed with the percent as a parameter
-        this.emit('screen-changed', this.#screenValue);
-    }
-
-    // overwriting the connect method, let's you
+    // overwriting connectWidget method, lets you
     // change the default event that widgets connect to
-    connect(event = 'screen-changed', callback) {
-        return super.connect(event, callback);
+    connectWidget(widget, callback, event = 'screen-changed') {
+        super.connectWidget(widget, callback, event);
     }
 }
 
 // the singleton instance
-const service = new BrightnessService;
+const service = new BrightnessService();
+
+// make it global for easy use with cli
+globalThis.brightness = service;
 
 // export to use in other modules
 export default service;

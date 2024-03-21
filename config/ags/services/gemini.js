@@ -5,23 +5,20 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Soup from 'gi://Soup?version=3.0';
 import { fileExists } from '../modules/.miscutils/files.js';
-// import { initMessages } from './gemini_history.js';
-// print(JSON.stringify(initMessages));
 
-
-//create history file if it doesn't exist
+// check if gemini_history.json exists
 if(!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`))
 {
 	Utils.execAsync([`bash`, `-c`,`touch ${GLib.get_user_config_dir()}/gemini_history.json`]).catch(print);
        Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print);
 }
-
+// read gemini_history.json
 const readfile = Utils.readFile(`${GLib.get_user_config_dir()}/gemini_history.json`)
 const history_chat = JSON.parse(readfile)
 const initMessages = history_chat
-// Utils.writeFile("export const initMessages = [ " + history + "]; " , `${GLib.get_user_config_dir()}/ags/services/gemini_history.js`).catch(print);
+
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
-const APIDOM_FILE_LOCATION = `${GLib.get_user_config_dir()}/google_api_dom.txt`;
+const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/gemini_key_dom.txt`;
 function replaceapidom(URL) {
     if (fileExists(APIDOM_FILE_LOCATION)) {
         var contents = Utils.readFile(APIDOM_FILE_LOCATION).trim();
@@ -29,7 +26,7 @@ function replaceapidom(URL) {
     }
     return URL;
 }
-const CHAT_MODELS = ["gemini-1.0-pro-001"]
+const CHAT_MODELS = ["gemini-pro"]
 const ONE_CYCLE_COUNT = 3;
 
 class GeminiMessage extends Service {
@@ -50,7 +47,6 @@ class GeminiMessage extends Service {
     _thinking = false;
     _done = false;
     _rawData = '';
-    _aireport = '';
 
     constructor(role, content, thinking = false, done = false) {
         super();
@@ -85,7 +81,7 @@ class GeminiMessage extends Service {
     get thinking() { return this._thinking }
     set thinking(thinking) {
         this._thinking = thinking;
-        this.notify('thinking ...')
+        this.notify('thinking')
         this.emit('changed')
     }
 
@@ -132,8 +128,6 @@ class GeminiService extends Service {
     _modelIndex = 0;
     _key = '';
     _decoder = new TextDecoder();
-	_usermessage = '';
-
 
     constructor() {
         super();
@@ -142,9 +136,7 @@ class GeminiService extends Service {
         else this.emit('hasKey', false);
 
         if (this._assistantPrompt) this._messages = [...initMessages];
-
-        else
-	    this._messages = [];
+        else this._messages = [];
 
         this.emit('initialized');
     }
@@ -187,8 +179,7 @@ class GeminiService extends Service {
     set assistantPrompt(value) {
         this._assistantPrompt = value;
         if (value) this._messages = [...initMessages];
-        else
-	    this._messages = [];
+        else this._messages = [];
     }
 
     readResponse(stream, aiResponse) {
@@ -211,18 +202,8 @@ class GeminiService extends Service {
                     this.readResponse(stream, aiResponse);
                 } catch {
                     aiResponse.done = true;
-			this._aireport = aiResponse.content;
-if(this.thinking == false){
-Utils.writeFile(JSON.stringify(this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })),`${GLib.get_user_config_dir()}/gemini_history.json`)
-	// save all the history 
-}
-			// i want to store ai response here
-	// if(this.thinking == false)
-// Utils.readFileAsync(`${GLib.get_user_config_dir()}/gemini_history.txt`)
-    // .then(content => Utils.writeFile(content + "\n" +JSON.stringify( { role: "user", parts: [{ text: this._usermessage }]},) +",\n\n" + JSON.stringify( { role: "model", parts: [{ text: aiResponse.content }]},)  + ",\n\n" , `${GLib.get_user_config_dir()}/gemini_history.txt`))
-    // .catch(logError)
-			
-
+			// the way to save all the history messages for gemini 
+			Utils.writeFile(JSON.stringify(this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })),`${GLib.get_user_config_dir()}/gemini_history.json`)
                     return;
                 }
             });
@@ -234,28 +215,27 @@ Utils.writeFile(JSON.stringify(this._messages.map(msg => { let m = { role: msg.r
     }
 
     send(msg) {
-
-// Utils.writeFile(JSON.stringify( { role: "user", parts: [{ text: msg }]},"\n"), `${GLib.get_user_cache_dir()}/user_message.txt`);
-
-
-///////////////////////////////////////////////////////
-	    this._usermessage = msg;
-
         this._messages.push(new GeminiMessage('user', msg));
         this.emit('newMsg', this._messages.length - 1);
-        const aiResponse = new GeminiMessage('model', 'thinking ...', true, false)
+        const aiResponse = new GeminiMessage('model', 'thinking...', true, false)
 
         const body =
         {
             "contents": this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; }),
-          // "history": this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; }),
+            // "safetySettings": [
+            //     { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
+            // ],
             "generationConfig": {
                 "temperature": this._temperature,
-		"topK": 1,
-		"topP": 1,
-
             },
+            // "key": this._key,
+            // "apiKey": this._key,
         };
+
         const session = new Soup.Session();
         const message = new Soup.Message({
             method: 'POST',
@@ -272,14 +252,12 @@ Utils.writeFile(JSON.stringify(this._messages.map(msg => { let m = { role: msg.r
             }), aiResponse);
         });
         this._messages.push(aiResponse);
-	
         this.emit('newMsg', this._messages.length - 1);
 
         if (this._cycleModels) {
             this._requestCount++;
             if (this._cycleModels)
                 this._modelIndex = (this._requestCount - (this._requestCount % ONE_CYCLE_COUNT)) % CHAT_MODELS.length;
-
         }
     }
 }

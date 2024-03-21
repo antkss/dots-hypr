@@ -1,6 +1,8 @@
 const { Gtk, Gdk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-const { Box, Button, CenterBox, Label, Revealer, Scrollable, Stack } = Widget;
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+const { Box, Button, CenterBox, Entry, EventBox, Icon, Label, Overlay, Revealer, Scrollable, Stack } = Widget;
+const { execAsync, exec } = Utils;
 import { setupCursorHover, setupCursorHoverInfo } from '../.widgetutils/cursorhover.js';
 // APIs
 import GPTService from '../../services/gpt.js';
@@ -121,7 +123,7 @@ chatEntry.get_buffer().connect("changed", (buffer) => {
         chatPlaceholder.set_valign(Gtk.Align.CENTER);
     }
 });
- 
+
 const chatEntryWrapper = Scrollable({
     className: 'sidebar-chat-wrapper',
     hscroll: 'never',
@@ -135,8 +137,8 @@ const chatSendButton = Button({
     label: 'arrow_upward',
     setup: setupCursorHover,
     onClicked: (self) => {
-        APIS[currentApiId].sendCommand(textbox.get_buffer().text);
-        textbox.get_buffer().set_text("", -1);
+        APIS[currentApiId].sendCommand(chatEntry.get_buffer().text);
+        chatEntry.get_buffer().set_text("", -1);
     },
 });
 
@@ -154,12 +156,12 @@ const chatPlaceholderRevealer = Revealer({
     child: chatPlaceholder,
     setup: enableClickthrough,
 });
+
 export const textbox = Widget.Entry({
         className: 'sidebar-chat-textarea',
 	placeholder_text: 'Type here to chat ...',
 	visibility: true,
         onAccept: (self) => { // This is when you hit Enter
-            const text = self.text;
 		APIS[currentApiId].sendCommand(self.text);
 		self.get_buffer().set_text("", -1);
 
@@ -179,7 +181,7 @@ export const textbox = Widget.Entry({
 //         chatSendButton,
 //     ]
 // });
-//
+
 const apiContentStack = Stack({
     vexpand: true,
     transition: 'slide_left_right',
@@ -208,27 +210,31 @@ function switchToTab(id) {
     currentApiId = id;
 }
 
-const apiSwitcher = CenterBox({
-    centerWidget: Box({
-        className: 'sidebar-chat-apiswitcher spacing-h-5',
-        hpack: 'center',
-        children: APIS.map((api, id) => Button({
-            child: api.tabIcon,
-            tooltipText: api.name,
-            setup: setupCursorHover,
-            onClicked: () => {
-                switchToTab(id);
-            }
-        })),
-    }),
-    endWidget: Button({
-        hpack: 'end',
-        className: 'txt-subtext txt-norm icon-material',
-        label: 'lightbulb',
-        tooltipText: 'Use PageUp/PageDown to switch between API pages',
-        setup: setupCursorHoverInfo,
-    }),
-})
+const apiSwitcher = EventBox({
+    onScrollUp: () => apiWidgets.attribute.prevTab(),
+    onScrollDown: () => apiWidgets.attribute.nextTab(),
+    child: CenterBox({
+        centerWidget: Box({
+            className: 'sidebar-chat-apiswitcher spacing-h-5',
+            hpack: 'center',
+            children: APIS.map((api, id) => Button({
+                child: api.tabIcon,
+                tooltipText: api.name,
+                setup: setupCursorHover,
+                onClicked: () => {
+                    switchToTab(id);
+                }
+            })),
+        }),
+        endWidget: Button({
+            hpack: 'end',
+            className: 'txt-subtext txt-norm icon-material',
+            label: 'lightbulb',
+            tooltipText: 'Use PageUp/PageDown to switch between API pages',
+            setup: setupCursorHoverInfo,
+        }),
+    })
+});
 
 const apiWidgets = Widget.Box({
     attribute: {
@@ -243,14 +249,7 @@ const apiWidgets = Widget.Box({
         apiContentStack,
         apiCommandStack,
         textbox,
-	    // chatSendButton
     ],
-
-}).keybind(["SHIFT"],"Return", (self, event) => {
-	// textbox.set_position(1);
-	textbox.set_text(textbox.text + "\n");
-	textbox.set_position(-1);
-    
 });
 
 export default apiWidgets;

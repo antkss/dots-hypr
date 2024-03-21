@@ -1,20 +1,18 @@
+const { Gtk } = imports.gi;
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { EventBox } = Widget;
 
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
+const { execAsync, exec } = Utils;
 const { Box, Revealer } = Widget;
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
-import userOptions from '../.configuration/user_options.js';
+
 const pinnedApps = [
     'firefox',
     'org.gnome.Nautilus',
-	'nemo',
-	'foot',
-	'mcpe',
-	'ida',
-
 ];
 
 function substitute(str) {
@@ -143,7 +141,7 @@ const Taskbar = () => Widget.Box({
     },
 });
 
-export const PinnedApps = () => Widget.Box({
+const PinnedApps = () => Widget.Box({
     class_name: 'dock-apps',
     homogeneous: true,
     children: pinnedApps

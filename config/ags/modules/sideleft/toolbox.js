@@ -3,9 +3,6 @@ const { Box, Scrollable } = Widget;
 import QuickScripts from './tools/quickscripts.js';
 import ColorPicker from './tools/colorpicker.js';
 import materialpick from './tools/materialswitch.js' 
-// import { PinnedApps } from '../dock/dock.js'
-// import musicControl from './tools/media.js'
-import musicControl from '../indicators/musiccontrols.js'
 
 export default Scrollable({
     hscroll: "never",
@@ -16,9 +13,7 @@ export default Scrollable({
         children: [
             QuickScripts(),
             ColorPicker(),
-	    materialpick(),
-	musicControl(),
-	// PinnedApps(),
+		materialpick(),
         ]
     })
 });

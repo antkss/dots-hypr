@@ -1,11 +1,14 @@
 const { Gdk } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-const { Box, Button, EventBox } = Widget;
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+const { Box, Button, EventBox, Label, Revealer, Scrollable, Stack } = Widget;
+const { execAsync, exec } = Utils;
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import toolBox from './toolbox.js';
 import apiWidgets from './apiwidgets.js';
+import { chatEntry } from './apiwidgets.js';
 import { TabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
 import { textbox } from './apiwidgets.js';
@@ -81,7 +84,6 @@ export default () => Box({
         }),
         widgetContent,
     ],
-
     setup: (self) => self
         .on('key-press-event', (widget, event) => { // Handle keybinds
             if (checkKeybind(event, userOptions.keybinds.sidebar.pin))

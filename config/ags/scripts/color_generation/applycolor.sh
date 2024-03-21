@@ -1,6 +1,6 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
-term_alpha=100 #Set this to < 100 make all your  transparent
+term_alpha=100 #Set this to < 100 make all your terminals transparent
 # sleep 0 # idk i wanted some delay or colors dont get applied properly
 if [ ! -d "$HOME"/.cache/ags/user/generated ]; then
     mkdir -p "$HOME"/.cache/ags/user/generated
@@ -12,34 +12,19 @@ colorstrings=''
 colorlist=()
 colorvalues=()
 
-# wallpath=$(swww query | awk -F 'image: ' '{print $2}')
+# wallpath=$(swww query | head -1 | awk -F 'image: ' '{print $2}')
 # wallpath_png="$HOME"'/.cache/ags/user/generated/hypr/lockscreen.png'
 # convert "$wallpath" "$wallpath_png"
 # wallpath_png=$(echo "$wallpath_png" | sed 's/\//\\\//g')
 # wallpath_png=$(sed 's/\//\\\\\//g' <<< "$wallpath_png")
 
-if [[ "$1" = "--bad-apple" ]]; then
-    cp scripts/color_generation/specials/_material_badapple.scss scss/_material.scss
-    colornames=$(cat scripts/color_generation/specials/_material_badapple.scss | cut -d: -f1)
-    colorstrings=$(cat scripts/color_generation/specials/_material_badapple.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
-    IFS=$'\n'
-    # filearr=( $filelist ) # Get colors
-    colorlist=( $colornames ) # Array of color names
-    colorvalues=( $colorstrings ) # Array of color values
-else
-    colornames=$(cat scss/_material.scss | cut -d: -f1)
-    colorstrings=$(cat scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
-    IFS=$'\n'
-    # filearr=( $filelist ) # Get colors
-    colorlist=( $colornames ) # Array of color names
-    colorvalues=( $colorstrings ) # Array of color values
-fi
-
 transparentize() {
   local hex="$1"
   local alpha="$2"
   local red green blue
-red=$((16#${hex:1:2})) green=$((16#${hex:3:2}))
+
+  red=$((16#${hex:1:2}))
+  green=$((16#${hex:3:2}))
   blue=$((16#${hex:5:2}))
 
   printf 'rgba(%d, %d, %d, %.2f)\n' "$red" "$green" "$blue" "$alpha"
@@ -50,7 +35,7 @@ get_light_dark() {
     if [ ! -f "$HOME"/.cache/ags/user/colormode.txt ]; then
         echo "" > "$HOME"/.cache/ags/user/colormode.txt
     else
-        lightdark=$(cat "$HOME"/.cache/ags/user/colormode.txt) # either "" or "-l"
+        lightdark=$(sed -n '1p' "$HOME/.cache/ags/user/colormode.txt")
     fi
     echo "$lightdark"
 }
@@ -67,13 +52,10 @@ apply_fuzzel() {
     # Apply colors
     for i in "${!colorlist[@]}"; do
         sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/fuzzel/fuzzel.ini
-# echo "$i: ${colorlist[$i]}: ${colorvalues[$i]}"
     done
 
     cp  "$HOME"/.cache/ags/user/generated/fuzzel/fuzzel.ini "$HOME"/.config/fuzzel/fuzzel.ini
 }
-
-
 
 apply_hyprland() {
     # Check if scripts/templates/hypr/hyprland/colors.conf exists
@@ -90,28 +72,6 @@ apply_hyprland() {
     done
 
     cp "$HOME"/.cache/ags/user/generated/hypr/hyprland/colors.conf "$HOME"/.config/hypr/hyprland/colors.conf
-    ########################################################
-##############apply for foot #################################
-if [ -d "$HOME/.config/foot" ]; then
-	if [[ -z $(cat $HOME/.config/foot/foot.ini | grep /.config/foot/colors.ini) ]]; then
-		echo "[main]
-include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
-	fi
-echo "
-[colors]
-background=${colorvalues[18]:1}
-foreground=ffffff
-flash=7f7f00
-regular0=0x696969   
-regular1=0xFF2400 
-regular2=0x03C03C
-regular3=0xFDFF00
-regular4=0x${colorvalues[1]:1} 
-regular5=0xFF1493 
-regular6=0x00CCCC  
-regular7=0xffffff  
-" > "$HOME"/.config/foot/colors.ini
-fi
 }
 
 apply_hyprlock() {
@@ -150,7 +110,7 @@ apply_gtk() { # Using gradience-cli
     # Set light/dark preference
     # And set GTK theme manually as Gradience defaults to light adw-gtk3
     # (which is unreadable when broken when you use dark mode)
-    if [ "$lightdark" = "-l" ]; then
+    if [ "$lightdark" = "light" ]; then
         gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
     else
@@ -165,7 +125,24 @@ apply_ags() {
     ags run-js "App.resetCss(); App.applyCss('${HOME}/.cache/ags/user/generated/style.css');"
 }
 
-apply_term() {
+if [[ "$1" = "--bad-apple" ]]; then
+    lightdark=$(get_light_dark)
+    cp scripts/color_generation/specials/_material_badapple"${lightdark}".scss scss/_material.scss
+    colornames=$(cat scripts/color_generation/specials/_material_badapple"${lightdark}".scss | cut -d: -f1)
+    colorstrings=$(cat scripts/color_generation/specials/_material_badapple"${lightdark}".scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
+    IFS=$'\n'
+    colorlist=( $colornames ) # Array of color names
+    colorvalues=( $colorstrings ) # Array of color values
+else
+    colornames=$(cat scss/_material.scss | cut -d: -f1)
+    colorstrings=$(cat scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
+    IFS=$'\n'
+    colorlist=( $colornames ) # Array of color names
+    colorvalues=( $colorstrings ) # Array of color values
+fi
+apply_stuff(){
+
+
     # Check if terminal escape sequence template exists
     if [ ! -f "scripts/templates/terminal/sequences.txt" ]; then
         echo "Template file not found for Terminal. Skipping that."
@@ -182,14 +159,14 @@ mv $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua $HOME/.config
 echo "return {
 	dark = {
 		black = \"#1a212e\",
-		bg0 = \"${colorvalues[18]}\",
+		bg0 = \"${colorvalues[7]}\",
 		bg1 = \"#31353f\",
 		bg2 = \"#393f4a\",
 		bg3 = \"#3b3f4c\",
 		bg_d = \"#21252b\",
 		bg_blue = \"#73b8f1\",
 		bg_yellow = \"#ebd09c\",
-		fg = \"${colorvalues[24]}\",
+		fg = \"${colorvalues[19]}\",
 		purple = \"#c678dd\",
 		green = \"#98c379\",
 		orange = \"#d19a66\",
@@ -212,21 +189,21 @@ echo "return {
 if [ -d "$HOME/.config/nvim/plugged/vim-airline" ]; then
 echo "let g:airline#themes#base16_flat#palette = {}
 let s:gui00 = \"#ffffff\"
-let s:gui01 = \"${colorvalues[18]}\"
-let s:gui02 = \"${colorvalues[3]}\"
+let s:gui01 = \"${colorvalues[7]}\"
+let s:gui02 = \"${colorvalues[29]}\"
 let s:gui03 = \"#95A5A6\"
 let s:gui04 = \"#BDC3C7\"
 let s:gui05 = \"#e0e0e0\"
 let s:gui06 = \"#f5f5f5\"
 let s:gui07 = \"#ECF0F1\"
-let s:gui08 = \"${colorvalues[8]}\"
-let s:gui09 = \"${colorvalues[1]}\"
+let s:gui08 = \"${colorvalues[35]}\"
+let s:gui09 = \"${colorvalues[27]}\"
 let s:gui0A = \"#F1C40F\"
-let s:gui0B = \"${colorvalues[1]}\"
+let s:gui0B = \"${colorvalues[27]}\"
 let s:gui0C = \"#1ABC9C\"
-let s:gui0D = \"${colorvalues[8]}\"
-let s:gui0E = \"${colorvalues[15]}\"
-let s:gui0F = \"${colorvalues[9]}\"
+let s:gui0D = \"${colorvalues[35]}\"
+let s:gui0E = \"${colorvalues[42]}\"
+let s:gui0F = \"${colorvalues[36]}\"
 
 let s:cterm00 = 23
 let s:cterm01 = 59
@@ -285,13 +262,37 @@ else
 		  notify-send "onedark,vim-airline and vim-airline-themes plugin not found, please install them for neovim material themes support\n link onedark: https://github.com/navarasu/onedark.nvim"
     fi
 
+##############apply for foot #################################
+if [ -d "$HOME/.config/foot" ]; then
+	if [[ -z $(cat $HOME/.config/foot/foot.ini | grep /.config/foot/colors.ini) ]]; then
+		echo "[main]
+include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
+	fi
+echo "
+[colors]
+background=${colorvalues[7]:1}
+foreground=ffffff
+flash=7f7f00
+regular0=0x696969   
+regular1=0xFF2400 
+regular2=0x03C03C
+regular3=0xFDFF00
+regular4=0x${colorvalues[27]:1} 
+regular5=0xFF1493 
+regular6=0x00CCCC  
+regular7=0xffffff  
+" > "$HOME"/.config/foot/colors.ini
+fi
 
-  }
 
+# for i in "${!colorlist[@]}"; do
+#  echo "${colorlist[$i]}:[$i] ${colorvalues[$i]}"
+# done
+
+}
+apply_stuff &
 apply_ags &
 apply_hyprland &
 apply_hyprlock &
 apply_gtk &
 apply_fuzzel &
-apply_term &
-notify-send "you should logout to take full effects"

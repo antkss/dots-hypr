@@ -41,7 +41,12 @@ export const Bar = async (monitor = 0) => {
     });
     const normalBarContent = Widget.CenterBox({
         className: 'bar-bg',
-                startWidget: WindowTitle(),
+        setup: (self) => {
+            const styleContext = self.get_style_context();
+            const minHeight = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+            // execAsync(['bash', '-c', `hyprctl keyword monitor ,addreserved,${minHeight},0,0,0`]).catch(print);
+        },
+        startWidget: WindowTitle(),
         centerWidget: Widget.Box({
             className: 'spacing-h-4',
             children: [
@@ -86,7 +91,7 @@ export const Bar = async (monitor = 0) => {
         child: Widget.Stack({
             homogeneous: false,
             transition: 'slide_up_down',
-            transitionDuration: userOptions.animations.durationSmall,
+            transitionDuration: userOptions.animations.durationLarge,
             children: {
                 'normal': normalBarContent,
                 'focus': focusedBarContent,

@@ -15,7 +15,7 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
     tooltipText: 'Wifi | Right-click to configure',
     onClicked: () => Network.toggleWifi(),
     onSecondaryClickRelease: () => {
-        execAsync(['bash', '-c', 'nm-connection-editor', '&']).catch(print);
+        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi', '&']);
         App.closeWindow('sideright');
     },
     child: NetworkIndicator(),
@@ -185,7 +185,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({ // TODO: Make this
     ...props,
     className: 'txt-small sidebar-iconbutton',
     onClicked: () => {
-        execAsync(['bash', '-c', 'xfce4-appearance-settings', '&']);
+        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('edit', 'norm'),
@@ -199,7 +199,7 @@ export const ModuleReloadIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Reload Environment config',
     onClicked: () => {
-        execAsync(['bash', '-c', 'hyprctl reload || swaymsg reload &']).catch(print);
+        execAsync(['bash', '-c', 'hyprctl reload || swaymsg reload &']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('refresh', 'norm'),
@@ -213,7 +213,7 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Open Settings',
     onClicked: () => {
-        execAsync(['bash', '-c', 'xfce4-appearance-settings', '&']).catch(print);
+        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('settings', 'norm'),

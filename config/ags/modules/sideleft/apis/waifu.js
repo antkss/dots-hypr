@@ -11,6 +11,8 @@ import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { MarginRevealer } from '../../.widgethacks/advancedrevealers.js';
 import { setupCursorHover, setupCursorHoverInfo } from '../../.widgetutils/cursorhover.js';
 import WaifuService from '../../../services/waifus.js';
+import { darkMode } from '../../.miscutils/system.js';
+import { chatEntry } from '../apiwidgets.js';
 
 async function getImageViewerApp(preferredApp) {
     Utils.execAsync(['bash', '-c', `command -v ${preferredApp}`])
@@ -117,9 +119,6 @@ const WaifuImage = (taglist) => {
         onClicked: action,
         setup: setupCursorHover,
     })
-    const colorIndicator = Box({
-        className: `sidebar-chat-indicator`,
-    });
     const downloadState = Stack({
         homogeneous: false,
         transition: 'slide_up_down',
@@ -139,7 +138,7 @@ const WaifuImage = (taglist) => {
     });
     const blockHeading = Box({
         hpack: 'fill',
-        className: 'sidebar-waifu-content spacing-h-5',
+        className: 'spacing-h-5',
         children: [
             ...taglist.map((tag) => CommandButton(tag)),
             Box({ hexpand: true }),
@@ -164,7 +163,11 @@ const WaifuImage = (taglist) => {
                         ImageAction({
                             name: 'Hoard',
                             icon: 'save',
-                            action: () => execAsync(['bash', '-c', `mkdir -p ~/Pictures/homework${thisBlock.attribute.isNsfw ? '/🌶️' : ''} && cp ${thisBlock.attribute.imagePath} ~/Pictures/homework${thisBlock.attribute.isNsfw ? '/🌶️/' : ''}`]).catch(print),
+                            action: (self) => {
+                                execAsync(['bash', '-c', `mkdir -p ~/Pictures/homework${thisBlock.attribute.isNsfw ? '/🌶️' : ''} && cp ${thisBlock.attribute.imagePath} ~/Pictures/homework${thisBlock.attribute.isNsfw ? '/🌶️/' : ''}`])
+                                    .then(() => self.label = 'done')
+                                    .catch(print);
+                            },
                         }),
                         ImageAction({
                             name: 'Open externally',
@@ -245,17 +248,13 @@ const WaifuImage = (taglist) => {
                 }
                 // Show
                 if (!force && fileExists(thisBlock.attribute.imagePath)) showImage();
-                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock.attribute.imagePath}' '${url}'`]).catch(print)
+                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock.attribute.imagePath}' '${url}'`])
                     .then(showImage)
                     .catch(print);
-                blockHeading.get_children().forEach((child) => {
-                    child.setCss(`border-color: ${dominant_color};`);
-                })
-                colorIndicator.css = `background-color: ${dominant_color};`;
+                thisBlock.css = `background-color: mix(${darkMode ? 'black' : 'white'}, ${dominant_color}, 0.97);`;
             },
         },
         children: [
-            colorIndicator,
             Box({
                 vertical: true,
                 className: 'spacing-v-5',
@@ -320,6 +319,7 @@ export const waifuView = Scrollable({
         // Always scroll to bottom with new content
         const adjustment = scrolledWindow.get_vadjustment();
         adjustment.connect("changed", () => {
+            if (!chatEntry.hasFocus) return;
             adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
         })
     }

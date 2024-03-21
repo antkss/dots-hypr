@@ -10,6 +10,7 @@ import { SystemMessage, ChatMessage } from "./ai_chatmessage.js";
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../.commonwidgets/configwidgets.js';
 import { markdownTest } from '../../.miscutils/md2pango.js';
 import { MarginRevealer } from '../../.widgethacks/advancedrevealers.js';
+import { chatEntry } from '../apiwidgets.js';
 
 const MODEL_NAME = `Gemini`;
 
@@ -58,16 +59,6 @@ const GeminiInfo = () => {
     });
 }
 
-// const textbox = Widget.Entry({
-//         className: 'overview-search-box txt-small txt',
-//         hpack: 'center',
-//         onAccept: (self) => { // This is when you hit Enter
-// 	if (text.length == 0) return;
-//             const text = self.text;
-// 	    sendMessage(text);
-// 	    self.text = '';
-// 	}  
-//     });
 export const GeminiSettings = () => MarginRevealer({
     transition: 'slide_down',
     revealChild: true,
@@ -99,22 +90,22 @@ export const GeminiSettings = () => MarginRevealer({
                 },
             }),
             ConfigGap({ vertical: true, size: 10 }), // Note: size can only be 5, 10, or 15 
-            // Box({
-            //     vertical: true,
-            //     hpack: 'fill',
-            //     className: 'sidebar-chat-settings-toggles',
-            //     children: [
-            //         ConfigToggle({
-            //             icon: 'model_training',
-            //             name: 'Training Mode',
-            //             desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
-            //             initValue: GeminiService.assistantPrompt,
-            //             onChange: (self, newValue) => {
-            //                 GeminiService.assistantPrompt = newValue;
-            //             },
-            //         }),
-            //     ]
-            // })
+            Box({
+                vertical: true,
+                hpack: 'fill',
+                className: 'sidebar-chat-settings-toggles',
+                children: [
+                    ConfigToggle({
+                        icon: 'model_training',
+                        name: 'Enhancements',
+                        desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
+                        initValue: GeminiService.assistantPrompt,
+                        onChange: (self, newValue) => {
+                            GeminiService.assistantPrompt = newValue;
+                        },
+                    }),
+                ]
+            })
         ]
     })
 });
@@ -139,7 +130,7 @@ export const GoogleAiInstructions = () => Box({
             }),
             setup: setupCursorHover,
             onClicked: () => {
-                Utils.execAsync(['bash', '-c', `xdg-open https://makersuite.google.com/app/apikey &`]).catch(print);
+                Utils.execAsync(['bash', '-c', `xdg-open https://makersuite.google.com/app/apikey &`]);
             }
         })
     })]
@@ -161,7 +152,7 @@ const geminiWelcome = Box({
 });
 
 export const chatContent = Box({
-    className: 'spacing-v-15',
+    className: 'spacing-v-5',
     vertical: true,
     setup: (self) => self
         .hook(GeminiService, (box, id) => {
@@ -171,6 +162,7 @@ export const chatContent = Box({
         }, 'newMsg')
     ,
 });
+
 const clearChat = () => {
     GeminiService.clear();
     const children = chatContent.get_children();
@@ -266,6 +258,7 @@ export const geminiView = Box({
             // Always scroll to bottom with new content
             const adjustment = scrolledWindow.get_vadjustment();
             adjustment.connect("changed", () => {
+                if(!chatEntry.hasFocus) return;
                 adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
             })
         }
