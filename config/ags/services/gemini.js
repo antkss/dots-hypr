@@ -203,7 +203,7 @@ class GeminiService extends Service {
                 } catch {
                     aiResponse.done = true;
 			// the way to save all the history messages for gemini 
-			Utils.writeFile(JSON.stringify(this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })),`${GLib.get_user_config_dir()}/gemini_history.json`)
+			Utils.writeFile(JSON.stringify(this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })),`${GLib.get_user_config_dir()}/gemini_history.json`);
                     return;
                 }
             });
