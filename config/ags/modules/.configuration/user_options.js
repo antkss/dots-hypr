@@ -10,8 +10,8 @@ let configOptions = {
         'writingCursor': " ...", // Warning: Using weird characters can mess up Markdown rendering
     },
     'animations': {
-        'durationSmall': 110,
-        'durationLarge': 180,
+        'durationSmall': 1,
+        'durationLarge': 1,
     },
     'apps': {
         'imageViewer': "loupe",
