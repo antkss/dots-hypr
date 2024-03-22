@@ -1,8 +1,6 @@
 const { Gtk, Gdk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, CenterBox, Entry, EventBox, Icon, Label, Overlay, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, CenterBox, EventBox, Label, Revealer, Scrollable, Stack } = Widget;
 import { setupCursorHover, setupCursorHoverInfo } from '../.widgetutils/cursorhover.js';
 // APIs
 import GPTService from '../../services/gpt.js';
@@ -123,7 +121,6 @@ chatEntry.get_buffer().connect("changed", (buffer) => {
         chatPlaceholder.set_valign(Gtk.Align.CENTER);
     }
 });
-
 const chatEntryWrapper = Scrollable({
     className: 'sidebar-chat-wrapper',
     hscroll: 'never',
@@ -156,7 +153,6 @@ const chatPlaceholderRevealer = Revealer({
     child: chatPlaceholder,
     setup: enableClickthrough,
 });
-
 export const textbox = Widget.Entry({
         className: 'sidebar-chat-textarea',
 	placeholder_text: 'Type here to chat ...',
@@ -168,20 +164,6 @@ export const textbox = Widget.Entry({
 	},
       
     });
-
-// const textboxArea = Box({ // Entry area
-//     className: 'sidebar-chat-textarea',
-//     children: [
-//         Overlay({
-//             passThrough: true,
-//             child: chatEntryWrapper,
-//             overlays: [chatPlaceholderRevealer],
-//         }),
-//         Box({ className: 'width-10' }),
-//         chatSendButton,
-//     ]
-// });
-
 const apiContentStack = Stack({
     vexpand: true,
     transition: 'slide_left_right',

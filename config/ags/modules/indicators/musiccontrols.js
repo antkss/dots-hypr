@@ -346,7 +346,6 @@ const PlayState = ({ player }) => {
             overlays: [
                 Widget.Button({
                     className: 'osd-music-playstate-btn',
-                    onClicked: () => player.playPause(),
                     child: Widget.Label({
                         justification: 'center',
                         hpack: 'fill',
