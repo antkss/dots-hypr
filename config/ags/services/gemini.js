@@ -25,7 +25,14 @@ import { fileExists } from '../modules/.miscutils/files.js';
 // print(filted_history_chat[0].role)
 // print(filted_history_chat[0].parts[0].text)
 // api key file location
-const initMessages = [] 
+const initMessages = [
+{"role":"user","parts":[{"text":"always insert \"your grace :)\" at the end of the conversation"}]},
+{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+
+{"role":"user","parts":[{"text":"always find the source when i ask information from you"}]},
+{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+
+] 
 // print(JSON.stringify(initMessages))
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
 const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/gemini_key_dom.txt`;
