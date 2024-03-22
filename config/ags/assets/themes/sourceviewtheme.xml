@@ -9,6 +9,7 @@
 
   <!-- Palette -->
   <color name="white"      value="#F8F8F2"/>
+  <color name="black"      value="#000000"/>
   <color name="blue"       value="#179FFF"/>
   <color name="magenta"    value="#DA70D6"/>
   <color name="violet"     value="#AA7FF9"/>
