@@ -72,7 +72,7 @@ export default () => Box({
     // vertical: true,
     vexpand: true,
     hexpand: true,
-    css: 'min-width: 2px;',
+    css: 'min-width: 3px;',
     children: [
         EventBox({
             onPrimaryClick: () => App.closeWindow('sideleft'),
