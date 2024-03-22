@@ -121,7 +121,6 @@ chatEntry.get_buffer().connect("changed", (buffer) => {
         chatPlaceholder.set_valign(Gtk.Align.CENTER);
     }
 });
- 
 const chatEntryWrapper = Scrollable({
     className: 'sidebar-chat-wrapper',
     hscroll: 'never',
@@ -139,7 +138,6 @@ const chatSendButton = Button({
         textbox.get_buffer().set_text("", -1);
     },
 });
-
 const chatPlaceholder = Label({
     className: 'txt-subtext txt-smallie margin-left-5',
     hpack: 'start',
@@ -159,27 +157,12 @@ export const textbox = Widget.Entry({
 	placeholder_text: 'Type here to chat ...',
 	visibility: true,
         onAccept: (self) => { // This is when you hit Enter
-            const text = self.text;
 		APIS[currentApiId].sendCommand(self.text);
 		self.get_buffer().set_text("", -1);
 
 	},
       
     });
-
-// const textboxArea = Box({ // Entry area
-//     className: 'sidebar-chat-textarea',
-//     children: [
-//         Overlay({
-//             passThrough: true,
-//             child: chatEntryWrapper,
-//             overlays: [chatPlaceholderRevealer],
-//         }),
-//         Box({ className: 'width-10' }),
-//         chatSendButton,
-//     ]
-// });
-//
 const apiContentStack = Stack({
     vexpand: true,
     transition: 'slide_left_right',
@@ -229,7 +212,6 @@ const apiSwitcher = CenterBox({
         setup: setupCursorHoverInfo,
     }),
 })
-
 const apiWidgets = Widget.Box({
     attribute: {
         'nextTab': () => switchToTab(Math.min(currentApiId + 1, APIS.length - 1)),
@@ -243,9 +225,7 @@ const apiWidgets = Widget.Box({
         apiContentStack,
         apiCommandStack,
         textbox,
-	    // chatSendButton
     ],
-
 }).keybind(["SHIFT"],"Return", (self, event) => {
 	// textbox.set_position(1);
 	textbox.set_text(textbox.text + "\n");

@@ -334,9 +334,9 @@ export const SystemMessage = (content, commandName, scrolledWindow) => {
     const thisMessage = Box({
         className: 'sidebar-chat-message',
         children: [
-            Box({
+Box({
                 className: `sidebar-chat-indicator sidebar-chat-indicator-System`,
-            }),
+}),
             Box({
                 vertical: true,
                 hpack: 'fill',

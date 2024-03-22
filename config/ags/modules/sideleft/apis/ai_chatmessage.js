@@ -19,7 +19,7 @@ const USERNAME = GLib.get_user_name();
 function loadCustomColorScheme(filePath) {
     // Read the XML file content
     const file = Gio.File.new_for_path(filePath);
-    const [success, contents] = file.load_contents(null);
+    const [success] = file.load_contents(null);
 
     if (!success) {
         logError('Failed to load the XML file.');

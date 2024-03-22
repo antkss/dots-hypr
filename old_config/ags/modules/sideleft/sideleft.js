@@ -1,7 +1,7 @@
 const { Gdk } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-const { Box, Button, EventBox } = Widget;
+const { Box, Button, EventBox} = Widget;
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import toolBox from './toolbox.js';
