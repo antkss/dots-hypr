@@ -46,18 +46,18 @@ export const keybindList = [[
         "icon": "widgets",
         "name": "Widgets (AGS)",
         "binds": [
-            { "keys": ["", "OR", "", "+", "Tab"], "action": "Toggle overview/launcher" },
-            { "keys": ["Ctrl", "", "+", "R"], "action": "Restart AGS" },
+            { "keys": ["", "+", "d"], "action": "Toggle overview/launcher" },
+            { "keys": [ "", "+", "Shift", "R"], "action": "Restart AGS" },
             { "keys": ["", "+", "/"], "action": "Toggle this cheatsheet" },
             { "keys": ["", "+", "N"], "action": "Toggle system sidebar" },
-            { "keys": ["", "+", "B", "OR", "", "+", "O"], "action": "Toggle utilities sidebar" },
+            { "keys": ["", "+", "O"], "action": "Toggle utilities sidebar" },
             { "keys": ["", "+", "K"], "action": "Toggle virtual keyboard" },
             { "keys": ["Ctrl", "Alt", "+", "Del"], "action": "Power/Session menu" },
 
             { "keys": ["Esc"], "action": "Exit a window" },
             { "keys": ["rightCtrl"], "action": "Dismiss/close sidebar" },
 
-            { "keys": ["Ctrl", "", "+", "T"], "action": "Change wallpaper+colorscheme" },
+            { "keys": ["", "+", "T"], "action": "Change wallpaper+colorscheme" },
 
             // { "keys": ["", "+", "B"], "action": "Toggle left sidebar" },
             // { "keys": ["", "+", "N"], "action": "Toggle right sidebar" },
