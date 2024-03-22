@@ -356,7 +356,6 @@ export const chatGPTView = Box({
                 // Always scroll to bottom with new content
                 const adjustment = scrolledWindow.get_vadjustment();
                 adjustment.connect("changed", () => {
-                    if(!chatEntry.hasFocus) return;
                     adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
                 })
             }

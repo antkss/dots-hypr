@@ -7,25 +7,25 @@ import Soup from 'gi://Soup?version=3.0';
 import { fileExists } from '../modules/.miscutils/files.js';
 
 // check if gemini_history.json exists
-// if(!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`))
-// {
-// 	Utils.execAsync([`bash`, `-c`,`touch ${GLib.get_user_config_dir()}/gemini_history.json`]).catch(print);
-//        Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print);
-// }
-// // read gemini_history.json
-// const readfile = Utils.readFile(`${GLib.get_user_config_dir()}/gemini_history.json`)
-// const history_chat = JSON.parse(readfile)
-// for(let i = 0; i < Object.keys(history_chat).length; i++)
-// {
-// 	if(history_chat[i].role == "model" && (history_chat[i].parts[0].text == "thinking ..." || history_chat[i].parts[0].text == "" )){
-// 	history_chat.splice(i,1)	
-// 	}
-// }
-//
+if(!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`))
+{
+	Utils.execAsync([`bash`, `-c`,`touch ${GLib.get_user_config_dir()}/gemini_history.json`]).catch(print);
+       Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print);
+}
+// read gemini_history.json
+const readfile = Utils.readFile(`${GLib.get_user_config_dir()}/gemini_history.json`)
+const history_chat = JSON.parse(readfile)
+for(let i = 0; i < Object.keys(history_chat).length; i++)
+{
+	if(history_chat[i].role == "model" && (history_chat[i].parts[0].text == "thinking ..." || history_chat[i].parts[0].text == "" )){
+	history_chat.splice(i,1)	
+	}
+}
+
 // print(filted_history_chat[0].role)
 // print(filted_history_chat[0].parts[0].text)
 // api key file location
-const initMessages = [] 
+const initMessages = history_chat
 // print(JSON.stringify(initMessages))
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
 const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/gemini_key_dom.txt`;
@@ -213,16 +213,16 @@ class GeminiService extends Service {
                 } catch {
                     aiResponse.done = true;
 			// the way to save all the history messages for gemini 
-	// 	var index = Object.keys(aiResponse.content.split('|')).length
-	// 	const contents = this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })
-	// print(Object.keys(contents).length)
-	// 	const aiRequ = aiResponse.content.split('|')[index-2]
-	// 		for(let i = 0; i < 2 ; i++){
-	// 		print(JSON.stringify(contents[aiRequ-i]))
-	// 		 contents.splice(aiRequ-i,1)
-	// 		}
-	// print(Object.keys(contents).length)
-// Utils.writeFile(JSON.stringify(contents),`${GLib.get_user_config_dir()}/gemini_history.json`);
+		var index = Object.keys(aiResponse.content.split('|')).length
+		const contents = this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })
+	print(Object.keys(contents).length)
+		const aiRequ = aiResponse.content.split('|')[index-2]
+			for(let i = 0; i < 2 ; i++){
+			print(JSON.stringify(contents[aiRequ-i]))
+			 contents.splice(aiRequ-i,1)
+			}
+	print(Object.keys(contents).length)
+Utils.writeFile(JSON.stringify(contents),`${GLib.get_user_config_dir()}/gemini_history.json`);
 
                     return;
                 }
