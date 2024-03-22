@@ -654,6 +654,7 @@ $colorpicker_rounding: 0.341rem;
 
 .sidebar-chat-codeblock-topbar {
     @include mainfont;
+    @include normal-rounding;
     background-color: $layer3;
     color: $onLayer3;
     border-top-left-radius: $rounding_small;

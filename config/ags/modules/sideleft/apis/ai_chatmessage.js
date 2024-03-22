@@ -184,7 +184,6 @@ const CodeBlock = (content = '', lang = 'txt') => {
         className: 'sidebar-chat-codeblock',
         vertical: true,
         children: [
-            topBar,
             Box({
                 className: 'sidebar-chat-codeblock-code',
                 homogeneous: true,
@@ -193,7 +192,8 @@ const CodeBlock = (content = '', lang = 'txt') => {
                     hscroll: 'automatic',
                     child: sourceView,
                 })],
-            })
+            }),
+            topBar,
         ]
     })
 
