@@ -20,7 +20,7 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 }
 
 .sideright-hide {
-    @include menu_accel;
+    @include element_easeInOut;
     margin-right: -30.682rem;
     // opacity: 0;
 }
