@@ -4689,3 +4689,50 @@ Lock information:
 2024-03-23 23:01:27 INFO  (GhidraRun) User as started Ghidra.  
 2024-03-23 23:01:28 DEBUG (RecoverySnapshotMgrPlugin) Recovery snapshot timer set to 5 minute(s)  
 2024-03-23 23:01:29 INFO  (DefaultProject) Opening project: /home/as/kcsc/hello  
+2024-03-23 23:02:26 DEBUG (DefaultProjectData) Closing ProjectData: /home/as/kcsc/hello.rep  
+2024-03-23 23:02:26 DEBUG (DefaultProjectData) Disposing ProjectData: /home/as/kcsc/hello.rep  
+2024-03-23 23:02:29 INFO  (LoggingInitialization) Using log config file: jar:file:/home/as/cac/ghidra_11.0_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2024-03-23 23:02:29 INFO  (LoggingInitialization) Using log file: /home/as/.ghidra/.ghidra_11.0_PUBLIC/application.log  
+2024-03-23 23:02:30 INFO  (Preferences) Loading user preferences: /home/as/.ghidra/.ghidra_11.0_PUBLIC/preferences  
+2024-03-23 23:02:30 INFO  (ClassSearcher) Searching for classes...  
+2024-03-23 23:02:32 INFO  (ClassSearcher) Class search complete (2135 ms)  
+2024-03-23 23:02:32 INFO  (SSLContextInitializer) Initializing SSL Context  
+2024-03-23 23:02:32 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2024-03-23 23:02:32 INFO  (SecureRandomFactory) Random Number Generator initialization complete: NativePRNGNonBlocking  
+2024-03-23 23:02:32 INFO  (ApplicationTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2024-03-23 23:02:32 INFO  (GhidraRun) User as started Ghidra.  
+2024-03-23 23:02:34 DEBUG (RecoverySnapshotMgrPlugin) Recovery snapshot timer set to 5 minute(s)  
+2024-03-23 23:02:34 INFO  (DefaultProject) Opening project: /home/as/kcsc/hello  
+2024-03-23 23:09:50 INFO  (PackedDatabaseCache) Packed database cache: /tmp/as-Ghidra/packed-db-cache  
+2024-03-23 23:09:50 DEBUG (PackedDatabaseCache) Using cached packed database: /home/as/cac/ghidra_11.0_PUBLIC/Ghidra/Features/Base/data/typeinfo/generic/generic_clib_64.gdt  
+2024-03-23 23:12:12 DEBUG (DefaultProjectData) Closing ProjectData: /home/as/kcsc/hello.rep  
+2024-03-23 23:12:12 DEBUG (DefaultProjectData) Disposing ProjectData: /home/as/kcsc/hello.rep  
+2024-03-23 23:12:21 INFO  (LoggingInitialization) Using log config file: jar:file:/home/as/cac/ghidra_11.0_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2024-03-23 23:12:21 INFO  (LoggingInitialization) Using log file: /home/as/.ghidra/.ghidra_11.0_PUBLIC/application.log  
+2024-03-23 23:12:21 INFO  (Preferences) Loading user preferences: /home/as/.ghidra/.ghidra_11.0_PUBLIC/preferences  
+2024-03-23 23:12:22 INFO  (ClassSearcher) Searching for classes...  
+2024-03-23 23:12:24 INFO  (ClassSearcher) Class search complete (2030 ms)  
+2024-03-23 23:12:24 INFO  (SSLContextInitializer) Initializing SSL Context  
+2024-03-23 23:12:24 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2024-03-23 23:12:24 INFO  (SecureRandomFactory) Random Number Generator initialization complete: NativePRNGNonBlocking  
+2024-03-23 23:12:24 INFO  (ApplicationTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2024-03-23 23:12:24 INFO  (GhidraRun) User as started Ghidra.  
+2024-03-23 23:12:25 DEBUG (RecoverySnapshotMgrPlugin) Recovery snapshot timer set to 5 minute(s)  
+2024-03-23 23:12:25 INFO  (DefaultProject) Opening project: /home/as/kcsc/hello  
+2024-03-23 23:12:36 INFO  (PackedDatabaseCache) Packed database cache: /tmp/as-Ghidra/packed-db-cache  
+2024-03-23 23:12:36 DEBUG (PackedDatabaseCache) Using cached packed database: /home/as/cac/ghidra_11.0_PUBLIC/Ghidra/Features/Base/data/typeinfo/generic/generic_clib_64.gdt  
+2024-03-23 23:19:47 DEBUG (ToolTaskManager) Background processing started...  
+2024-03-23 23:19:47 DEBUG (ToolTaskManager) Exec Task Auto Analysis  
+2024-03-23 23:19:47 DEBUG (ToolTaskManager) Auto Analysis task finish (0.011 secs)  
+2024-03-23 23:19:47 DEBUG (ToolTaskManager) Auto Analysis task complete (0.16 secs)  
+2024-03-23 23:19:47 DEBUG (ToolTaskManager) Background processing complete (0.162 secs)  
+2024-03-23 23:20:01 DEBUG (PackedDatabaseCache) Using cached packed database: /home/as/cac/ghidra_11.0_PUBLIC/Ghidra/Features/Base/data/typeinfo/generic/generic_clib_64.gdt  
+2024-03-23 23:20:18 DEBUG (ToolTaskManager) Background processing started...  
+2024-03-23 23:20:18 DEBUG (ToolTaskManager) Exec Task Auto Analysis  
+2024-03-23 23:20:18 DEBUG (ToolTaskManager) Auto Analysis task finish (0.003 secs)  
+2024-03-23 23:20:18 DEBUG (ToolTaskManager) Auto Analysis task complete (0.117 secs)  
+2024-03-23 23:20:18 DEBUG (ToolTaskManager) Background processing complete (0.118 secs)  
+2024-03-23 23:21:16 WARN  (DecompileCallback) Decompiling 00405040, pcode error at 00405040: Unable to disassemble EXTERNAL block location: 00405040  
+2024-03-23 23:22:26 INFO  (RecoveryMgr) Sat Mar 23 23:22:26 ICT 2024 Recovery snapshot created: /home/as/kcsc/hello.rep/idata/00/~00000002.db/snapshotA.grf  
+2024-03-23 23:25:25 DEBUG (DefaultProjectData) Closing ProjectData: /home/as/kcsc/hello.rep  
+2024-03-23 23:25:25 DEBUG (DefaultProjectData) Disposing ProjectData: /home/as/kcsc/hello.rep  

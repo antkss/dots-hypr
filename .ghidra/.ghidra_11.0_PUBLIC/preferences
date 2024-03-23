@@ -1,8 +1,8 @@
 #User Preferences
-#Sat Mar 23 23:01:29 ICT 2024
+#Sat Mar 23 23:25:25 ICT 2024
 G_FILE_CHOOSER.VIEW_STYLE.Select\ a\ Ghidra\ Project\ Directory=SimpleView
 LastNewProjectDirectory=/home/as/kcsc/
-TIP_INDEX=22
+TIP_INDEX=24
 G_FILE_CHOOSER.HEIGHT.Select\ a\ Ghidra\ Project\ Directory=600
 OPEN_PROGRAM_DIALOG.SHOW_HISTORY=false
 G_FILE_CHOOSER.VIEW_STYLE.Open\ a\ Ghidra\ Project=SimpleView
