@@ -56,7 +56,7 @@ const Windows = () => [
     // forMonitors((id) => Corner(id, 'bottom left')),
     // forMonitors((id) => Corner(id, 'bottom right')),
 ];
-const CLOSE_ANIM_TIME = 150; // Longer than actual anim time to make sure widgets animate fully
+const CLOSE_ANIM_TIME = 400; // Longer than actual anim time to make sure widgets animate fully
 App.config({
     css: `${COMPILED_STYLE_DIR}/style.css`,
     stackTraceOnError: true,

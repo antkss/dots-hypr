@@ -32,6 +32,9 @@ const initMessages = [
 {"role":"user","parts":[{"text":"always find the source when i ask information from you"}]},
 {"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
 
+{"role":"user","parts":[{"text":"you are my computer expert, knowing everything about computer and coding that can help me rule the world "}]},
+{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+
 ] 
 // print(JSON.stringify(initMessages))
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
