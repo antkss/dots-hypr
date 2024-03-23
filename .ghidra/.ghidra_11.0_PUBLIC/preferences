@@ -1,0 +1,34 @@
+#User Preferences
+#Sat Mar 23 23:01:29 ICT 2024
+G_FILE_CHOOSER.VIEW_STYLE.Select\ a\ Ghidra\ Project\ Directory=SimpleView
+LastNewProjectDirectory=/home/as/kcsc/
+TIP_INDEX=22
+G_FILE_CHOOSER.HEIGHT.Select\ a\ Ghidra\ Project\ Directory=600
+OPEN_PROGRAM_DIALOG.SHOW_HISTORY=false
+G_FILE_CHOOSER.VIEW_STYLE.Open\ a\ Ghidra\ Project=SimpleView
+G_FILE_CHOOSER.VIEW_STYLE.Select\ File\ to\ Import=SimpleView
+SHOW_TIPS=true
+ViewedProjects=
+LAST_USED_OPTIONS_CONFIG=Standard Defaults
+RecentProjects=/home/as/kcsc/hello
+OPEN_PROGRAM_DIALOG.WIDTH_NO_HISTORY=350
+ProjectDirectory=/home/as/kcsc/
+G_FILE_CHOOSER.WIDTH.Select\ a\ Ghidra\ Project\ Directory=800
+G_FILE_CHOOSER.HEIGHT.Select\ Symbol\ Storage\ Dir=600
+LastOpenedProject=/home/as/kcsc/hello
+USER_AGREEMENT=ACCEPT
+OPEN_PROGRAM_DIALOG.HEIGHT=500
+LastImportFile=/home/as/pwnable/horsetrack/vuln
+G_FILE_CHOOSER.WIDTH.Select\ Symbol\ Storage\ Dir=800
+SHOW.HELP.NAVIGATION.AID=true
+G_FILE_CHOOSER.HEIGHT.Select\ File\ to\ Import=600
+G_FILE_CHOOSER.VIEW_STYLE.Select\ Symbol\ Storage\ Dir=SimpleView
+G_FILE_CHOOSER.HEIGHT.Open\ a\ Ghidra\ Project=600
+RECENT_0=/home/as/pwnable/horsetrack
+Theme=File\:/home/as/.ghidra/.ghidra_11.0_PUBLIC/themes/hello.theme
+GhidraShowWhatsNew=false
+G_FILE_CHOOSER.WIDTH.Open\ a\ Ghidra\ Project=800
+RECENT_1=/home/as/pwnable
+RECENT_2=/home/as/kcsc/hacklolo/games
+RECENT_3=/home/as/kcsc
+G_FILE_CHOOSER.WIDTH.Select\ File\ to\ Import=800

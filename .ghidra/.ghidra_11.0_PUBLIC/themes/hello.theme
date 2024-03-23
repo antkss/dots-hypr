@@ -1,0 +1,15 @@
+name = hello
+lookAndFeel = Nimbus
+useDarkDefaults = false
+color.bg.decompiler = #ffffcc
+color.bg.decompiler.current.variable = #000000 // Black
+color.bg.listing = #ffffcc
+color.bg.listing.highlighter.scoped.read = #ff3333
+color.fg.decompiler.function.name = #ff9900
+color.fg.decompiler.keyword = #ff00cc
+color.fg.decompiler.type = #ff6666
+color.fg.decompiler.variable = #009999
+color.fg.listing.comment.plate = #808080 // Gray
+font.byteviewer = Monospaced-PLAIN-9
+font.listing.base = Liberation Mono-BOLD-10
+font.plugin.console = Monospaced-PLAIN-10
