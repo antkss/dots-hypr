@@ -162,7 +162,7 @@ class GeminiService extends Service {
     get modelName() { return CHAT_MODELS[this._modelIndex] }
 
     get keyPath() { return KEY_FILE_LOCATION }
-	get historyPath() { return HISTORY_PATH }
+    get historyPath() { return HISTORY_PATH }
     get key() { return this._key }
     set key(keyValue) {
         this._key = keyValue;
