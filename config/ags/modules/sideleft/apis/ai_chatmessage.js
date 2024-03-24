@@ -10,8 +10,8 @@ import md2pango from '../../.miscutils/md2pango.js';
 import { darkMode } from "../../.miscutils/system.js";
 
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`;
-const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/assets/themes/sourceviewtheme.xml`;
-const CUSTOM_SCHEME_ID = 'custom';
+const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/assets/themes/sourceviewtheme${darkMode.value ? '' : '-light'}.xml`;
+const CUSTOM_SCHEME_ID = `custom${darkMode.value ? '' : '-light'}`;
 const USERNAME = GLib.get_user_name();
 
 /////////////////////// Custom source view colorscheme /////////////////////////
@@ -19,7 +19,7 @@ const USERNAME = GLib.get_user_name();
 function loadCustomColorScheme(filePath) {
     // Read the XML file content
     const file = Gio.File.new_for_path(filePath);
-    const [success] = file.load_contents(null);
+    const [success, contents] = file.load_contents(null);
 
     if (!success) {
         logError('Failed to load the XML file.');
@@ -52,7 +52,7 @@ const HighlightedCode = (content, lang) => {
     const buffer = new GtkSource.Buffer();
     const sourceView = new GtkSource.View({
         buffer: buffer,
-        wrap_mode: Gtk.WrapMode.WORD_CHAR,
+        wrap_mode: Gtk.WrapMode.NONE
     });
     const langManager = GtkSource.LanguageManager.get_default();
     let displayLang = langManager.get_language(substituteLang(lang)); // Set your preferred language
@@ -82,7 +82,7 @@ const Latex = (content = '') => {
     const latexViewArea = Box({
         // vscroll: 'never',
         // hscroll: 'automatic',
-        homogeneous: true,
+        // homogeneous: true,
         attribute: {
             render: async (self, text) => {
                 if (text.length == 0) return;
@@ -107,7 +107,7 @@ const Latex = (content = '') => {
 text=$(cat ${filePath} | sed 's/$/ \\\\\\\\/g' | sed 's/&=/=/g')
 LaTeX -headless -input="$text" -output=${outFilePath} -textsize=${fontSize * 1.1} -padding=0 -maxwidth=${latexViewArea.get_allocated_width() * 0.85}
 sed -i 's/fill="rgb(0%, 0%, 0%)"/style="fill:#000000"/g' ${outFilePath}
-sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode ? '#ffffff' : '#000000'}"/g' ${outFilePath}
+sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#000000'}"/g' ${outFilePath}
 `;
                 Utils.writeFile(renderScript, scriptFilePath).catch(print);
                 Utils.exec(`chmod a+x ${scriptFilePath}`)
@@ -184,6 +184,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
         className: 'sidebar-chat-codeblock',
         vertical: true,
         children: [
+            topBar,
             Box({
                 className: 'sidebar-chat-codeblock-code',
                 homogeneous: true,
@@ -192,8 +193,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
                     hscroll: 'automatic',
                     child: sourceView,
                 })],
-            }),
-            topBar,
+            })
         ]
     })
 
@@ -222,7 +222,7 @@ const MessageContent = (content) => {
                     child.destroy();
                 }
                 contentBox.add(TextBlock())
-                // Loop lines. Put normal text in markdown parser 
+                // Loop lines. Put normal text in markdown parser
                 // and put code into code highlighter (TODO)
                 let lines = content.split('\n');
                 let lastProcessed = 0;

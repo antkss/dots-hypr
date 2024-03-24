@@ -6,39 +6,30 @@ import GLib from 'gi://GLib';
 import Soup from 'gi://Soup?version=3.0';
 import { fileExists } from '../modules/.miscutils/files.js';
 
-// check if gemini_history.json exists
-// if(!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`))
-// {
-// 	Utils.execAsync([`bash`, `-c`,`touch ${GLib.get_user_config_dir()}/gemini_history.json`]).catch(print);
-//        Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print);
-// }
-// // read gemini_history.json
-// const readfile = Utils.readFile(`${GLib.get_user_config_dir()}/gemini_history.json`)
-// const history_chat = JSON.parse(readfile)
-// for(let i = 0; i < Object.keys(history_chat).length; i++)
-// {
-// 	if(history_chat[i].role == "model" && (history_chat[i].parts[0].text == "thinking ..." || history_chat[i].parts[0].text == "" )){
-// 	history_chat.splice(i,1)	
-// 	}
-// }
-//
-// print(filted_history_chat[0].role)
-// print(filted_history_chat[0].parts[0].text)
-// api key file location
-const initMessages = [
-{"role":"user","parts":[{"text":"always insert \"your grace :)\" at the end of the conversation"}]},
-{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+const HISTORY_DIR = `${GLib.get_user_config_dir()}/`;
+const HISTORY_FILENAME = `gemini_history.json`;
+const HISTORY_PATH = HISTORY_DIR + HISTORY_FILENAME;
+const initMessages =
+    [
 
-{"role":"user","parts":[{"text":"always find the source when i ask information from you"}]},
-{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+	{"role":"user","parts":[{"text":"always insert \"your grace :)\" at the end of the conversation"}]},
+	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
 
-{"role":"user","parts":[{"text":"you are my computer expert, knowing everything about computer and coding that can help me rule the world "}]},
-{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+	{"role":"user","parts":[{"text":"always find the source when i ask information from you"}]},
+	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
 
-] 
-// print(JSON.stringify(initMessages))
+	{"role":"user","parts":[{"text":"you are my computer expert, knowing everything about computer and coding that can help me rule the world "}]},
+	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+    ];
+
+
+if (!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`)) {
+    Utils.execAsync([`bash`, `-c`, `touch ${GLib.get_user_config_dir()}/gemini_history.json`]).catch(print);
+    Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print);
+}
+
 const KEY_FILE_LOCATION = `${GLib.get_user_config_dir()}/gemini_key_ags.txt`;
-const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/gemini_key_dom.txt`;
+const APIDOM_FILE_LOCATION = `${GLib.get_user_config_dir()}/google_api_dom.txt`;
 function replaceapidom(URL) {
     if (fileExists(APIDOM_FILE_LOCATION)) {
         var contents = Utils.readFile(APIDOM_FILE_LOCATION).trim();
@@ -117,13 +108,17 @@ class GeminiMessage extends Service {
     }
 
     parseSection() {
-        if(this._thinking) {
+        if (this._thinking) {
             this._thinking = false;
-            this._parts[0].text= '';
+            this._parts[0].text = '';
         }
         const parsedData = JSON.parse(this._rawData);
-        const delta = parsedData.candidates[0].content.parts[0].text;
-        this._parts[0].text += delta;
+        if (!parsedData.candidates)
+            this._parts[0].text += `Blocked: ${parsedData.promptFeedback.blockReason}`;
+        else {
+            const delta = parsedData.candidates[0].content.parts[0].text;
+            this._parts[0].text += delta;
+        }
         // this.emit('delta', delta);
         this.notify('content');
         this._rawData = '';
@@ -140,13 +135,15 @@ class GeminiService extends Service {
         });
     }
 
-    _assistantPrompt = true;
-    _messages = [];
+    _assistantPrompt = userOptions.ai.enhancements;
     _cycleModels = true;
-    _requestCount = 0;
-    _temperature = userOptions.ai.defaultTemperature;
-    _modelIndex = 0;
+    _usingHistory = userOptions.ai.useHistory;
     _key = '';
+    _requestCount = 0;
+    _safe = false;
+    _temperature = userOptions.ai.defaultTemperature;
+    _messages = [];
+    _modelIndex = 0;
     _decoder = new TextDecoder();
 
     constructor() {
@@ -155,8 +152,9 @@ class GeminiService extends Service {
         if (fileExists(KEY_FILE_LOCATION)) this._key = Utils.readFile(KEY_FILE_LOCATION).trim();
         else this.emit('hasKey', false);
 
-        if (this._assistantPrompt) this._messages = [...initMessages];
-        else this._messages = [];
+        // if (this._usingHistory) Utils.timeout(1000, () => this.loadHistory());
+        if (this._usingHistory) this.loadHistory();
+        else this._messages = this._assistantPrompt ? [...initMessages] : [];
 
         this.emit('initialized');
     }
@@ -181,17 +179,55 @@ class GeminiService extends Service {
         }
     }
 
+    get useHistory() { return this._usingHistory; }
+    set useHistory(value) {
+        if (value && !this._usingHistory) this.loadHistory();
+        this._usingHistory = value;
+    }
+
+    get safe() { return this._safe }
+    set safe(value) { this._safe = value; }
+
     get temperature() { return this._temperature }
     set temperature(value) { this._temperature = value; }
 
     get messages() { return this._messages }
     get lastMessage() { return this._messages[this._messages.length - 1] }
 
+    saveHistory() {
+        Utils.writeFile(JSON.stringify(this._messages.map(msg => {
+            let m = { role: msg.role, parts: msg.parts }; return m;
+        })), HISTORY_PATH);
+    }
+
+    loadHistory() {
+        this._messages = [];
+        this.appendHistory();
+        this._usingHistory = true;
+    }
+
+    appendHistory() {
+        if (fileExists(HISTORY_PATH)) {
+            const readfile = Utils.readFile(HISTORY_PATH);
+            JSON.parse(readfile).forEach(element => {
+                // this._messages.push(element);
+                this.addMessage(element.role, element.parts[0].text);
+            });
+            // console.log(this._messages)
+            // this._messages = this._messages.concat(JSON.parse(readfile));
+            // for (let index = 0; index < this._messages.length; index++) {
+            //     this.emit('newMsg', index);
+            // }
+        }
+        else {
+            this._messages = this._assistantPrompt ? [...initMessages] : []
+            Utils.exec(`bash -c 'mkdir -p ${HISTORY_DIR} && touch ${HISTORY_PATH}'`)
+        }
+    }
+
     clear() {
-        if (this._assistantPrompt)
-            this._messages = [...initMessages];
-        else
-            this._messages = [];
+        this._messages = this._assistantPrompt ? [...initMessages] : [];
+        if (this._usingHistory) this.saveHistory();
         this.emit('clear');
     }
 
@@ -209,6 +245,7 @@ class GeminiService extends Service {
                 try {
                     const [bytes] = stream.read_line_finish(res);
                     const line = this._decoder.decode(bytes);
+                    // console.log(line);
                     if (line == '[{') { // beginning of response
                         aiResponse._rawData += '{';
                         this.thinking = false;
@@ -217,23 +254,12 @@ class GeminiService extends Service {
                         aiResponse.parseSection();
                     }
                     else // Normal content
-                        aiResponse._rawData += (line+"\n");
+                        aiResponse._rawData += line;
 
                     this.readResponse(stream, aiResponse);
                 } catch {
                     aiResponse.done = true;
-			// the way to save all the history messages for gemini 
-	// 	var index = Object.keys(aiResponse.content.split('|')).length
-	// 	const contents = this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; })
-	// print(Object.keys(contents).length)
-	// 	const aiRequ = aiResponse.content.split('|')[index-2]
-	// 		for(let i = 0; i < 2 ; i++){
-	// 		print(JSON.stringify(contents[aiRequ-i]))
-	// 		 contents.splice(aiRequ-i,1)
-	// 		}
-	// print(Object.keys(contents).length)
-// Utils.writeFile(JSON.stringify(contents),`${GLib.get_user_config_dir()}/gemini_history.json`);
-
+                    if (this._usingHistory) this.saveHistory();
                     return;
                 }
             });
@@ -252,13 +278,13 @@ class GeminiService extends Service {
         const body =
         {
             "contents": this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; }),
-            // "safetySettings": [
-            //     { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
-            // ],
+            "safetySettings": this._safe ? [] : [
+                // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
+                { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE", },
+                { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE", },
+                { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE", },
+                // { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
+            ],
             "generationConfig": {
                 "temperature": this._temperature,
             },

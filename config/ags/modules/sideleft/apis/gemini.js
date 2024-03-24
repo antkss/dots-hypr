@@ -1,7 +1,8 @@
 const { Gtk } = imports.gi;
+import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-import GLib from 'gi://GLib';
+
 const { Box, Button, Icon, Label, Revealer, Scrollable } = Widget;
 import GeminiService from '../../../services/gemini.js';
 import { setupCursorHover, setupCursorHoverInfo } from '../../.widgetutils/cursorhover.js';
@@ -15,7 +16,6 @@ const MODEL_NAME = `Gemini`;
 
 export const geminiTabIcon = Icon({
     hpack: 'center',
-    className: 'sidebar-chat-apiswitcher-icon',
     icon: `google-gemini-symbolic`,
 })
 
@@ -88,7 +88,7 @@ export const GeminiSettings = () => MarginRevealer({
                     GeminiService.temperature = value;
                 },
             }),
-            ConfigGap({ vertical: true, size: 10 }), // Note: size can only be 5, 10, or 15 
+            ConfigGap({ vertical: true, size: 10 }), // Note: size can only be 5, 10, or 15
             Box({
                 vertical: true,
                 hpack: 'fill',
@@ -96,11 +96,29 @@ export const GeminiSettings = () => MarginRevealer({
                 children: [
                     ConfigToggle({
                         icon: 'model_training',
-                        name: 'DAD',
-                        desc: 'Turn on save training data and use it for conversating',
+                        name: 'Enhancements',
+                        desc: 'Tells Gemini:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
                         initValue: GeminiService.assistantPrompt,
                         onChange: (self, newValue) => {
                             GeminiService.assistantPrompt = newValue;
+                        },
+                    }),
+                    ConfigToggle({
+                        icon: 'shield',
+                        name: 'Safety',
+                        desc: 'When turned off, tells the API (not the model) \nto not block harmful/explicit content',
+                        initValue: GeminiService.safe,
+                        onChange: (self, newValue) => {
+                            GeminiService.safe = newValue;
+                        },
+                    }),
+                    ConfigToggle({
+                        icon: 'history',
+                        name: 'History',
+                        desc: 'Saves chat history\nMessages in previous chats won\'t show automatically, but they are there',
+                        initValue: GeminiService.useHistory,
+                        onChange: (self, newValue) => {
+                            GeminiService.useHistory = newValue;
                         },
                     }),
                 ]
@@ -182,11 +200,9 @@ export const geminiCommands = Box({
     className: 'spacing-h-5',
     children: [
         Box({ hexpand: true }),
-	CommandButton('/reset'),
         CommandButton('/key'),
         CommandButton('/model'),
         CommandButton('/clear'),
-	
     ]
 });
 
@@ -202,7 +218,10 @@ export const sendMessage = (text) => {
     // Commands
     if (text.startsWith('/')) {
         if (text.startsWith('/clear')) clearChat();
-	else if (text.startsWith('/reset')) { Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print); clearChat();}
+        else if (text.startsWith('/load')) {
+            clearChat();
+            GeminiService.loadHistory();
+        }
         else if (text.startsWith('/model')) chatContent.add(SystemMessage(`Currently using \`${GeminiService.modelName}\``, '/model', geminiView))
         else if (text.startsWith('/prompt')) {
             const firstSpaceIndex = text.indexOf(' ');
@@ -259,9 +278,9 @@ export const geminiView = Box({
             })
             // Always scroll to bottom with new content
             const adjustment = scrolledWindow.get_vadjustment();
-            adjustment.connect("changed", () => {
+            adjustment.connect("changed", () => Utils.timeout(1, () => {
                 adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
-            })
+            }))
         }
     })]
 });
