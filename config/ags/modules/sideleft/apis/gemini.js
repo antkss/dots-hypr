@@ -1,5 +1,4 @@
 const { Gtk } = imports.gi;
-import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
@@ -10,7 +9,6 @@ import { SystemMessage, ChatMessage } from "./ai_chatmessage.js";
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../.commonwidgets/configwidgets.js';
 import { markdownTest } from '../../.miscutils/md2pango.js';
 import { MarginRevealer } from '../../.widgethacks/advancedrevealers.js';
-import { chatEntry } from '../apiwidgets.js';
 
 const MODEL_NAME = `Gemini`;
 
@@ -119,6 +117,7 @@ export const GeminiSettings = () => MarginRevealer({
                         initValue: GeminiService.useHistory,
                         onChange: (self, newValue) => {
                             GeminiService.useHistory = newValue;
+
                         },
                     }),
                 ]

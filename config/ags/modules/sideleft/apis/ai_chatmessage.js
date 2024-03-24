@@ -52,7 +52,7 @@ const HighlightedCode = (content, lang) => {
     const buffer = new GtkSource.Buffer();
     const sourceView = new GtkSource.View({
         buffer: buffer,
-        wrap_mode: Gtk.WrapMode.NONE
+        wrap_mode: Gtk.WrapMode.WORD,
     });
     const langManager = GtkSource.LanguageManager.get_default();
     let displayLang = langManager.get_language(substituteLang(lang)); // Set your preferred language
@@ -184,7 +184,6 @@ const CodeBlock = (content = '', lang = 'txt') => {
         className: 'sidebar-chat-codeblock',
         vertical: true,
         children: [
-            topBar,
             Box({
                 className: 'sidebar-chat-codeblock-code',
                 homogeneous: true,
@@ -193,7 +192,8 @@ const CodeBlock = (content = '', lang = 'txt') => {
                     hscroll: 'automatic',
                     child: sourceView,
                 })],
-            })
+            }),
+            topBar,
         ]
     })
 
