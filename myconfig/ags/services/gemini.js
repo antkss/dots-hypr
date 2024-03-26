@@ -288,6 +288,9 @@ class GeminiService extends Service {
             // ],
             "generationConfig": {
                 "temperature": this._temperature,
+		"topK": 1000000000,
+		"topP": 1,
+
             },
             // "key": this._key,
             // "apiKey": this._key,
