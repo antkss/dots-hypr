@@ -1,17 +1,17 @@
 
 @importtheme "_base";
-.disasm-font { ProggySquareTT }
+/* .disasm-font { Terminess Nerd Font } */
 
-.hexview-font { ProggySquareTT}
+/* .hexview-font { Terminess Nerd Font} */
 
-.text-input-font { ProggySquareTT}
+/* .text-input-font { Terminess Nerd Font } */
 
 QWidget:focus {
   outline: none;
 }
 
 QWidget {
-  background-color: #efefef;
+  background-color: #f3fdff;
   color           : #222222;
   font-family     : 'Ubuntu Nerd Font';
 }
@@ -26,7 +26,7 @@ hexview_t {
 }
 
 QToolBar {
-  background-color: #efefef;
+  background-color: #f3fdff;
   border          : none;
   spacing         : 5px;
   border          : 1px solid #eeeeee;
@@ -152,7 +152,7 @@ QTabWidget::tab-bar {
 }
 
 QTabBar {
-  background-color: #ffffff;
+  background-color: #f3fdff;
   border          : 0px solid black;
   border-bottom   : 2px solid #ffffff;
 }
@@ -160,7 +160,7 @@ QTabBar {
 QTabBar:tab {
   border-right    : 1px solid #adadad;
   border-bottom   : 1px solid transparent;
-  background-color: #ffffff;
+  background-color: #f3fdff;
   height          : 2em;
   max-height      : 2em;
   min-height      : 2em;
@@ -169,8 +169,8 @@ QTabBar:tab {
 }
 
 QTabBar:tab:selected {
-  background-color: #0078d6;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 QTabBar:close-button {
