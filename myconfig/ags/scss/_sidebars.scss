@@ -3,7 +3,64 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 @mixin group-padding {
     padding: 0.341rem;
 }
+.sidebar-bluetooth-device {
+    padding: 0.682rem;
+    @include normal-rounding;
+    background-color: $layer2;
+    color: $onLayer2;
+}
 
+.sidebar-bluetooth-appicon {
+    font-size: 3.273rem;
+}
+
+.sidebar-bluetooth-device-remove {
+    @include full-rounding;
+    min-width: 2.045rem;
+    min-height: 2.045rem;
+    // background-color: $layer3;
+    padding: 0.341rem;
+}
+
+.sidebar-bluetooth-device-remove:hover,
+.sidebar-bluetooth-device-remove:focus {
+    @include full-rounding;
+    background-color: $layer2Hover;
+    padding: 0.341rem;
+}
+.sidebar-volmixer-stream {
+    // @include normal-rounding;
+    // background-color: $layer2;
+    // color: $onLayer2;
+    border-bottom: 0.068rem solid $outlineVariant;
+    padding: 0.682rem;
+}
+
+.sidebar-volmixer-stream-appicon {
+    font-size: 3.273rem;
+}
+
+.sidebar-volmixer-stream-slider {
+    trough {
+        border-radius: $rounding_verysmall;
+        min-height: 1.364rem;
+        min-width: 1.364rem;
+        background-color: $secondaryContainer;
+    }
+
+    highlight {
+        border-radius: $rounding_verysmall;
+        min-height: 1.364rem;
+        min-width: 1.364rem;
+        background-color: $primary;
+    }
+
+    slider {
+        border-radius: $rounding_verysmall;
+        min-height: 1.364rem;
+        min-width: 1.364rem;
+    }
+}
 .sidebar-right {
     @include menu_decel;
     @include elevation-border;
