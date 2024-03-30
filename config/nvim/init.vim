@@ -22,7 +22,7 @@ call plug#begin('~/.local/share/nvim/lazy')
 	" debug plugin
 	Plug 'puremourning/vimspector',  { 'on': 'VimspectorInstall' }
 	"code assistant plugin load on insert mode only 
-	Plug 'Exafunction/codeium.vim', { 'branch': 'main'  }
+	Plug 'Exafunction/codeium.vim', { 'branch': 'main','on' : 'NonExistentCommandUltisnips'  }
 	"theme plugin
 	Plug 'navarasu/onedark.nvim'
 	"auto pair load on insert mode only
@@ -37,7 +37,8 @@ call plug#end()
 "load config when insert mode is on
 augroup load_ultisnips
   autocmd!
-  autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips
+  autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips 
+  autocmd InsertEnter * silent! Codeium Enable
 augroup END
 
 syntax enable

@@ -1,9 +1,10 @@
 " use <tab> to trigger completion and navigate to the next complete item
 "use enter key to comfirm completion
+" update mapping for coc completion
 inoremap <expr> <return> coc#pum#visible() ? coc#pum#confirm() : "\<RETURN>"
-inoremap <silent><expr> <Tab>
+inoremap <silent><expr> <S-Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
+      \ CheckBackspace() ? "\<S-Tab>" :
       \ coc#refresh()
 
 function! CheckBackspace() abort
