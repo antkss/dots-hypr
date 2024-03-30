@@ -5,7 +5,8 @@ call plug#begin('~/.local/share/nvim/lazy')
 	" Plug 'neovim/nvim-lsp' " nvim-lsp
 	" Plug 'VonHeikemen/lsp-zero.nvim'
 	" Plug 'jackguo380/vim-lsp-cxx-highlight'
-	Plug 'ryanoasis/vim-devicons'
+	" Plug 'ryanoasis/vim-devicons'
+	Plug 'nvim-tree/nvim-web-devicons'
 	" Plug 'skywind3000/asyncrun.vim'
 	" indent 
 	Plug 'echasnovski/mini.indentscope'
@@ -13,7 +14,8 @@ call plug#begin('~/.local/share/nvim/lazy')
 	"Plug 'nvim-tree/nvim-web-devicons'
 	Plug 'neoclide/coc.nvim', {'branch': 'release','on' : 'NonExistentCommandUltisnips'}
 	"Vim line
-	Plug 'vim-airline/vim-airline'
+	" Plug 'vim-airline/vim-airline'
+	Plug 'nvim-lualine/lualine.nvim'
 	"vim translator 
 	Plug 'voldikss/vim-translator'
 	" Finder plugin
@@ -34,16 +36,23 @@ call plug#begin('~/.local/share/nvim/lazy')
 	" vim startup time
 	Plug 'dstein64/vim-startuptime'
 call plug#end()
+" additional configurations 
+
+
 "load config when insert mode is on
+
 augroup load_ultisnips
   autocmd!
   autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips 
   autocmd InsertEnter * silent! Codeium Enable
 augroup END
-
 syntax enable
 " set settings path
-execute "source" stdpath('config') . "/lua.vim"
+augroup loadmod
+autocmd!
+autocmd InsertEnter * silent! execute "source" stdpath('config') . "/lua.vim" | autocmd! loadmod
+augroup END
+
 for source_file in split(glob(stdpath('config').'/config/*.vim'))
 	execute 'source' source_file
 endfor

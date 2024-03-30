@@ -37,7 +37,7 @@ function replaceapidom(URL) {
     }
     return URL;
 }
-const CHAT_MODELS = ["gemini-pro"]
+const CHAT_MODELS = ["gemini-1.0-pro-001"]
 const ONE_CYCLE_COUNT = 3;
 
 class GeminiMessage extends Service {
@@ -279,15 +279,18 @@ class GeminiService extends Service {
         const body =
         {
             "contents": this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; }),
-            "safetySettings": this._safe ? [] : [
-                // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
-                { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE", },
-                { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE", },
-                { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE", },
-                // { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
-            ],
+            // "safetySettings": this._safe ? [] : [
+            //     // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE", },
+            //     { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE", },
+            //     // { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
+            // ],
             "generationConfig": {
                 "temperature": this._temperature,
+		"topK": 1000000000,
+		"topP": 1,
+
             },
             // "key": this._key,
             // "apiKey": this._key,

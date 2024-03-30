@@ -152,10 +152,10 @@ apply_stuff(){
     mkdir -p "$HOME"/.cache/ags/user/generated/terminal
     cp "scripts/templates/terminal/sequences.txt" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
     # check if onedark plugin exist 
-    if [ -d "$HOME/.config/nvim/plugged/onedark.nvim" ]; then
+    if [ -d "$HOME/.local/share/nvim/lazy/onedark.nvim" ]; then
 # apply colors for neovim background 
 # if the folder exist then do the operations
-mv $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua.bak
+mv $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua.bak
 echo "return {
 	dark = {
 		black = \"#1a212e\",
@@ -185,81 +185,56 @@ echo "return {
 		diff_change = \"#1c3448\",
 		diff_text = \"#2c5372\",
 	}
-} " > $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua
-if [ -d "$HOME/.config/nvim/plugged/vim-airline" ]; then
-echo "let g:airline#themes#base16_flat#palette = {}
-let s:gui00 = \"#ffffff\"
-let s:gui01 = \"${colorvalues[7]}\"
-let s:gui02 = \"${colorvalues[29]}\"
-let s:gui03 = \"#95A5A6\"
-let s:gui04 = \"#BDC3C7\"
-let s:gui05 = \"#e0e0e0\"
-let s:gui06 = \"#f5f5f5\"
-let s:gui07 = \"#ECF0F1\"
-let s:gui08 = \"${colorvalues[35]}\"
-let s:gui09 = \"${colorvalues[27]}\"
-let s:gui0A = \"#F1C40F\"
-let s:gui0B = \"${colorvalues[27]}\"
-let s:gui0C = \"#1ABC9C\"
-let s:gui0D = \"${colorvalues[35]}\"
-let s:gui0E = \"${colorvalues[42]}\"
-let s:gui0F = \"${colorvalues[36]}\"
+} " > $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua
+if [ -d "$HOME/.local/share/nvim/lazy/lualine.nvim" ]; then
+echo "
+local Colors = {
+  itagbg          = '${colorvalues[45]}',
+  darkestgreen   = '${colorvalues[7]}',
+  brightgreen    = '${colorvalues[26]}',
+  darkestcyan    = '${colorvalues[37]}',
+  mediumcyan     = '${colorvalues[47]}',
+  darkred        = '${colorvalues[44]}',
+  itext          = '${colorvalues[19]}',
+  brightred      = '${colorvalues[36]}',
+  brightorange   = '${colorvalues[34]}',
+  gray1          = '#262626',
+  gray4          = '#585858',
+  gray5          = '${colorvalues[29]}',
+  gray10         = '#f0f0f0',
+}
 
-let s:cterm00 = 23
-let s:cterm01 = 59
-let s:cterm02 = 102
-let s:cterm03 = 109
-let s:cterm04 = 146
-let s:cterm05 = 253
-let s:cterm06 = 15
-let s:cterm07 = 15
-let s:cterm08 = 167
-let s:cterm09 = 172
-let s:cterm0A = 220
-let s:cterm0B = 41
-let s:cterm0C = 37
-let s:cterm0D = 68
-let s:cterm0E = 97
-let s:cterm0F = 131
+local M = {
+  normal = {
+    a = { fg = Colors.darkestgreen, bg = Colors.brightgreen, gui = 'bold' },
+    b = { fg = Colors.gray10, bg = Colors.gray5 },
+    c = { fg = Colors.brightgreen, bg = Colors.darkestgreen },
+  },
+  insert = {
+    a = { fg = Colors.darkestcyan, bg = Colors.itagbg, gui = 'bold' },
+    b = { fg = Colors.itext, bg = Colors.mediumcyan },
+    c = { fg = Colors.itext, bg = Colors.darkestgreen },
+  },
+  visual = { a = { fg = Colors.darkred, bg = Colors.brightorange, gui = 'bold' } },
+  replace = { a = { fg = Colors.darkestgreen, bg = Colors.brightred, gui = 'bold' } },
+  inactive = {
+    a = { fg = Colors.gray1, bg = Colors.gray5, gui = 'bold' },
+    b = { fg = Colors.gray1, bg = Colors.gray5 },
+    c = { bg = Colors.gray1, fg = Colors.gray5 },
+  },
+}
 
-let s:N1   = [ s:gui01, s:gui0B, s:cterm01, s:cterm0B ]
-let s:N2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
-let s:N3   = [ s:gui09, s:gui01, s:cterm09, s:cterm01 ]
-let g:airline#themes#base16_flat#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+M.terminal = M.insert
 
-let s:I1   = [ s:gui01, s:gui0D, s:cterm01, s:cterm0D ]
-let s:I2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
-let s:I3   = [ s:gui09, s:gui01, s:cterm09, s:cterm01 ]
-let g:airline#themes#base16_flat#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
+return M
 
-let s:R1   = [ s:gui01, s:gui08, s:cterm01, s:cterm08 ]
-let s:R2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
-let s:R3   = [ s:gui09, s:gui01, s:cterm09, s:cterm01 ]
-let g:airline#themes#base16_flat#palette.replace = airline#themes#generate_color_map(s:R1, s:R2, s:R3)
-
-let s:V1   = [ s:gui01, s:gui0E, s:cterm01, s:cterm0E ]
-let s:V2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
-let s:V3   = [ s:gui09, s:gui01, s:cterm09, s:cterm01 ]
-let g:airline#themes#base16_flat#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
-
-let s:IA1   = [ s:gui05, s:gui01, s:cterm05, s:cterm01 ]
-let s:IA2   = [ s:gui05, s:gui01, s:cterm05, s:cterm01 ]
-let s:IA3   = [ s:gui05, s:gui01, s:cterm05, s:cterm01 ]
-let g:airline#themes#base16_flat#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
-
-if !get(g:, 'loaded_ctrlp', 0)
-  finish
-endif
-let g:airline#themes#base16_flat#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
-      \ [ s:gui07, s:gui02, s:cterm07, s:cterm02, '' ],
-      \ [ s:gui07, s:gui04, s:cterm07, s:cterm04, '' ],
-      \ [ s:gui05, s:gui01, s:cterm05, s:cterm01, 'bold' ])" > $HOME/.config/nvim/plugged/vim-airline/autoload/airline/themes/base16_flat.vim
+" > $HOME/.local/share/nvim/lazy/lualine.nvim/lua/lualine/themes/powerline.lua
 else 
-	notify-send "airline plugin not found, please install it for material themes support"
+	notify-send "lualine plugin not found, please install it for material themes support"
 	fi
           else 
 		  #if it doesn't exist then 
-		  notify-send "onedark,vim-airline and vim-airline-themes plugin not found, please install them for neovim material themes support\n link onedark: https://github.com/navarasu/onedark.nvim"
+		  notify-send "onedark and lualine please install them for neovim material themes support\n link onedark: https://github.com/navarasu/onedark.nvim"
     fi
 
 ##############apply for foot #################################
@@ -284,7 +259,7 @@ regular7=0xffffff
 " > "$HOME"/.config/foot/colors.ini
 fi
 
-
+#
 # for i in "${!colorlist[@]}"; do
 #  echo "${colorlist[$i]}:[$i] ${colorvalues[$i]}"
 # done
