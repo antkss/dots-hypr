@@ -152,10 +152,10 @@ apply_stuff(){
     mkdir -p "$HOME"/.cache/ags/user/generated/terminal
     cp "scripts/templates/terminal/sequences.txt" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
     # check if onedark plugin exist 
-    if [ -d "$HOME/.config/nvim/plugged/onedark.nvim" ]; then
+    if [ -d "$HOME/.local/share/nvim/lazy/onedark.nvim" ]; then
 # apply colors for neovim background 
 # if the folder exist then do the operations
-mv $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua.bak
+mv $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua.bak
 echo "return {
 	dark = {
 		black = \"#1a212e\",
@@ -185,8 +185,8 @@ echo "return {
 		diff_change = \"#1c3448\",
 		diff_text = \"#2c5372\",
 	}
-} " > $HOME/.config/nvim/plugged/onedark.nvim/lua/onedark/palette.lua
-if [ -d "$HOME/.config/nvim/plugged/vim-airline" ]; then
+} " > $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua
+if [ -d "$HOME/.local/share/nvim/lazy/vim-airline" ]; then
 echo "let g:airline#themes#base16_flat#palette = {}
 let s:gui00 = \"#ffffff\"
 let s:gui01 = \"${colorvalues[7]}\"
@@ -253,7 +253,7 @@ endif
 let g:airline#themes#base16_flat#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
       \ [ s:gui07, s:gui02, s:cterm07, s:cterm02, '' ],
       \ [ s:gui07, s:gui04, s:cterm07, s:cterm04, '' ],
-      \ [ s:gui05, s:gui01, s:cterm05, s:cterm01, 'bold' ])" > $HOME/.config/nvim/plugged/vim-airline/autoload/airline/themes/base16_flat.vim
+      \ [ s:gui05, s:gui01, s:cterm05, s:cterm01, 'bold' ])" > $HOME/.local/share/nvim/lazy/vim-airline/autoload/airline/themes/base16_flat.vim
 else 
 	notify-send "airline plugin not found, please install it for material themes support"
 	fi
