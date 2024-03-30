@@ -1,6 +1,9 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync, exec } = Utils;
+import ModuleVolumeMixer from "./centermodules/volumemixer.js";
+// import ModuleNetworks from "./centermodules/networks.js";
+import ModuleBluetooth from "./centermodules/bluetooth.js";
+const { execAsync} = Utils;
 const { Box, EventBox } = Widget;
 import {
     ToggleIconBluetooth,
@@ -9,7 +12,6 @@ import {
     ModuleNightLight,
     ModuleInvertColors,
     ModuleIdleInhibitor,
-    ModuleEditIcon,
     ModuleReloadIcon,
     ModuleSettingsIcon,
     ModulePowerIcon,
@@ -18,7 +20,40 @@ import {
 import ModuleNotificationList from "./notificationlist.js";
 import { ModuleCalendar } from "./calendar.js";
 import { getDistroIcon } from '../.miscutils/system.js';
+import { ExpandingIconTabContainer } from '../.commonwidgets/tabcontainer.js';
+const centerWidgets = [
+    {
+        name: 'Notifications',
+        materialIcon: 'notifications',
+        contentWidget: ModuleNotificationList(),
+    },
+    {
+        name: 'Volume mixer',
+        materialIcon: 'volume_up',
+        contentWidget: ModuleVolumeMixer(),
+    },
+    // {
+    //     name: 'Networks',
+    //     materialIcon: 'lan',
+    //     contentWidget: ModuleNetworks(),
+    // },
+    {
+        name: 'Bluetooth',
+        materialIcon: 'bluetooth',
+        contentWidget: ModuleBluetooth(),
+    },
+];
 
+export const sidebarOptionsStack = ExpandingIconTabContainer({
+    tabsHpack: 'center',
+    tabSwitcherClassName: 'sidebar-icontabswitcher',
+    icons: centerWidgets.map((api) => api.materialIcon),
+    names: centerWidgets.map((api) => api.name),
+    children: centerWidgets.map((api) => api.contentWidget),
+    onChange: (self, id) => {
+        self.shown = centerWidgets[id].name;
+    }
+});
 const timeRow = Box({
     className: 'spacing-h-10 sidebar-group-invisible-morehorizpad',
     children: [
@@ -84,7 +119,7 @@ export default () => Box({
                         togglesBox,
                     ]
                 }),
-                ModuleNotificationList({ vexpand: true, }),
+		sidebarOptionsStack,
                 ModuleCalendar(),
             ]
         }),

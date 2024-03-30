@@ -13,7 +13,7 @@ let configOptions = {
     },
     'animations': {
         'durationSmall': 110,
-        'durationLarge': 180,
+        'durationLarge': 300,
     },
     'apps': {
         'imageViewer': "loupe",
