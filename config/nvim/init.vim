@@ -1,0 +1,48 @@
+call plug#begin('~/.local/share/nvim/lazy')
+	Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+	" nerdtree hightlight and icons
+	Plug 'octol/vim-cpp-enhanced-highlight'
+	" Plug 'neovim/nvim-lsp' " nvim-lsp
+	" Plug 'VonHeikemen/lsp-zero.nvim'
+	" Plug 'jackguo380/vim-lsp-cxx-highlight'
+	Plug 'ryanoasis/vim-devicons'
+	" Plug 'skywind3000/asyncrun.vim'
+	" indent 
+	Plug 'echasnovski/mini.indentscope'
+	"COC VIM, load on insert mode only 
+	"Plug 'nvim-tree/nvim-web-devicons'
+	Plug 'neoclide/coc.nvim', {'branch': 'release','on' : 'NonExistentCommandUltisnips'}
+	"Vim line
+	Plug 'vim-airline/vim-airline'
+	"vim translator 
+	Plug 'voldikss/vim-translator'
+	" Finder plugin
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
+	" debug plugin
+	Plug 'puremourning/vimspector',  { 'on': 'VimspectorInstall' }
+	"code assistant plugin load on insert mode only 
+	Plug 'Exafunction/codeium.vim', { 'branch': 'main'  }
+	"theme plugin
+	Plug 'navarasu/onedark.nvim'
+	"auto pair load on insert mode only
+	Plug 'echasnovski/mini.pairs',{ 'on' : 'NonExistentCommandUltisnips' }
+	" comment plugin
+	Plug 'numToStr/Comment.nvim'
+	" mini surround load on insert mode only 
+	Plug 'echasnovski/mini.surround',{ 'on' : 'NonExistentCommandUltisnips' }
+	" vim startup time
+	Plug 'dstein64/vim-startuptime'
+call plug#end()
+"load config when insert mode is on
+augroup load_ultisnips
+  autocmd!
+  autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips
+augroup END
+
+syntax enable
+" set settings path
+execute "source" stdpath('config') . "/lua.vim"
+for source_file in split(glob(stdpath('config').'/config/*.vim'))
+	execute 'source' source_file
+endfor
