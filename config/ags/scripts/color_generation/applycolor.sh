@@ -220,7 +220,7 @@ local M = {
   inactive = {
     a = { fg = Colors.gray1, bg = Colors.gray5, gui = 'bold' },
     b = { fg = Colors.gray1, bg = Colors.gray5 },
-    c = { bg = Colors.gray1, fg = Colors.gray5 },
+    c = { bg = Colors.gray1, fg = Colors.brightgreen },
   },
 }
 
