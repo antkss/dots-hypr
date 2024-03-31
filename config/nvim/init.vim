@@ -52,6 +52,8 @@ augroup loadmod
 autocmd!
 autocmd InsertEnter * silent! execute "source" stdpath('config') . "/lua.vim" | autocmd! loadmod
 augroup END
+" instant load
+execute 'source' stdpath('config') . "/ilua.vim"
 
 for source_file in split(glob(stdpath('config').'/config/*.vim'))
 	execute 'source' source_file
