@@ -13,8 +13,9 @@ call plug#begin('~/.local/share/nvim/lazy')
 	"COC VIM, load on insert mode only 
 	"Plug 'nvim-tree/nvim-web-devicons'
 	Plug 'neoclide/coc.nvim', {'branch': 'release','on' : 'NonExistentCommandUltisnips'}
-	"Vim line
-	" Plug 'vim-airline/vim-airline'
+	"colorizer
+
+	" lualine for statusline
 	Plug 'nvim-lualine/lualine.nvim'
 	"vim translator 
 	Plug 'voldikss/vim-translator'

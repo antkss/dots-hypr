@@ -1,4 +1,5 @@
 "vim spector configuration
+set equalalways
 let g:vimspector_sidebar_width = 40
 let g:vimspector_bottombar_height = 0
 let g:vimspector_terminal_maxwidth = 60
