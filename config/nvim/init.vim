@@ -2,19 +2,14 @@ call plug#begin('~/.local/share/nvim/lazy')
 	Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 	" nerdtree hightlight and icons
 	Plug 'octol/vim-cpp-enhanced-highlight'
-	" Plug 'neovim/nvim-lsp' " nvim-lsp
-	" Plug 'VonHeikemen/lsp-zero.nvim'
-	" Plug 'jackguo380/vim-lsp-cxx-highlight'
-	" Plug 'ryanoasis/vim-devicons'
+	" neovim icons
 	Plug 'nvim-tree/nvim-web-devicons'
+	" neovim compile
 	" Plug 'skywind3000/asyncrun.vim'
 	" indent 
 	Plug 'echasnovski/mini.indentscope'
 	"COC VIM, load on insert mode only 
-	"Plug 'nvim-tree/nvim-web-devicons'
 	Plug 'neoclide/coc.nvim', {'branch': 'release','on' : 'NonExistentCommandUltisnips'}
-	"colorizer
-
 	" lualine for statusline
 	Plug 'nvim-lualine/lualine.nvim'
 	"vim translator 
@@ -37,11 +32,8 @@ call plug#begin('~/.local/share/nvim/lazy')
 	" vim startup time
 	Plug 'dstein64/vim-startuptime'
 call plug#end()
-" additional configurations 
-
 
 "load config when insert mode is on
-
 augroup load_ultisnips
   autocmd!
   autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips 
