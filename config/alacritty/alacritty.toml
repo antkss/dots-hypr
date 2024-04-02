@@ -10,7 +10,9 @@ size = 9
 
 [font.normal]
 family = "Terminess Nerd Font"
-style = "Bold"
+style = "Regular"
+[font.italic]
+family = "Cascadia Code"	
 
 [selection]
 save_to_clipboard = true
@@ -28,7 +30,7 @@ lines = 50
 x = 0
 y = 0
 [cursor]
-blink_interval = 100 
+blink_interval = 200
 unfocused_hollow = true
 vi_mode_style = "Block"
 
