@@ -12,7 +12,8 @@ size = 9
 family = "Terminess Nerd Font"
 style = "Regular"
 [font.italic]
-family = "Cascadia Code"	
+family = "Terminess Nerd Font"	
+style = "normal"
 
 [selection]
 save_to_clipboard = true
