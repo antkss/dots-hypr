@@ -14,14 +14,14 @@ autocmd VimEnter * silent! syntax keyword cpp_inout
 			\ cin cout cerr 
 
 
-autocmd VimEnter * silent! hi Normal guifg=lightpink
+autocmd VimEnter * silent! hi Normal guifg=white
 autocmd VimEnter * silent! hi Number guifg=#eaff00
 autocmd VimEnter * silent! hi datatype guifg=orange
-autocmd VimEnter * silent! hi ccpp_function guifg=#f005fc
+autocmd VimEnter * silent! hi ccpp_function guifg=lightpink
 autocmd VimEnter * silent! hi ccpp_condition guifg=#72df4a
 autocmd VimEnter * silent! hi ccpp_loop guifg=#00faed
 autocmd VimEnter * silent! hi cpp_keywords guifg=#00ff91
-autocmd VimEnter * silent! hi cpp_inout guifg=#ff0000
+autocmd VimEnter * silent! hi cpp_inout guifg=#ff006a
 
 
 colorscheme onedark
