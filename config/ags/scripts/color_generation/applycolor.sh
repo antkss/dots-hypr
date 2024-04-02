@@ -258,7 +258,20 @@ regular6=0x00CCCC
 regular7=0xffffff  
 " > "$HOME"/.config/foot/colors.ini
 fi
-
+echo "
+[colors.normal]
+black = \"0x10100E\"
+blue = \"0x${colorvalues[27]:1}\"
+cyan = \"0x20B2AA\"
+green = \"0x${colorvalues[2]:1}\"
+magenta = \"0x9A4EAE\"
+red = \"0x${colorvalues[2]:1}\"
+white = \"0x${colorvalues[20]:1}\"
+yellow = \"0x${colorvalues[53]:1}\"
+[colors.primary]
+background = \"0x${colorvalues[7]:1}\"
+foreground = \"0xcbe3e7\"
+" > "$HOME"/.config/alacritty/color.toml
 #
 # for i in "${!colorlist[@]}"; do
 #  echo "${colorlist[$i]}:[$i] ${colorvalues[$i]}"
