@@ -1,7 +1,7 @@
 call plug#begin('~/.local/share/nvim/lazy')
 	Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-	" nerdtree hightlight and icons
-	Plug 'octol/vim-cpp-enhanced-highlight'
+	"highlight syntax
+	" Plug 'bfrg/vim-cpp-modern'
 	" neovim icons
 	Plug 'nvim-tree/nvim-web-devicons'
 	" neovim compile
@@ -32,7 +32,6 @@ call plug#begin('~/.local/share/nvim/lazy')
 	" vim startup time
 	Plug 'dstein64/vim-startuptime'
 call plug#end()
-
 "load config when insert mode is on
 augroup load_ultisnips
   autocmd!
