@@ -8,4 +8,5 @@ tnoremap <C-c> <C-\><C-n>
 nmap <S-j> <PageDown> 
 " mapping function
 nnoremap + :join <CR>
+" set mouse=ai
 
