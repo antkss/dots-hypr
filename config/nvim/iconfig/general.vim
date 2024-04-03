@@ -1,6 +1,6 @@
 
 " general configurations
-set mouse=r
+set mouse=n
 set number 
 " change make properties
 let &makeprg = 'g++ -g -o %< % -fno-stack-protector -no-pie'

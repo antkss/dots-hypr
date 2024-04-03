@@ -31,6 +31,8 @@ call plug#begin('~/.local/share/nvim/lazy')
 	Plug 'echasnovski/mini.surround',{ 'on' : 'NonExistentCommandUltisnips' }
 	" vim startup time
 	Plug 'dstein64/vim-startuptime'
+	" keep size
+	Plug 'kwkarlwang/bufresize.nvim'
 call plug#end()
 "load config when insert mode is on
 augroup load_ultisnips
@@ -39,14 +41,19 @@ augroup load_ultisnips
   autocmd InsertEnter * silent! Codeium Enable
 augroup END
 syntax enable
-" set settings path
-augroup loadmod
-autocmd!
-autocmd InsertEnter * silent! execute "source" stdpath('config') . "/lua.vim" | autocmd! loadmod
-augroup END
-" instant load
+" insert load lua
+autocmd InsertEnter * silent! execute "source" stdpath('config') . "/lua.vim" 
+" instant load lua
 execute 'source' stdpath('config') . "/ilua.vim"
-
-for source_file in split(glob(stdpath('config').'/config/*.vim'))
+" instant load config
+for source_file in split(glob(stdpath('config').'/iconfig/*.vim'))
 	execute 'source' source_file
 endfor
+
+" load config when insert mode is on
+function! s:loadconfig()
+	for source_file in split(glob(stdpath('config').'/config/*.vim'))
+		execute 'source' source_file 
+	endfor
+endfunction
+autocmd InsertEnter * call s:loadconfig()
