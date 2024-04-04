@@ -40,11 +40,10 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = "InsertEnter"
+		event = "InsertEnter",
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
-		event = "InsertEnter"
 	},
 	{
 		'hrsh7th/vim-vsnip',
@@ -56,7 +55,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
 	    },
-	    event = "InsertEnter",
+	    event = "BufRead",
 	    config = function ()
 
 		local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -90,15 +89,25 @@ return {
 		    }),
 		  })
 		require("lspconfig").clangd.setup{
-			capabilities = capabilities
+			capabilities = capabilities,
+				workspace = {
+					 maxPreload = 11,
+					preloadFileSize = 10,
+			},
 
 		}
+
 		require("lspconfig").pyright.setup {
-			capabilities = capabilities
+			capabilities = capabilities,
+			workspace = {
+				 maxPreload = 11,
+				preloadFileSize = 10,
+			},
+
 		}
 		require("codeium").setup({})
 		vim.cmd("LspStart")
-	    end
+	    end,
 	
 	},
 	{
