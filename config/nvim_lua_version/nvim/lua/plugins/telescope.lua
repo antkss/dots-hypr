@@ -1,6 +1,6 @@
 return {
-	 'nvim-telescope/telescope.nvim',
-	 autocmd = false, 
+	'nvim-telescope/telescope.nvim',
+	autocmd = false, 
 	tag = '0.1.6',
 	opts = {
 		pickers = {

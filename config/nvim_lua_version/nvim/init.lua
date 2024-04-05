@@ -38,6 +38,7 @@ require("lazy").setup("plugins",{
 	    },
 })
 
+vim.opt.termguicolors=true
  -- local fileExtension = '.lua'
  -- local function isLuaFile(filename)
  --   return filename:sub(-#fileExtension) == fileExtension
@@ -57,6 +58,5 @@ dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/keymap.lua')
 -- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/lsp.lua')
--- loadAll(os.getenv('HOME') .. '/.config/nvim/lua/plugins')
 
 

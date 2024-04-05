@@ -2,7 +2,11 @@
 return {
 
 	{
-		"navarasu/onedark.nvim",
+		"antkss/onedark.nvim",
+		config = function ()
+			require("onedark").setup()
+			
+		end
 	},
 
 	  {

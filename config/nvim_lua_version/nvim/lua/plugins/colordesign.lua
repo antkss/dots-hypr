@@ -1,0 +1,5 @@
+return {
+	{'lifepillar/vim-colortemplate'},
+
+
+}
