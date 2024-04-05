@@ -10,7 +10,7 @@
   "nerdtree": { "branch": "master", "commit": "f3a4d8eaa8ac10305e3d53851c976756ea9dc8e8" },
   "nvim-cmp": { "branch": "main", "commit": "ce16de5665c766f39c271705b17fff06f7bcb84f" },
   "nvim-lspconfig": { "branch": "master", "commit": "e13ef0c5c8ccdbb9c84682522d6ad5923a65c1a8" },
-  "onedark.nvim": { "branch": "master", "commit": "2c311b72e08c047424c1cebe99c7ef54e2c87f04" },
+  "onedark.nvim": { "branch": "master", "commit": "bcdccb993147083545fb58eb63a4bd6a1d85495f" },
   "plenary.nvim": { "branch": "master", "commit": "8aad4396840be7fc42896e3011751b7609ca4119" },
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "vim-colortemplate": { "branch": "master", "commit": "527166b3ddc430e35be224770cb8871c75593690" },

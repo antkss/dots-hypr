@@ -29,23 +29,20 @@ return {
 	{
 		'numToStr/Comment.nvim',
 		event = "VimEnter",
-		config = function()
+		config = function()	
 			require('Comment').setup()
 		end,
 	},
 	-- {'echasnovski/mini.surround'},
-	{
-		'ryanoasis/vim-devicons',
-		event = "ColorSchemePre",
 
-	},
 	{
 		"neovim/nvim-lspconfig",
-		event = {"InsertEnter", "BufRead"},
+		lazy = true,
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
-		event = {"BufRead","CmdlineEnter"}
+		lazy = true,
+
 	},
 	{
 		'hrsh7th/vim-vsnip',
@@ -177,7 +174,6 @@ return {
 				},
 
 		}
-		vim.cmd("LspStart")
 	    end,
 	},
 	{

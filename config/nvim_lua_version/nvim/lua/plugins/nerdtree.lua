@@ -25,18 +25,26 @@ return {
 	--       { "<F5>", "fE", desc = "Explorer NeoTree (cwd)", remap = true },
 	--
 	-- 	}
+	--
 	-- }
+
+	{
+		'ryanoasis/vim-devicons',
+		keys ={
+		      	{"<F5>", ":NERDTreeToggle <CR>"},
+		}
+
+	},
 	{
 		'preservim/nerdtree' ,
 		-- event = "VimEnter",
 		autocmd = false,
-		-- config = {
-		-- 
-		--
-		-- },
+		config = function ()
+		vim.g.webdevicons_enable = 1
+		end,
 		keys = {
 			{ "e", "fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
-		      	{"<F5>", ":NERDTreeToggle <CR>", desc = "Explorer NeoTree (cwd)", {nnoremap = true} },
+		      	{"<F5>", ":NERDTreeToggle <CR>", desc = "Explorer NERDTree (cwd)", {nnoremap = true} },
 
 		}
 
