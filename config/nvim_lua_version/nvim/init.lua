@@ -1,3 +1,4 @@
+-- DON'T EVEN EDIT THIS FILE--
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -37,8 +38,9 @@ require("lazy").setup("plugins",{
 		},
 	    },
 })
-
 vim.opt.termguicolors=true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
  -- local fileExtension = '.lua'
  -- local function isLuaFile(filename)
  --   return filename:sub(-#fileExtension) == fileExtension
@@ -57,6 +59,3 @@ vim.opt.termguicolors=true
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
 -- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/keymap.lua')
--- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/lsp.lua')
-
-

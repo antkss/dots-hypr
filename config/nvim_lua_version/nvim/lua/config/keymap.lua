@@ -8,7 +8,6 @@ vim.api.nvim_set_keymap('v','<S-j>','<PageDown>', {noremap = true})
 vim.api.nvim_set_keymap('v','<c-j>','<C-d>', {noremap = true})
 vim.api.nvim_set_keymap('v','<c-k>','<C-u>', {noremap = true})
 vim.api.nvim_set_keymap('n','+',':join <CR>', {noremap = true})
-
 -- Use Tab for trigger completion with characters ahead and navigate
 -- NOTE: There's always a completion item selected by default, you may want to enable
 -- no select by setting `"suggest.noselect": true` in your configuration file

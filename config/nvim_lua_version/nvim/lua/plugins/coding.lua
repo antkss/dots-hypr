@@ -13,7 +13,7 @@ return {
 	},
 	{
 		'echasnovski/mini.indentscope',
-		event = "VimEnter",
+		event = "VeryLazy",
 		config =  function ()
 		require('mini.indentscope').setup({ options = { try_as_border = true ,delay = 400} })
 
@@ -28,7 +28,7 @@ return {
 	},
 	{
 		'numToStr/Comment.nvim',
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()	
 			require('Comment').setup()
 		end,
@@ -37,11 +37,11 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-		lazy = true,
+		event = "VeryLazy",
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
-		lazy = true,
+		event = "VeryLazy",
 
 	},
 	{
