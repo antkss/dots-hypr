@@ -174,6 +174,7 @@ return {
 				},
 
 		}
+		vim.cmd("LspStart")
 	    end,
 	},
 	{
