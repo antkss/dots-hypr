@@ -1,0 +1,17 @@
+return {
+
+	{
+		'neoclide/coc.nvim',
+		enabled = false,
+		branch =  "release",
+		event = "InsertEnter",
+		build = "npm install --prefix ~/.local/share/nvim/lazy/coc.nvim",
+		config = function()
+			local opts = {silent = true, noremap = true, expr = true, replace_keycodes = true}
+			vim.keymap.set("i", "<s-cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<s-CR>\<c-r>=coc#on_enter()\<s-CR>"]], opts)
+		end,
+
+	}
+
+
+}

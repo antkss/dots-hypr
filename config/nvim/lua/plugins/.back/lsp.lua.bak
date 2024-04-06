@@ -1,0 +1,28 @@
+return {
+-- {'hrsh7th/vim-vsnip',event = "InsertEnter"},
+	{
+		'hrsh7th/nvim-cmp',
+		lazy = true
+	},
+	{
+		"williamboman/mason.nvim",
+		lazy = true,
+
+	},
+	{"williamboman/mason-lspconfig.nvim",event = "InsertEnter"},
+	{
+		"neovim/nvim-lspconfig",
+		event = "InsertEnter"
+
+
+	},
+	{
+		'hrsh7th/cmp-nvim-lsp',
+		lazy = true,
+	},
+	{
+		'hrsh7th/vim-vsnip',
+		event = "InsertEnter"
+	}
+
+}
