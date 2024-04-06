@@ -156,7 +156,7 @@ return {
 				},
 
 		}
-		require("lspconfig").pyright.setup {
+		require("lspconfig").pylsp.setup {
 			capabilities = capabilities,
 				workspace = {
 					maxPreload = 11,
