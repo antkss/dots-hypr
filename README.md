@@ -13,7 +13,9 @@
 - super speed with handmade colorscheme and nvim statusline
 
 ![image](https://github.com/antkss/dots-hypr/assets/88892713/29d2d425-777b-406f-924f-dcfbfb89829c)
-![image](https://github.com/antkss/dots-hypr/assets/88892713/a29dab6a-0aca-412c-9581-b32331c1ae34)
+
+![image](https://github.com/antkss/dots-hypr/assets/88892713/c5fb1ec2-be17-49e4-88a1-ff05f3e5ce6e)
+
 
 
 
