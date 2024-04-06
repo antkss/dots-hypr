@@ -32,8 +32,8 @@ vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeReplace",c.replac
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorReplace",c.replace.a.bg,"nil"))
 vim.cmd("syntax keyword StatuslineModeSeparatorCommand StatuslineModeSeparatorCommand")
 vim.cmd("syntax keyword StatuslineModeCommand StatuslineModeCommand")
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeCommand",c.normal.a.fg,c.normal.a.bg))
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorCommand",c.normal.a.bg,"nil"))
+vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeCommand",c.command.a.fg,c.command.a.bg))
+vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorCommand",c.command.a.bg,"nil"))
 local warn = ""
 local error = ""
 local warns = 0
@@ -103,7 +103,7 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 	local mode = mode_to_str[vim.api.nvim_get_mode().mode] or 'UNKNOWN'
 	-- Set the highlight group.
 	local hl = 'Other'
-	if mode:find 'NORMAL' or mode:find 'REPLACE' then
+	if mode:find 'NORMAL' then
 	    hl = 'Normal'
 	elseif mode:find 'PENDING' then
 	    hl = 'Pending'
@@ -113,6 +113,8 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 	    hl = 'Insert'
 	elseif mode:find 'COMMAND' or mode:find 'TERMINAL' or mode:find 'EX' then
 	    hl = 'Command'
+	elseif mode:find 'REPLACE' then
+		hl = 'Replace'
 	end
 	local string = table.concat {
 		string.format('%%#StatuslineModeSeparator%s#',hl),

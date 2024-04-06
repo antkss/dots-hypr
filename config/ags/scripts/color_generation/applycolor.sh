@@ -192,26 +192,23 @@ local Colors = {
   darkestgreen   = '${colorvalues[7]}',
   brightgreen    = '${colorvalues[26]}',
   darkestcyan    = '${colorvalues[37]}',
-  mediumcyan     = '${colorvalues[47]}',
   darkred        = '${colorvalues[44]}',
   itext          = '${colorvalues[19]}',
-  brightred      = '${colorvalues[36]}',
+  brightred      = '${colorvalues[53]}',
   brightorange   = '${colorvalues[34]}',
   gray1          = '#262626',
-  gray4          = '#585858',
+  cmdbg          = '${colorvalues[2]}',
   gray5          = '${colorvalues[29]}',
   gray10         = '#f0f0f0',
+  cmdfg          = '${colorvalues[49]}',
 }
-
 local M = {
   normal = {
     a = { fg = Colors.darkestgreen, bg = Colors.brightgreen, gui = 'bold' },
-    b = { fg = Colors.gray10, bg = Colors.gray5 },
     c = { fg = Colors.brightgreen, bg = Colors.darkestgreen },
   },
   insert = {
     a = { fg = Colors.darkestcyan, bg = Colors.itagbg, gui = 'bold' },
-    b = { fg = Colors.itext, bg = Colors.mediumcyan },
     c = { fg = Colors.itext, bg = Colors.darkestgreen },
   },
   visual = { a = { fg = Colors.darkred, bg = Colors.brightorange, gui = 'bold' } },
@@ -221,6 +218,8 @@ local M = {
     b = { fg = Colors.gray1, bg = Colors.gray5 },
     c = { bg = Colors.gray1, fg = Colors.brightgreen },
   },
+	command = { a = { fg = Colors.cmdfg, bg = Colors.cmdbg, gui = 'bold' } },
+
 }
 
 M.terminal = M.insert

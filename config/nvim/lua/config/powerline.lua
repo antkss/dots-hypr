@@ -1,29 +1,26 @@
 
 local Colors = {
-  itagbg          = '#FFB1C2',
-  darkestgreen   = '#1D1013',
-  brightgreen    = '#FFB1C2',
-  darkestcyan    = '#52220E',
-  mediumcyan     = '#8F0040',
-  darkred        = '#FFD9E0',
-  itext          = '#DDBFC4',
-  brightred      = '#FFB599',
-  brightorange   = '#693D3A',
+  itagbg          = '#FFB0CE',
+  darkestgreen   = '#1C1014',
+  brightgreen    = '#FFB0CE',
+  darkestcyan    = '#53201F',
+  darkred        = '#FFD9E5',
+  itext          = '#DBBFC8',
+  brightred      = '#FFB3AF',
+  brightorange   = '#683D45',
   gray1          = '#262626',
-  gray4          = '#585858',
-  gray5          = '#8F0040',
+  cmdbg          = '#FC009A',
+  gray5          = '#8C0053',
   gray10         = '#f0f0f0',
+  cmdfg          = '#F2B7C0',
 }
-
 local M = {
   normal = {
     a = { fg = Colors.darkestgreen, bg = Colors.brightgreen, gui = 'bold' },
-    b = { fg = Colors.gray10, bg = Colors.gray5 },
     c = { fg = Colors.brightgreen, bg = Colors.darkestgreen },
   },
   insert = {
     a = { fg = Colors.darkestcyan, bg = Colors.itagbg, gui = 'bold' },
-    b = { fg = Colors.itext, bg = Colors.mediumcyan },
     c = { fg = Colors.itext, bg = Colors.darkestgreen },
   },
   visual = { a = { fg = Colors.darkred, bg = Colors.brightorange, gui = 'bold' } },
@@ -33,6 +30,8 @@ local M = {
     b = { fg = Colors.gray1, bg = Colors.gray5 },
     c = { bg = Colors.gray1, fg = Colors.brightgreen },
   },
+	command = { a = { fg = Colors.cmdfg, bg = Colors.cmdbg, gui = 'bold' } },
+
 }
 
 M.terminal = M.insert
