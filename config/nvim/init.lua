@@ -39,7 +39,7 @@ require("lazy").setup("plugins",{
 	    },
 })
 vim.opt.termguicolors=true
-vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
  -- local fileExtension = '.lua'
  -- local function isLuaFile(filename)

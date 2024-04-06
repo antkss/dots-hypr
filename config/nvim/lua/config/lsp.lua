@@ -1,23 +1,3 @@
-	-- config = function ()
-
-		-- require("mason").setup({
-		-- 	ui = {
-		-- 	icons = {
-		-- 	    package_installed = "✓",
-		-- 	    package_pending = "➜",
-		-- 	    package_uninstalled = "✗"
-		-- 	}
-		--     }
-		--
-		-- })
-		--
-		-- require("mason-lspconfig").setup{
-		-- ensure_installed = { "lua_ls","clangd","pyright"},
-		--
-		-- }
-		-- local lspconfig = require('lspconfig')
-		-- lspconfig.pyright.setup {}
-
 		local cmp = require'cmp'
 		cmp.setup({
 		    snippet = {

@@ -1,9 +1,14 @@
 vim.g.qf_disable_statusline = 1
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●', -- Could be '●', '▎', 'x'
+  }
+})
 local signs = {
-  { name = "DiagnosticSignError", text = "✘ " },
-  { name = "DiagnosticSignWarn", text = "▲" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
+  { name = "DiagnosticSignError", text = "󰅚" },
+  { name = "DiagnosticSignWarn", text = "󰀪" },
+  { name = "DiagnosticSignHint", text = "󰌶" },
+  { name = "DiagnosticSignInfo", text = "" },
 }
 for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
@@ -38,13 +43,13 @@ callback = function()
 	local levels = vim.diagnostic.severity
 	errors = #vim.diagnostic.get(0, {severity = levels.ERROR})
 					if errors > 0 then
-					  error = " "
+					  error = "󰅚"
 					 else
 					  error = ""
 					end
 	warns = #vim.diagnostic.get(0, {severity = levels.WARN})
 			  if warns > 0 then
-			    warn = " "
+			    warn = "󰀪"
 			    else
 			    warn = ""
 			  end
@@ -117,10 +122,10 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 		string.format('%%#StatuslineMode%s# %s ',hl,"%f"),
 	}
 	if errors ~=0 then
-		string = string .. string.format('%s%d',error,errors)
+		string = string .. string.format('%s %d',error,errors)
 	end
 	if warns ~=0 then
-		string = string .. string.format(' %s%d ',warn,warns)
+		string = string .. string.format(' %s %d',warn,warns)
 	end
 	string = string .. string.format(" %s","%3l:%-2c ")
 	vim.opt.statusline = string
