@@ -1,10 +1,10 @@
 -- copy things
 vim.api.nvim_set_keymap('n', 'q:','<nop>', {noremap = true})
 vim.api.nvim_set_keymap('t','<C-c>','<C-\\><C-n>', {noremap = true})
-vim.api.nvim_set_keymap('n','<S-j>','<PageDown>', {noremap = true})
+vim.api.nvim_set_keymap('n','<S-j>','<nop>', {noremap = true})
 vim.api.nvim_set_keymap('n','<c-j>','<C-d>', {noremap = true})
 vim.api.nvim_set_keymap('n','<c-k>','<C-u>', {noremap = true})
-vim.api.nvim_set_keymap('v','<S-j>','<PageDown>', {noremap = true})
+vim.api.nvim_set_keymap('v','<S-j>','<nop>', {noremap = true})
 vim.api.nvim_set_keymap('v','<c-j>','<C-d>', {noremap = true})
 vim.api.nvim_set_keymap('v','<c-k>','<C-u>', {noremap = true})
 vim.api.nvim_set_keymap('n','+',':join <CR>', {noremap = true})

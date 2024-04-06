@@ -29,7 +29,7 @@ return {
 	{
 		'numToStr/Comment.nvim',
 		event = "VeryLazy",
-		config = function()	
+		config = function()
 			require('Comment').setup()
 		end,
 	},
@@ -56,9 +56,7 @@ return {
 	    },
 	    event = {"BufRead","CmdlineEnter"},
 	    config = function ()
-
 		local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 		require('mini.pairs').setup()
 		-- require('mini.surround').setup()
 		local cmp = require'cmp'

@@ -186,7 +186,6 @@ echo "return {
 		diff_text = \"#2c5372\",
 	}
 } " > $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua
-if [ -d "$HOME/.local/share/nvim/lazy/lualine.nvim" ]; then
 echo "
 local Colors = {
   itagbg          = '${colorvalues[45]}',
@@ -228,10 +227,7 @@ M.terminal = M.insert
 
 return M
 
-" > $HOME/.local/share/nvim/lazy/lualine.nvim/lua/lualine/themes/powerline.lua
-else 
-	notify-send "lualine plugin not found, please install it for material themes support"
-	fi
+" > $HOME/.config/nvim/lua/config/powerline.lua
           else 
 		  #if it doesn't exist then 
 		  notify-send "onedark and lualine please install them for neovim material themes support\n link onedark: https://github.com/navarasu/onedark.nvim"

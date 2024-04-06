@@ -57,5 +57,5 @@ vim.g.loaded_netrwPlugin = 1
 -- vim.opt.termguicolors = true
 -- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/coding.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
--- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
+dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/keymap.lua')
