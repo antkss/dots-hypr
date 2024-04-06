@@ -10,11 +10,13 @@
 
 ![image](https://github.com/antkss/dots-hypr/assets/88892713/de76879c-242b-4b66-bf72-4627faeca8b5)
 
+- super speed with handmade colorscheme and nvim statusline
+
+![image](https://github.com/antkss/dots-hypr/assets/88892713/29d2d425-777b-406f-924f-dcfbfb89829c)
+![image](https://github.com/antkss/dots-hypr/assets/88892713/a29dab6a-0aca-412c-9581-b32331c1ae34)
+
+
 
 - full desktop setup:
 
 ![image](https://github.com/antkss/dots-hypr/assets/88892713/692be282-01d6-4cba-825e-5a72eccb39ce)
-- super speed with handmade colorscheme and nvim statusline
-![image](https://github.com/antkss/dots-hypr/assets/88892713/ee3537d2-4048-45da-9aec-e46e2eee830c)
-![image](https://github.com/antkss/dots-hypr/assets/88892713/a29dab6a-0aca-412c-9581-b32331c1ae34)
-
