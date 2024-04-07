@@ -2,7 +2,7 @@ import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Brightness from '../../../services/brightness.js';
 import Indicator from '../../../services/indicator.js';
-
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const WindowTitle = async () => {
     try {
         const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
@@ -42,15 +42,12 @@ const OptionalWindowTitleInstance = await WindowTitle();
 
 export default () => Widget.EventBox({
     onScrollUp: () => {
+        Utils.execAsync(['bash', '-c', `brightnessctl set 1%-`]);
         Indicator.popup(1); // Since the brightness and speaker are both on the same window
-        Brightness.screen_value += 0.01;
     },
     onScrollDown: () => {
+        Utils.execAsync(['bash', '-c', `brightnessctl set +1%`]);
         Indicator.popup(1); // Since the brightness and speaker are both on the same window
-        Brightness.screen_value -= 0.01;
-    },
-    onPrimaryClick: () => {
-        App.toggleWindow('sideleft');
     },
     child: Widget.Box({
         homogeneous: false,
