@@ -1,11 +1,11 @@
 
 local Colors = {
   itagbg          = '#FFB1C2',
-  darkestgreen   = '#1D1013',
+  bbg   = '#1D1013',
   brightgreen    = '#FFB1C2',
   darkestcyan    = '#52220E',
   darkred        = '#FFD9E0',
-  itext          = '#DDBFC4',
+  ifg          = '#DDBFC4',
   brightred      = '#FFB599',
   brightorange   = '#693D3A',
   gray1          = '#262626',
@@ -16,21 +16,21 @@ local Colors = {
 }
 local M = {
   normal = {
-    a = { fg = Colors.darkestgreen, bg = Colors.brightgreen, gui = 'bold' },
-    c = { fg = Colors.brightgreen, bg = Colors.darkestgreen },
+    a = { fg = Colors.bbg, bg = Colors.brightgreen, gui = 'bold' },
+    c = { fg = Colors.brightgreen, bg = Colors.bbg },
   },
   insert = {
     a = { fg = Colors.darkestcyan, bg = Colors.itagbg, gui = 'bold' },
-    c = { fg = Colors.itext, bg = Colors.darkestgreen },
+    c = { fg = Colors.ifg, bg = Colors.bbg },
   },
   visual = { a = { fg = Colors.darkred, bg = Colors.brightorange, gui = 'bold' } },
-  replace = { a = { fg = Colors.darkestgreen, bg = Colors.brightred, gui = 'bold' } },
+  replace = { a = { fg = Colors.bbg, bg = Colors.brightred, gui = 'bold' } },
   inactive = {
     a = { fg = Colors.gray1, bg = Colors.gray5, gui = 'bold' },
     b = { fg = Colors.gray1, bg = Colors.gray5 },
     c = { bg = Colors.gray1, fg = Colors.brightgreen },
   },
-	command = { a = { fg = Colors.cmdfg, bg = Colors.cmdbg, gui = 'bold' } },
+	command = { a = { fg = Colors.bbg, bg = Colors.cmdbg, gui = 'bold' } },
 
 }
 

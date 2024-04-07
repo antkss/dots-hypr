@@ -189,11 +189,11 @@ echo "return {
 echo "
 local Colors = {
   itagbg          = '${colorvalues[45]}',
-  darkestgreen   = '${colorvalues[7]}',
+  bbg   = '${colorvalues[7]}',
   brightgreen    = '${colorvalues[26]}',
   darkestcyan    = '${colorvalues[37]}',
   darkred        = '${colorvalues[44]}',
-  itext          = '${colorvalues[19]}',
+  ifg          = '${colorvalues[19]}',
   brightred      = '${colorvalues[53]}',
   brightorange   = '${colorvalues[34]}',
   gray1          = '#262626',
@@ -204,21 +204,21 @@ local Colors = {
 }
 local M = {
   normal = {
-    a = { fg = Colors.darkestgreen, bg = Colors.brightgreen, gui = 'bold' },
-    c = { fg = Colors.brightgreen, bg = Colors.darkestgreen },
+    a = { fg = Colors.bbg, bg = Colors.brightgreen, gui = 'bold' },
+    c = { fg = Colors.brightgreen, bg = Colors.bbg },
   },
   insert = {
     a = { fg = Colors.darkestcyan, bg = Colors.itagbg, gui = 'bold' },
-    c = { fg = Colors.itext, bg = Colors.darkestgreen },
+    c = { fg = Colors.ifg, bg = Colors.bbg },
   },
   visual = { a = { fg = Colors.darkred, bg = Colors.brightorange, gui = 'bold' } },
-  replace = { a = { fg = Colors.darkestgreen, bg = Colors.brightred, gui = 'bold' } },
+  replace = { a = { fg = Colors.bbg, bg = Colors.brightred, gui = 'bold' } },
   inactive = {
     a = { fg = Colors.gray1, bg = Colors.gray5, gui = 'bold' },
     b = { fg = Colors.gray1, bg = Colors.gray5 },
     c = { bg = Colors.gray1, fg = Colors.brightgreen },
   },
-	command = { a = { fg = Colors.cmdfg, bg = Colors.cmdbg, gui = 'bold' } },
+	command = { a = { fg = Colors.bbg, bg = Colors.cmdbg, gui = 'bold' } },
 
 }
 
@@ -229,7 +229,7 @@ return M
 " > $HOME/.config/nvim/lua/config/powerline.lua
           else 
 		  #if it doesn't exist then 
-		  notify-send "onedark and lualine please install them for neovim material themes support\n link onedark: https://github.com/navarasu/onedark.nvim"
+		  notify-send "onedark please install them for neovim material themes support\n link onedark: https://github.com/antkss/onedark.nvim"
     fi
 
 ##############apply for foot #################################
