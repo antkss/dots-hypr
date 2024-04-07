@@ -25,7 +25,6 @@ function forMonitors(widget) {
     const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
     return range(n, 0).map(widget).flat(1);
 }
-
 // SCSS compilation
 Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`); // reset music styles
 Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`); // reset music styles
@@ -43,7 +42,7 @@ const Windows = () => [
     // Dock(),
     Overview(),
     forMonitors(Indicator),
-    Cheatsheet(),
+    // Cheatsheet(),
     SideLeft(),
     SideRight(),
     Osk(),
@@ -53,6 +52,8 @@ const Windows = () => [
     // forMonitors(BarCornerTopright),
     forMonitors((id) => Corner(id, 'top left')),
     forMonitors((id) => Corner(id, 'top right')),
+	forMonitors(BarCornerTopleft),
+	forMonitors(BarCornerTopright),
     // forMonitors((id) => Corner(id, 'bottom left')),
     // forMonitors((id) => Corner(id, 'bottom right')),
 ];
@@ -73,5 +74,3 @@ App.config({
 // BarCornerTopleft().catch(print); // Use this to debug the bar. Single monitor only.
 // BarCornerTopright().catch(print); // Use this to debug the bar. Single monitor only.
 forMonitors(Bar);
-forMonitors(BarCornerTopleft);
-forMonitors(BarCornerTopright);
