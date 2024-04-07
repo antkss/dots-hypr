@@ -1,0 +1,16 @@
+
+ -- local fileExtension = '.lua'
+ -- local function isLuaFile(filename)
+ --   return filename:sub(-#fileExtension) == fileExtension
+ -- end
+ --
+ --
+ -- local function loadAll(paths)
+ --   local scan = require('plenary.scandir')
+ --   for _, file in ipairs(scan.scan_dir(paths, { depth = 0 })) do
+ --     if isLuaFile(file) then
+ --       dofile(file) end
+ --   end
+ -- end
+-- vim.opt.termguicolors = true
+-- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/coding.lua')

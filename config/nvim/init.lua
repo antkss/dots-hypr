@@ -41,21 +41,20 @@ require("lazy").setup("plugins",{
 vim.opt.termguicolors=true
 -- vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
- -- local fileExtension = '.lua'
- -- local function isLuaFile(filename)
- --   return filename:sub(-#fileExtension) == fileExtension
- -- end
- --
- --
- -- local function loadAll(paths)
- --   local scan = require('plenary.scandir')
- --   for _, file in ipairs(scan.scan_dir(paths, { depth = 0 })) do
- --     if isLuaFile(file) then
- --       dofile(file) end
- --   end
- -- end
--- vim.opt.termguicolors = true
--- dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/coding.lua')
+vim.o.updatetime = 250
+vim.o.splitbelow = true 	-- Force Split Below
+vim.o.splitright = true 	-- Force Split Right
+
+vim.api.nvim_exec(
+	[[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]],
+	false
+)
+
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/keymap.lua')

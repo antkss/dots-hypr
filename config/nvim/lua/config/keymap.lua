@@ -15,20 +15,20 @@ vim.api.nvim_set_keymap('n','+',':join <CR>', {noremap = true})
 -- NOTE: Use command ':verbose imap <tab>' to make sure Tab is not mapped by
 -- other plugins before putting this into your config
 
--- vim.api.nvim_set_keymap('v', 'y', '"+y', {noremap = true})
--- vim.api.nvim_set_keymap('v', 'Y', '"+yg_', {noremap = true})
--- vim.api.nvim_set_keymap('n', 'y', '"+y', {noremap = true})
--- vim.api.nvim_set_keymap('n', 'yy', '"+yy', {noremap = true})
--- -- paste things
--- vim.api.nvim_set_keymap('n', 'p', '"+p', {noremap = true})
--- vim.api.nvim_set_keymap('v', 'p', '"+p', {noremap = true})
--- -- cut things
+vim.api.nvim_set_keymap('v', 'y', '"+y', {noremap = true})
+vim.api.nvim_set_keymap('v', 'Y', '"+yg_', {noremap = true})
+vim.api.nvim_set_keymap('n', 'y', '"+y', {noremap = true})
+vim.api.nvim_set_keymap('n', 'yy', '"+yy', {noremap = true})
+-- paste things
+vim.api.nvim_set_keymap('n', 'p', '"+p', {noremap = true})
+vim.api.nvim_set_keymap('v', 'p', '"+p', {noremap = true})
+-- cut things
 -- vim.api.nvim_set_keymap('v', 'x', '"+x', {noremap = true})
 -- vim.api.nvim_set_keymap('n', 'x', '"+x', {noremap = true})
--- vim.api.nvim_set_keymap('v', 'X', '"+X', {noremap = true})
--- vim.api.nvim_set_keymap('n', 'X', '"+X', {noremap = true})
--- --D things 
+vim.api.nvim_set_keymap('v', 'X', '"+X', {noremap = true})
+vim.api.nvim_set_keymap('n', 'X', '"+X', {noremap = true})
+--D things 
 -- vim.api.nvim_set_keymap('v', 'd', '"+d', {noremap = true})
 -- vim.api.nvim_set_keymap('n', 'd', '"+d', {noremap = true})
--- vim.api.nvim_set_keymap('v', 'D', '"+D', {noremap = true})
--- vim.api.nvim_set_keymap('n', 'D', '"+D', {noremap = true})
+vim.api.nvim_set_keymap('v', 'D', '"+D', {noremap = true})
+vim.api.nvim_set_keymap('n', 'D', '"+D', {noremap = true})

@@ -6,7 +6,7 @@ return {
 		event = "VeryLazy",
 		config = function ()
 			require("onedark").setup()
-			vim.opt.clipboard = "unnamedplus"
+			-- vim.opt.clipboard = "unnamedplus"
 		end
 	},
 
