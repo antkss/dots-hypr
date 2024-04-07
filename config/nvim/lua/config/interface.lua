@@ -1,4 +1,4 @@
-vim.g.qf_disable_statusline = 1
+-- vim.g.qf_disable_statusline = 1
 vim.o.showtabline = 2
 vim.diagnostic.config({
   virtual_text = {
@@ -107,7 +107,7 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 	if mode:find 'NORMAL' then
 	    hl = 'Normal'
 	elseif mode:find 'PENDING' then
-	    hl = 'Pending'
+	    hl = 'Replace'
 	elseif mode:find 'VISUAL' then
 	    hl = 'Visual'
 	elseif mode:find 'INSERT' or mode:find 'SELECT' then
@@ -130,7 +130,7 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 	if warns ~=0 then
 		string = string .. string.format(' %s %d',warn,warns)
 	end
-	string = string .. string.format(" %s","%3l:%-2c ")
+	string = string .. string.format(" %s","%3l:%-2c")
 	vim.opt.statusline = string
 
     end
