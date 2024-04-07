@@ -1,0 +1,32 @@
+
+#window-box {
+  /* background-color: alpha(@theme_bg_color, 0.96); */
+  border: 2px solid @color0;
+  /* box-shadow: 10px 10px 0px; */
+  padding: 0 3em;
+  border-radius: 20px;
+}
+#warning-label,
+#error-label,
+#unlock-button {
+  margin-top: 12px;
+  padding: 10px 2rem;
+  margin-bottom: 20px;
+}
+
+#unlock-button {
+  border-radius: 20px;
+  background-color: alpha(@color4, 0.0);
+  border-radius: 25px;
+  border: 2px solid alpha(@color4, 0.5);
+}
+#password {
+border-radius: 25px;
+}
+
+#input-field {
+  border-radius: 20px;
+  padding: 3px 10px;
+  border: 2px solid @color0;
+}
+
