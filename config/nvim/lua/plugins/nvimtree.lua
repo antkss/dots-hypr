@@ -31,7 +31,7 @@ return {
 	{
 		'nvim-tree/nvim-web-devicons',
 		keys ={
-		      	{"<F5>", ":NvimTreeToggle <CR>"},
+		      	{"<F5>", ":NvimTreeToggle <CR>",silent=true},
 		}
 
 	},

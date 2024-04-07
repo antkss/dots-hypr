@@ -11,10 +11,10 @@ return {
 
 	},
 	keys = {
-		{'ff', ":Telescope find_files <CR>"},
-		{'fg', ":Telescope live_grep <CR>"},
-		{'fb', ":Telescope buffers <CR>"},
-		{'fh', ":Telescope help_tags <CR>"},
+		{'ff', ":Telescope find_files <CR>",silent = true},
+		{'fg', ":Telescope live_grep <CR>",silent = true},
+		{'fb', ":Telescope buffers <CR>",silent = true},
+		{'fh', ":Telescope help_tags <CR>",silent = true},
 
 
 	}

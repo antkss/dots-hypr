@@ -1,18 +1,18 @@
 
 local Colors = {
-  itagbg          = '#FFB1C2',
-  bbg   = '#1D1013',
-  brightgreen    = '#FFB1C2',
-  darkestcyan    = '#52220E',
-  darkred        = '#FFD9E0',
-  ifg          = '#DDBFC4',
-  brightred      = '#FFB599',
-  brightorange   = '#693D3A',
+  itagbg          = '#C0C1FF',
+  bbg   = '#12131C',
+  brightgreen    = '#C0C1FF',
+  darkestcyan    = '#3F2551',
+  darkred        = '#E1E0FF',
+  ifg          = '#C6C5D6',
+  brightred      = '#DCBAF0',
+  brightorange   = '#4D4465',
   gray1          = '#262626',
-  cmdbg          = '#FC0076',
-  gray5          = '#8F0040',
+  cmdbg          = '#1A05FF',
+  gray5          = '#1600EC',
   gray10         = '#f0f0f0',
-  cmdfg          = '#F5B7B2',
+  cmdfg          = '#CDC0E9',
 }
 local M = {
   normal = {
