@@ -4,7 +4,7 @@ return {
 	'voldikss/vim-translator',
 	autocmd = false,
 	keys = {
-		{ 't', ':Translate --engine=bing <CR>' },
+		{ 't', ':Translate --engine=bing <CR>' ,silent = true},
 		-- { 't', ':\'<,\'>Translate --engine=bing<CR>', mode = visual}
 	},
 	config = function()

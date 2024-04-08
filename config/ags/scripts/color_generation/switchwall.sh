@@ -11,7 +11,7 @@ else
 		mv $imgpath $HOME/.cache/target
 		cd $HOME/.cache
 		ffmpeg -y -i target -filter_complex "[v:0]crop=iw:ih" -frames:v 1 -f image2 output%03d_swww.png
-		mv $HOME/.cache/target $imgpath
+		mv $HOME/.cache/target $imgpath  
 		if file --mime-type "$imgpath" | grep -q "image/gif"; then
 		notify-send "applying gif ..."
 		gifpath=$imgpath
@@ -42,5 +42,6 @@ else
 	# --transition-pos "$cursorposx, $cursorposy_inverted"
 fi
 
+&>/dev/null
 # Generate colors for ags n stuff
 "$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply

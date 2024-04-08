@@ -157,88 +157,48 @@ apply_stuff(){
 # apply colors for neovim background 
 # if the folder exist then do the operations
 mv $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua.bak
-echo "return {
-	dark = {
-		black = \"#1a212e\",
-		bg0 = \"${colorvalues[7]}\",
-		bg1 = \"#31353f\",
-		bg2 = \"#393f4a\",
-		bg3 = \"#3b3f4c\",
-		bg_d = \"#21252b\",
-		bg_blue = \"#73b8f1\",
-		bg_yellow = \"#ebd09c\",
-		fg = \"${colorvalues[19]}\",
-		purple = \"#c678dd\",
-		green = \"#98c379\",
-		orange = \"#d19a66\",
-		blue = \"#61afef\",
-		yellow =\"#e5c07b\",
-		cyan = \"#56b6c2\",
-		red = \"#e86671\",
-		grey = \"#5c6370\",
-		light_grey = \"#848b98\",
-		dark_cyan = \"#2b6f77\",
-		dark_red = \"#993939\",
-		dark_yellow = \"#93691d\",
-		dark_purple = \"#8a3fa0\",
-		diff_add = \"#31392b\",
-		diff_delete = \"#382b2c\",
-		diff_change = \"#1c3448\",
-		diff_text = \"#2c5372\",
-	}
-} " > $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua
-echo "
-local Colors = {
-  itagbg          = '${colorvalues[45]}',
-  bbg   = '${colorvalues[7]}',
-  brightgreen    = '${colorvalues[26]}',
-  darkestcyan    = '${colorvalues[37]}',
-  darkred        = '${colorvalues[44]}',
-  ifg          = '${colorvalues[19]}',
-  brightred      = '${colorvalues[53]}',
-  brightorange   = '${colorvalues[34]}',
-  gray1          = '#262626',
-  cmdbg          = '${colorvalues[2]}',
-  gray5          = '${colorvalues[29]}',
-  gray10         = '#f0f0f0',
-  cmdfg          = '${colorvalues[49]}',
-}
-local M = {
-  normal = {
-    a = { fg = Colors.bbg, bg = Colors.brightgreen, gui = 'bold' },
-    c = { fg = Colors.brightgreen, bg = Colors.bbg },
-  },
-  insert = {
-    a = { fg = Colors.darkestcyan, bg = Colors.itagbg, gui = 'bold' },
-    c = { fg = Colors.ifg, bg = Colors.bbg },
-  },
-  visual = { a = { fg = Colors.darkred, bg = Colors.brightorange, gui = 'bold' } },
-  replace = { a = { fg = Colors.bbg, bg = Colors.brightred, gui = 'bold' } },
-  inactive = {
-    a = { fg = Colors.gray1, bg = Colors.gray5, gui = 'bold' },
-    b = { fg = Colors.gray1, bg = Colors.gray5 },
-    c = { bg = Colors.gray1, fg = Colors.brightgreen },
-  },
-	command = { a = { fg = Colors.bbg, bg = Colors.cmdbg, gui = 'bold' } },
+# Check if scripts/templates/onedark/palette.lua exists
+if [ ! -f "scripts/templates/onedark/palette.lua" ]; then
+    echo "Template file not found for onedark. Skipping that."
+    return
+fi
+# Copy template
+mkdir -p "$HOME"/.cache/ags/user/generated/onedark
+cp "scripts/templates/onedark/palette.lua" "$HOME"/.cache/ags/user/generated/onedark/palette.lua
+# Apply colors
+# sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
+for i in "${!colorlist[@]}"; do
+    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/onedark/palette.lua
+done
 
-}
+cp "$HOME"/.cache/ags/user/generated/onedark/palette.lua $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua
+if [ ! -f "scripts/templates/onedark/palette.lua" ]; then
+    echo "Template file not found for onedark. Skipping that."
+    return
+fi
+# Copy template
+mkdir -p "$HOME"/.cache/ags/user/generated/vimline
 
-M.terminal = M.insert
+    cp "scripts/templates/vimline/powerline.lua" "$HOME"/.cache/ags/user/generated/vimline/powerline.lua
+    # Apply colors
+    # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
+    for i in "${!colorlist[@]}"; do
+        sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/vimline/powerline.lua
+    done
 
-return M
-
-" > $HOME/.config/nvim/lua/config/powerline.lua
+    cp "$HOME"/.cache/ags/user/generated/vimline/powerline.lua $HOME/.config/nvim/lua/config/powerline.lua
           else 
 		  #if it doesn't exist then 
 		  notify-send "onedark please install them for neovim material themes support\n link onedark: https://github.com/antkss/onedark.nvim"
     fi
+########################### the end of neovim #################################################
 
 ##############apply for foot #################################
-if [ -d "$HOME/.config/foot" ]; then
-	if [[ -z $(cat $HOME/.config/foot/foot.ini | grep /.config/foot/colors.ini) ]]; then
-		echo "[main]
-include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
-	fi
+# if [ -d "$HOME/.config/foot" ]; then
+# 	if [[ -z $(cat $HOME/.config/foot/foot.ini | grep /.config/foot/colors.ini) ]]; then
+# 		echo "[main]
+# include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
+# 	fi
 echo "
 [colors]
 background=${colorvalues[7]:1}
@@ -252,7 +212,7 @@ regular5=f2affd  # magenta
 regular6=13c299  # cyan
 regular7=e6e6e6  # white
 " > "$HOME"/.config/foot/colors.ini
-fi
+# fi
 echo "
 [colors.normal]
 black = \"0x10100E\"
@@ -273,11 +233,11 @@ foreground = \"0xcbe3e7\"
 # done
 
 }
-apply_ags
+apply_ags 
 sleep 0.1
 apply_stuff 
 sleep 0.1
-apply_hyprland 
+apply_hyprland   
 sleep 0.1
 apply_hyprlock 
 sleep 0.1 

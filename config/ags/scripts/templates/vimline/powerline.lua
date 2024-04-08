@@ -1,13 +1,13 @@
 local Colors = {
-  ibg		= '#CEBDFF',
-  bbg		= '#14121C',
-  nbg		= '#CEBDFF',
-  vfg		= '#E8DDFF',
-  ifg		= '#CBC3D5',
-  rbg		= '#E7B7E7',
-  vbg		= '#544262',
-  cmdbg         = '#CEBDFF',
-  cmdfg         = '#5200CE',
+  ibg		= '#{{ $primaryFixedDim }}',
+  bbg		= '#{{ $background }}',
+  nbg		= '#{{ $surfaceTint }}',
+  vfg		= '#{{ $primaryFixed }}',
+  ifg		= '#{{ $onSurfaceVariant }}',
+  rbg		= '#{{ $tertiaryFixedDim }}',
+  vbg		= '#{{ $secondaryContainer }}',
+  cmdbg         = '#{{ $primary }}',
+  cmdfg         = '#{{ $primaryContainer }}',
 }
 local M = {
   normal = {
