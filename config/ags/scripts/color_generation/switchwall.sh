@@ -5,24 +5,31 @@ if [ "$1" == "--noswitch" ]; then
     # imgpath=$(ags run-js 'wallpaper.get(0)')
 else
     # Select and set image (hyprland)
-    cd "$HOME/.images"
-    imgpath=$(yad --width 1000 --height 600 --file --title='Choose wallpaper' --add-preview --large-preview)
-    screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
-    cursorposx=$(hyprctl cursorpos -j | gojq '.x' 2>/dev/null) || cursorposx=960
-    cursorposy=$(hyprctl cursorpos -j | gojq '.y' 2>/dev/null) || cursorposy=540
-    cursorposy_inverted=$(( screensizey - cursorposy ))
+	cd "$HOME/.images"
+	imgpath=$(yad --width 1000 --height 600 --file --title='Choose wallpaper' --add-preview --large-preview &)
+	if file --mime-type "$imgpath" | grep -q "image/gif" || file --mime-type "$imgpath" | grep -q "video"; then
+		mv $imgpath $HOME/.cache/target
+		cd $HOME/.cache
+		ffmpeg -y -i target -filter_complex "[v:0]crop=iw:ih" -frames:v 1 -f image2 output_swww.png
+		mv $HOME/.cache/target $imgpath
+		imgpath="$HOME/.cache/output_swww.png"
+		# screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
+		# cursorposx=$(hyprctl cursorpos -j | gojq '.x' 2>/dev/null) || cursorposx=960
+		# cursorposy=$(hyprctl cursorpos -j | gojq '.y' 2>/dev/null) || cursorposy=540
+		# cursorposy_inverted=$(( screensizey - cursorposy ))
+	fi
 
-    if [ "$imgpath" == '' ]; then
-        echo 'Aborted'
-        exit 0
-    fi
-
-
-    # ags run-js "wallpaper.set('')"
-    # sleep 0.1 && ags run-js "wallpaper.set('${imgpath}')" &
-    swww img "$imgpath" --transition-step 100 --transition-fps 60 \
-    --transition-type grow --transition-angle 30 --transition-duration 1 \
-    --transition-pos "$cursorposx, $cursorposy_inverted"
+	if [ "$imgpath" == '' ]; then
+		echo 'Aborted'
+	exit 0
+	fi
+	swww img "$imgpath" --transition-step 50 
+	screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
+	cursorposx=$(hyprctl cursorpos -j | gojq '.x' 2>/dev/null) || cursorposx=960
+	cursorposy=$(hyprctl cursorpos -j | gojq '.y' 2>/dev/null) || cursorposy=540
+	cursorposy_inverted=$(( screensizey - cursorposy ))
+	# --transition-type grow --transition-angle 30 --transition-duration 1 \
+	# --transition-pos "$cursorposx, $cursorposy_inverted"
 fi
 
 # Generate colors for ags n stuff

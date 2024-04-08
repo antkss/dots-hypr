@@ -275,13 +275,8 @@ foreground = \"0xcbe3e7\"
 
 }
 apply_ags
-sleep 0.1
 apply_stuff 
-sleep 0.1
 apply_hyprland 
-sleep 0.1
 apply_hyprlock 
-sleep 0.1 
 apply_gtk 
-sleep 0.1 
 apply_fuzzel 
