@@ -18,17 +18,17 @@ colorvalues=()
 # wallpath_png=$(echo "$wallpath_png" | sed 's/\//\\\//g')
 # wallpath_png=$(sed 's/\//\\\\\//g' <<< "$wallpath_png")
 
-transparentize() {
-  local hex="$1"
-  local alpha="$2"
-  local red green blue
-
-  red=$((16#${hex:1:2}))
-  green=$((16#${hex:3:2}))
-  blue=$((16#${hex:5:2}))
-
-  printf 'rgba(%d, %d, %d, %.2f)\n' "$red" "$green" "$blue" "$alpha"
-}
+# transparentize() {
+#   local hex="$1"
+#   local alpha="$2"
+#   local red green blue
+#
+#   red=$((16#${hex:1:2}))
+#   green=$((16#${hex:3:2}))
+#   blue=$((16#${hex:5:2}))
+#
+#   printf 'rgba(%d, %d, %d, %.2f)\n' "$red" "$green" "$blue" "$alpha"
+# }
 
 get_light_dark() {
     lightdark=""
@@ -242,16 +242,15 @@ include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
 echo "
 [colors]
 background=${colorvalues[7]:1}
-foreground=ffffff
-flash=7f7f00
-regular0=0x696969   
-regular1=0xFF2400 
-regular2=0x03C03C
-regular3=0xFDFF00
-regular4=0x${colorvalues[27]:1} 
-regular5=0xFF1493 
-regular6=0x00CCCC  
-regular7=0xffffff  
+foreground=${colorvalues[53]:1}
+regular0=242424  # black
+regular1=f62b5a  # red
+regular2=47b413  # green
+regular3=e3c401  # yellow
+regular4=${colorvalues[27]:1}  # blue
+regular5=f2affd  # magenta
+regular6=13c299  # cyan
+regular7=e6e6e6  # white
 " > "$HOME"/.config/foot/colors.ini
 fi
 echo "

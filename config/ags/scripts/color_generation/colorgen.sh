@@ -12,11 +12,11 @@ lightdark="dark"
 transparency="opaque"
 materialscheme="vibrant"
 if [ ! -f $colormodefile ]; then
-    echo "dark" > $colormodefile
+    echo $lightdark > $colormodefile
     echo "opaque" >> $colormodefile
     echo "vibrant" >> $colormodefile
 elif [[ $(wc -l < $colormodefile) -ne 3 || $(wc -w < $colormodefile) -ne 3 ]]; then
-    echo "dark" > $colormodefile
+    echo $lightdark > $colormodefile
     echo "opaque" >> $colormodefile
     echo "vibrant" >> $colormodefile
 else

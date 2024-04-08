@@ -1,23 +1,21 @@
 # -*- conf -*-
 [main]
 include=~/.config/foot/colors.ini
-#shell=$SHELL (if set, otherwise user's default shell from /etc/passwd)
-term=xterm-256color
-
+# shell=$SHELL (if set, otherwise user's default shell from /etc/passwd)
+# term=foot (or xterm-256color if built with -Dterminfo=disabled)
 # login-shell=no
 
 # app-id=foot # globally set wayland app-id. Default values are "foot" and "footclient" for desktop and server mode
 # title=foot
 # locked-title=no
-# font=Terminus (TTF):size=9, weight=normal
-font=Terminess Nerd Font:size=9, weight=normal
-#font=Hack:size=8
-#font-bold=Hack:size=8
-font-italic=Terminess Nerd Font:size=9, weight=normal
-# font-bold-italic=Hack
-font-size-adjustment=0.5
-# line-height= 10
-# letter-spacing=0.38
+
+font=Terminess Nerd Font:size=9
+# font-bold=<bold variant of regular font>
+font-italic=Terminess Nerd Font:size=9
+# font-bold-italic=<bold+italic variant of regular font>
+# font-size-adjustment=0.5
+# line-height=<font metrics>
+# letter-spacing=0
 # horizontal-letter-offset=0
 # vertical-letter-offset=0
 # underline-offset=<font metrics>
@@ -27,13 +25,13 @@ font-size-adjustment=0.5
 
 # initial-window-size-pixels=700x500  # Or,
 # initial-window-size-chars=<COLSxROWS>
-#initial-window-mode=windowed
+# initial-window-mode=windowed
 # pad=0x0                             # optionally append 'center'
-# resize-delay-ms=100
+resize-delay-ms=100
 
 # notify=notify-send -a ${app-id} -i ${app-id} ${title} ${body}
 
-#bold-text-in-regular=yes
+# bold-text-in-bright=no
 # word-delimiters=,│`|:"'()[]{}<>
 # selection-target=primary
 # workers=<number of logical CPUs>
@@ -51,61 +49,59 @@ font-size-adjustment=0.5
 # command-focused=no
 
 [scrollback]
-lines=10000
+# lines=1000
 # multiplier=3.0
 # indicator-position=relative
 # indicator-format=""
 
 [url]
-#launch=xdg-open ${url}
-#label-letters=sadfjklewcmpgh
-#osc8-underline=url-mode
-#protocols=http, https, ftp, ftps, file, gemini, gopher
-#uri-characters=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]
+# launch=xdg-open ${url}
+# label-letters=sadfjklewcmpgh
+# osc8-underline=url-mode
+# protocols=http, https, ftp, ftps, file, gemini, gopher
+# uri-characters=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]
 
 [cursor]
-#style=line
+# style=block
 # color=<inverse foreground/background>
-blink=yes
-beam-thickness=1.5
-
+# blink=no
+# beam-thickness=1.5
 # underline-thickness=<font underline thickness>
 
 [mouse]
-hide-when-typing=yes
-alternate-scroll-mode=yes
-
+# hide-when-typing=no
+# alternate-scroll-mode=yes
 
 [touch]
 # long-press-delay=400
 
 [colors]
-alpha=0.8
+# alpha=1.0
+# background=242424
+# foreground=ffffff
+# flash=7f7f00
+# flash-alpha=0.5
 
-#flash-alpha=0.5
+## Normal/regular colors (color palette 0-7)
+# regular0=242424  # black
+# regular1=f62b5a  # red
+# regular2=47b413  # green
+# regular3=e3c401  # yellow
+# regular4=24acd4  # blue
+# regular5=f2affd  # magenta
+# regular6=13c299  # cyan
+# regular7=e6e6e6  # white
 
-# ## Normal/regular colors (color palette 0-7)
-#regular0=0x10100E # black
-#regular1=0xC40233  # red
-#regular2=0x009F6B  # green
-#regular3=0xFFD700  # yellow
-#regular4=0xffffff  # blue
-#regular5=0x9A4EAE  # magenta
-#regular6=0x20B2AA  # cyan
-#regular7=0xC6C6C4  # white
-#
-# Bright colors (color palette 8-15)
-#
-#
-#
-# bright0=0x696969   # bright black
-# bright1=0xFF2400   # bright red
-# bright2=0x03C03C  # bright green
-# bright3=0xFDFF00  # bright yellow
-# bright4=0x007FFF   # bright blue
-# bright5=0xFF1493   # bright magenta
-# bright6=0x00CCCC  # bright cyan
-# bright7=0xFFFAFA   # bright white
+## Bright colors (color palette 8-15)
+# bright0=616161   # bright black
+# bright1=ff4d51   # bright red
+# bright2=35d450   # bright green
+# bright3=e9e836   # bright yellow
+# bright4=5dc5f8   # bright blue
+# bright5=feabf2   # bright magenta
+# bright6=24dfc4   # bright cyan
+# bright7=ffffff   # bright white
+
 ## dimmed colors (see foot.ini(5) man page)
 # dim0=<not set>
 # ...
@@ -120,7 +116,7 @@ alpha=0.8
 # selection-foreground=<inverse foreground/background>
 # selection-background=<inverse foreground/background>
 # jump-labels=<regular0> <regular3>          # black-on-yellow
-# scrollback-indicator=<regular0> <regular4>  # black-on-bright-blue
+# scrollback-indicator=<regular0> <bright4>  # black-on-bright-blue
 # search-box-no-match=<regular0> <regular1>  # black-on-red
 # search-box-match=<regular0> <regular3>     # black-on-yellow
 # urls=<regular3>
@@ -141,21 +137,21 @@ alpha=0.8
 # button-close-color=<regular1>
 
 [key-bindings]
- scrollback-up-page=Page_Up
+# scrollback-up-page=Shift+Page_Up
 # scrollback-up-half-page=none
 # scrollback-up-line=none
- scrollback-down-page=Page_Down
+# scrollback-down-page=Shift+Page_Down
 # scrollback-down-half-page=none
 # scrollback-down-line=none
 # scrollback-home=none
 # scrollback-end=none
-clipboard-copy=Control+Shift+c XF86Copy Menu
-clipboard-paste=Control+Shift+v XF86Paste 
+# clipboard-copy=Control+Shift+c XF86Copy
+# clipboard-paste=Control+Shift+v XF86Paste
 # primary-paste=Shift+Insert
-search-start=Control+Shift+f
-font-increase=Control+equal Control+KP_Add
-font-decrease=Control+minus Control+KP_Subtract
-font-reset=Control+0  
+# search-start=Control+Shift+r
+# font-increase=Control+plus Control+equal Control+KP_Add
+# font-decrease=Control+minus Control+KP_Subtract
+# font-reset=Control+0 Control+KP_0
 # spawn-terminal=Control+Shift+n
 # minimize=none
 # maximize=none
@@ -163,19 +159,20 @@ font-reset=Control+0
 # pipe-visible=[sh -c "xurls | fuzzel | xargs -r firefox"] none
 # pipe-scrollback=[sh -c "xurls | fuzzel | xargs -r firefox"] none
 # pipe-selected=[xargs -r firefox] none
+# pipe-command-output=[wl-copy] none # Copy last command's output to the clipboard
 # show-urls-launch=Control+Shift+o
 # show-urls-copy=none
 # show-urls-persistent=none
 # prompt-prev=Control+Shift+z
 # prompt-next=Control+Shift+x
 # unicode-input=Control+Shift+u
-# noop=Control+Shift+Return Control+Tab Control+KP_0 Control+Return  Shift+Return Control+Shift+comma Control+Shift+period Control+Shift+slash Control+quotedbl Control+exclam Control+at Control+numbersign Control+dollar Control+percent Control+asciicircum Control+ampersand Control+asterisk Control+parenleft Control+parenright Control+plus Control+Shift+Right  Control+Shift+Left Control+Shift+Up Control+Shift+Down Control+Right  Control+Left Control+Up Control+Down Shift+Left Shift+Up Shift+Down Shift+Right Shift+Home Shift+Next Shift+Prior Shift+End  Control+Next Control+Prior Control+End Control+Home Control+Shift+Next Control+Shift+Prior Control+Shift+End Control+Shift+Home Control+semicolon Control+Shift+semicolon Control+apostrophe Control+period Control+comma Mod4+Left Mod4+Right Mod4+Down Mod4+Shift+Return
+# noop=none
 
 [search-bindings]
-cancel=Control+g Escape
-commit= Control+c
-find-prev=Control+r
-find-next=Return
+# cancel=Control+g Control+c Escape
+# commit=Return
+# find-prev=Control+r
+# find-next=Control+s
 # cursor-left=Left Control+b
 # cursor-left-word=Control+Left Mod1+b
 # cursor-right=Right Control+f
@@ -214,7 +211,6 @@ find-next=Return
 # \x03=Mod4+c  # Map Super+c -> Ctrl+c
 
 [mouse-bindings]
-
 # scrollback-up-mouse=BTN_BACK
 # scrollback-down-mouse=BTN_FORWARD
 # selection-override-modifiers=Shift
@@ -229,6 +225,3 @@ find-next=Return
 # select-row=BTN_LEFT-4
 
 # vim: ft=dosini
-
-
-
