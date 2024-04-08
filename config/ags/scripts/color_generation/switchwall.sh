@@ -23,11 +23,12 @@ else
 		echo 'Aborted'
 	exit 0
 	fi
-	swww img "$imgpath" --transition-step 50 
+	swww img "$imgpath" 
 	screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
 	cursorposx=$(hyprctl cursorpos -j | gojq '.x' 2>/dev/null) || cursorposx=960
 	cursorposy=$(hyprctl cursorpos -j | gojq '.y' 2>/dev/null) || cursorposy=540
 	cursorposy_inverted=$(( screensizey - cursorposy ))
+	# --transition-step 100 
 	# --transition-type grow --transition-angle 30 --transition-duration 1 \
 	# --transition-pos "$cursorposx, $cursorposy_inverted"
 fi
