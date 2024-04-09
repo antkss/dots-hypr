@@ -204,7 +204,7 @@ echo "
 background=${colorvalues[7]:1}
 foreground=${colorvalues[53]:1}
 regular0=242424  # black
-regular1=f41212  # red
+regular1=ff0000  # red
 regular2=55ff00  # green
 regular3=f2fa00  # yellow
 regular4=${colorvalues[27]:1}  # blue
