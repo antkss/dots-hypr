@@ -144,16 +144,16 @@ fi
 apply_stuff(){
 
 
-    # Check if terminal escape sequence template exists
-    if [ ! -f "scripts/templates/terminal/sequences.txt" ]; then
-        echo "Template file not found for Terminal. Skipping that."
-        return
-    fi
-    # Copy template
-    mkdir -p "$HOME"/.cache/ags/user/generated/terminal
-    cp "scripts/templates/terminal/sequences.txt" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
-    # check if onedark plugin exist 
-    if [ -d "$HOME/.local/share/nvim/lazy/onedark.nvim" ]; then
+# Check if terminal escape sequence template exists
+if [ ! -f "scripts/templates/terminal/sequences.txt" ]; then
+echo "Template file not found for Terminal. Skipping that."
+return
+fi
+# Copy template
+mkdir -p "$HOME"/.cache/ags/user/generated/terminal
+cp "scripts/templates/terminal/sequences.txt" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
+# check if onedark plugin exist 
+if [ -d "$HOME/.local/share/nvim/lazy/onedark.nvim" ]; then
 # apply colors for neovim background 
 # if the folder exist then do the operations
 mv $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua $HOME/.local/share/nvim/lazy/onedark.nvim/lua/onedark/palette.lua.bak
@@ -178,7 +178,6 @@ if [ ! -f "scripts/templates/onedark/palette.lua" ]; then
 fi
 # Copy template
 mkdir -p "$HOME"/.cache/ags/user/generated/vimline
-
     cp "scripts/templates/vimline/powerline.lua" "$HOME"/.cache/ags/user/generated/vimline/powerline.lua
     # Apply colors
     # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
@@ -193,7 +192,7 @@ mkdir -p "$HOME"/.cache/ags/user/generated/vimline
     fi
 ########################### the end of neovim #################################################
 
-##############apply for foot #################################
+##############apply for foot and alacritty #################################
 # if [ -d "$HOME/.config/foot" ]; then
 # 	if [[ -z $(cat $HOME/.config/foot/foot.ini | grep /.config/foot/colors.ini) ]]; then
 # 		echo "[main]
@@ -204,9 +203,9 @@ echo "
 background=${colorvalues[7]:1}
 foreground=${colorvalues[53]:1}
 regular0=242424  # black
-regular1=f62b5a  # red
-regular2=47b413  # green
-regular3=e3c401  # yellow
+regular1=f41212  # red
+regular2=55ff00  # green
+regular3=f2fa00  # yellow
 regular4=${colorvalues[27]:1}  # blue
 regular5=f2affd  # magenta
 regular6=13c299  # cyan
