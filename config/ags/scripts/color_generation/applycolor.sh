@@ -18,17 +18,18 @@ colorvalues=()
 # wallpath_png=$(echo "$wallpath_png" | sed 's/\//\\\//g')
 # wallpath_png=$(sed 's/\//\\\\\//g' <<< "$wallpath_png")
 
-# transparentize() {
-#   local hex="$1"
-#   local alpha="$2"
-#   local red green blue
-#
-#   red=$((16#${hex:1:2}))
-#   green=$((16#${hex:3:2}))
-#   blue=$((16#${hex:5:2}))
-#
-#   printf 'rgba(%d, %d, %d, %.2f)\n' "$red" "$green" "$blue" "$alpha"
-# }
+transparentize() {
+  local hex=${colorvalues[27]}
+  local alpha="$2"
+  local red green blue
+
+  red=$((16#${hex:1:2}))
+  green=$((16#${hex:3:2}))
+  blue=$((16#${hex:5:2}))
+
+  printf '${colorvalues[27]}'
+  printf 'rgba(%d, %d, %d, %.2f)\n' "$red" "$green" "$blue" "$alpha"
+}
 
 get_light_dark() {
     lightdark=""
@@ -243,3 +244,4 @@ sleep 0.1
 apply_gtk 
 sleep 0.1 
 apply_fuzzel 
+transparentize

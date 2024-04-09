@@ -4,6 +4,7 @@ import Gdk from 'gi://Gdk';
 import GLib from 'gi://GLib';
 import App from 'resource:///com/github/Aylur/ags/app.js'
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
+// import  Recent from './modules/recent/a.js';
 // Stuff
 import userOptions from './modules/.configuration/user_options.js';
 // Widgets
@@ -47,6 +48,7 @@ const Windows = () => [
     SideRight(),
     Osk(),
     Session(),
+	// Recent(),
     // forMonitors(Bar),
     // forMonitors(BarCornerTopleft),
     // forMonitors(BarCornerTopright),
