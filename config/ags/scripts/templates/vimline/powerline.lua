@@ -3,7 +3,7 @@ local Colors = {
   bbg		= '#{{ $background }}',
   nbg		= '#{{ $surfaceTint }}',
   vfg		= '#{{ $primaryFixed }}',
-  ifg		= '#{{ $onSurfaceVariant }}',
+  ifg		= '#{{ $inversePrimary }}',
   rbg		= '#{{ $tertiaryFixedDim }}',
   vbg		= '#{{ $secondaryContainer }}',
   cmdbg         = '#{{ $primary }}',
@@ -15,7 +15,7 @@ local M = {
     c = { fg = Colors.nbg, bg = Colors.bbg },
   },
   insert = {
-    a = { fg = Colors.darkestcyan, bg = Colors.ibg, gui = 'bold' },
+    a = { fg = Colors.ifg, bg = Colors.ibg, gui = 'bold' },
     c = { fg = Colors.ifg, bg = Colors.bbg },
   },
   visual = { a = { fg = Colors.vfg, bg = Colors.vbg, gui = 'bold' } },

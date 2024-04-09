@@ -33,6 +33,7 @@ export default () => {
 
             const offset = Math.floor((Hyprland.active.workspace.id - 1) / NUM_OF_WORKSPACES_SHOWN) * NUM_OF_WORKSPACES_SHOWN;
             const startWorkspace = offset + 1;
+		print(startWorkspace);
             const endWorkspace = startWorkspace + NUM_OF_WORKSPACES_SHOWN - 1;
             for (let i = startWorkspace; i <= endWorkspace; i++) {
                 let button = new Gtk.MenuItem({
