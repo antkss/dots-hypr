@@ -6,7 +6,5 @@ export default () => PopupWindow({
     anchor: ['left', 'top', 'bottom'],
     name: 'sideleft',
     layer: 'top',
-    showClassName: 'sideleft-show',
-    hideClassName: 'sideleft-hide',
     child: SidebarLeft(),
 });

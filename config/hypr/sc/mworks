@@ -5,11 +5,13 @@ ids=($(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tr '\n' ' ' ))
 las=$(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tail -1 )
 for i in $(hyprctl workspaces -j | jq -r '.[].id' | sort -g); do 
 	if [ $i -gt $cur ]; then 
-		hyprctl dispatch workspace $i
+		hyprctl dispatch movetoworkspace $i
 		break
 	else if [ $cur -eq $las ];then
-		hyprctl dispatch workspace ${ids[0]}
+		hyprctl dispatch movetoworkspace ${ids[0]}
 		break
+	else
+		echo $i
 	fi
 	fi
 done
