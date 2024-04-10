@@ -11,8 +11,8 @@ const { exec, execAsync } = Utils;
 const SessionButton = (name, icon, command, props = {}, colorid = 0) => {
     const buttonDescription = Widget.Revealer({
         vpack: 'end',
-        transitionDuration: userOptions.animations.durationSmall,
-        transition: 'slide_down',
+        // transitionDuration: userOptions.animations.durationSmall,
+        // transition: 'slide_down',
         revealChild: false,
         child: Widget.Label({
             className: 'txt-smaller session-button-desc',

@@ -30,9 +30,9 @@ menu {
     -gtk-outline-radius: 1.159rem;
 
     animation-name: appear;
-    animation-duration: 40ms;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
+    // animation-duration: 40ms;
+    // animation-timing-function: ease-out;
+    // animation-iteration-count: 1;
 }
 
 menubar>menuitem {
@@ -80,9 +80,9 @@ radio:checked {
 
 tooltip {
     animation-name: appear;
-    animation-duration: 100ms;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
+    // animation-duration: 100ms;
+    // animation-timing-function: ease-out;
+    // animation-iteration-count: 1;
     @include normal-rounding;
     background-color: opacify($color: $inverseSurface, $amount: 1);
     color: $inverseOnSurface;
@@ -107,8 +107,8 @@ popover {
     -gtk-outline-radius: 1.159rem;
 
     animation-name: appear;
-    animation-duration: 40ms;
-    animation-timing-function: ease-out;
+    // animation-duration: 40ms;
+    // animation-timing-function: ease-out;
     animation-iteration-count: 1;
 }
 

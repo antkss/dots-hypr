@@ -11,7 +11,7 @@ export const DirectoryButton = ({ parentPath, name, type, icon }) => {
     const actionText = Widget.Revealer({
         revealChild: false,
         transition: "crossfade",
-        transitionDuration: userOptions.animations.durationLarge,
+        // transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Label({
             className: 'overview-search-results-txt txt txt-small txt-action',
             label: 'Open',
@@ -20,7 +20,7 @@ export const DirectoryButton = ({ parentPath, name, type, icon }) => {
     const actionTextRevealer = Widget.Revealer({
         revealChild: false,
         transition: "slide_left",
-        transitionDuration: userOptions.animations.durationSmall,
+        // transitionDuration: userOptions.animations.durationSmall,
         child: actionText,
     });
     return Widget.Button({
@@ -87,7 +87,7 @@ export const DesktopEntryButton = (app) => {
     const actionText = Widget.Revealer({
         revealChild: false,
         transition: "crossfade",
-        transitionDuration: userOptions.animations.durationLarge,
+        // transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Label({
             className: 'overview-search-results-txt txt txt-small txt-action',
             label: 'Launch',
@@ -96,7 +96,7 @@ export const DesktopEntryButton = (app) => {
     const actionTextRevealer = Widget.Revealer({
         revealChild: false,
         transition: "slide_left",
-        transitionDuration: userOptions.animations.durationSmall,
+        // transitionDuration: userOptions.animations.durationSmall,
         child: actionText,
     });
     return Widget.Button({

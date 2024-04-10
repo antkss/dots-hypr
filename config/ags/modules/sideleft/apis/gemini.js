@@ -57,7 +57,7 @@ const GeminiInfo = () => {
 }
 
 export const GeminiSettings = () => MarginRevealer({
-    transition: 'slide_down',
+    // transition: 'slide_down',
     revealChild: true,
     extraSetup: (self) => self
         .hook(GeminiService, (self) => Utils.timeout(200, () => {
@@ -129,8 +129,8 @@ export const GeminiSettings = () => MarginRevealer({
 export const GoogleAiInstructions = () => Box({
     homogeneous: true,
     children: [Revealer({
-        transition: 'slide_down',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'slide_down',
+        // transitionDuration: userOptions.animations.durationLarge,
         setup: (self) => self
             .hook(GeminiService, (self, hasKey) => {
                 self.revealChild = (GeminiService.key.length == 0);

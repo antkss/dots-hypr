@@ -29,8 +29,8 @@ export const Tray = (props = {}) => {
     });
     const trayRevealer = Widget.Revealer({
         revealChild: true,
-        transition: 'slide_left',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'slide_left',
+        // transitionDuration: userOptions.animations.durationLarge,
         child: trayContent,
     });
     return Box({
