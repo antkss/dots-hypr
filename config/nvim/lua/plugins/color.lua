@@ -1,9 +1,7 @@
 return {
 	{
-		'norcalli/nvim-colorizer.lua',
-		event = "VeryLazy",
-
-
+		'lilydjwg/colorizer',
+		cmd = "Color",
 
 	}
 

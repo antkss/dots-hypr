@@ -16,6 +16,7 @@ vim.api.nvim_set_keymap('n','+',':join <CR>', {noremap = true})
 -- other plugins before putting this into your config
 --
 -- vim.opt.clipboard = "unnamedplus"
+vim.api.nvim_set_keymap('n','<LeftMouse>','<nop>', {noremap = true})
 vim.api.nvim_set_keymap('v', 'y', '"+y', {noremap = true})
 vim.api.nvim_set_keymap('v', 'Y', '"+yg_', {noremap = true})
 vim.api.nvim_set_keymap('n', 'y', '"+y', {noremap = true})

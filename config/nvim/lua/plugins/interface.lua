@@ -6,6 +6,7 @@ return {
 		event = "VeryLazy",
 		config = function ()
 			require("onedark").setup()
+			-- vim.cmd.colorscheme "onedark"
 			-- vim.opt.clipboard = "unnamedplus"
 		end
 	},

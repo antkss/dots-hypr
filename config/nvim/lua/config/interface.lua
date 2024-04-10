@@ -15,24 +15,19 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 local c = require('config.powerline')
-vim.cmd("syntax keyword StatuslineModeSeparatorNormal StatuslineModeSeparatorNormal")
-vim.cmd("syntax keyword StatuslineModeNormal StatuslineModeNormal")
+-- normal group 
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeNormal",c.normal.a.fg,c.normal.a.bg))
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorNormal",c.normal.c.fg,"nil"))
-vim.cmd("syntax keyword StatuslineModeSeparatorInsert StatuslineModeSeparatorInsert")
-vim.cmd("syntax keyword StatuslineModeInsert StatuslineModeInsert")
+-- insert group
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeInsert",c.insert.a.fg,c.insert.a.bg))
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorInsert",c.normal.c.fg,"nil"))
-vim.cmd("syntax keyword StatuslineModeSeparatorVisual StatuslineModeSeparatorVisual")
-vim.cmd("syntax keyword StatuslineModeVisual StatuslineModeVisual")
+-- visual group
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeVisual",c.visual.a.fg,c.visual.a.bg))
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorVisual",c.visual.a.bg,"nil"))
-vim.cmd("syntax keyword StatuslineModeSeparatorReplace StatuslineModeSeparatorReplace")
-vim.cmd("syntax keyword StatuslineModeReplace StatuslineModeReplace")
+-- replace group
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeReplace",c.replace.a.fg,c.replace.a.bg))
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorReplace",c.replace.a.bg,"nil"))
-vim.cmd("syntax keyword StatuslineModeSeparatorCommand StatuslineModeSeparatorCommand")
-vim.cmd("syntax keyword StatuslineModeCommand StatuslineModeCommand")
+-- command group
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeCommand",c.command.a.fg,c.command.a.bg))
 vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorCommand",c.command.a.bg,"nil"))
 local warn = ""

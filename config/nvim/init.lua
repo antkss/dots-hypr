@@ -29,7 +29,7 @@ require("lazy").setup("plugins",{
 			"gzip",
 			-- "matchit",
 			-- "matchparen",
-			-- "netrwPlugin",
+			"netrwPlugin",
 			"tarPlugin",
 			"tohtml",
 			"tutor",
@@ -39,11 +39,7 @@ require("lazy").setup("plugins",{
 	    },
 })
 vim.opt.termguicolors=true
--- vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.o.updatetime = 250
-vim.o.splitbelow = true 	-- Force Split Below
-vim.o.splitright = true 	-- Force Split Right
 
 vim.api.nvim_exec(
 	[[
