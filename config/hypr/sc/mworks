@@ -10,8 +10,6 @@ for i in $(hyprctl workspaces -j | jq -r '.[].id' | sort -g); do
 	else if [ $cur -eq $las ];then
 		hyprctl dispatch movetoworkspace ${ids[0]}
 		break
-	else
-		echo $i
 	fi
 	fi
 done
