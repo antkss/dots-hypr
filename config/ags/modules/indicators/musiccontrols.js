@@ -18,6 +18,7 @@ const lightDark = (colorMode == "light") ? '-l' : '';
 const COVER_COLORSCHEME_SUFFIX = '_colorscheme.css';
 var lastCoverPath = '';
 
+const player = Mpris.getPlayer();
 function isRealPlayer(player) {
     return (
         // Remove unecessary native buses from browsers if there's plasma integration
@@ -404,5 +405,11 @@ export default () => Revealer({
     }),
     setup: (self) => self.hook(showMusicControls, (revealer) => {
         revealer.revealChild = showMusicControls.value;
+	    // if (player !=null ){
+		   //  console.log("hello");
+		   //  revealer.revealChild = isRealPlayer(player); 
+	    // }
+
+	    Utils.timeout(6000, () => { revealer.revealChild = false})
     }),
 })

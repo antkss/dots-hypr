@@ -76,7 +76,7 @@ export const SearchAndWindows = () => {
         hpack: 'center',
         child: Widget.Label({
             className: 'overview-search-prompt txt-small txt',
-            label: 'Type to search'
+            label: 'Type here to search'
         }),
     });
 

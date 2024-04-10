@@ -114,7 +114,8 @@ export default () => {
                 EventBox({
                     child: BarGroup({ child: musicStuff }),
                     onPrimaryClick: () => execAsync('playerctl play-pause').catch(print),
-                    onSecondaryClick: () => showMusicControls.setValue(!showMusicControls.value),
+                    // onSecondaryClick: () => showMusicControls.setValue(!showMusicControls.value),
+			onHover: () => showMusicControls.setValue(!showMusicControls.value),
                     onMiddleClick: () => execAsync(['bash', '-c', 'playerctl next']).catch(print),
                     setup: (self) => self.on('button-press-event', (self, event) => {
                         if (event.get_button()[1] === 8) // Side button

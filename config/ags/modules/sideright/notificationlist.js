@@ -119,8 +119,8 @@ export default (props) => {
         }
     });
     const listContents = Stack({
-        transition: 'crossfade',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'crossfade',
+        // transitionDuration: userOptions.animations.durationLarge,
         children: {
             'empty': notifEmptyContent,
             'list': notifList,
