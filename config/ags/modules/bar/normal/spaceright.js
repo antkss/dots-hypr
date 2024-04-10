@@ -80,6 +80,7 @@ export default () => {
             else Audio.speaker.volume -= 0.03;
             Indicator.popup(1);
         },
+	onPrimaryClick: () => Utils.execAsync(['bash', '-c', 'xfce4-appearance-settings', '&']),
         child: Widget.Box({
             children: [
                 actualContent,
