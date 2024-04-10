@@ -88,9 +88,9 @@ const BarBattery = () => Box({
     className: 'spacing-h-4 bar-batt-txt',
     children: [
         Revealer({
-            transitionDuration: userOptions.animations.durationSmall,
+            // transitionDuration: userOptions.animations.durationSmall,
             revealChild: false,
-            transition: 'slide_right',
+            // transition: 'slide_right',
             child: MaterialIcon('bolt', 'norm', { tooltipText: "Charging" }),
             setup: (self) => self.hook(Battery, revealer => {
                 self.revealChild = Battery.charging;
@@ -132,8 +132,8 @@ const BarGroup = ({ child }) => Widget.Box({
     ]
 });
 const BatteryModule = () => Stack({
-    transition: 'slide_up_down',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transition: 'slide_up_down',
+    // transitionDuration: userOptions.animations.durationLarge,
     children: [
 		// 'laptop': 
 		    Box({

@@ -20,7 +20,7 @@ const ceil = Math.ceil;
 // Font size = workspace id
 const WorkspaceContents = (count = 10) => {
     return DrawingArea({
-        className: 'menu-decel',
+        // className: 'menu-decel',
         attribute: {
             lastImmediateActiveWs: 0,
             immediateActiveWs: 0,

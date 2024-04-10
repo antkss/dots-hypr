@@ -251,7 +251,7 @@ gesture.connect('drag-end', () => {
     }
     else {
         keyboardWindow.setCss(`
-            transition: margin-bottom 170ms cubic-bezier(0.05, 0.7, 0.1, 1);
+            transition: margin-bottom 170ms;
             margin-bottom: 0px;
         `);
     }

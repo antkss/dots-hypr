@@ -8,4 +8,6 @@ export default () => PopupWindow({
     showClassName: 'sideright-show',
     hideClassName: 'sideright-hide',
     child: SidebarRight(),
+}).keybind([ "CONTROL"], "c", (self, event) => {
+	App.closeWindow(self.name);
 });

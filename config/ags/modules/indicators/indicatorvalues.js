@@ -90,9 +90,9 @@ export default () => {
         }),
     });
     return MarginRevealer({
-        transition: 'slide_down',
-        showClass: 'osd-show',
-        hideClass: 'osd-hide',
+        // transition: 'slide_down',
+        // showClass: 'osd-show',
+        // hideClass: 'osd-hide',
         extraSetup: (self) => self
             .hook(Indicator, (revealer, value) => {
                 if (value > -1) revealer.attribute.show();

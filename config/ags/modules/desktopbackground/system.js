@@ -10,8 +10,8 @@ const ResourceValue = (name, icon, interval, valueUpdateCmd, displayFunc, props 
     className: 'bg-system-bg txt',
     children: [
         Revealer({
-            transition: 'slide_left',
-            transitionDuration: userOptions.animations.durationLarge,
+            // transition: 'slide_left',
+            // transitionDuration: userOptions.animations.durationLarge,
             child: Box({
                 vpack: 'center',
                 vertical: true,

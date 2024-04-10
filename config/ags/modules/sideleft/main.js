@@ -7,4 +7,6 @@ export default () => PopupWindow({
     name: 'sideleft',
     layer: 'top',
     child: SidebarLeft(),
+}).keybind([ "CONTROL"], "c", (self, event) => {
+	App.closeWindow(self.name);
 });

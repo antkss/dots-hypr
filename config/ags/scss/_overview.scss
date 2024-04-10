@@ -3,7 +3,7 @@
 }
 
 .overview-search-box {
-    @include element_decel;
+    // @include element_decel;
     @include large-rounding;
     @include elevation-border;
     @include elevation2;
@@ -115,7 +115,7 @@
 
 .overview-tasks-window {
     @include normal-rounding;
-    @include menu_decel;
+    // @include menu_decel;
     background-color: $layer2;
     color: $onSurface;
     border: 0.068rem solid $surfaceContainerHighest;

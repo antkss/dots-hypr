@@ -19,7 +19,7 @@ const switchToRelativeWorkspace = (self, num) =>
 
 const WorkspaceContents = (count = 10) => {
     return DrawingArea({
-        css: `transition: 90ms cubic-bezier(0.1, 1, 0, 1);`,
+        // css: `transition: 90ms cubic-bezier(0.1, 1, 0, 1);`,
         attribute: {
             initialized: false,
             workspaceMask: 0,
