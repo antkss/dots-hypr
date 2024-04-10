@@ -157,7 +157,7 @@ const chatPlaceholder = Label({
 const chatPlaceholderRevealer = Revealer({
     revealChild: true,
     transition: 'crossfade',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transitionDuration: userOptions.animations.durationLarge,
     child: chatPlaceholder,
     setup: enableClickthrough,
 });
@@ -177,7 +177,7 @@ export const textbox = Widget.Entry({
 
 const apiCommandStack = Stack({
     transition: 'slide_up_down',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transitionDuration: userOptions.animations.durationLarge,
     children: APIS.reduce((acc, api) => {
         acc[api.name] = api.commandBar;
         return acc;
