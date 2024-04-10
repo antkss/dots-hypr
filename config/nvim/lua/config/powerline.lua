@@ -1,13 +1,13 @@
 local Colors = {
-  ibg		= '#E8B3FF',
-  bbg		= '#18111A',
-  nbg		= '#E8B3FF',
-  vfg		= '#F6D9FF',
-  ifg		= '#D1C2D2',
-  rbg		= '#F3B4DA',
-  vbg		= '#5A3D59',
-  cmdbg         = '#E8B3FF',
-  cmdfg         = '#7200A3',
+  ibg		= '#FFB1C2',
+  bbg		= '#1D1013',
+  nbg		= '#FFB1C2',
+  vfg		= '#FFD9E0',
+  ifg		= '#BB0056',
+  rbg		= '#FFB599',
+  vbg		= '#693D3A',
+  cmdbg         = '#FFB1C2',
+  cmdfg         = '#8F0040',
 }
 local M = {
   normal = {
@@ -15,7 +15,7 @@ local M = {
     c = { fg = Colors.nbg, bg = Colors.bbg },
   },
   insert = {
-    a = { fg = Colors.darkestcyan, bg = Colors.ibg, gui = 'bold' },
+    a = { fg = Colors.ifg, bg = Colors.ibg, gui = 'bold' },
     c = { fg = Colors.ifg, bg = Colors.bbg },
   },
   visual = { a = { fg = Colors.vfg, bg = Colors.vbg, gui = 'bold' } },
