@@ -62,16 +62,16 @@ export const SearchAndWindows = () => {
         vexpand: true,
     });
     const resultsRevealer = Widget.Revealer({
-        transitionDuration: userOptions.animations.durationLarge,
+        // transitionDuration: userOptions.animations.durationLarge,
         revealChild: false,
-        transition: 'slide_down',
+        // transition: 'slide_down',
         // duration: 200,
         hpack: 'center',
         child: resultsBox,
     });
     const entryPromptRevealer = Widget.Revealer({
-        transition: 'crossfade',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'crossfade',
+        // transitionDuration: userOptions.animations.durationLarge,
         revealChild: true,
         hpack: 'center',
         child: Widget.Label({
@@ -81,8 +81,8 @@ export const SearchAndWindows = () => {
     });
 
     const entryIconRevealer = Widget.Revealer({
-        transition: 'crossfade',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'crossfade',
+        // transitionDuration: userOptions.animations.durationLarge,
         revealChild: false,
         hpack: 'end',
         child: Widget.Label({

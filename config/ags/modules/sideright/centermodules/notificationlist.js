@@ -95,8 +95,8 @@ export default (props) => {
     //     },
     // })
     const clearButton = Revealer({
-        transition: 'slide_right',
-        transitionDuration: userOptions.animations.durationSmall,
+        // transition: 'slide_right',
+        // transitionDuration: userOptions.animations.durationSmall,
         setup: (self) => self.hook(Notifications, (self) => {
             self.revealChild = Notifications.notifications.length > 0;
         }),
@@ -153,8 +153,8 @@ export default (props) => {
         }
     });
     const listContents = Stack({
-        transition: 'crossfade',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'crossfade',
+        // transitionDuration: userOptions.animations.durationLarge,
         children: {
             'empty': notifEmptyContent,
             'list': notifList,

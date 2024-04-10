@@ -35,8 +35,8 @@ const ColorSchemeSettingsRevealer = () => {
     });
     const content = Widget.Revealer({
         revealChild: false,
-        transition: 'slide_down',
-        transitionDuration: 200,
+        // transition: 'slide_down',
+        // transitionDuration: 200,
         child: ColorSchemeSettings(),
         setup: (self) => self.hook(isHoveredColorschemeSettings, (revealer) => {
             if (isHoveredColorschemeSettings.value == false) {
@@ -185,8 +185,8 @@ const ColorschemeContent = () => Widget.Box({
 const isHoveredColorschemeSettings = Variable(false);
 
 export default () => Widget.Revealer({
-    transition: 'slide_down',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transition: 'slide_down',
+    // transitionDuration: userOptions.animations.durationLarge,
     child: ColorschemeContent(),
     setup: (self) => {
       self

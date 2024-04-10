@@ -240,8 +240,8 @@ const CoverArt = ({ player, ...rest }) => {
 
 const TrackControls = ({ player, ...rest }) => Widget.Revealer({
     revealChild: false,
-    transition: 'slide_right',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transition: 'slide_right',
+    // transitionDuration: userOptions.animations.durationLarge,
     child: Widget.Box({
         ...rest,
         vpack: 'center',
@@ -276,8 +276,8 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
 
 const TrackSource = ({ player, ...rest }) => Widget.Revealer({
     revealChild: false,
-    transition: 'slide_left',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transition: 'slide_left',
+    // transitionDuration: userOptions.animations.durationLarge,
     child: Widget.Box({
         ...rest,
         className: 'osd-music-pill spacing-h-5',
@@ -304,9 +304,9 @@ const TrackSource = ({ player, ...rest }) => Widget.Revealer({
 
 const TrackTime = ({ player, ...rest }) => {
     return Widget.Revealer({
-        revealChild: false,
-        transition: 'slide_left',
-        transitionDuration: userOptions.animations.durationLarge,
+        // revealChild: false,
+        // transition: 'slide_left',
+        // transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Box({
             ...rest,
             vpack: 'center',
@@ -395,8 +395,8 @@ const MusicControlsWidget = (player) => Box({
 })
 
 export default () => Revealer({
-    transition: 'slide_down',
-    transitionDuration: userOptions.animations.durationLarge,
+    // transition: 'slide_down',
+    // transitionDuration: userOptions.animations.durationLarge,
     revealChild: false,
     child: Box({
         children: Mpris.bind("players")

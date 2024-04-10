@@ -142,7 +142,7 @@ export default () => {
                         appIcon,
                         // TODO: Add xwayland tag instead of just having italics
                         Widget.Revealer({
-                            transition: 'slide_down',
+                            // transition: 'slide_down',
                             revealChild: revealInfoCondition,
                             child: Widget.Label({
                                 maxWidthChars: 10, // Doesn't matter what number
@@ -416,8 +416,8 @@ export default () => {
 
     return Widget.Revealer({
         revealChild: true,
-        transition: 'slide_down',
-        transitionDuration: userOptions.animations.durationLarge,
+        // transition: 'slide_down',
+        // transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Box({
             vertical: true,
             className: 'overview-tasks',
