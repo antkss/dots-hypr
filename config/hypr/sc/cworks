@@ -1,6 +1,5 @@
 #!/bin/bash
 cur=$(hyprctl activeworkspace -j | jq -r '.id')
-
 ids=($(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tr '\n' ' ' ))
 las=$(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tail -1 )
 for i in $(hyprctl workspaces -j | jq -r '.[].id' | sort -g); do 
