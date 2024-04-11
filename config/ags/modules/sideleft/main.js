@@ -10,7 +10,7 @@ const widgetContent = Revealer({
 
 const side_chats = Box({
     // vertical: true,
-className: "side_chat",
+// className: "side_chat",
     vexpand: true,
     hexpand: true,
     css: 'min-height: 500px; min-width: 600px;',

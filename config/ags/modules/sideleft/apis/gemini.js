@@ -25,7 +25,7 @@ const GeminiInfo = () => {
     });
     return Box({
         vertical: true,
-        className: 'spacing-v-15',
+        className: 'side_chat',
         children: [
             geminiLogo,
             Label({
@@ -69,7 +69,7 @@ export const GeminiSettings = () => MarginRevealer({
     ,
     child: Box({
         vertical: true,
-        className: 'sidebar-chat-settings',
+        className: 'side_chat',
         children: [
             ConfigSegmentedSelection({
                 hpack: 'center',
