@@ -30,7 +30,9 @@ $rounding_verysmall: 0.477rem;
 
 @mixin titlefont {
     // Geometric sans-serif
-    font-family: "Gabarito", "Poppins", "Lexend", sans-serif;
+    font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono",;
+    // , "Poppins", "Lexend", sans-serif;
+    font-weight: 500;
 }
 
 @mixin mainfont {
