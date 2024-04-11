@@ -4,10 +4,10 @@ import Gdk from 'gi://Gdk';
 import GLib from 'gi://GLib';
 import App from 'resource:///com/github/Aylur/ags/app.js'
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
-// import  Recent from './modules/recent/a.js';
-// Stuff
-import userOptions from './modules/.configuration/user_options.js';
+// import  {Recent} from './a.js';
+import center from './center/center.js'
 // Widgets
+import userOptions from './modules/.configuration/user_options.js';
 import { Bar, BarCornerTopleft, BarCornerTopright } from './modules/bar/main.js';
 import Cheatsheet from './modules/cheatsheet/main.js';
 // import DesktopBackground from './modules/desktopbackground/main.js';
@@ -48,11 +48,12 @@ const Windows = () => [
     Overview(),
     forMonitors(Indicator),
     // Cheatsheet(),
+	center(0),
     SideLeft(),
     // SideRight(),
+	// Recent(),
     Osk(),
     Session(),
-	// Recent(),
     // forMonitors(Bar),
     // forMonitors(BarCornerTopleft),
     // forMonitors(BarCornerTopright),

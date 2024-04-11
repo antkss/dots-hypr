@@ -4,14 +4,13 @@
 // }
 *:not(popover) { all: unset; }
 
-// Colors
 @import './material'; // Material colors
 @import './colors'; // Global color definitions. Uses material colors as base.
 @import './lib_mixins';
 @import './lib_classes';
-@import './common'; // Context menu n stuff
-
-// Components
+@import './common'; 
+// @import './recent';
+@import './center';
 @import './bar';
 @import './cheatsheet';
 @import './desktopbackground';
