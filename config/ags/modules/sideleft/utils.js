@@ -20,7 +20,7 @@ export default () => Window({
 	// className:"side_utils",
 	visible: false,
     keymode: 'exclusive',
-    anchor: ['bottom','top','right'],
+    anchor: ['bottom','top','left'],
     name: 'side_utils',
     layer: 'top',
     child: tools,

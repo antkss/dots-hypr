@@ -9,7 +9,7 @@ import center from './center/center.js'
 // Widgets
 import userOptions from './modules/.configuration/user_options.js';
 import { Bar, BarCornerTopleft, BarCornerTopright } from './modules/bar/main.js';
-import Cheatsheet from './modules/cheatsheet/main.js';
+// import Cheatsheet from './modules/cheatsheet/main.js';
 // import DesktopBackground from './modules/desktopbackground/main.js';
 // import Dock from './modules/dock/main.js';
 import side_utils from './modules/sideleft/utils.js'
@@ -19,6 +19,7 @@ import Osk from './modules/onscreenkeyboard/main.js';
 import Overview from './modules/overview/main.js';
 import Session from './modules/session/main.js';
 import side_chat from './modules/sideleft/main.js';
+import lockscreen from './modules/lockscreen/Lockscreen.js'
 // import SideRight from './modules/sideright/main.js';
 
 const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
@@ -46,6 +47,7 @@ applyStyle().catch(print);
 const Windows = () => [
     // forMonitors(DesktopBackground),
     // Dock(),
+	lockscreen(),
     Overview(),
     forMonitors(Indicator),
     // Cheatsheet(),
