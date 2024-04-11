@@ -3,6 +3,7 @@ const { Box, Scrollable } = Widget;
 import QuickScripts from './tools/quickscripts.js';
 import ColorPicker from './tools/colorpicker.js';
 import materialpick from './tools/materialswitch.js' 
+import notification from './notificationlist.js';
 
 export default Scrollable({
     hscroll: "never",
@@ -11,9 +12,10 @@ export default Scrollable({
         vertical: true,
         className: 'spacing-v-10',
         children: [
-            QuickScripts(),
-            ColorPicker(),
+		QuickScripts(),
+		ColorPicker(),
 		materialpick(),
+		notification(),
         ]
     })
 });
