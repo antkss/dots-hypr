@@ -12,12 +12,13 @@ import { Bar, BarCornerTopleft, BarCornerTopright } from './modules/bar/main.js'
 import Cheatsheet from './modules/cheatsheet/main.js';
 // import DesktopBackground from './modules/desktopbackground/main.js';
 // import Dock from './modules/dock/main.js';
+import side_utils from './modules/sideleft/utils.js'
 import Corner from './modules/screencorners/main.js';
 import Indicator from './modules/indicators/main.js';
 import Osk from './modules/onscreenkeyboard/main.js';
 import Overview from './modules/overview/main.js';
 import Session from './modules/session/main.js';
-import SideLeft from './modules/sideleft/main.js';
+import side_chat from './modules/sideleft/main.js';
 // import SideRight from './modules/sideright/main.js';
 
 const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
@@ -49,7 +50,8 @@ const Windows = () => [
     forMonitors(Indicator),
     // Cheatsheet(),
 	center(0),
-    SideLeft(),
+    side_chat(),
+	side_utils(),
     // SideRight(),
 	// Recent(),
     Osk(),

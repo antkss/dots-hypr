@@ -19,7 +19,7 @@ export default (monitor = 0) => Widget.Window({
         },
         child: Widget.Box({
             vertical: true,
-            className: 'osd-window',
+            // className: 'osd-window',
             css: 'min-height: 2px;',
             children: [
                 IndicatorValues(),

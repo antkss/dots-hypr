@@ -29,7 +29,7 @@ export default () => SidebarModule({
                         className: 'sidebar-module-scripts-button',
 			    label: "💕",
                         onClicked: () => {
-                            App.closeWindow('sideleft');
+                            App.closeWindow('side_utils');
                             execAsync([`bash`, `-c`, `$HOME/.config/ags/scripts/color_generation/switchcolor.sh --pick`]).catch(print)
                         },
                     }),
@@ -52,7 +52,7 @@ export default () => SidebarModule({
                         className: 'sidebar-module-scripts-button',
 			    label: "🔄",
                         onClicked: () => {
-                            App.closeWindow('sideleft');
+                            // App.closeWindow('side_utils');
                             execAsync([`bash`, `-c`, `killall ags && ags &`]).catch(print)
                         },
                     }),

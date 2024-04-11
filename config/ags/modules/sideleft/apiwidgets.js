@@ -5,17 +5,17 @@ const { Box, Button, CenterBox, Entry, EventBox, Icon, Label, Overlay, Revealer,
 const { execAsync, exec } = Utils;
 import { setupCursorHover, setupCursorHoverInfo } from '../.widgetutils/cursorhover.js';
 // APIs
-import GPTService from '../../services/gpt.js';
+// import GPTService from '../../services/gpt.js';
 import Gemini from '../../services/gemini.js';
 import { geminiView, geminiCommands, sendMessage as geminiSendMessage, geminiTabIcon } from './apis/gemini.js';
-import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGPTTabIcon } from './apis/chatgpt.js';
-import { waifuView, waifuCommands, sendMessage as waifuSendMessage, waifuTabIcon } from './apis/waifu.js';
+// import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGPTTabIcon } from './apis/chatgpt.js';
+// import { waifuView, waifuCommands, sendMessage as waifuSendMessage, waifuTabIcon } from './apis/waifu.js';
 // import { booruView, booruCommands, sendMessage as booruSendMessage, booruTabIcon } from './apis/booru.js';
 import { enableClickthrough } from "../.widgetutils/clickthrough.js";
 import { checkKeybind } from '../.widgetutils/keybind.js';
 const TextView = Widget.subclass(Gtk.TextView, "AgsTextView");
 
-import { widgetContent } from './sideleft.js';
+// import { widgetContent } from './sideleft.js';
 import { IconTabContainer } from '../.commonwidgets/tabcontainer.js';
 
 const EXPAND_INPUT_THRESHOLD = 30;
@@ -80,10 +80,10 @@ export const chatEntry = TextView({
                 self.grab_focus();
             }
         })
-        .hook(GPTService, (self) => {
-            if (APIS[currentApiId].name != 'Assistant (GPTs)') return;
-            self.placeholderText = (GPTService.key.length > 0 ? 'Message the model...' : 'Enter API Key...');
-        }, 'hasKey')
+        // .hook(GPTService, (self) => {
+        //     if (APIS[currentApiId].name != 'Assistant (GPTs)') return;
+        //     self.placeholderText = (GPTService.key.length > 0 ? 'Message the model...' : 'Enter API Key...');
+        // }, 'hasKey')
         .hook(Gemini, (self) => {
             if (APIS[currentApiId].name != 'Assistant (Gemini Pro)') return;
             self.placeholderText = (Gemini.key.length > 0 ? 'Message Gemini...' : 'Enter Google AI API Key...');
@@ -95,16 +95,16 @@ export const chatEntry = TextView({
                 return true;
             }
             // Keybinds
-            if (checkKeybind(event, userOptions.keybinds.sidebar.cycleTab))
-                widgetContent.cycleTab();
-            else if (checkKeybind(event, userOptions.keybinds.sidebar.nextTab))
-                widgetContent.nextTab();
-            else if (checkKeybind(event, userOptions.keybinds.sidebar.prevTab))
-                widgetContent.prevTab();
-            else if (checkKeybind(event, userOptions.keybinds.sidebar.apis.nextTab)) {
-                apiWidgets.attribute.nextTab();
-                return true;
-            }
+            // if (checkKeybind(event, userOptions.keybinds.sidebar.cycleTab))
+            //     widgetContent.cycleTab();
+            // else if (checkKeybind(event, userOptions.keybinds.sidebar.nextTab))
+            //     widgetContent.nextTab();
+            // else if (checkKeybind(event, userOptions.keybinds.sidebar.prevTab))
+            //     widgetContent.prevTab();
+            // else if (checkKeybind(event, userOptions.keybinds.sidebar.apis.nextTab)) {
+            //     apiWidgets.attribute.nextTab();
+            //     return true;
+            // }
             else if (checkKeybind(event, userOptions.keybinds.sidebar.apis.prevTab)) {
                 apiWidgets.attribute.prevTab();
                 return true;

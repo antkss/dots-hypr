@@ -1,19 +1,21 @@
-import { textbox } from './apiwidgets.js';
 const { Gdk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-const { Box, Revealer,Window } = Widget;
+const { Box, Revealer } = Widget;
 import apiWidgets from './apiwidgets.js';
+import { textbox } from './apiwidgets.js';
+
 const widgetContent = Revealer({
+	className: "side_chat",
 	revealChild: true,
 	child: apiWidgets,
 });
 
-const side_chats = Box({
+export default () => Box({
     // vertical: true,
 className: "side_chat",
     vexpand: true,
     hexpand: true,
-    css: 'min-height: 500px; min-width: 600px;',
+    css: 'min-width: 2px;',
     children: [
         widgetContent,
     ],
@@ -34,14 +36,6 @@ className: "side_chat",
 
                 }
 
-        }),
-});
-export default () => Window({
-	// className:"side_chat",
-	visible: false,
-    keymode: 'exclusive',
-    anchor: [/* 'bottom', */'top'/* ,'left' */],
-    name: 'side_chat',
-    layer: 'overlay',
-    child: side_chats,
+        })
+    ,
 });
