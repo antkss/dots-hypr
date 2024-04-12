@@ -7,7 +7,7 @@ const { Box, Button, Label, Scrollable, Stack } = Widget;
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import Notification from '../.commonwidgets/notification.js';
-
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 export default (props) => {
     const notifEmptyContent = Box({
         homogeneous: true,
@@ -87,7 +87,9 @@ export default (props) => {
     const clearButton = ListActionButton('clear_all', 'Clear', () => {
         Notifications.clear();
         notificationList.get_children().forEach(ch => ch.attribute.destroyWithAnims())
+	Utils.timeout(800, () => {
 	App.closeWindow("side_utils")
+})
     });
     const listTitle = Box({
         vpack: 'start',
