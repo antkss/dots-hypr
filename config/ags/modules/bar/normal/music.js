@@ -7,13 +7,13 @@ const { execAsync } = Utils;
 import { AnimatedCircProg } from "../../.commonwidgets/cairo_circularprogress.js";
 import { showMusicControls } from '../../../variables.js';
 
-const CUSTOM_MODULE_CONTENT_INTERVAL_FILE = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-interval.txt`;
-const CUSTOM_MODULE_CONTENT_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-poll.sh`;
-const CUSTOM_MODULE_LEFTCLICK_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-leftclick.sh`;
-const CUSTOM_MODULE_RIGHTCLICK_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-rightclick.sh`;
-const CUSTOM_MODULE_MIDDLECLICK_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-middleclick.sh`;
-const CUSTOM_MODULE_SCROLLUP_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-scrollup.sh`;
-const CUSTOM_MODULE_SCROLLDOWN_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-scrolldown.sh`;
+// const CUSTOM_MODULE_CONTENT_INTERVAL_FILE = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-interval.txt`;
+// const CUSTOM_MODULE_CONTENT_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-poll.sh`;
+// const CUSTOM_MODULE_LEFTCLICK_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-leftclick.sh`;
+// const CUSTOM_MODULE_RIGHTCLICK_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-rightclick.sh`;
+// const CUSTOM_MODULE_MIDDLECLICK_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-middleclick.sh`;
+// const CUSTOM_MODULE_SCROLLUP_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-scrollup.sh`;
+// const CUSTOM_MODULE_SCROLLDOWN_SCRIPT = `${GLib.get_home_dir()}/.cache/ags/user/scripts/custom-module-scrolldown.sh`;
 
 function trimTrackTitle(title) {
     if (!title) return '';
@@ -97,32 +97,25 @@ export default () => {
         }),
     })
     const musicStuff = Box({
-        className: 'spacing-h-10',
+        className: 'music-bar',
         hexpand: true,
+	vexpand:true,
         children: [
             playingState,
             trackTitle,
         ]
     })
-    return EventBox({
-        onScrollUp: (self) => switchToRelativeWorkspace(self, -1),
-        onScrollDown: (self) => switchToRelativeWorkspace(self, +1),
-        child: Box({
-            className: 'spacing-h-4',
-            children: [
-                // SystemResourcesOrCustomModule(),
-                EventBox({
-                    child: BarGroup({ child: musicStuff }),
-                    onPrimaryClick: () => execAsync('playerctl play-pause').catch(print),
+        return  EventBox({
+		
+                    child: musicStuff ,
+			onPrimaryClick: () => execAsync('playerctl play-pause').catch(print),
                     // onSecondaryClick: () => showMusicControls.setValue(!showMusicControls.value),
 			onHover: () => showMusicControls.setValue(!showMusicControls.value),
-                    onMiddleClick: () => execAsync(['bash', '-c', 'playerctl next']).catch(print),
-                    setup: (self) => self.on('button-press-event', (self, event) => {
-                        if (event.get_button()[1] === 8) // Side button
-                            execAsync('playerctl previous').catch(print)
-                    }),
-                })
-            ]
-        })
-    });
+			// onHoverLost: () => showMusicControls.setValue(!showMusicControls.value),
+			onMiddleClick: () => execAsync(['bash', '-c', 'playerctl next']).catch(print),
+                    // setup: (self) => self.on('button-press-event', (self, event) => {
+                    //     if (event.get_button()[1] === 8) // Side button
+                    //         execAsync('playerctl previous').catch(print)
+                    // }),
+        });
 }

@@ -1,15 +1,16 @@
-import App from 'resource:///com/github/Aylur/ags/app.js';
+// import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import Brightness from '../../../services/brightness.js';
+// import Brightness from '../../../services/brightness.js';
 import Indicator from '../../../services/indicator.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const WindowTitle = async () => {
-    try {
-        const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
-        return Widget.Scrollable({
+// const WindowTitle = async () => {
+//     try {
+       const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
+       export default () => Widget.Scrollable({
             hexpand: true, vexpand: true,
             hscroll: 'automatic', vscroll: 'never',
             child: Widget.Box({
+		css: `margin-left: 11px;`,
                 vertical: true,
                 children: [
                     Widget.Label({
@@ -33,41 +34,37 @@ const WindowTitle = async () => {
                 ]
             })
         });
-    } catch {
-        return null;
-    }
-}
+//     } catch {
+//         return null;
+//     }
+// }
 
-const OptionalWindowTitleInstance = await WindowTitle();
-
-export default () => Widget.EventBox({
-    onScrollUp: () => {
-        Utils.execAsync(['bash', '-c', `brightnessctl set 1%-`]);
-        Indicator.popup(1); // Since the brightness and speaker are both on the same window
-    },
-    onScrollDown: () => {
-        Utils.execAsync(['bash', '-c', `brightnessctl set +1%`]);
-        Indicator.popup(1); // Since the brightness and speaker are both on the same window
-    },
-    child: Widget.Box({
-        homogeneous: false,
-        children: [
-            Widget.Box({ className: 'bar-corner-spacing' }),
-            Widget.Overlay({
-                overlays: [
-                    Widget.Box({ hexpand: true }),
-                    Widget.Box({
-                        className: 'bar-sidemodule', hexpand: true,
-                        children: [Widget.Box({
-                            vertical: true,
-                            className: 'bar-space-button',
-                            children: [
-                                OptionalWindowTitleInstance,
-                            ]
-                        })]
-                    }),
-                ]
-            })
-        ]
-    })
-});
+// const OptionalWindowTitleInstance = await WindowTitle();
+//
+// export default () => Widget.EventBox({
+// 	onScrollUp: () => {
+// 	Utils.execAsync([`bash`,`-c`,`brightnessctl set 1%+`])
+// 	Indicator.popup(1);
+// 	},
+// 	onScrollDown: () => {
+// 	Utils.execAsync([`bash`,`-c`,`brightnessctl set 1%-`])
+// 	Indicator.popup(1);
+//
+// 	},
+// 	child:OptionalWindowTitleInstance,
+//             // // Widget.Box({ className: 'bar-corner-spacing' }),
+//             // Widget.Overlay({
+//             //     overlays: [
+//             //         Widget.Box({
+//             //             className: 'bar-sidemodule', hexpand: true,
+//             //             children: [Widget.Box({
+//             //                 vertical: true,
+//             //                 className: 'bar-space-button',
+//             //                 children: [
+//             //                 ]
+//             //             })]
+//             //         }),
+//             //     ]
+//             // })
+//         // ]
+//     });

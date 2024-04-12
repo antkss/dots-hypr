@@ -11,7 +11,12 @@ $bar_ws_width_focus_active: 2.045rem;
 .bar-height {
     min-height: 2.727rem;
 }
-
+.battery{
+	font-size: 3px;
+	min-height: 4px;
+	min-width: 25px;
+	color: $primary;
+}
 .bar-bg {
     background-color: $layer0;
     min-height: 2.727rem;
@@ -37,7 +42,24 @@ $bar_ws_width_focus_active: 2.045rem;
 .bar-group {
     background-color: $layer1;
 }
+.music-bar{
 
+	background-color: $layer1;
+	padding: 0.205rem;
+	margin: 3px;
+	border-radius:9px;
+	min-width: 26rem;
+}
+.clock-bar{
+	background-color: $layer1;
+	padding-left: 25px;
+	padding-right: 20px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	margin: 3px;
+	border-radius:9px;
+	min-width: 10rem;
+}
 .bar-group-pad {
     padding: 0.205rem;
 }

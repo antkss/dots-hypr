@@ -1,26 +1,19 @@
-window.lockscreen {
-    background-color: rgba(0, 0, 0, 0.25);
+.lockscreen{
+background-color: rgba(0, 0, 0, 0.25);
+
+}
 
     .avatar {
-        @include widget;
-        border-radius: $radii * 2;
         min-height: 200px;
         min-width: 200px;
     }
 
     .content {
-        @include floating-widget;
-        padding: $spacing * 4;
     }
 
-    spinner {
-        margin-top: $spacing * 2;
+    .spinner {
     }
 
-    entry {
-        @include button;
-        margin-top: $spacing * 2;
-        padding: $spacing;
+    .entry {
         min-height: 20px;
     }
-} 

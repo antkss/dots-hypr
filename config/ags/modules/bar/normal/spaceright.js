@@ -84,7 +84,7 @@ export default () => {
         child: Widget.Box({
             children: [
                 actualContent,
-                SpaceRightDefaultClicks(Widget.Box({ className: 'bar-corner-spacing' })),
+                // SpaceRightDefaultClicks(Widget.Box({ className: 'bar-corner-spacing' })),
             ]
         })
     });

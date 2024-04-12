@@ -19,7 +19,6 @@ import Osk from './modules/onscreenkeyboard/main.js';
 import Overview from './modules/overview/main.js';
 import Session from './modules/session/main.js';
 import side_chat from './modules/sideleft/main.js';
-import lockscreen from './modules/lockscreen/Lockscreen.js'
 // import SideRight from './modules/sideright/main.js';
 
 const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
@@ -47,7 +46,7 @@ applyStyle().catch(print);
 const Windows = () => [
     // forMonitors(DesktopBackground),
     // Dock(),
-	lockscreen(),
+	// lockscreen(),
     Overview(),
     forMonitors(Indicator),
     // Cheatsheet(),
