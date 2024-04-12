@@ -114,10 +114,10 @@ return {
 			    }),
 			 sources = cmp.config.sources(
 				{
-					{ name = 'codeium' },
 					{ name = 'nvim_lsp' },
 				      -- { name = 'codeium', trigger_characters = {'/', '.'}},
 				      { name = 'vsnip' }, -- For vsnip users.
+					{ name = 'codeium' },
 				      -- { name = 'luasnip' }, -- For luasnip users.
 				      -- { name = 'ultisnips' }, -- For ultisnips users.
 				      -- { name = 'snippy' }, -- For snippy users.
@@ -156,7 +156,7 @@ return {
 				},
 
 		}
-		require("lspconfig").pylsp.setup {
+		require("lspconfig").pyright.setup {
 			capabilities = capabilities,
 				workspace = {
 					maxPreload = 11,
