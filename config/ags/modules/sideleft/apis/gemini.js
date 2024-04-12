@@ -254,9 +254,11 @@ export const sendMessage = (text) => {
 }
 
 export const geminiView = Box({
-    homogeneous: true,
-    children: [Scrollable({
-        className: 'sidebar-chat-viewport',
+	// css: `border-radius: 20px;background:#ffffff;margin: 0.682rem;padding: 0.682rem;`,
+	// className: 'chat_frame',
+	homogeneous: true,
+	children: [Scrollable({
+	// css: `border-radius: 20px;background:#ffffff;margin: 0.682rem;padding: 0.682rem;`,
         vexpand: true,
         child: Box({
             vertical: true,

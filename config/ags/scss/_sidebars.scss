@@ -13,7 +13,13 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 	background: $background;
 	padding: 0.682rem;
 	margin: 0.682rem;
+	border: 2px solid $primary;
 	border-radius: 20px;
+}
+.chat_frame{
+	padding: 0.682rem;
+	margin: 0.682rem;
+	    border-radius: 20px;
 }
 .sidebar-bluetooth-appicon {
     font-size: 3.273rem;

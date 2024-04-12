@@ -87,6 +87,7 @@ export default (props) => {
     const clearButton = ListActionButton('clear_all', 'Clear', () => {
         Notifications.clear();
         notificationList.get_children().forEach(ch => ch.attribute.destroyWithAnims())
+	App.closeWindow("side_utils")
     });
     const listTitle = Box({
         vpack: 'start',
