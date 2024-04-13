@@ -3,20 +3,19 @@ import clientInfoWidget from "./dymicBar/clientInfo.js";
 
 
 export const centerBar = () => {
-  const mainControl  = Widget.Stack({
-    children: [
-clientInfoWidget()
-    ],
-  })
+//   const mainControl  = Widget.Stack({
+//     children: [
+// clientInfoWidget()
+//     ],
+//   })
 
-  const centerWidget = Widget.Box({
+  const centerWidget = Widget.Revealer({
     className: "u-right-bar",
     hpack: "end",
     vpack: "fill",
-    vertical: false,
-    children: [
-      mainControl,
-    ],
+	revealChild: true,
+    // vertical: false,
+    child: clientInfoWidget(),
   });
 
   return centerWidget;

@@ -39,7 +39,7 @@ const side_chats = Box({
 export default () => Window({
 	// className:"side_chat",
 	visible: false,
-    keymode: 'exclusive',
+    keymode: 'on-demand',
     anchor: [/* 'bottom', */'top'/* ,'left' */],
     name: 'side_chat',
     layer: 'overlay',

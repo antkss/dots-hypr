@@ -97,8 +97,7 @@ export default () => {
             .hook(Indicator, (revealer, value) => {
                 if (value > -1) revealer.attribute.show();
                 else revealer.attribute.hide();
-            }, 'popup')
-        ,
+            }, 'popup'),
         child: Box({
             hpack: 'center',
             vertical: false,

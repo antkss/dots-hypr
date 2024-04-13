@@ -2,9 +2,9 @@ import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { getClientIcon, ignoreAppsClass } from "../lib/client.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
-const { Gdk, Gtk } = imports.gi;
+const { Gdk, GLib, Gtk } = imports.gi;
 
-const barHeight = 5;
+// const barHeight = 5;
 const workspaceDotCss = {
   active:
     "min-width:1rem;min-height:1rem;border-radius:999rem;background-color:#fff",
@@ -85,10 +85,11 @@ const labels = Widget.Label({
   }).hook(Hyprland.active.workspace, (self) => {
 	  self.attribute.update(self)
 	  App.openWindow("center");
-	  Utils.timeout(2000, () => {
-		App.closeWindow("center");
+	Utils.timeout(2000, () => {
+	App.closeWindow("center");
 	});
-  });
+	  
+});
   const widget = Widget.CenterBox({
 	  className: "recent_panel",
     startWidget: clientIconBox,
