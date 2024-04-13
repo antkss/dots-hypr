@@ -10,6 +10,7 @@ export default (monitor = 0) => Widget.Window({
     monitor,
     className: 'indicator',
     layer: 'overlay',
+// keymode: 'on-demand',
     // exclusivity: 'ignore',
     visible: true,
     anchor: ['top'],

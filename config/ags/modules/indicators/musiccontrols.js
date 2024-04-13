@@ -7,7 +7,7 @@ const { exec, execAsync } = Utils;
 const { Box, Label, Button, Revealer } = Widget;
 
 import { fileExists } from '../.miscutils/files.js';
-import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
+// import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
 import { showMusicControls } from '../../variables.js';
 import { darkMode, hasPlasmaIntegration } from '../.miscutils/system.js';
 
@@ -69,23 +69,23 @@ function trimTrackTitle(title) {
     return title;
 }
 
-const TrackProgress = ({ player, ...rest }) => {
-    const _updateProgress = (circprog) => {
-        // const player = Mpris.getPlayer();
-        if (!player) return;
-        // Set circular progress (see definition of AnimatedCircProg for explanation)
-        circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
-    }
-    return AnimatedCircProg({
-        ...rest,
-        className: 'osd-music-circprog',
-        vpack: 'center',
-        extraSetup: (self) => self
-            .hook(Mpris, _updateProgress)
-            .poll(3000, _updateProgress)
-        ,
-    })
-}
+// const TrackProgress = ({ player, ...rest }) => {
+//     const _updateProgress = (circprog) => {
+//         // const player = Mpris.getPlayer();
+//         if (!player) return;
+//         // Set circular progress (see definition of AnimatedCircProg for explanation)
+//         circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
+//     }
+//     return AnimatedCircProg({
+//         ...rest,
+//         className: 'osd-music-circprog',
+//         vpack: 'center',
+//         extraSetup: (self) => self
+//             .hook(Mpris, _updateProgress)
+//             .poll(3000, _updateProgress)
+//         ,
+//     })
+// }
 
 const TrackTitle = ({ player, ...rest }) => Label({
     ...rest,
@@ -177,13 +177,13 @@ const CoverArt = ({ player, ...rest }) => {
                 // const player = Mpris.getPlayer(); // Maybe no need to re-get player.. can't remember why I had this
                 // Player closed
                 // Note that cover path still remains, so we're checking title
-                if (!player || player.trackTitle == "") {
+                const coverPath = player.coverPath;
+                if (!player || player.trackTitle == "" || !coverPath)  {
                     self.css = `background-image: none;`; // CSS image
                     App.applyCss(`${COMPILED_STYLE_DIR}/style.css`);
                     return;
                 }
 
-                const coverPath = player.coverPath;
                 const stylePath = `${player.coverPath}${darkMode.value ? '' : '-l'}${COVER_COLORSCHEME_SUFFIX}`;
                 if (player.coverPath == lastCoverPath) { // Since 'notify::cover-path' emits on cover download complete
                     Utils.timeout(200, () => {
@@ -236,7 +236,7 @@ const CoverArt = ({ player, ...rest }) => {
 }
 
 const TrackControls = ({ player, ...rest }) => Widget.Revealer({
-    revealChild: false,
+    revealChild: true,
     // transition: 'slide_right',
     // transitionDuration: userOptions.animations.durationLarge,
     child: Widget.Box({
@@ -262,17 +262,17 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
             }),
         ],
     }),
-    setup: (self) => self.hook(Mpris, (self) => {
-        // const player = Mpris.getPlayer();
-        if (!player)
-            self.revealChild = false;
-        else
-            self.revealChild = true;
-    }, 'notify::play-back-status'),
+    // setup: (self) => self.hook(Mpris, (self) => {
+    //     // const player = Mpris.getPlayer();
+    //     if (!player)
+    //         self.revealChild = false;
+    //     else
+    //         self.revealChild = true;
+    // }, 'notify::play-back-status'),
 });
 
 const TrackSource = ({ player, ...rest }) => Widget.Revealer({
-    revealChild: false,
+    revealChild: true,
     // transition: 'slide_left',
     // transitionDuration: userOptions.animations.durationLarge,
     child: Widget.Box({
@@ -290,18 +290,18 @@ const TrackSource = ({ player, ...rest }) => Widget.Revealer({
             }),
         ],
     }),
-    setup: (self) => self.hook(Mpris, (self) => {
-        const mpris = Mpris.getPlayer('');
-        if (!mpris)
-            self.revealChild = false;
-        else
-            self.revealChild = true;
-    }),
+    // setup: (self) => self.hook(Mpris, (self) => {
+    //     const mpris = Mpris.getPlayer('');
+    //     if (!mpris)
+    //         self.revealChild = false;
+    //     else
+    //         self.revealChild = true;
+    // }),
 });
 
 const TrackTime = ({ player, ...rest }) => {
     return Widget.Revealer({
-        // revealChild: false,
+        revealChild: true,
         // transition: 'slide_left',
         // transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Box({
@@ -310,7 +310,7 @@ const TrackTime = ({ player, ...rest }) => {
             className: 'osd-music-pill spacing-h-5',
             children: [
                 Label({
-                    setup: (self) => self.poll(1000, (self) => {
+                    setup: (self) => self.hook(player, (self) => {
                         // const player = Mpris.getPlayer();
                         if (!player) return;
                         self.label = lengthStr(player.position);
@@ -335,28 +335,30 @@ const TrackTime = ({ player, ...rest }) => {
 
 const PlayState = ({ player }) => {
     var position = 0;
-    const trackCircProg = TrackProgress({ player: player });
-    return Widget.Button({
-        className: 'osd-music-playstate',
-        child: Widget.Overlay({
-            child: trackCircProg,
-            overlays: [
-                Widget.Button({
-                    className: 'osd-music-playstate-btn',
-                    onClicked: () => player.playPause(),
-                    child: Widget.Label({
-                        justification: 'center',
-                        hpack: 'fill',
-                        vpack: 'center',
-                        setup: (self) => self.hook(player, (label) => {
-                            label.label = `${player.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
+    // const trackCircProg = TrackProgress({ player: player });
+    // return Widget.Button({
+        // className: 'osd-music-playstate',
+	// css: `border: 2px solid black;`,
+        // child: Widget.Overlay({
+            // child: trackCircProg,
+            // overlays: [
+                return Widget.Button({
+			className: 'osd-music-playstate-btn osd-music-playstate',
+			css: `border: 2px solid black;`,
+			onClicked: () => player.playPause(),
+			child: Widget.Label({
+			justification: 'center',
+			hpack: 'fill',
+			vpack: 'center',
+			setup: (self) => self.hook(player, (label) => {
+			label.label = `${player.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
                         }, 'notify::play-back-status'),
                     }),
-                }),
-            ],
-            passThrough: true,
-        })
-    });
+                });
+            // ],
+            // passThrough: true,
+        // })
+    // });
 }
 
 const MusicControlsWidget = (player) => Box({
@@ -394,7 +396,7 @@ const MusicControlsWidget = (player) => Box({
 export default () => Revealer({
     // transition: 'slide_down',
     // transitionDuration: userOptions.animations.durationLarge,
-    revealChild: false,
+    // revealChild: false,
     child: Box({
         children: Mpris.bind("players")
             .as(players => players.map((player) => (isRealPlayer(player) ? MusicControlsWidget(player) : null)))
