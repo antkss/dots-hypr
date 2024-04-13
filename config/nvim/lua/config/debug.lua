@@ -26,5 +26,6 @@ end
 vim.api.nvim_clear_autocmds({ group = 'insertonenter' })
 -- set mouse
 vim.opt.mouse = 'n'
+vim.opt.swapfile = false
 -- yeah, just temporary 
 -- require("colorizer").setup()
