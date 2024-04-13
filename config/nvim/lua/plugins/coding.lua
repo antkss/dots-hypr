@@ -172,14 +172,14 @@ return {
 				},
 
 		}
-		require("lspconfig").tsserver.setup {
-			capabilities = capabilities,
-				workspace = {
-					maxPreload = 11,
-					preloadFileSize = 10,
-				},
-
-		}
+		-- require("lspconfig").tsserver.setup {
+		-- 	capabilities = capabilities,
+		-- 		workspace = {
+		-- 			maxPreload = 11,
+		-- 			preloadFileSize = 10,
+		-- 		},
+		--
+		-- }
 		vim.cmd("LspStart")
 	    end,
 	},

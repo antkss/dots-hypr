@@ -8,7 +8,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 import center from './center/center.js'
 // Widgets
 import userOptions from './modules/.configuration/user_options.js';
-import { Bar, BarCornerTopleft, BarCornerTopright } from './modules/bar/main.js';
+import { Bar } from './modules/bar/main.js';
 // import Cheatsheet from './modules/cheatsheet/main.js';
 // import DesktopBackground from './modules/desktopbackground/main.js';
 // import Dock from './modules/dock/main.js';
@@ -56,10 +56,10 @@ const Windows = () => [
     // forMonitors(Bar),
     // forMonitors(BarCornerTopleft),
     // forMonitors(BarCornerTopright),
-    forMonitors((id) => Corner(id, 'top left')),
-    forMonitors((id) => Corner(id, 'top right')),
-	forMonitors(BarCornerTopleft),
-	forMonitors(BarCornerTopright),
+    // forMonitors((id) => Corner(id, 'top left')),
+    // forMonitors((id) => Corner(id, 'top right')),
+	// forMonitors(BarCornerTopleft),
+	// forMonitors(BarCornerTopright),
     // forMonitors((id) => Corner(id, 'bottom left')),
     // forMonitors((id) => Corner(id, 'bottom right')),
 ];

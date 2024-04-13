@@ -234,7 +234,7 @@ const Utilities = () => Box({
 export default () => Widget.Box({
         className: 'spacing-h-4',
         children: [
-		 BarClock(), 
+		BarClock(), 
 		Utilities(),
             // BatteryModule(),
 		batteryProgress,
