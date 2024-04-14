@@ -1,9 +1,9 @@
 #!/bin/bash
 echo 0 > /proc/sys/kernel/randomize_va_space
-intel_gpu_frequency -c min=500
+intel_gpu_frequency -s 500
 for i in /sys/devices/system/cpu/cpufreq/policy*;do
-	echo "ondemand" > $i/scaling_governor
-	echo "2500000" > $i/scaling_max_freq
+	echo "schedutil" > $i/scaling_governor
+	echo "2600000" > $i/scaling_max_freq
 done
 # /home/as/.bin/bin/setcolors /home/as/.config/google.dark
 
