@@ -5,11 +5,11 @@
 *:not(popover) { all: unset; }
 
 @import './material'; // Material colors
+@import './lockscreen';
 @import './colors'; // Global color definitions. Uses material colors as base.
 @import './lib_mixins';
 @import './lib_classes';
 @import './common'; 
-// @import './recent';
 @import './center';
 @import './bar';
 @import './cheatsheet';

@@ -1,7 +1,7 @@
 // This is for the cool memory indicator on the sidebar
 // For the right pill of the bar, see system.js
 const { Gdk, Gtk } = imports.gi;
-// import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';

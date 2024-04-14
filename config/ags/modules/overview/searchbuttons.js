@@ -95,7 +95,7 @@ export const DesktopEntryButton = (app) => {
     });
     const actionTextRevealer = Widget.Revealer({
         revealChild: false,
-        transition: "slide_left",
+        // transition: "slide_left",
         // transitionDuration: userOptions.animations.durationSmall,
         child: actionText,
     });

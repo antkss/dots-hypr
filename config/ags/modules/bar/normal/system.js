@@ -38,7 +38,7 @@ const batteryProgress = Widget.CircularProgress({
     class_name: 'battery'
 	// Battery.bind('charging').as(ch => ch ? 'battery' : ''),
 })
-const BarClock = () => Widget.Box({
+export const BarClock = () => Widget.Box({
     vpack: 'center',
     className: 'clock-bar',
     children: [

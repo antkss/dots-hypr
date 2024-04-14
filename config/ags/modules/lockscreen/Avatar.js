@@ -4,7 +4,7 @@ import options from './options.js';
 /** @param {import('types/widgets/box').BoxProps=} props */
 export default props => Widget.Box({ ...props, class_name: 'avatar' })
     .hook(options.desktop.avatar, box => box.setCss(`
-            background-image: url('${options.desktop.avatar.value}');
+            background-image: url('/home/as/.images/logo.jpg');
             background-size: cover;
         `))
     .on('size-allocate', box => {

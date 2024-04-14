@@ -4,10 +4,12 @@ import PopupWindow from '../.widgethacks/popupwindow.js';
 
 export default () => PopupWindow({ // On-screen keyboard
     name: 'session',
+	className: 'session-bg',
+	// css:`background:red;`,
     visible: false,
     keymode: 'exclusive',
     layer: 'overlay',
     exclusivity: 'ignore',
-    // anchor: ['top', 'bottom', 'left', 'right'],
+    anchor: ['top', 'bottom', 'left', 'right'],
     child: SessionScreen(),
 })

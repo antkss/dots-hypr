@@ -174,7 +174,7 @@ export const textbox = Widget.Entry({
 });
 
 const apiCommandStack = Stack({
-    transition: 'slide_up_down',
+    // transition: 'slide_up_down',
     // transitionDuration: userOptions.animations.durationLarge,
     children: APIS.reduce((acc, api) => {
         acc[api.name] = api.commandBar;
