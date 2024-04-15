@@ -1,6 +1,9 @@
 # My new things
 
-- images: 
+- images:
+
+![image](https://github.com/antkss/dots-hypr/assets/88892713/cfbb4f62-0fa0-40aa-bffb-36e0e0b5e347)
+
 
 ![image](https://github.com/antkss/dots-hypr/assets/88892713/da49a9b4-85ba-4f78-925f-dbe1e16b5d82)
 
