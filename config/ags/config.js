@@ -5,7 +5,7 @@ import GLib from 'gi://GLib';
 import App from 'resource:///com/github/Aylur/ags/app.js'
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 // import  {Recent} from './a.js';
-import center from './center/center.js'
+// import center from './center/center.js'
 // Widgets
 import userOptions from './modules/.configuration/user_options.js';
 import { Bar } from './modules/bar/main.js';
@@ -47,7 +47,7 @@ const Windows = () => [
     Overview(),
     forMonitors(Indicator),
     // Cheatsheet(),
-	center(0),
+	// center(0),
     side_chat(),
 	side_utils(),
     // SideRight(),

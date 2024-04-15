@@ -2,10 +2,9 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import options from './options.js';
 
 /** @param {import('types/widgets/box').BoxProps=} props */
-export default props => Widget.Box({ ...props, class_name: 'avatar' })
+export default props => Widget.Box()
     .hook(options.desktop.avatar, box => box.setCss(`
             background-image: url('/home/as/.images/logo.jpg');
-            background-size: cover;
         `))
     .on('size-allocate', box => {
         const h = box.get_allocated_height();

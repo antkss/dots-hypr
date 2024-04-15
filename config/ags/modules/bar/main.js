@@ -10,7 +10,7 @@ import System from "./normal/system.js";
 // import { RoundedCorner } from "../.commonwidgets/cairo_roundedcorner.js";
 // import { currentShellMode } from '../../variables.js';
 import hyprspace from './normal/workspaces_hyprland.js'
-import hyprfocus from './focus/workspaces_hyprland.js'
+// import hyprfocus from './focus/workspaces_hyprland.js'
 
 // const NormalOptionalWorkspaces = async () => {
 //     try {
