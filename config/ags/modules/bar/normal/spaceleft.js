@@ -19,7 +19,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 	    },
 	// hscroll: 'automatic', vscroll: 'never',
 		child: Widget.Box({
-		    css: `margin-left: 11px;`,
+			css: `margin-left: 11px;margin-top:2px;`,
 		    vertical: true,
 		    children: [
 			Widget.Label({
