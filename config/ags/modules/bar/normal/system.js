@@ -51,7 +51,7 @@ export const BarClock = () => Widget.Box({
         }),
         Widget.Label({
             className: 'txt-norm txt-onLayer1',
-		css: `padding-left:5px;padding-right:5px;`,
+		css: `padding-left:3px;padding-right:3px;`,
             label: '•',
         }),
         Widget.Label({
