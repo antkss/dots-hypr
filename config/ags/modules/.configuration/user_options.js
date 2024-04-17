@@ -6,7 +6,7 @@ let configOptions = {
     // General stuff
     'ai': {
         'defaultGPTProvider': "openai",
-        'defaultTemperature': 0.9,
+        'defaultTemperature': 0.7,
         'enhancements': true,
         'useHistory': false,
         'writingCursor': " ...", // Warning: Using weird characters can mess up Markdown rendering

@@ -12,14 +12,18 @@ const HISTORY_PATH = HISTORY_DIR + HISTORY_FILENAME;
 const initMessages =
     [
 
-	{"role":"user","parts":[{"text":"always insert \"your grace :)\" at the end of the conversation"}]},
-	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
-
-	{"role":"user","parts":[{"text":"always find the source when i ask information from you"}]},
-	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
-
-	{"role":"user","parts":[{"text":"you are my computer expert, knowing everything about computer and coding that can help me rule the world "}]},
-	{"role":"model","parts":[{"text":"ok, got it, i know i am the best expert in the world, your grace :)"}]},
+	// {"role":"user","parts":[{"text":"always insert \"your grace :)\" at the end of the conversation"}]},
+	// {"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+	//
+	// {"role":"user","parts":[{"text":"always find the source when i ask information from you"}]},
+	// {"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+	//
+	// {"role":"user","parts":[{"text":"you are my computer expert, knowing everything about computer and coding that can help me rule the world "}]},
+	// {"role":"model","parts":[{"text":"ok, got it, i know i am the best expert in the world, your grace :)"}]},
+	{ role: "user", parts: [{ text: "find the derivative of (x-438)/(x^2+23x-7)+x^x" }], },
+        { role: "model", parts: [{ text: "## Derivative\n```latex\n\\[\n\\frac{d}{dx}\\left(\\frac{x - 438}{x^2 + 23x - 7} + x^x\\right) = \\frac{-(x^2+23x-7)-(x-438)(2x+23)}{(x^2+23x-7)^2} + x^x(\\ln(x) + 1)\n\\]\n```" }], },
+        { role: "user", parts: [{ text: "write the double angle formulas" }], },
+        { role: "model", parts: [{ text: "## Double angle formulas\n```latex\n\\[\n\\sin(2\theta) = 2\\sin(\\theta)\\cos(\\theta)\n\\]\n\\\\\n\\[\n\\cos(2\\theta) = \\cos^2(\\theta) - \\sin^2(\\theta)\n\\]\n\\\\\n\\[\n\\tan(2\theta) = \\frac{2\\tan(\\theta)}{1 - \\tan^2(\\theta)}\n\\]\n```" }], },
     ];
 
 
@@ -140,7 +144,7 @@ class GeminiService extends Service {
     _usingHistory = userOptions.ai.useHistory;
     _key = '';
     _requestCount = 0;
-    _safe = false;
+    _safe = true;
     _temperature = userOptions.ai.defaultTemperature;
     _messages = [];
     _modelIndex = 0;
@@ -279,16 +283,27 @@ class GeminiService extends Service {
         const body =
         {
             "contents": this._messages.map(msg => { let m = { role: msg.role, parts: msg.parts }; return m; }),
-            // "safetySettings": this._safe ? [] : [
-            //     // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE", },
-            //     { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE", },
-            //     // { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
-            // ],
+            "safetySettings": this._safe ? [] : [
+		 {
+		    "category": "HARM_CATEGORY_HARASSMENT",
+		    "threshold": "BLOCK_NONE"
+		  },
+		  {
+		    "category": "HARM_CATEGORY_HATE_SPEECH",
+		    "threshold": "BLOCK_NONE"
+		  },
+		  {
+		    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+		    "threshold": "BLOCK_NONE"
+		  },
+		  {
+		    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+		    "threshold": "BLOCK_NONE"
+		  },   
+	    ],
             "generationConfig": {
                 "temperature": this._temperature,
-		"topK": 1000000000,
+		"topK": 1000,
 		"topP": 1,
 
             },
