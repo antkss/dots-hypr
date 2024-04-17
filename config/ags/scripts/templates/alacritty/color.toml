@@ -1,0 +1,12 @@
+[colors.normal]
+black = "0x10100E"
+blue = "0x{{ $primary }}"
+cyan = "0x20B2AA"
+green = "0x{{ $primary_paletteKeyColor }}"
+magenta = "0x9A4EAE"
+red = "0x{{ $primary_paletteKeyColor }}"
+white = "0x{{ $inverseSurface }}"
+yellow = "0x{{ $tertiaryFixedDim }}"
+[colors.primary]
+background = "0x{{ $background }}"
+foreground = "0xcbe3e7"

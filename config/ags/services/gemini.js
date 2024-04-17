@@ -19,7 +19,7 @@ const initMessages =
 	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
 
 	{"role":"user","parts":[{"text":"you are my computer expert, knowing everything about computer and coding that can help me rule the world "}]},
-	{"role":"model","parts":[{"text":"ok, got it, your grace :)"}]},
+	{"role":"model","parts":[{"text":"ok, got it, i know i am the best expert in the world, your grace :)"}]},
     ];
 
 

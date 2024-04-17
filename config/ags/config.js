@@ -13,7 +13,7 @@ import { Bar } from './modules/bar/main.js';
 // import DesktopBackground from './modules/desktopbackground/main.js';
 // import Dock from './modules/dock/main.js';
 import side_utils from './modules/sideleft/utils.js'
-import Corner from './modules/screencorners/main.js';
+// import Corner from './modules/screencorners/main.js';
 import Indicator from './modules/indicators/main.js';
 import Osk from './modules/onscreenkeyboard/main.js';
 import Overview from './modules/overview/main.js';
@@ -41,45 +41,22 @@ async function applyStyle() {
 applyStyle().catch(print);
 
 const Windows = () => [
-    // forMonitors(DesktopBackground),
-    // Dock(),
 	Lockscreen(),
-    Overview(),
-    forMonitors(Indicator),
-    // Cheatsheet(),
-	// center(0),
-    side_chat(),
+	Overview(),
+	forMonitors(Indicator),
+	side_chat(),
 	side_utils(),
-    // SideRight(),
-	// Recent(),
-    Osk(),
-    Session(),
-    // forMonitors(Bar),
-    // forMonitors(BarCornerTopleft),
-    // forMonitors(BarCornerTopright),
-    // forMonitors((id) => Corner(id, 'top left')),
-    // forMonitors((id) => Corner(id, 'top right')),
-	// forMonitors(BarCornerTopleft),
-	// forMonitors(BarCornerTopright),
-    // forMonitors((id) => Corner(id, 'bottom left')),
-    // forMonitors((id) => Corner(id, 'bottom right')),
+	Osk(),
+	Session(),
+
 ];
 
-// const CLOSE_ANIM_TIME = 150; // Longer than actual anim time to make sure widgets animate fully
-// const closeWindowDelays = {}; // For animations
-// for(let i = 0; i < (Gdk.Display.get_default()?.get_n_monitors() || 1); i++) {
-//     closeWindowDelays[`osk${i}`] = CLOSE_ANIM_TIME;
-// }
+
 App.config({
     css: `${COMPILED_STYLE_DIR}/style.css`,
     stackTraceOnError: true,
     windows: Windows().flat(1),
 });
 
-// Stuff that don't need to be toggled. And they're async so ugh...
-// Bar().catch(print); // Use this to debug the bar. Single monitor only.
-// BarCornerTopleft().catch(print); // Use this to debug the bar. Single monitor only.
-// BarCornerTopright().catch(print); // Use this to debug the bar. Single monitor only.
-// forMonitors(Bar);
 forMonitors(Bar);
 

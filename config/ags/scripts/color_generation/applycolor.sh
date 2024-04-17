@@ -199,35 +199,35 @@ mkdir -p "$HOME"/.cache/ags/user/generated/vimline
 # 		echo "[main]
 # include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
 # 	fi
-echo "
-[colors]
-background=${colorvalues[7]:1}
-foreground=${colorvalues[53]:1}
-regular0=242424  # black
-regular1=ff0000  # red
-regular2=55ff00  # green
-regular3=f2fa00  # yellow
-regular4=${colorvalues[27]:1}  # blue
-regular5=f2affd  # magenta
-regular6=13c299  # cyan
-regular7=e6e6e6  # white
-" > "$HOME"/.config/foot/colors.ini
-# fi
-echo "
-[colors.normal]
-black = \"0x10100E\"
-blue = \"0x${colorvalues[27]:1}\"
-cyan = \"0x20B2AA\"
-green = \"0x${colorvalues[2]:1}\"
-magenta = \"0x9A4EAE\"
-red = \"0x${colorvalues[2]:1}\"
-white = \"0x${colorvalues[20]:1}\"
-yellow = \"0x${colorvalues[53]:1}\"
-[colors.primary]
-background = \"0x${colorvalues[7]:1}\"
-foreground = \"0xcbe3e7\"
-" > "$HOME"/.config/alacritty/color.toml
-#
+
+mkdir -p "$HOME"/.cache/ags/user/generated/foot
+cp "scripts/templates/foot/colors.ini" "$HOME"/.cache/ags/user/generated/foot/colors.ini
+for i in "${!colorlist[@]}"; do
+    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/foot/colors.ini
+done
+cp "$HOME"/.cache/ags/user/generated/foot/colors.ini $HOME/.config/foot/colors.ini
+
+mkdir -p "$HOME"/.cache/ags/user/generated/alacritty
+cp "scripts/templates/alacritty/colors.ini" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
+for i in "${!colorlist[@]}"; do
+    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/foot/color.toml
+done
+cp "$HOME"/.cache/ags/user/generated/foot/color.toml $HOME/.config/foot/color.toml
+# echo "
+# [colors.normal]
+# black = \"0x10100E\"
+# blue = \"0x${colorvalues[27]:1}\"
+# cyan = \"0x20B2AA\"
+# green = \"0x${colorvalues[2]:1}\"
+# magenta = \"0x9A4EAE\"
+# red = \"0x${colorvalues[2]:1}\"
+# white = \"0x${colorvalues[20]:1}\"
+# yellow = \"0x${colorvalues[53]:1}\"
+# [colors.primary]
+# background = \"0x${colorvalues[7]:1}\"
+# foreground = \"0xcbe3e7\"
+# " > "$HOME"/.config/alacritty/color.toml
+
 # for i in "${!colorlist[@]}"; do
 #  echo "${colorlist[$i]}:[$i] ${colorvalues[$i]}"
 # done

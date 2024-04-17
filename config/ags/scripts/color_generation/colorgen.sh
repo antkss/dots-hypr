@@ -8,7 +8,7 @@ fi
 
 # check if the file ~/.cache/ags/user/colormode.txt exists. if not, create it. else, read it to $lightdark
 colormodefile="$HOME/.cache/ags/user/colormode.txt"
-lightdark="dark"
+lightdark="light"
 transparency="opaque"
 materialscheme="vibrant"
 if [ ! -f $colormodefile ]; then

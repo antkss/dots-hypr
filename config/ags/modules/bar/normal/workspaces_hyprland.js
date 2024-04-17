@@ -1,4 +1,4 @@
-const { GLib, Gdk, Gtk } = imports.gi;
+const { Gdk, Gtk } = imports.gi;
 const Lang = imports.lang;
 const Cairo = imports.cairo;
 const Pango = imports.gi.Pango;
@@ -161,7 +161,7 @@ export default () => EventBox({
         children: [Box({
             className: 'bar-group bar-group-standalone bar-group-pad',
             css: 'min-width: 2px;',
-            children: [WorkspaceContents(userOptions.workspaces.shown)],
+            children: [WorkspaceContents()],
         })]
     }),
     setup: (self) => {

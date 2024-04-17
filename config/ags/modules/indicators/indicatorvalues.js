@@ -24,6 +24,7 @@ const OsdValue = ({
     return Box({ // Volume
         vertical: true,
         hexpand: true,
+	    css:`min-height:5px;`,
         className: `osd-bg osd-value ${extraClassName}`,
         attribute: {
             'disable': () => {
@@ -101,7 +102,7 @@ export default () => {
         child: Box({
             hpack: 'center',
             vertical: false,
-            className: 'spacing-h--10',
+            // className: 'spacing-h--10',
             children: [
                 brightnessIndicator,
                 volumeIndicator,

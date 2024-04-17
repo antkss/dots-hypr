@@ -122,7 +122,7 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#0000
         },
         setup: (self) => self.attribute.render(self, content).catch(print),
     });
-    const wholeThing = Box({
+    const wholeThing = Widget.Entry({
         className: 'sidebar-chat-latex',
         homogeneous: true,
         attribute: {

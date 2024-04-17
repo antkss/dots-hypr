@@ -1,3 +1,4 @@
+
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Indicator from '../../services/indicator.js';
 import IndicatorValues from './indicatorvalues.js';
