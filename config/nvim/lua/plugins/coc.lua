@@ -52,6 +52,13 @@ return {
 					end
 				    end
 				    , opts)
+				    vim.cmd("hi CocFadeOut ctermfg=none guifg=grey")
+				-- vim.api.nvim_create_augroup("CocGroup", {})
+				-- vim.api.nvim_create_autocmd("CursorHold", {
+				--     group = "CocGroup",
+				--     command = "silent call CocActionAsync('highlight')",
+				--     desc = "Highlight symbol under cursor on CursorHold"
+				-- })
 			end,
 
 	},
@@ -60,7 +67,6 @@ return {
 		event = "VeryLazy",
 		config = function ()
 		vim.cmd("CodeiumEnable")
-		local opts = {silent = true, noremap = true, expr = true, replace_keycodes = true}
 		end
 	}
 
