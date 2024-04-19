@@ -9,6 +9,8 @@ return {
 	},
 	config = function()
 	vim.g.translator_target_lang = 'vi'
+	-- vim.keymap.set("n", "t", ":Translate --engine=bing <CR>", {noremap = true})
+	vim.keymap.set("v", "t", ":Translate --engine=bing <CR>", {noremap = true})
 	end,
 	},
 	{
@@ -53,6 +55,8 @@ return {
 				    end
 				    , opts)
 				    vim.cmd("hi CocFadeOut ctermfg=none guifg=grey")
+				    vim.cmd("hi CocFloating  ctermbg=0 guibg=nil")
+				    vim.cmd("hi CocMenuSel  ctermbg=yellow guibg=yellow")
 				-- vim.api.nvim_create_augroup("CocGroup", {})
 				-- vim.api.nvim_create_autocmd("CursorHold", {
 				--     group = "CocGroup",

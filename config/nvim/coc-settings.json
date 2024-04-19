@@ -1,7 +1,7 @@
 {
     //"coc.source.file.shortcut": "File",
     //"coc.source.around.shortcut": "?",
-    //"suggest.disableKind": true,
+"suggest.disableKind": true,
 "languageserver":{
    "clangd": {
     "command": "/usr/bin/clangd",
