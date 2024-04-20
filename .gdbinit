@@ -8,7 +8,8 @@ alias uf= disassemble
 alias nvim=!nvim
 alias cx=context
 alias at=attach
-alias px=!ps aux | grep -P '\.\/' | awk '{print $2, $11}'
+# alias px=!ps aux | grep -P '\.\/' | awk '{print $2, $11}'
+alias px = !px
 alias ff=search
 alias vm=vmmap
 alias tl=x/40xg
@@ -20,4 +21,4 @@ set enhance-integer-value-color green
 set enhance-string-value-color green
 set enhance-unknown-color green
 set telescope-skip-repeating-val off
-
+#
