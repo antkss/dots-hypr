@@ -1,0 +1,23 @@
+#!/bin/bash
+process=$(ps aux | grep -P '\.\/' | awk '{print $2, $11}')
+pids=($(ps aux | grep -P '\.\/' | awk '{print $2}' | tr '\n' " "))
+
+while true
+do 
+	if [ -z "$pids" ]; then
+		echo "no process running"
+		break
+	fi
+	for i in "${process}"; do
+		echo  "${process}"
+
+	done
+	read -p "Enter choice: " choice
+	if [ -z "$choice" ]; then
+		sudo gdb --pid ${pids[0]}
+		break
+	fi
+	sudo gdb --pid ${pids[$choice]}
+	break
+done
+
