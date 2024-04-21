@@ -14,6 +14,7 @@ alias ff=search
 alias vm=vmmap
 alias tl=x/40xg
 alias cls=!clear
+alias cx=checksec
 set context-sections regs disasm code ghidra stack expressions threads
 set context-register-color green
 set enhance-comment-color green
