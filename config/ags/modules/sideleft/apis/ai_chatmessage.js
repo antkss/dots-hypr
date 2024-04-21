@@ -210,18 +210,6 @@ const Divider = () => Box({
     className: 'sidebar-chat-divider',
 })
 
-const messagecontent = (content)=>{
-	return Label({
-
-		    hpack: 'fill',
-		    className: 'txt sidebar-chat-txtblock sidebar-chat-txt',
-		    useMarkup: true,
-		    xalign: 0,
-		    wrap: true,
-		    selectable: true,
-		label: content,
-	})
-}
 const MessageContent = (content) => {
     const contentBox = Box({
         vertical: true,
@@ -298,7 +286,7 @@ const MessageContent = (content) => {
 }
 
 export const ChatMessage = (message, modelName = 'Model') => {
-    const messageContentBox = messagecontent(message.content);
+    const messageContentBox = MessageContent(message.content);
     const thisMessage = Box({
         className: 'side_chat',
         homogeneous: true,
@@ -321,12 +309,11 @@ export const ChatMessage = (message, modelName = 'Model') => {
                         messageContentBox.toggleClassName('thinking', message.thinking);
                     }, 'notify::thinking')
                     .hook(message, (self) => { // Message update
-                        // messageContentBox.attribute.fullUpdate(messageContentBox, message.content, message.role != 'user');
-			    messageContentBox.label = message.content;
+                        messageContentBox.attribute.fullUpdate(messageContentBox, message.content, message.role != 'user');
                     }, 'notify::content')
-                    // .hook(message, (label, isDone) => { // Remove the cursor
-                    //     messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false);
-                    // }, 'notify::done')
+                    .hook(message, (label, isDone) => { // Remove the cursor
+                        messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false);
+                    }, 'notify::done')
                 ,
             })
         ]
@@ -335,7 +322,7 @@ export const ChatMessage = (message, modelName = 'Model') => {
 }
 
 export const SystemMessage = (content, commandName, scrolledWindow) => {
-    const messageContentBox = messagecontent(content);
+    const messageContentBox = MessageContent(content);
     const thisMessage = Box({
         className: 'sidebar-chat-message',
         children: [
