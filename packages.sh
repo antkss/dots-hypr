@@ -7,6 +7,6 @@ sudo usermod -aG seat $(whoami)
 sudo cp ./havefuns/randomdis.service /etc/systemd/system
 mkdir -p /home/$(whoami)/.bin/bin/
 cp ./havefuns/randomdis /home/$(whoami)/.bin/bin/
-mkdir /home/$(whoami)/.config
+# mkdir /home/$(whoami)/.config
 # cp ./havefuns/google.dark /home/$(whoami)/.config
 # cp ./havefuns/setcolors /home/$(whoami)/.bin/bin/
