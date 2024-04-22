@@ -3,8 +3,8 @@ return {
 
 	{
 		"antkss/onedark.nvim",
-		event = "VeryLazy",
-		config = function ()
+		-- event = "VeryLazy",
+		init = function ()
 			require("onedark").setup()
 			-- vim.cmd.colorscheme "onedark"
 			-- vim.opt.clipboard = "unnamedplus"

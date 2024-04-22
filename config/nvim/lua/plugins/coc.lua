@@ -56,7 +56,7 @@ return {
 				    , opts)
 				    vim.cmd("hi CocFadeOut ctermfg=none guifg=grey")
 				    vim.cmd("hi CocFloating  ctermbg=0 guibg=nil")
-				    vim.cmd("hi CocMenuSel  ctermbg=yellow guibg=yellow")
+				    -- vim.cmd("hi CocMenuSel  ctermbg=yellow guibg=yellow")
 				-- vim.api.nvim_create_augroup("CocGroup", {})
 				-- vim.api.nvim_create_autocmd("CursorHold", {
 				--     group = "CocGroup",
