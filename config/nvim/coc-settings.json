@@ -1,6 +1,7 @@
 {
-    //"coc.source.file.shortcut": "File",
-    //"coc.source.around.shortcut": "?",
+"border":true,
+"dialog.floatBorderHighlight":10,
+"suggest.floatConfig.border":true,
 "suggest.disableKind": true,
 "languageserver":{
    "clangd": {
@@ -13,5 +14,5 @@
   }
 }
 
-},
-        
+}
+       
