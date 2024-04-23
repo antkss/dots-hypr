@@ -201,18 +201,18 @@ mkdir -p "$HOME"/.cache/ags/user/generated/vimline
 # 	fi
 
 mkdir -p "$HOME"/.cache/ags/user/generated/foot
-cp "scripts/templates/foot/colors.ini" "$HOME"/.cache/ags/user/generated/foot/colors.ini
+cp "$HOME"/.config/ags/scripts/templates/foot/colors.ini "$HOME"/.cache/ags/user/generated/foot/colors.ini
 for i in "${!colorlist[@]}"; do
     sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/foot/colors.ini
 done
 cp "$HOME"/.cache/ags/user/generated/foot/colors.ini $HOME/.config/foot/colors.ini
 
 mkdir -p "$HOME"/.cache/ags/user/generated/alacritty
-cp "scripts/templates/alacritty/colors.ini" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
+cp "$HOME"/.config/ags/scripts/templates/alacritty/color.toml "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 for i in "${!colorlist[@]}"; do
-    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/foot/color.toml
+    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 done
-cp "$HOME"/.cache/ags/user/generated/foot/color.toml $HOME/.config/foot/color.toml
+cp "$HOME"/.cache/ags/user/generated/alacritty/color.toml $HOME/.config/alacritty/color.toml
 # echo "
 # [colors.normal]
 # black = \"0x10100E\"
