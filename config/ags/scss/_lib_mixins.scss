@@ -57,14 +57,15 @@ $rounding_verysmall: 0.477rem;
 @mixin techfont {
     // Monospace for sys info n stuff. Doesn't have to be a nerd font, but it's cool.
     font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font",
-        "JetBrains Mono NL", "SpaceMono NF", "SpaceMono Nerd Font", monospace;
+        "JetBrains Mono NL", "SpaceMono", "SpaceMono Nerd Font", monospace;
 }
 
 @mixin readingfont {
     // The most readable fonts, for a comfortable reading experience
     // in stuff like AI chat on sidebar
-    font-family: "Lexend", "Noto Sans", sans-serif;
-    // font-weight: 500;
+    font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code";
+    font-size: 12px;
+    font-weight: 600;
 }
 
 @mixin subtext {
