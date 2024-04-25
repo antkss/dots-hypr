@@ -281,7 +281,7 @@ const MessageContent = (content) => {
             }
         }
     });
-    contentBox.attribute.fullUpdate(contentBox, content, false);
+    // contentBox.attribute.fullUpdate(contentBox, content, false);
     return contentBox;
 }
 
