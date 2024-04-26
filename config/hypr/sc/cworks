@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 cur=$(hyprctl activeworkspace -j | jq -r '.id')
 ids=($(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tr '\n' ' '))
 declare -r las=$(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tail -1)
