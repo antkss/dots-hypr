@@ -7,7 +7,7 @@ function fish_greeting
 	if test -z $DISPLAY 
 		neofetch
 	end
-	set PATH /home/as/.bin/bin $PATH
+	set PATH /home/as/.bin/bin:/home/as/cac/ghidra_11.0_PUBLIC/jre/bin $PATH
 	alias learn="cd /home/as/pwnable"
 	alias intop="sudo intel_gpu_top"
 	alias kcsc="cd /home/as/kcsc"
