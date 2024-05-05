@@ -5,7 +5,7 @@ function ll
 end
 function fish_greeting                                            
 	if test -z $DISPLAY 
-		neofetch
+		fastfetch
 	end
 	set PATH /home/as/.bin/bin:/home/as/cac/ghidra_11.0_PUBLIC/jre/bin $PATH
 	alias learn="cd /home/as/pwnable"
