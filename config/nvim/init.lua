@@ -40,13 +40,15 @@ require("lazy").setup("plugins",{
 })
 vim.opt.termguicolors=true
 vim.o.updatetime = 250
+vim.opt.shiftwidth = 4
 
 vim.api.nvim_exec(
 	[[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
+    augroup YankHighlight
+	autocmd!
+	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+    augroup end
+
 ]],
 	false
 )
