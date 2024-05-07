@@ -130,8 +130,8 @@ export const ConfigMulipleSelection = ({
     onChange,
     ...rest
 }) => {
-    let lastSelected = initIndex;
-    let value = optionsArr[initIndex[0]][initIndex[1]].value;
+    // let lastSelected = initIndex;
+    // let value = optionsArr[initIndex[0]][initIndex[1]].value;
     const widget = Box({
         tooltipText: desc,
         className: 'multipleselection-container spacing-v-3',
