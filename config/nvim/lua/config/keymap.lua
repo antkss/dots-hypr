@@ -1,6 +1,6 @@
 -- copy things
 vim.api.nvim_set_keymap('n', 'q:','<nop>', {noremap = true})
-vim.api.nvim_set_keymap('t','<C-c>','<C-\\><C-n>', {noremap = true})
+-- vim.api.nvim_set_keymap('t','<C-c>','<C-\\><C-n>', {noremap = true})
 vim.api.nvim_set_keymap('n','<S-j>','<nop>', {noremap = true})
 vim.api.nvim_set_keymap('n','<c-j>','<C-d>', {noremap = true})
 vim.api.nvim_set_keymap('n','<c-k>','<C-u>', {noremap = true})
@@ -35,4 +35,4 @@ vim.api.nvim_set_keymap('v', 'd', '"+d', {noremap = true})
 vim.api.nvim_set_keymap('v', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('n', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('i','<Tab>', 'codeium#Accept()', {silent = true, expr = true})
--- vim.api.nvim_set_keymap('i','<C-c>','<Esc>', {noremap = true})
+vim.api.nvim_set_keymap('i','<C-c>','<Esc>', {noremap = true})
