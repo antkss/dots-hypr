@@ -23,7 +23,7 @@ read -p " " p
 case $p in "yes")sleep 0;; *)echo "Received \"$p\", aborting...";exit 1;;esac
 clear
 printf '\n'
-printf 'Do you want to confirm every time before a command executes?\n'
+printf 'Do you want to install ?\n'
 printf '  y = Yes, continue\n'
 printf '  a = Abort. (DEFAULT)\n'
 read -p "====> " p
