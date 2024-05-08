@@ -33,21 +33,21 @@ export default () => {
     const barStatusIcons = StatusIcons({
         className: 'bar-statusicons',
         setup: (self) => self.hook(App, (self, currentName, visible) => {
-            if (currentName === 'sideright') {
+            // if (currentName === 'sideright') {
                 self.toggleClassName('bar-statusicons-active', visible);
-            }
+            // }
         }),
     });
     const SpaceRightDefaultClicks = (child) => Widget.EventBox({
         onHover: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', true) },
         onHoverLost: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', false) },
         // onPrimaryClick: () => App.toggleWindow('sideright'),
-        onSecondaryClick: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']).catch(print),
-        onMiddleClick: () => execAsync('playerctl play-pause').catch(print),
-        setup: (self) => self.on('button-press-event', (self, event) => {
-            if (event.get_button()[1] === 8)
-                execAsync('playerctl previous').catch(print)
-        }),
+        // onSecondaryClick: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']).catch(print),
+        // onMiddleClick: () => execAsync('playerctl play-pause').catch(print),
+        // setup: (self) => self.on('button-press-event', (self, event) => {
+        //     if (event.get_button()[1] === 8)
+        //         execAsync('playerctl previous').catch(print)
+        // }),
         child: child,
     });
     const emptyArea = SpaceRightDefaultClicks(Widget.Box({ hexpand: true, }));
