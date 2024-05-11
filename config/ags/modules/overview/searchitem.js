@@ -3,8 +3,8 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 export const searchItem = ({ materialIconName, name, actionName, content, onActivate, extraClassName = '', ...rest }) => {
     const actionText = Widget.Revealer({
         revealChild: false,
-        // transition: "crossfade",
-        // transitionDuration: userOptions.animations.durationLarge,
+        transition: "crossfade",
+        transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Label({
             className: 'overview-search-results-txt txt txt-small txt-action',
             label: `${actionName}`,
@@ -12,8 +12,8 @@ export const searchItem = ({ materialIconName, name, actionName, content, onActi
     });
     const actionTextRevealer = Widget.Revealer({
         revealChild: false,
-        // transition: "slide_left",
-        // transitionDuration: userOptions.animations.durationSmall,
+        transition: "slide_left",
+        transitionDuration: userOptions.animations.durationSmall,
         child: actionText,
     })
     return Widget.Button({

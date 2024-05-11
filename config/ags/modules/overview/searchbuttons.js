@@ -1,17 +1,17 @@
 const { Gtk } = imports.gi;
-import GLib from 'gi://GLib';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync} = Utils;
+const { execAsync, exec } = Utils;
 import { searchItem } from './searchitem.js';
-import { execAndClose, launchCustomCommand } from './miscfunctions.js';
+import { execAndClose, couldBeMath, launchCustomCommand } from './miscfunctions.js';
+import GeminiService from '../../services/gemini.js';
 
 export const DirectoryButton = ({ parentPath, name, type, icon }) => {
     const actionText = Widget.Revealer({
         revealChild: false,
         transition: "crossfade",
-        // transitionDuration: userOptions.animations.durationLarge,
+        transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Label({
             className: 'overview-search-results-txt txt txt-small txt-action',
             label: 'Open',
@@ -20,7 +20,7 @@ export const DirectoryButton = ({ parentPath, name, type, icon }) => {
     const actionTextRevealer = Widget.Revealer({
         revealChild: false,
         transition: "slide_left",
-        // transitionDuration: userOptions.animations.durationSmall,
+        transitionDuration: userOptions.animations.durationSmall,
         child: actionText,
     });
     return Widget.Button({
@@ -74,20 +74,12 @@ export const CalculationResultButton = ({ result, text }) => searchItem({
         execAsync(['wl-copy', `${result}`]).catch(print);
     },
 });
-function iconExists(iconName) {
-    let iconTheme = Gtk.IconTheme.get_default();
-    return iconTheme.has_icon(iconName);
-}
-export const DesktopEntryButton = (app) => {
-	var appicon = app.iconName;
-	if (!iconExists(app.iconName)) {
-  appicon = `${GLib.get_user_config_dir()}/ags/assets/icons/logo.jpg`;
-	}
 
+export const DesktopEntryButton = (app,customIcon) => {
     const actionText = Widget.Revealer({
         revealChild: false,
         transition: "crossfade",
-        // transitionDuration: userOptions.animations.durationLarge,
+        transitionDuration: userOptions.animations.durationLarge,
         child: Widget.Label({
             className: 'overview-search-results-txt txt txt-small txt-action',
             label: 'Launch',
@@ -95,8 +87,8 @@ export const DesktopEntryButton = (app) => {
     });
     const actionTextRevealer = Widget.Revealer({
         revealChild: false,
-        // transition: "slide_left",
-        // transitionDuration: userOptions.animations.durationSmall,
+        transition: "slide_left",
+        transitionDuration: userOptions.animations.durationSmall,
         child: actionText,
     });
     return Widget.Button({
@@ -114,7 +106,7 @@ export const DesktopEntryButton = (app) => {
                             className: 'overview-search-results-icon',
                             homogeneous: true,
                             child: Widget.Icon({
-                                icon: appicon,
+                                icon: customIcon,
                             }),
                         }),
                         Widget.Label({
@@ -168,5 +160,17 @@ export const SearchButton = ({ text = '' }) => searchItem({
     onActivate: () => {
         App.closeWindow('overview');
         execAsync(['bash', '-c', `xdg-open '${userOptions.search.engineBaseUrl}${text} ${['', ...userOptions.search.excludedSites].join(' -site:')}' &`]).catch(print);
+    },
+});
+
+export const AiButton = ({ text }) => searchItem({
+    materialIconName: 'chat_paste_go',
+    name: 'Ask Gemini',
+    actionName: 'Ask',
+    content: `${text}`,
+    onActivate: () => {
+        GeminiService.send(text);
+        App.closeWindow('overview');
+        App.openWindow('sideleft');
     },
 });
