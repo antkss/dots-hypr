@@ -19,7 +19,7 @@ className:"side_chat",
 export default () => Window({
 	// className:"side_utils",
 	visible: false,
-    keymode: 'on-demand',
+    // keymode: 'on-demand',
     anchor: ['bottom','top','left'],
     name: 'side_utils',
     layer: 'top',

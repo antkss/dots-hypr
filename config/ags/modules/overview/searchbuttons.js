@@ -171,6 +171,6 @@ export const AiButton = ({ text }) => searchItem({
     onActivate: () => {
         GeminiService.send(text);
         App.closeWindow('overview');
-        App.openWindow('sideleft');
+        App.openWindow('side_chats');
     },
 });
