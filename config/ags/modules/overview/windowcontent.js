@@ -137,7 +137,7 @@ export const SearchAndWindows = () => {
             else {
                 GeminiService.send(text);
                 App.closeWindow('overview');
-                App.openWindow('sideleft');
+                App.openWindow('side_chat');
             }
         },
         onChange: (entry) => { // this is when you type
