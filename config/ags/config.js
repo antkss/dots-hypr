@@ -54,7 +54,7 @@ const Windows = () => [
 
 App.config({
     css: `${COMPILED_STYLE_DIR}/style.css`,
-    stackTraceOnError: true,
+    // stackTraceOnError: true,
     windows: Windows().flat(1),
 });
 

@@ -74,7 +74,7 @@ export const chatEntry = TextView({
     className: 'sidebar-chat-entry txt txt-smallie',
     setup: (self) => self
         .hook(App, (self, currentName, visible) => {
-            if (visible && currentName === 'sideleft') {
+            if (visible && currentName === 'side_chat') {
                 self.grab_focus();
             }
         })

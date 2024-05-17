@@ -5,7 +5,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { Box, Button, Icon, Label, Revealer, Scrollable } = Widget;
 import GeminiService from '../../../services/gemini.js';
 import { setupCursorHover, setupCursorHoverInfo } from '../../.widgetutils/cursorhover.js';
-import { SystemMessage, ChatMessage } from "./ai_chatmessage.js";
+import { SystemMessage, ChatMessage} from "./ai_chatmessage.js";
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../.commonwidgets/configwidgets.js';
 import { markdownTest } from '../../.miscutils/md2pango.js';
 import { MarginRevealer } from '../../.widgethacks/advancedrevealers.js';

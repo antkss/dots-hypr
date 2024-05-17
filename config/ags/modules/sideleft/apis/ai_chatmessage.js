@@ -14,6 +14,8 @@ const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/assets/themes/sourceview
 const CUSTOM_SCHEME_ID = `custom${darkMode.value ? '' : '-light'}`;
 const USERNAME = GLib.get_user_name();
 
+// Example using a wrapper object
+
 /////////////////////// Custom source view colorscheme /////////////////////////
 
 function loadCustomColorScheme(filePath) {
@@ -78,71 +80,71 @@ const TextBlock = (content = '') => Label({
 Utils.execAsync(['bash', '-c', `rm ${LATEX_DIR}/*`])
     .then(() => Utils.execAsync(['bash', '-c', `mkdir -p ${LATEX_DIR}`]))
     .catch(() => {  });
-const Latex = (content = '') => {
-    const latexViewArea = Box({
-        // vscroll: 'never',
-        // hscroll: 'automatic',
-        // homogeneous: true,
-        attribute: {
-            render: async (self, text) => {
-                if (text.length == 0) return;
-                const styleContext = self.get_style_context();
-                const fontSize = styleContext.get_property('font-size', Gtk.StateFlags.NORMAL);
-
-                const timeSinceEpoch = Date.now();
-                const fileName = `${timeSinceEpoch}.tex`;
-                const outFileName = `${timeSinceEpoch}-symbolic.svg`;
-                const outIconName = `${timeSinceEpoch}-symbolic`;
-                const scriptFileName = `${timeSinceEpoch}-render.sh`;
-                const filePath = `${LATEX_DIR}/${fileName}`;
-                const outFilePath = `${LATEX_DIR}/${outFileName}`;
-                const scriptFilePath = `${LATEX_DIR}/${scriptFileName}`;
-
-                Utils.writeFile(text, filePath).catch(print);
-                // Since MicroTex doesn't support file path input properly, we gotta cat it
-                // And escaping such a command is a fucking pain so I decided to just generate a script
-                // Note: MicroTex doesn't support `&=`
-                // You can add this line in the middle for debugging: echo "$text" > ${filePath}.tmp
-                const renderScript = `#!/usr/bin/env bash
-text=$(cat ${filePath} | sed 's/$/ \\\\\\\\/g' | sed 's/&=/=/g')
-LaTeX -headless -input="$text" -output=${outFilePath} -textsize=${fontSize * 1.1} -padding=0 -maxwidth=${latexViewArea.get_allocated_width() * 0.85}
-sed -i 's/fill="rgb(0%, 0%, 0%)"/style="fill:#000000"/g' ${outFilePath}
-sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#000000'}"/g' ${outFilePath}
-`;
-                Utils.writeFile(renderScript, scriptFilePath).catch(print);
-                Utils.exec(`chmod a+x ${scriptFilePath}`)
-                Utils.timeout(100, () => {
-                    Utils.exec(`bash ${scriptFilePath}`);
-                    Gtk.IconTheme.get_default().append_search_path(LATEX_DIR);
-
-                    self.child?.destroy();
-                    self.child = Gtk.Image.new_from_icon_name(outIconName, 0);
-                })
-            }
-        },
-        setup: (self) => self.attribute.render(self, content).catch(print),
-    });
-    const wholeThing = Widget.Entry({
-        className: 'sidebar-chat-latex',
-        homogeneous: true,
-        attribute: {
-            'updateText': (text) => {
-                latexViewArea.attribute.render(latexViewArea, text).catch(print);
-            }
-        },
-        children: [Scrollable({
-            vscroll: 'never',
-            hscroll: 'automatic',
-            child: latexViewArea
-        })]
-    })
-    return wholeThing;
-}
-
+// const Latex = (content = '') => {
+//     const latexViewArea = Box({
+//         // vscroll: 'never',
+//         // hscroll: 'automatic',
+//         // homogeneous: true,
+//         attribute: {
+//             render: async (self, text) => {
+//                 if (text.length == 0) return;
+//                 const styleContext = self.get_style_context();
+//                 const fontSize = styleContext.get_property('font-size', Gtk.StateFlags.NORMAL);
+//
+//                 const timeSinceEpoch = Date.now();
+//                 const fileName = `${timeSinceEpoch}.tex`;
+//                 const outFileName = `${timeSinceEpoch}-symbolic.svg`;
+//                 const outIconName = `${timeSinceEpoch}-symbolic`;
+//                 const scriptFileName = `${timeSinceEpoch}-render.sh`;
+//                 const filePath = `${LATEX_DIR}/${fileName}`;
+//                 const outFilePath = `${LATEX_DIR}/${outFileName}`;
+//                 const scriptFilePath = `${LATEX_DIR}/${scriptFileName}`;
+//
+//                 Utils.writeFile(text, filePath).catch(print);
+//                 // Since MicroTex doesn't support file path input properly, we gotta cat it
+//                 // And escaping such a command is a fucking pain so I decided to just generate a script
+//                 // Note: MicroTex doesn't support `&=`
+//                 // You can add this line in the middle for debugging: echo "$text" > ${filePath}.tmp
+//                 const renderScript = `#!/usr/bin/env bash
+// text=$(cat ${filePath} | sed 's/$/ \\\\\\\\/g' | sed 's/&=/=/g')
+// LaTeX -headless -input="$text" -output=${outFilePath} -textsize=${fontSize * 1.1} -padding=0 -maxwidth=${latexViewArea.get_allocated_width() * 0.85}
+// sed -i 's/fill="rgb(0%, 0%, 0%)"/style="fill:#000000"/g' ${outFilePath}
+// sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#000000'}"/g' ${outFilePath}
+// `;
+//                 Utils.writeFile(renderScript, scriptFilePath).catch(print);
+//                 Utils.exec(`chmod a+x ${scriptFilePath}`)
+//                 Utils.timeout(100, () => {
+//                     Utils.exec(`bash ${scriptFilePath}`);
+//                     Gtk.IconTheme.get_default().append_search_path(LATEX_DIR);
+//
+//                     self.child?.destroy();
+//                     self.child = Gtk.Image.new_from_icon_name(outIconName, 0);
+//                 })
+//             }
+//         },
+//         setup: (self) => self.attribute.render(self, content).catch(print),
+//     });
+//     const wholeThing = Widget.Entry({
+//         className: 'sidebar-chat-latex',
+//         homogeneous: true,
+//         attribute: {
+//             'updateText': (text) => {
+//                 latexViewArea.attribute.render(latexViewArea, text).catch(print);
+//             }
+//         },
+//         children: [Scrollable({
+//             vscroll: 'never',
+//             hscroll: 'automatic',
+//             child: latexViewArea
+//         })]
+//     })
+//     return wholeThing;
+// }
+//
 const CodeBlock = (content = '', lang = 'txt') => {
-    if (lang == 'tex' || lang == 'latex') {
-        return Latex(content);
-    }
+ //    if (lang == 'tex' || lang == 'latex') {
+	// return Latex(content);
+ //    }
     const topBar = Box({
         className: 'sidebar-chat-codeblock-topbar',
         children: [
@@ -229,6 +231,7 @@ const MessageContent = (content) => {
                 let inCode = false;
                 for (const [index, line] of lines.entries()) {
                     // Code blocks
+
                     const codeBlockRegex = /^\s*```([a-zA-Z0-9]+)?\n?/;
                     if (codeBlockRegex.test(line)) {
                         const kids = self.get_children();
@@ -278,7 +281,7 @@ const MessageContent = (content) => {
                 //     label: '------------------------------\n' + md2pango(content),
                 // }))
                 contentBox.show_all();
-            }
+            },
         }
     });
     // contentBox.attribute.fullUpdate(contentBox, content, false);
@@ -313,6 +316,7 @@ export const ChatMessage = (message, modelName = 'Model') => {
                     }, 'notify::content')
                     .hook(message, (label, isDone) => { // Remove the cursor
                         messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false);
+
                     }, 'notify::done')
                 ,
             })
