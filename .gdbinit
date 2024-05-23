@@ -1,7 +1,12 @@
 # source ~/cac/gef/gef.py
-# set debuginfod enabled off
+set debuginfod enabled on
 set auto-load safe-path /
+source /home/as/cac/pwndbg/gdbinit.py
+source /usr/lib/python3.12/site-packages/decomp2dbg/d2d.py
+alias de=decompiler
+alias angr=decompiler connect angr
 source /usr/share/pwndbg/gdbinit.py
+source /home/as/.my2.py
 # alias la=!ls --color=auto
 alias m=start
 alias uf= disassemble
@@ -15,7 +20,9 @@ alias vm=vmmap
 alias tl=x/40xg
 alias cls=!clear
 alias cs=checksec
-alias nec=nextc
+alias ne=nextjump
+alias pds=pdisass pc
+alias ls=!ls
 # alias ls=!ls --color=auto
 set context-sections code stack expressions threads disasm
 set context-register-color red
@@ -29,12 +36,21 @@ set memory-heap-color yellow
 set gcc-compiler-path /usr/bin/gcc
 set context-code-lines 1
 set context-stack-lines 6
+set show-flags on
+# set exec-wrapper env 'LD_PRELOAD=/home/as/Music/libc.so.6'
+# set exec-wrapper env 'LD_LIBRARY_PATH=/home/as/Music'
+# dir /home/as/cac/glibc-2.39/cac
 # set max-visualize-chunk-size 10
 set context-clear-screen on
 set resolve-heap-via-heuristic force
-define ls 
-!ls
+# define ls 
+# !ls
+# end
+define rm
+!rm
 end
 # gef region
 # theme address_stack yellow
 # gef config gef.bruteforce_main_arena True
+set history filename ~/.gdb_history
+
