@@ -6,7 +6,7 @@ source /usr/lib/python3.12/site-packages/decomp2dbg/d2d.py
 alias de=decompiler
 alias angr=decompiler connect angr
 source /usr/share/pwndbg/gdbinit.py
-source /home/as/.my2.py
+source /home/as/.gdbnew.py
 # alias la=!ls --color=auto
 alias m=start
 alias uf= disassemble
