@@ -52,15 +52,16 @@ function substituteLang(str) {
 
 const HighlightedCode = (content, lang) => {
     const buffer = new GtkSource.Buffer();
-    const sourceView = new GtkSource.View({
+    const sourceView = new Gtk.TextView({
+	editable: false,
         buffer: buffer,
         wrap_mode: Gtk.WrapMode.WORD,
     });
-    const langManager = GtkSource.LanguageManager.get_default();
-    let displayLang = langManager.get_language(substituteLang(lang)); // Set your preferred language
-    if (displayLang) {
-        buffer.set_language(displayLang);
-    }
+    // const langManager = GtkSource.LanguageManager.get_default();
+    // let displayLang = langManager.get_language(substituteLang(lang)); // Set your preferred language
+    // if (displayLang) {
+    //     buffer.set_language(displayLang);
+    // }
     const schemeManager = GtkSource.StyleSchemeManager.get_default();
     buffer.set_style_scheme(schemeManager.get_scheme(CUSTOM_SCHEME_ID));
     buffer.set_text(content, -1);
@@ -146,13 +147,16 @@ const CodeBlock = (content = '', lang = 'txt') => {
 	// return Latex(content);
  //    }
     const topBar = Box({
-        className: 'sidebar-chat-codeblock-topbar',
+        // className: 'sidebar-chat-codeblock-topbar',
+	className: 'txt sidebar-chat-txtblock sidebar-chat-txt',
+	css: `font-family: jetbrains mono;`,
         children: [
             Label({
                 label: lang,
-                className: 'sidebar-chat-codeblock-topbar-txt',
+                // className: 'sidebar-chat-codeblock-topbar-txt',
             }),
             Box({
+		className: 'spacing-h-5',
                 hexpand: true,
             }),
             Button({
@@ -183,11 +187,13 @@ const CodeBlock = (content = '', lang = 'txt') => {
                 sourceView.get_buffer().set_text(text, -1);
             }
         },
-        className: 'sidebar-chat-codeblock',
+        // className: 'sidebar-chat-codeblock',
         vertical: true,
         children: [
             Box({
-                className: 'sidebar-chat-codeblock-code',
+                // className: 'sidebar-chat-codeblock-code',
+		className: 'txt sidebar-chat-txtblock sidebar-chat-txt',
+		// css: `font-family: jetbrains mono;`,
                 homogeneous: true,
                 children: [Scrollable({
                     vscroll: 'never',
@@ -223,53 +229,53 @@ const MessageContent = (content) => {
                     const child = children[i];
                     child.destroy();
                 }
-                contentBox.add(TextBlock())
+                contentBox.add(CodeBlock(content))
                 // Loop lines. Put normal text in markdown parser
                 // and put code into code highlighter (TODO)
-                let lines = content.split('\n');
-                let lastProcessed = 0;
-                let inCode = false;
-                for (const [index, line] of lines.entries()) {
-                    // Code blocks
-
-                    const codeBlockRegex = /^\s*```([a-zA-Z0-9]+)?\n?/;
-                    if (codeBlockRegex.test(line)) {
-                        const kids = self.get_children();
-                        const lastLabel = kids[kids.length - 1];
-                        const blockContent = lines.slice(lastProcessed, index).join('\n');
-                        if (!inCode) {
-                            lastLabel.label = md2pango(blockContent);
-                            contentBox.add(CodeBlock('', codeBlockRegex.exec(line)[1]));
-                        }
-                        else {
-                            lastLabel.attribute.updateText(blockContent);
-                            contentBox.add(TextBlock());
-                        }
-
-                        lastProcessed = index + 1;
-                        inCode = !inCode;
-                    }
-                    // Breaks
-                    const dividerRegex = /^\s*---/;
-                    if (!inCode && dividerRegex.test(line)) {
-                        const kids = self.get_children();
-                        const lastLabel = kids[kids.length - 1];
-                        const blockContent = lines.slice(lastProcessed, index).join('\n');
-                        lastLabel.label = md2pango(blockContent);
-                        contentBox.add(Divider());
-                        contentBox.add(TextBlock());
-                        lastProcessed = index + 1;
-                    }
-                }
-                if (lastProcessed < lines.length) {
-                    const kids = self.get_children();
-                    const lastLabel = kids[kids.length - 1];
-                    let blockContent = lines.slice(lastProcessed, lines.length).join('\n');
-                    if (!inCode)
-                        lastLabel.label = `${md2pango(blockContent)}${useCursor ? userOptions.ai.writingCursor : ''}`;
-                    else
-                        lastLabel.attribute.updateText(blockContent);
-                }
+                // let lines = content.split('\n');
+                // let lastProcessed = 0;
+                // let inCode = false;
+                // for (const [index, line] of lines.entries()) {
+                //     // Code blocks
+                //
+                //     const codeBlockRegex = /^\s*```([a-zA-Z0-9]+)?\n?/;
+                //     if (codeBlockRegex.test(line)) {
+                //         const kids = self.get_children();
+                //         const lastLabel = kids[kids.length - 1];
+                //         const blockContent = lines.slice(lastProcessed, index).join('\n');
+                //         if (!inCode) {
+                //             lastLabel.label = md2pango(blockContent);
+                //             contentBox.add(CodeBlock('', codeBlockRegex.exec(line)[1]));
+                //         }
+                //         else {
+                //             lastLabel.attribute.updateText(blockContent);
+                //             contentBox.add(TextBlock());
+                //         }
+                //
+                //         lastProcessed = index + 1;
+                //         inCode = !inCode;
+                //     }
+                //     // Breaks
+                //     const dividerRegex = /^\s*---/;
+                //     if (!inCode && dividerRegex.test(line)) {
+                //         const kids = self.get_children();
+                //         const lastLabel = kids[kids.length - 1];
+                //         const blockContent = lines.slice(lastProcessed, index).join('\n');
+                //         lastLabel.label = md2pango(blockContent);
+                //         contentBox.add(Divider());
+                //         contentBox.add(TextBlock());
+                //         lastProcessed = index + 1;
+                //     }
+                // }
+                // if (lastProcessed < lines.length) {
+                //     const kids = self.get_children();
+                //     const lastLabel = kids[kids.length - 1];
+                //     let blockContent = lines.slice(lastProcessed, lines.length).join('\n');
+                //     if (!inCode)
+                //         lastLabel.label = `${md2pango(blockContent)}${useCursor ? userOptions.ai.writingCursor : ''}`;
+                //     else
+                //         lastLabel.attribute.updateText(blockContent);
+                // }
                 // Debug: plain text
                 // contentBox.add(Label({
                 //     hpack: 'fill',

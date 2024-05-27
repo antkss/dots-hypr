@@ -6,7 +6,7 @@ import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 // import GPTService from '../../services/gpt.js';
 import Gemini from '../../services/gemini.js';
 import { geminiView, geminiCommands, sendMessage as geminiSendMessage, geminiTabIcon } from './apis/gemini.js';
-// import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGPTTabIcon } from './apis/chatgpt.js';
+import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGPTTabIcon } from './apis/chatgpt.js';
 // import { waifuView, waifuCommands, sendMessage as waifuSendMessage, waifuTabIcon } from './apis/waifu.js';
 // import { booruView, booruCommands, sendMessage as booruSendMessage, booruTabIcon } from './apis/booru.js';
 import { enableClickthrough } from "../.widgetutils/clickthrough.js";
@@ -26,14 +26,14 @@ const APIS = [
         tabIcon: geminiTabIcon,
         placeholderText: 'Message Gemini...',
     },
-    // {
-    //     name: 'Assistant (GPTs)',
-    //     sendCommand: chatGPTSendMessage,
-    //     contentWidget: chatGPTView,
-    //     commandBar: chatGPTCommands,
-    //     tabIcon: chatGPTTabIcon,
-    //     placeholderText: 'Message the model...',
-    // },
+    {
+        name: 'Assistant (Groq)',
+        sendCommand: chatGPTSendMessage,
+        contentWidget: chatGPTView,
+        commandBar: chatGPTCommands,
+        tabIcon: chatGPTTabIcon,
+        placeholderText: 'Message the model...',
+    },
     // {
     //     name: 'Waifus',
     //     sendCommand: waifuSendMessage,

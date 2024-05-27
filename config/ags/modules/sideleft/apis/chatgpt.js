@@ -15,7 +15,7 @@ import { chatEntry } from '../apiwidgets.js';
 
 export const chatGPTTabIcon = Icon({
     hpack: 'center',
-    icon: `openai-symbolic`,
+    icon: `google-gemini-symbolic`,
 });
 
 const ProviderSwitcher = () => {
@@ -110,7 +110,7 @@ const GPTInfo = () => {
     const openAiLogo = Icon({
         hpack: 'center',
         className: 'sidebar-chat-welcome-logo',
-        icon: `openai-symbolic`,
+        icon: `google-gemini-symbolic`,
     });
     return Box({
         vertical: true,
@@ -121,7 +121,7 @@ const GPTInfo = () => {
                 className: 'txt txt-title-small sidebar-chat-welcome-txt',
                 wrap: true,
                 justify: Gtk.Justification.CENTER,
-                label: 'Assistant (GPTs)',
+                label: 'groq',
             }),
             Box({
                 className: 'spacing-h-5',
@@ -235,7 +235,7 @@ const GPTWelcome = () => Box({
     vexpand: true,
     homogeneous: true,
     child: Box({
-        className: 'spacing-v-15',
+        className: 'side_chat',
         vpack: 'center',
         vertical: true,
         children: [
