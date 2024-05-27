@@ -1,6 +1,8 @@
 
 import gdb
 import struct
+import re
+import pwndbg
 
 class TISCommand(gdb.Command):
     """Display stack or heap in a custom format."""
@@ -23,8 +25,17 @@ class TISCommand(gdb.Command):
             args = gdb.string_to_argv(arg)
             if len(args) == 1:
                 if args[0] == "heap":
-                    self.display_heap(40)  # Default to 40 lines if no number is provided
+                    self.display_heap(50)  # Default to 40 lines if no number is provided
                     return
+                else:
+                    try:
+                        lines = int(args[0])
+                        rsp_val = int(gdb.parse_and_eval("$rsp"))
+                        start_address = max(rsp_val, 0)  # Minimum address is 0
+                        self.display_memory(start_address-0x30, lines)
+                        return
+                    except ValueError:
+                        print("show with another format:")
                 start_address = self.parse_address(args[0])
                 if start_address is None:
                     print("Invalid address format.")
@@ -52,10 +63,20 @@ class TISCommand(gdb.Command):
                 return
         else:
             rsp_val = int(gdb.parse_and_eval("$rsp"))
-            start_address = max(rsp_val - 0x30, 0)  # Minimum address is 0
+            start_address = max(rsp_val, 0)  # Minimum address is 0
             lines = 12
+        try:
+            gdb.selected_inferior().read_memory(start_address-0x30, 0x10)
+            self.display_memory(start_address-0x30, lines)
+            return
+        except gdb.MemoryError as e:
+            gdb.selected_inferior().read_memory(start_address, 0x10)
+            self.display_memory(start_address, lines)
+            return
+        except gdb.MemoryError as e:
+            print(f"Error reading memory at 0x{start_address:016x}: {e}")
+            return
 
-        self.display_memory(start_address, lines)
 
     def display_memory(self, start_address, lines):
         block_color_index = 0
@@ -63,25 +84,31 @@ class TISCommand(gdb.Command):
             addr = start_address + i * 0x10
             offset = addr - start_address
             try:
+                address_str = ""
                 data = gdb.selected_inferior().read_memory(addr, 0x10)
                 values = struct.unpack("QQ", bytes(data))
                 ascii_rep = ''.join(chr(b) if 32 <= b <= 126 else '.' for b in bytes(data))
                 register_name = self.get_register_name(addr)
                 if register_name:
-                    address_str = f" -> {register_name}"
-                else:
-                    address_str = ""
+                    address_str += f" -> {register_name}"
                 address_str = address_str.ljust(8)
-                hex_str = f"{self.COLORS[block_color_index]}0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
-                ascii_str = f"{self.COLORS[block_color_index]}{ascii_rep}{self.RESET}"
-                print(f"{self.COLORS[block_color_index]}0x{offset:08x} | 0x{addr:016x} | {hex_str}\t{ascii_str}{self.RESET}{address_str}")
+
+                if addr == start_address+0x30:
+                    address_str += f" <- here"
+                    hex_str = f"0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
+                    ascii_str = f"{ascii_rep}{self.RESET}"
+                    offaddr = f"0x{offset:05x} | {hex(addr)}"
+                else:
+                    hex_str = f"{self.COLORS[block_color_index]}0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
+                    ascii_str = f"{self.COLORS[block_color_index]}{ascii_rep}{self.RESET}"
+                    offaddr = f"{self.COLORS[block_color_index]}0x{offset:05x} | {hex(addr)}"
+                print(f"{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}")
             except gdb.MemoryError as e:
                 print(f"Error reading memory at 0x{addr:016x}: {e}")
                 break
             except Exception as e:
                 print(f"Unexpected error: {e}")
                 break
-
             if (i + 1) % 5 == 0:
                 block_color_index = (block_color_index + 1) % len(self.COLORS)
 
