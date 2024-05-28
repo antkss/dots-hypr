@@ -31,7 +31,7 @@ class TISCommand(gdb.Command):
                         lines = int(args[0])
                         rsp_val = int(gdb.parse_and_eval("$rsp"))
                         start_address = max(rsp_val, 0)  # Minimum address is 0
-                        self.display_memory(start_address-0x30, lines)
+                        self.display_memory(start_address-0x30, lines,False)
                         return
                     except ValueError:
                         gdb.write("show with another format:\n")
@@ -66,19 +66,20 @@ class TISCommand(gdb.Command):
             lines = 12
         try:
             gdb.selected_inferior().read_memory(start_address-0x30, 0x10)
-            self.display_memory(start_address-0x30, lines)
+            self.display_memory(start_address-0x30, lines,True)
             return
         except gdb.MemoryError as e:
             gdb.selected_inferior().read_memory(start_address, 0x10)
-            self.display_memory(start_address, lines)
+            self.display_memory(start_address, lines,True)
             return
         except gdb.MemoryError as e:
             gdb.write(f"Error reading memory at 0x{start_address:016x}: {e}\n")
             return
 
 
-    def display_memory(self, start_address, lines):
+    def display_memory(self, start_address, lines,isheap=True):
         block_color_index = 0
+        heapcolor = 0
         for i in range(lines):
             addr = start_address + i * 0x10
             offset = addr - start_address
@@ -91,17 +92,21 @@ class TISCommand(gdb.Command):
                 if register_name:
                     address_str += f" -> {register_name}"
                 address_str = address_str.ljust(8)
-
+                hex_str = f"0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
+                ascii_str = f"{ascii_rep}{self.RESET}"
+                offaddr = f"0x{offset:05x} | {hex(addr)}"
                 if addr == start_address+0x30:
                     address_str += f" <- here"
-                    hex_str = f"0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
-                    ascii_str = f"{ascii_rep}{self.RESET}"
-                    offaddr = f"0x{offset:05x} | {hex(addr)}"
+                if isheap:
+                    gdb.write(f"{self.COLORS[heapcolor]}{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}\n")
+                    if values[1]:
+                        heapcolor = (heapcolor + 1) % len(self.COLORS)
+                        
                 else:
                     hex_str = f"{self.COLORS[block_color_index]}0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
                     ascii_str = f"{self.COLORS[block_color_index]}{ascii_rep}{self.RESET}"
                     offaddr = f"{self.COLORS[block_color_index]}0x{offset:05x} | {hex(addr)}"
-                gdb.write(f"{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}\n")
+                    gdb.write(f"{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}\n")
             except gdb.MemoryError as e:
                 gdb.write(f"Error reading memory at 0x{addr:016x}: {e}\n")
                 break
@@ -121,7 +126,7 @@ class TISCommand(gdb.Command):
                     start_address = int(parts[0], 16)
                     end_address = int(parts[1], 16)
                     actual_lines = min((end_address - start_address) // 0x10, lines)
-                    self.display_memory(start_address, actual_lines)
+                    self.display_memory(start_address, actual_lines,True)
                     # self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
                     return
             gdb.write("Heap segment not found.\n")
@@ -187,8 +192,38 @@ class NeCommand(gdb.Command):
             pc = frame.pc()
             instructions = []
             current_pc = pc
-            point = ["jmp", "je", "jne", "jl", "jle", "jg", "jge", "call","cmp","ret"]
-
+            point = [
+            "jmp",  # Unconditional jump
+            "je",   # Jump if equal
+            "jne",  # Jump if not equal
+            "jz",   # Jump if zero
+            "jnz",  # Jump if not zero
+            "jc",   # Jump if carry
+            "jnc",  # Jump if not carry
+            "jo",   # Jump if overflow
+            "jno",  # Jump if not overflow
+            "js",   # Jump if sign
+            "jns",  # Jump if not sign
+            "jp",   # Jump if parity
+            "jnp",  # Jump if not parity
+            "jl",   # Jump if less
+            "jge",  # Jump if greater or equal
+            "jle",  # Jump if less or equal
+            "jg",   # Jump if greater
+            "ja",   # Jump if above
+            "jna",  # Jump if not above
+            "jb",   # Jump if below
+            "jnb",  # Jump if not below
+            "jbe",  # Jump if below or equal
+            "jae",  # Jump if above or equal
+            "jcxz", # Jump if CX is zero
+            "loop", # Loop until CX is zero
+            "loope", # Loop while equal
+            "loopne", # Loop while not equal
+            "call",
+            "cmp",
+            "ret"
+            ]
             # Disassemble until we have enough instructions
             while len(instructions) < count:
                 next_instructions = arch.disassemble(current_pc, current_pc + 16)

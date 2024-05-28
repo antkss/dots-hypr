@@ -2,7 +2,6 @@
 import gdb
 import struct
 import re
-import pwndbg
 
 class TISCommand(gdb.Command):
     """Display stack or heap in a custom format."""
@@ -35,10 +34,10 @@ class TISCommand(gdb.Command):
                         self.display_memory(start_address-0x30, lines)
                         return
                     except ValueError:
-                        print("show with another format:")
+                        gdb.write("show with another format:\n")
                 start_address = self.parse_address(args[0])
                 if start_address is None:
-                    print("Invalid address format.")
+                    gdb.write("Invalid address format.\n")
                     return
                 lines = 12  # Default count
             elif len(args) == 2:
@@ -47,19 +46,19 @@ class TISCommand(gdb.Command):
                         lines = int(args[1])
                         self.display_heap(lines)
                     except ValueError:
-                        print("Invalid number of lines.")
+                        gdb.write("Invalid number of lines.\n")
                     return
                 start_address = self.parse_address(args[0])
                 if start_address is None:
-                    print("Invalid address format.")
+                    gdb.write("Invalid address format.\n")
                     return
                 try:
                     lines = int(args[1])
                 except ValueError:
-                    print("Invalid number of lines.")
+                    gdb.write("Invalid number of lines.\n")
                     return
             else:
-                print("Usage: tis <address> [lines] or tis heap [lines]")
+                gdb.write("Usage: tis <address> [lines] or tis heap [lines]\n")
                 return
         else:
             rsp_val = int(gdb.parse_and_eval("$rsp"))
@@ -74,7 +73,7 @@ class TISCommand(gdb.Command):
             self.display_memory(start_address, lines)
             return
         except gdb.MemoryError as e:
-            print(f"Error reading memory at 0x{start_address:016x}: {e}")
+            gdb.write(f"Error reading memory at 0x{start_address:016x}: {e}\n")
             return
 
 
@@ -102,12 +101,12 @@ class TISCommand(gdb.Command):
                     hex_str = f"{self.COLORS[block_color_index]}0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
                     ascii_str = f"{self.COLORS[block_color_index]}{ascii_rep}{self.RESET}"
                     offaddr = f"{self.COLORS[block_color_index]}0x{offset:05x} | {hex(addr)}"
-                print(f"{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}")
+                gdb.write(f"{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}\n")
             except gdb.MemoryError as e:
-                print(f"Error reading memory at 0x{addr:016x}: {e}")
+                gdb.write(f"Error reading memory at 0x{addr:016x}: {e}\n")
                 break
             except Exception as e:
-                print(f"Unexpected error: {e}")
+                gdb.write(f"Unexpected error: {e}\n")
                 break
             if (i + 1) % 5 == 0:
                 block_color_index = (block_color_index + 1) % len(self.COLORS)
@@ -123,29 +122,29 @@ class TISCommand(gdb.Command):
                     end_address = int(parts[1], 16)
                     actual_lines = min((end_address - start_address) // 0x10, lines)
                     self.display_memory(start_address, actual_lines)
-                    self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
+                    # self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
                     return
-            print("Heap segment not found.")
+            gdb.write("Heap segment not found.\n")
         except gdb.error as e:
-            print(f"Error retrieving heap segment: {e}")
+            gdb.write(f"Error retrieving heap segment: {e}\n")
 
-    def count_heap_chunks(self, start_address, end_address):
-        chunk_count = 0
-        addr = start_address
-        try:
-            while addr < end_address:
-                data = gdb.selected_inferior().read_memory(addr, 0x8)
-                chunk_size = struct.unpack("Q", bytes(data))[0] & ~0x7  # Mask out flags in the size
-                if chunk_size == 0:
-                    break
-                chunk_count += 1
-                addr += chunk_size
-            print(f"Number of heap chunks: {chunk_count}")
-        except gdb.MemoryError as e:
-            print(f"Error reading memory at 0x{addr:016x}: {e}")
-        except Exception as e:
-            print(f"Unexpected error: {e}")
-
+    # def count_heap_chunks(self, start_address, end_address):
+    #     chunk_count = 0
+    #     addr = start_address
+    #     try:
+    #         while addr < end_address:
+    #             data = gdb.selected_inferior().read_memory(addr, 0x8)
+    #             chunk_size = struct.unpack("Q", bytes(data))[0] & ~0x7  # Mask out flags in the size
+    #             if chunk_size == 0:
+    #                 break
+    #             chunk_count += 1
+    #             addr += chunk_size
+    #         gdb.write(f"Number of heap chunks: {chunk_count}\n")
+    #     except gdb.MemoryError as e:
+    #         gdb.write(f"Error reading memory at 0x{addr:016x}: {e}")
+    #     except Exception as e:
+    #         gdb.write(f"Unexpected error: {e}")
+    #
     def get_register_name(self, address):
         frame = gdb.selected_frame()
         arch = frame.architecture()
@@ -176,4 +175,52 @@ class TISCommand(gdb.Command):
             return None
 
 TISCommand()
+
+class NeCommand(gdb.Command):
+    def __init__(self):
+        super(NeCommand, self).__init__("ne", gdb.COMMAND_USER)
+    def Nefunction(self):
+        try:
+            count = 10  # Number of instructions to disassemble
+            frame = gdb.selected_frame()
+            arch = frame.architecture()
+            pc = frame.pc()
+            instructions = []
+            current_pc = pc
+            point = ["jmp", "je", "jne", "jl", "jle", "jg", "jge", "call","cmp","ret"]
+
+            # Disassemble until we have enough instructions
+            while len(instructions) < count:
+                next_instructions = arch.disassemble(current_pc, current_pc + 16)
+                if not next_instructions:
+                    break
+                instructions.extend(next_instructions)
+                current_pc = next_instructions[-1]['addr'] + next_instructions[-1]['length']
+            for i in range(count-1):
+                nexti = instructions[i+1]['asm'].split()[0]
+                # print(instructions[i]['asm'])
+                if nexti in point:
+                    gdb.execute(f"ni {i+1}")
+                    # print(i+1)
+                    # print(instructions[i+1]['asm'])
+                    return
+            gdb.execute(f"ni")
+        except:
+            gdb.write("program is stopped !!\n")
+                
+
+
+        # for ins in instructions[1:count+1]:  # Start from the second instruction and limit to 'count' instructions
+        #     asm_parts = ins['asm'].split()
+        #     asm = asm_parts[0] if asm_parts else ""  # Extract the mnemonic instruction
+        #     marker = "=>" if ins['addr'] == pc else "  "
+        #     gdb.write(f"{marker} {asm}\n")
+
+
+    def invoke(self, arg, from_tty):
+        self.Nefunction()
+
+NeCommand()
+
+
 
