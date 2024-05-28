@@ -3,28 +3,35 @@ set debuginfod enabled on
 set auto-load safe-path /
 source /home/as/cac/pwndbg/gdbinit.py
 source /usr/lib/python3.12/site-packages/decomp2dbg/d2d.py
+source /home/as/.gdbnew.py
+# source /usr/share/pwndbg/gdbinit.py
 alias de=decompiler
 alias angr=decompiler connect angr
-source /usr/share/pwndbg/gdbinit.py
-source /home/as/.gdbnew.py
+define ls 
+!ls
+end
+define rm
+!rm
+end
 # alias la=!ls --color=auto
 alias m=start
 alias uf= disassemble
 alias nvim=!nvim
-alias cx=context
 alias at=attach
 alias px=!ps aux | grep -P '\.\/' | awk '{print $2, $11}'
-# alias px = !px
 alias ff=search
+alias cx=context
+# alias px = !px
 alias vm=vmmap
+alias ghi=decompiler connect ghidra
 alias tl=x/40xg
 alias cls=!clear
 alias cs=checksec
-alias ne=nextjump
+# alias ne=nextjump
 alias pds=pdisass pc
-alias ls=!ls
+# alias ls=!ls
 # alias ls=!ls --color=auto
-set context-sections code stack expressions threads disasm
+set context-sections code stack ghidra expressions threads disasm
 set context-register-color red
 set context-register-changed-color underline
 set enhance-comment-color green
@@ -43,14 +50,10 @@ set show-flags on
 # set max-visualize-chunk-size 10
 set context-clear-screen on
 set resolve-heap-via-heuristic force
-# define ls 
-# !ls
-# end
-define rm
-!rm
-end
+
 # gef region
 # theme address_stack yellow
 # gef config gef.bruteforce_main_arena True
 set history filename ~/.gdb_history
+
 
