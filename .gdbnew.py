@@ -58,7 +58,7 @@ class TISCommand(gdb.Command):
                     gdb.write("Invalid number of lines.\n")
                     return
             else:
-                gdb.write("Usage: tis <address> [lines] or tis heap [lines]")
+                gdb.write("Usage: tis <address> [lines] or tis heap [lines]\n")
                 return
         else:
             rsp_val = int(gdb.parse_and_eval("$rsp"))
@@ -73,7 +73,7 @@ class TISCommand(gdb.Command):
             self.display_memory(start_address, lines)
             return
         except gdb.MemoryError as e:
-            gdb.write(f"Error reading memory at 0x{start_address:016x}: {e}")
+            gdb.write(f"Error reading memory at 0x{start_address:016x}: {e}\n")
             return
 
 
@@ -106,7 +106,7 @@ class TISCommand(gdb.Command):
                 gdb.write(f"Error reading memory at 0x{addr:016x}: {e}\n")
                 break
             except Exception as e:
-                gdb.write(f"Unexpected error: {e}")
+                gdb.write(f"Unexpected error: {e}\n")
                 break
             if (i + 1) % 5 == 0:
                 block_color_index = (block_color_index + 1) % len(self.COLORS)
@@ -122,29 +122,29 @@ class TISCommand(gdb.Command):
                     end_address = int(parts[1], 16)
                     actual_lines = min((end_address - start_address) // 0x10, lines)
                     self.display_memory(start_address, actual_lines)
-                    self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
+                    # self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
                     return
-            gdb.write("Heap segment not found.")
+            gdb.write("Heap segment not found.\n")
         except gdb.error as e:
-            gdb.write(f"Error retrieving heap segment: {e}")
+            gdb.write(f"Error retrieving heap segment: {e}\n")
 
-    def count_heap_chunks(self, start_address, end_address):
-        chunk_count = 0
-        addr = start_address
-        try:
-            while addr < end_address:
-                data = gdb.selected_inferior().read_memory(addr, 0x8)
-                chunk_size = struct.unpack("Q", bytes(data))[0] & ~0x7  # Mask out flags in the size
-                if chunk_size == 0:
-                    break
-                chunk_count += 1
-                addr += chunk_size
-            gdb.write(f"Number of heap chunks: {chunk_count}")
-        except gdb.MemoryError as e:
-            gdb.write(f"Error reading memory at 0x{addr:016x}: {e}")
-        except Exception as e:
-            gdb.write(f"Unexpected error: {e}")
-
+    # def count_heap_chunks(self, start_address, end_address):
+    #     chunk_count = 0
+    #     addr = start_address
+    #     try:
+    #         while addr < end_address:
+    #             data = gdb.selected_inferior().read_memory(addr, 0x8)
+    #             chunk_size = struct.unpack("Q", bytes(data))[0] & ~0x7  # Mask out flags in the size
+    #             if chunk_size == 0:
+    #                 break
+    #             chunk_count += 1
+    #             addr += chunk_size
+    #         gdb.write(f"Number of heap chunks: {chunk_count}\n")
+    #     except gdb.MemoryError as e:
+    #         gdb.write(f"Error reading memory at 0x{addr:016x}: {e}")
+    #     except Exception as e:
+    #         gdb.write(f"Unexpected error: {e}")
+    #
     def get_register_name(self, address):
         frame = gdb.selected_frame()
         arch = frame.architecture()
