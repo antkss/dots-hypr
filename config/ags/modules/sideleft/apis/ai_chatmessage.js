@@ -142,7 +142,7 @@ Utils.execAsync(['bash', '-c', `rm ${LATEX_DIR}/*`])
 //     return wholeThing;
 // }
 //
-const CodeBlock = (content = '', lang = 'txt') => {
+const CodeBlock = (content = '', lang = 'message') => {
  //    if (lang == 'tex' || lang == 'latex') {
 	// return Latex(content);
  //    }
@@ -286,13 +286,24 @@ const MessageContent = (content) => {
                 //     selectable: true,
                 //     label: '------------------------------\n' + md2pango(content),
                 // }))
-                contentBox.show_all();
+                // contentBox.show_all();
             },
         }
     });
     // contentBox.attribute.fullUpdate(contentBox, content, false);
     return contentBox;
 }
+const codebox = (content = '') =>{
+    const contentbox = Box({
+	    className: 'sidebar-chat-codeblock',
+	    vertical: true,
+	    child: CodeBlock(content),
+
+    })
+
+}
+
+
 
 export const ChatMessage = (message, modelName = 'Model') => {
     const messageContentBox = MessageContent(message.content);
@@ -311,19 +322,20 @@ export const ChatMessage = (message, modelName = 'Model') => {
                         useMarkup: true,
                         label: (message.role == 'user' ? USERNAME : modelName),
                     }),
-                    messageContentBox,
+		    messageContentBox
+		    // CodeBlock(message.content),
                 ],
                 setup: (self) => self
-                    .hook(message, (self, isThinking) => {
-                        messageContentBox.toggleClassName('thinking', message.thinking);
-                    }, 'notify::thinking')
+                    // .hook(message, (self, isThinking) => {
+                    //     messageContentBox.toggleClassName('thinking', message.thinking);
+                    // }, 'notify::thinking')
                     .hook(message, (self) => { // Message update
-                        messageContentBox.attribute.fullUpdate(messageContentBox, message.content, message.role != 'user');
+                        messageContentBox.attribute.fullUpdate(messageContentBox, message.content);
                     }, 'notify::content')
-                    .hook(message, (label, isDone) => { // Remove the cursor
-                        messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false);
-
-                    }, 'notify::done')
+                    // .hook(message, (label, isDone) => { // Remove the cursor
+                    //     messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false);
+                    //
+                    // }, 'notify::done')
                 ,
             })
         ]

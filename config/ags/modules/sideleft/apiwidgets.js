@@ -88,10 +88,11 @@ export const chatEntry = TextView({
         }, 'hasKey')
         .on("key-press-event", (widget, event) => {
             // Don't send when Shift+Enter
-            if (event.get_keyval()[1] === Gdk.KEY_Return && event.get_state()[1] == Gdk.ModifierType.MOD2_MASK) {
+	    if (event.get_keyval()[1] === Gdk.KEY_Return && !(event.get_state()[1] & Gdk.ModifierType.SHIFT_MASK)) {
                 apiSendMessage(widget);
                 return true;
             }
+
             // Keybinds
             // if (checkKeybind(event, userOptions.keybinds.sidebar.cycleTab))
             //     widgetContent.cycleTab();
@@ -161,17 +162,20 @@ const chatPlaceholderRevealer = Revealer({
 });
 
 
-export const textbox = Widget.Entry({
-        className: 'sidebar-chat-textarea',
-	placeholder_text: 'Type here to chat ...',
-	visibility: true,
-        onAccept: (self) => { // This is when you hit Enter
-		APIS[currentApiId].sendCommand(self.text);
-		self.get_buffer().set_text("", -1);
-
-	},
-      
+export const textbox = Widget.Box({ // Entry area
+    className: 'sidebar-chat-textarea',
+    children: [
+        Widget.Overlay({
+            passThrough: true,
+            child: chatEntryWrapper,
+            overlays: [chatPlaceholderRevealer],
+        }),
+        Widget.Box({ className: 'width-10' }),
+        chatSendButton,
+    ]
 });
+
+
 
 const apiCommandStack = Stack({
     // transition: 'slide_up_down',
@@ -212,10 +216,10 @@ const apiWidgets = Widget.Box({
         apiCommandStack,
         textbox,
     ],
-}).keybind(["SHIFT"],"Return", (self, event) => {
-	// textbox.set_position(1);
-	textbox.set_text(textbox.text + "\n");
-	textbox.set_position(-1)
-});
-
+})
+// .keybind(["SHIFT"],"Return", (self, event) => {
+// 	// textbox.set_position(1);
+// 	textbox.set_text(textbox.text + "\n");
+// 	textbox.set_position(-1)
+// });
 export default apiWidgets;

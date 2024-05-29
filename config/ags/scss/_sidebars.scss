@@ -591,7 +591,8 @@ $colorpicker_rounding: 0.341rem;
 
 .sidebar-chat-textarea {
     @include normal-rounding;
-    background-color: $surfaceContainerHigh;
+    @include mainfont;
+    background-color: $background;
     color: $onSurfaceVariant;
     padding: 0.682rem;
     border: 0.068rem solid $outline;

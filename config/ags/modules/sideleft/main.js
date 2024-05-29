@@ -25,7 +25,7 @@ const side_chats = Box({
                     widget != textbox && event.get_keyval()[1] != Gdk.KEY_space)
                     ||
                     ((event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
-                        event.get_keyval()[1] === Gdk.KEY_v)
+                        event.get_keyval()[1] === Gdk.KEY_V)
                 ) {
                     textbox.grab_focus();
                     const buffer = textbox.get_buffer();

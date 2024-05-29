@@ -175,8 +175,7 @@ export const chatContent = Box({
             const message = GeminiService.messages[id];
             if (!message) return;
             box.add(ChatMessage(message, MODEL_NAME))
-        }, 'newMsg')
-    ,
+        }, 'newMsg'),
 });
 
 const clearChat = () => {
@@ -186,6 +185,9 @@ const clearChat = () => {
         const child = children[i];
         child.destroy();
     }
+}
+const stop = () => {
+    GeminiService.stop();
 }
 
 const CommandButton = (command) => Button({
@@ -202,6 +204,7 @@ export const geminiCommands = Box({
         CommandButton('/key'),
         CommandButton('/model'),
         CommandButton('/clear'),
+	// CommandButton('/stop'),
     ]
 });
 
