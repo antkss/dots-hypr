@@ -77,9 +77,16 @@ class TISCommand(gdb.Command):
             return
 
 
-    def display_memory(self, start_address, lines,isheap=True):
+    def display_memory(self, start_address, lines,isheap=True,head=False):
         block_color_index = 0
         heapcolor = 0
+        headl = []
+        for i in range(lines):
+            addr = start_address + i * 0x10
+            data = gdb.selected_inferior().read_memory(addr, 0x10)
+            values = struct.unpack("QQ", bytes(data))
+            if values[1]:
+                headl.append(addr)
         for i in range(lines):
             addr = start_address + i * 0x10
             offset = addr - start_address
@@ -107,6 +114,9 @@ class TISCommand(gdb.Command):
                     ascii_str = f"{self.COLORS[block_color_index]}{ascii_rep}{self.RESET}"
                     offaddr = f"{self.COLORS[block_color_index]}0x{offset:05x} | {hex(addr)}"
                     gdb.write(f"{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}\n")
+                if head:
+                    if addr == headl[len(headl)-1]+16:
+                        return
             except gdb.MemoryError as e:
                 gdb.write(f"Error reading memory at 0x{addr:016x}: {e}\n")
                 break
@@ -116,7 +126,8 @@ class TISCommand(gdb.Command):
             if (i + 1) % 5 == 0:
                 block_color_index = (block_color_index + 1) % len(self.COLORS)
 
-    def display_heap(self, lines=40):
+
+    def display_heap(self, lines=300):
         try:
             # Assume the heap boundaries can be determined from the heap segment in the memory mappings
             mappings = gdb.execute("info proc mappings", to_string=True)
@@ -126,7 +137,7 @@ class TISCommand(gdb.Command):
                     start_address = int(parts[0], 16)
                     end_address = int(parts[1], 16)
                     actual_lines = min((end_address - start_address) // 0x10, lines)
-                    self.display_memory(start_address, actual_lines,True)
+                    self.display_memory(start_address, actual_lines,True,True)
                     # self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
                     return
             gdb.write("Heap segment not found.\n")
