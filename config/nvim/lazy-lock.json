@@ -1,17 +1,17 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
-  "coc.nvim": { "branch": "release", "commit": "ca6d569d0758ad58d5c3def72ac0e09545820991" },
-  "codeium.vim": { "branch": "main", "commit": "31dd2962c81759be007895db6ce089feec397c86" },
+  "coc.nvim": { "branch": "release", "commit": "f0ce9ae23d6ce9d0cbabe73bdb738e45accc6f08" },
+  "codeium.vim": { "branch": "main", "commit": "289eb724e5d6fab2263e94a1ad6e54afebefafb2" },
   "colorizer": { "branch": "master", "commit": "72790a003d5a706c287486a1a81e3a6b32158b54" },
-  "lazy.nvim": { "branch": "main", "commit": "31ddbea7c10b6920c9077b66c97951ca8682d5c8" },
-  "mini.indentscope": { "branch": "main", "commit": "cf07f19e718ebb0bcc5b00999083ce11c37b8d40" },
-  "mini.pairs": { "branch": "main", "commit": "04f58f2545ed80ac3b52dd4826e93f33e15b2af6" },
-  "nvim-tree.lua": { "branch": "master", "commit": "81eb8d519233c105f30dc0a278607e62b20502fd" },
-  "nvim-web-devicons": { "branch": "master", "commit": "6e355632387a085f15a66ad68cf681c1d7374a04" },
-  "onedark.nvim": { "branch": "master", "commit": "5504c3d561064f6646b8469f5fa5f18ef65eb34d" },
-  "plenary.nvim": { "branch": "master", "commit": "8aad4396840be7fc42896e3011751b7609ca4119" },
+  "lazy.nvim": { "branch": "main", "commit": "b77aaa08cb5b178ed8662765caa41c70ff254a4c" },
+  "mini.indentscope": { "branch": "main", "commit": "f0d7faa064c892b96997810afcddfadc3f2a15b3" },
+  "mini.pairs": { "branch": "main", "commit": "40261dfcec7623cd57be3c3beb50fa73f2650cdf" },
+  "nvim-tree.lua": { "branch": "master", "commit": "5a87ffe35c4739ffb6b62052572583ad277a20ae" },
+  "nvim-web-devicons": { "branch": "master", "commit": "b77921fdc44833c994fdb389d658ccbce5490c16" },
+  "onedark.nvim": { "branch": "master", "commit": "7248343f929438a9b73be5c3ccc41cfeb266319f" },
+  "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "vim-startuptime": { "branch": "master", "commit": "ac2cccb5be617672add1f4f3c0a55ce99ba34e01" },
   "vim-translator": { "branch": "master", "commit": "6f0639c6d471a3a90ac19db96e1e379c030f74e3" },
-  "vimspector": { "branch": "master", "commit": "def092693ea33eb2055fb2cfbcabb8e56ea77963" }
+  "vimspector": { "branch": "master", "commit": "c37d50fc463013bdad2ba044615b0bc2ce163681" }
 }
