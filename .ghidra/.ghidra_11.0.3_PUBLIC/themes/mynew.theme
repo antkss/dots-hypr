@@ -1,0 +1,11 @@
+name = mynew
+lookAndFeel = Flat Light
+useDarkDefaults = false
+font.decompiler = JetBrains Mono SemiBold-PLAIN-14
+font.help.about = monospaced-PLAIN-12
+font.listing.base = JetBrains Mono ExtraBold-PLAIN-13
+font.listing.header = Serif-PLAIN-11
+font.plugin.console = Space Mono-PLAIN-12
+font.plugin.terminal = Space Mono-PLAIN-12
+font.standard = Space Mono-PLAIN-10
+[laf.font]CheckBox.font = sansserif-PLAIN-13

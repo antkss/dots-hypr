@@ -1,0 +1,10 @@
+{
+  "GPROPERTIES_NAME": "File_Options",
+  "VALUES": {
+    "Aggressive Instruction Finder": true
+  },
+  "TYPES": {
+    "Aggressive Instruction Finder": "boolean"
+  },
+  "ENUM_CLASSES": {}
+}
