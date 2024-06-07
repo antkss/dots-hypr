@@ -5,12 +5,13 @@ import ColorPicker from './tools/colorpicker.js';
 import materialpick from './tools/materialswitch.js' 
 import notification from './notificationlist.js';
 
-export default Scrollable({
+export const toolbox =  Scrollable({
     hscroll: "never",
     vscroll: "automatic",
+    css: 'min-width: 600px',
     child: Box({
         vertical: true,
-        className: 'spacing-v-10',
+        className: 'side_chat',
         children: [
 		QuickScripts(),
 		ColorPicker(),

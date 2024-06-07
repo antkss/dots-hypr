@@ -1,7 +1,7 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { SearchAndWindows } from "./windowcontent.js";
 import PopupWindow from '../.widgethacks/popupwindow.js';
-import overview_hyprland from './overview_hyprland.js';
+// import overview_hyprland from './overview_hyprland.js';
 
 export default (id = '') => PopupWindow({
     name: `overview${id}`,

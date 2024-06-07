@@ -10,7 +10,7 @@ import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGP
 // import { waifuView, waifuCommands, sendMessage as waifuSendMessage, waifuTabIcon } from './apis/waifu.js';
 // import { booruView, booruCommands, sendMessage as booruSendMessage, booruTabIcon } from './apis/booru.js';
 import { enableClickthrough } from "../.widgetutils/clickthrough.js";
-import { checkKeybind } from '../.widgetutils/keybind.js';
+// import { checkKeybind } from '../.widgetutils/keybind.js';
 const TextView = Widget.subclass(Gtk.TextView, "AgsTextView");
 
 // import { widgetContent } from './sideleft.js';
@@ -34,6 +34,7 @@ const APIS = [
         tabIcon: chatGPTTabIcon,
         placeholderText: 'Message the model...',
     },
+
     // {
     //     name: 'Waifus',
     //     sendCommand: waifuSendMessage,
@@ -104,10 +105,10 @@ export const chatEntry = TextView({
             //     apiWidgets.attribute.nextTab();
             //     return true;
             // }
-            else if (checkKeybind(event, userOptions.keybinds.sidebar.apis.prevTab)) {
-                apiWidgets.attribute.prevTab();
-                return true;
-            }
+            // else if (checkKeybind(event, userOptions.keybinds.sidebar.apis.prevTab)) {
+            //     apiWidgets.attribute.prevTab();
+            //     return true;
+            // }
         })
     ,
 });
@@ -203,13 +204,14 @@ function switchToTab(id) {
     apiContentStack.shown.value = id;
 }
 
-const apiWidgets = Widget.Box({
-    attribute: {
-        'nextTab': () => switchToTab(Math.min(currentApiId + 1, APIS.length - 1)),
-        'prevTab': () => switchToTab(Math.max(0, currentApiId - 1)),
-    },
+export const apiWidgets = Widget.Box({
+    // attribute: {
+    //     'nextTab': () => switchToTab(Math.min(currentApiId + 1, APIS.length - 1)),
+    //     'prevTab': () => switchToTab(Math.max(0, currentApiId - 1)),
+    // },
     vertical: true,
-    className: 'spacing-v-10',
+    css: "min-width: 600px;",
+    // className: 'spacing-v-10',
     homogeneous: false,
     children: [
         apiContentStack,
@@ -222,4 +224,4 @@ const apiWidgets = Widget.Box({
 // 	textbox.set_text(textbox.text + "\n");
 // 	textbox.set_position(-1)
 // });
-export default apiWidgets;
+// export default apiWidgets;

@@ -9,10 +9,10 @@ import { fileExists } from '../.miscutils/files.js';
 import { execAndClose, expandTilde, hasUnterminatedBackslash, couldBeMath, launchCustomCommand, ls } from './miscfunctions.js';
 import {
     CalculationResultButton, CustomCommandButton, DirectoryButton,
-    DesktopEntryButton, ExecuteCommandButton, SearchButton, AiButton
+    DesktopEntryButton, ExecuteCommandButton, SearchButton
 } from './searchbuttons.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
-import GeminiService from '../../services/gemini.js';
+// import GeminiService from '../../services/gemini.js';
 
 // Add math funcs
 const { abs, sin, cos, tan, cot, asin, acos, atan, acot } = Math;
@@ -134,11 +134,11 @@ export const SearchAndWindows = () => {
                     execAndClose(text, false);
             }
 
-            else {
-                GeminiService.send(text);
-                App.closeWindow('overview');
-                App.openWindow('side_chat');
-            }
+            // else {
+            //     GeminiService.send(text);
+            //     App.closeWindow('overview');
+            //     App.openWindow('side_chat');
+            // }
         },
         onChange: (entry) => { // this is when you type
             const isAction = entry.text[0] == '>';
@@ -202,7 +202,7 @@ export const SearchAndWindows = () => {
             }
 
             // Add fallback: search
-            resultsBox.add(AiButton({ text: entry.text }));
+            // resultsBox.add(AiButton({ text: entry.text }));
             resultsBox.add(SearchButton({ text: entry.text }));
             resultsBox.show_all();
         },

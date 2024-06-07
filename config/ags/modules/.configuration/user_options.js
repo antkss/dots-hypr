@@ -9,7 +9,7 @@ let configOptions = {
         'defaultTemperature': 0.7,
         'enhancements': true,
         'useHistory': false,
-        'writingCursor': " ...", // Warning: Using weird characters can mess up Markdown rendering
+        // 'writingCursor': " ...", // Warning: Using weird characters can mess up Markdown rendering
     },
     'animations': {
         'durationSmall': 110,

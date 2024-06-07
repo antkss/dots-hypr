@@ -1,7 +1,7 @@
 const { Gtk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 // import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
-import { SCREEN_WIDTH } from '../../variables.js';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
 import WindowTitle from "./normal/spaceleft.js";
 import Indicators from "./normal/spaceright.js";
 import Music from "./normal/music.js";
@@ -42,8 +42,9 @@ export const Bar = async (monitor = 0) => {
     //     children: children,
     // });
     const normalBarContent = Widget.CenterBox({
+	hexpand: false,
         className: 'bar-bg',
-	css:`border-radius:10px;min-width:${SCREEN_WIDTH-5}px;`,
+	css:`border-radius:10px;min-width:${SCREEN_WIDTH-5}px`,
         // setup: (self) => {
         //     const styleContext = self.get_style_context();
         //     const minHeight = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);

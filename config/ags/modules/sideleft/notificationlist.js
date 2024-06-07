@@ -88,7 +88,7 @@ export default (props) => {
         Notifications.clear();
         notificationList.get_children().forEach(ch => ch.attribute.destroyWithAnims())
 	Utils.timeout(800, () => {
-	App.closeWindow("side_utils")
+	App.closeWindow("side_chat")
 })
     });
     const listTitle = Box({

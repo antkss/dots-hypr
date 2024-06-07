@@ -22,6 +22,6 @@ export default () => Window({
     // keymode: 'on-demand',
     anchor: ['bottom','top','left'],
     name: 'side_utils',
-    layer: 'top',
+    layer: 'overlay',
     child: tools,
 });
