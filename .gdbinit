@@ -7,12 +7,23 @@ source /home/as/.gdbnew.py
 # source /usr/share/pwndbg/gdbinit.py
 alias de=decompiler
 alias angr=decompiler connect angr
+alias bj=decompiler connect binaryninja
 define ls 
 !ls
 end
 define rm
 !rm
 end
+define malloc
+call (int*)malloc($arg0)
+end
+define free
+call (void)free($arg0)
+end
+# define nea
+# x/10xi $pc
+# end
+set disassembly-flavor intel
 # alias la=!ls --color=auto
 alias m=start
 alias uf= disassemble
