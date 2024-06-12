@@ -15,7 +15,7 @@ import { Bar } from './modules/bar/main.js';
 // import side_utils from './modules/sideleft/utils.js'
 // import Corner from './modules/screencorners/main.js';
 import Indicator from './modules/indicators/main.js';
-import Osk from './modules/onscreenkeyboard/main.js';
+// import Osk from './modules/onscreenkeyboard/main.js';
 import Overview from './modules/overview/main.js';
 import Session from './modules/session/main.js';
 import side_chat from './modules/sideleft/main.js';
@@ -46,7 +46,7 @@ const Windows = () => [
 	forMonitors(Indicator),
 	side_chat(),
 	// side_utils(),
-	Osk(),
+	// Osk(),
 	Session(),
 
 ];
