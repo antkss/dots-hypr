@@ -30,4 +30,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           pacman -Syuu base-devel
+          bash install.sh
 
