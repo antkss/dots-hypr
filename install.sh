@@ -140,7 +140,7 @@ installfull
 
 if [[ $ask == true ]];then
 ./packages.sh
-try hyprctl reload
+# try hyprctl reload
 fi
 #####################################################################################
 printf "\e[36m[$0]: Finished. See the \"Import Manually\" folder and grab anything you need.\e[97m\n"
