@@ -207,31 +207,12 @@ for i in "${!colorlist[@]}"; do
 done
 cp "$HOME"/.cache/ags/user/generated/foot/colors.ini $HOME/.config/foot/colors.ini
 
-mkdir -p "$HOME"/.cache/ags/user/generated/alacritty
-cp "$HOME"/.config/ags/scripts/templates/alacritty/color.toml "$HOME"/.cache/ags/user/generated/alacritty/color.toml
-for i in "${!colorlist[@]}"; do
-    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
-done
-cp "$HOME"/.cache/ags/user/generated/alacritty/color.toml $HOME/.config/alacritty/color.toml
-# echo "
-# [colors.normal]
-# black = \"0x10100E\"
-# blue = \"0x${colorvalues[27]:1}\"
-# cyan = \"0x20B2AA\"
-# green = \"0x${colorvalues[2]:1}\"
-# magenta = \"0x9A4EAE\"
-# red = \"0x${colorvalues[2]:1}\"
-# white = \"0x${colorvalues[20]:1}\"
-# yellow = \"0x${colorvalues[53]:1}\"
-# [colors.primary]
-# background = \"0x${colorvalues[7]:1}\"
-# foreground = \"0xcbe3e7\"
-# " > "$HOME"/.config/alacritty/color.toml
-
+# mkdir -p "$HOME"/.cache/ags/user/generated/alacritty
+# cp "$HOME"/.config/ags/scripts/templates/alacritty/color.toml "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 # for i in "${!colorlist[@]}"; do
-#  echo "${colorlist[$i]}:[$i] ${colorvalues[$i]}"
+#     sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 # done
-
+# cp "$HOME"/.cache/ags/user/generated/alacritty/color.toml $HOME/.config/alacritty/color.toml
 }
 apply_ags 
 sleep 0.1
