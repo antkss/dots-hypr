@@ -403,6 +403,6 @@ export default () => Revealer({
     }),
     setup: (self) => self.hook(showMusicControls, (revealer) => {
         revealer.revealChild = showMusicControls.value;
-	Utils.timeout(6000, () => { revealer.revealChild = false})
+	// Utils.timeout(6000, () => { revealer.revealChild = false})
     }),
 })

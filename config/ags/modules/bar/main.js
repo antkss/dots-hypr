@@ -1,7 +1,7 @@
 const { Gtk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 // import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../variables.js';
+import {  SCREEN_WIDTH } from '../../variables.js';
 import WindowTitle from "./normal/spaceleft.js";
 import Indicators from "./normal/spaceright.js";
 import Music from "./normal/music.js";

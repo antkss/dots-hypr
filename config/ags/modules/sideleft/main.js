@@ -1,9 +1,31 @@
 // import { textbox } from './apiwidgets.js';
 // const { Gdk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-const { Box, Revealer,Window } = Widget;
+const { Box, Revealer,Window,Scrollable } = Widget;
 import {apiWidgets} from './apiwidgets.js';
-import {toolbox} from './toolbox.js'
+// import {toolbox} from './toolbox.js'
+// import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import QuickScripts from './tools/quickscripts.js';
+import ColorPicker from './tools/colorpicker.js';
+import materialpick from './tools/materialswitch.js' 
+import notification from './notificationlist.js';
+import {SCREEN_WIDTH,SCREEN_HEIGHT} from '../../variables.js';
+
+const toolbox =  Scrollable({
+    hscroll: "never",
+    vscroll: "automatic",
+    css: `min-width: ${SCREEN_WIDTH*0.4}px`,
+    child: Box({
+        vertical: true,
+        className: 'side_chat',
+        children: [
+		QuickScripts(),
+		ColorPicker(),
+		materialpick(),
+		notification(),
+        ]
+    })
+});
 const widgetContent = Revealer({
 	revealChild: true,
 	child: apiWidgets,
@@ -14,10 +36,10 @@ const side_chats = Box({
 // className: "side_chat",
     vexpand: false,
     hexpand: false,
-    css: 'min-width: 1366px;',
+    css: `min-width: ${SCREEN_WIDTH}px;`,
     children: [
 	widgetContent,
-	Box({css:'min-width: 166px'}),
+	Box({css:`min-width: ${SCREEN_WIDTH*0.12}px`}),
 	toolbox
     ],
     // setup: (self) => self
