@@ -1,5 +1,5 @@
 -- vim.g.qf_disable_statusline = 1
-vim.o.showtabline = 2
+-- vim.o.showtabline = 2
 vim.diagnostic.config({
   virtual_text = {
     prefix = '●', -- Could be '●', '▎', 'x'
@@ -113,10 +113,10 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 		hl = 'Replace'
 	end
 	local string = table.concat {
-		string.format('%%#StatuslineModeSeparator%s#',hl),
+		-- string.format('%%#StatuslineModeSeparator%s#',hl),
 		string.format('%%#StatuslineMode%s# %s ',hl,mode),
-		string.format('%%#StatuslineModeSeparator%s#',hl),
-		string.format("%%#StatuslineModeSeparator%s#%s",hl,"%= "),
+		string.format('%%#StatuslineModeSeparator%s#',hl),
+		string.format("%%#StatuslineModeSeparator%s#%s",hl,"%= "),
 		string.format('%%#StatuslineMode%s# %s ',hl,"%.40t"),
 	}
 	if errors ~=0 then
@@ -131,4 +131,4 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
     end
   })
 
-vim.go.tabline="%#StatuslineModeSeparatorNormal#%#StatuslineModeNormal# %f %#StatuslineModeSeparatorNormal#"
+-- vim.go.tabline="%#StatuslineModeSeparatorNormal#%#StatuslineModeNormal# %f %#StatuslineModeSeparatorNormal#"
