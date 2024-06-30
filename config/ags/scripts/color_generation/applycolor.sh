@@ -6,6 +6,8 @@ if [ ! -d "$HOME"/.cache/ags/user/generated ]; then
     mkdir -p "$HOME"/.cache/ags/user/generated
 fi
 cd "$HOME/.config/ags" || exit
+rm -r "$HOME"/.cache/ags/user/generated/*
+cp -r scripts/templates/* "$HOME"/.cache/ags/user/generated
 
 colornames=''
 colorstrings=''
@@ -48,8 +50,8 @@ apply_fuzzel() {
         return
     fi
     # Copy template
-    mkdir -p "$HOME"/.cache/ags/user/generated/fuzzel
-    cp "scripts/templates/fuzzel/fuzzel.ini" "$HOME"/.cache/ags/user/generated/fuzzel/fuzzel.ini
+    # mkdir -p "$HOME"/.cache/ags/user/generated/fuzzel
+    # cp -r "scripts/templates/fuzzel" "$HOME"/.cache/ags/user/generated/fuzzel
     # Apply colors
     for i in "${!colorlist[@]}"; do
         sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/fuzzel/fuzzel.ini
@@ -65,8 +67,8 @@ apply_hyprland() {
         return
     fi
     # Copy template
-    mkdir -p "$HOME"/.cache/ags/user/generated/hypr/hyprland
-    cp "scripts/templates/hypr/hyprland/colors.conf" "$HOME"/.cache/ags/user/generated/hypr/hyprland/colors.conf
+    # mkdir -p "$HOME"/.cache/ags/user/generated/hypr/hyprland
+    # cp -r "scripts/templates/hypr/hyprland" "$HOME"/.cache/ags/user/generated/hypr/hyprland
     # Apply colors
     for i in "${!colorlist[@]}"; do
         sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprland/colors.conf
@@ -82,8 +84,8 @@ apply_hyprlock() {
         return
     fi
     # Copy template
-    mkdir -p "$HOME"/.cache/ags/user/generated/hypr/
-    cp "scripts/templates/hypr/hyprlock.conf" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
+    # mkdir -p "$HOME"/.cache/ags/user/generated/hypr/
+    # cp -r "scripts/templates/hypr" "$HOME"/.cache/ags/user/generated/hypr
     # Apply colors
     # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
     for i in "${!colorlist[@]}"; do
@@ -97,8 +99,8 @@ apply_gtk() { # Using gradience-cli
     lightdark=$(get_light_dark)
 
     # Copy template
-    mkdir -p "$HOME"/.cache/ags/user/generated/gradience
-    cp "scripts/templates/gradience/preset.json" "$HOME"/.cache/ags/user/generated/gradience/preset.json
+    # mkdir -p "$HOME"/.cache/ags/user/generated/gradience
+    # cp -r "scripts/templates/gradience" "$HOME"/.cache/ags/user/generated/gradience
 
     # Apply colors
     for i in "${!colorlist[@]}"; do
@@ -151,8 +153,8 @@ echo "Template file not found for Terminal. Skipping that."
 return
 fi
 # Copy template
-mkdir -p "$HOME"/.cache/ags/user/generated/terminal
-cp "scripts/templates/terminal/sequences.txt" "$HOME"/.cache/ags/user/generated/terminal/sequences.txt
+# mkdir -p "$HOME"/.cache/ags/user/generated/terminal
+# cp -r "scripts/templates/terminal" "$HOME"/.cache/ags/user/generated/terminal
 # check if onedark plugin exist 
 if [ -d "$HOME/.local/share/nvim/lazy/onedark.nvim" ]; then
 # apply colors for neovim background 
@@ -164,8 +166,8 @@ if [ ! -f "scripts/templates/onedark/palette.lua" ]; then
     return
 fi
 # Copy template
-mkdir -p "$HOME"/.cache/ags/user/generated/onedark
-cp "scripts/templates/onedark/palette.lua" "$HOME"/.cache/ags/user/generated/onedark/palette.lua
+# mkdir -p "$HOME"/.cache/ags/user/generated/onedark
+# cp -r "scripts/templates/onedark" "$HOME"/.cache/ags/user/generated/onedark
 # Apply colors
 # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
 for i in "${!colorlist[@]}"; do
@@ -178,8 +180,8 @@ if [ ! -f "scripts/templates/onedark/palette.lua" ]; then
     return
 fi
 # Copy template
-mkdir -p "$HOME"/.cache/ags/user/generated/vimline
-    cp "scripts/templates/vimline/powerline.lua" "$HOME"/.cache/ags/user/generated/vimline/powerline.lua
+# mkdir -p "$HOME"/.cache/ags/user/generated/vimline
+    # cp -r "scripts/templates/vimline" "$HOME"/.cache/ags/user/generated/vimline
     # Apply colors
     # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$HOME"/.cache/ags/user/generated/hypr/hyprlock.conf
     for i in "${!colorlist[@]}"; do
@@ -200,19 +202,27 @@ mkdir -p "$HOME"/.cache/ags/user/generated/vimline
 # include=~/.config/foot/colors.ini" >> $HOME/.config/foot/foot.ini
 # 	fi
 
-mkdir -p "$HOME"/.cache/ags/user/generated/foot
-cp "$HOME"/.config/ags/scripts/templates/foot/colors.ini "$HOME"/.cache/ags/user/generated/foot/colors.ini
+# mkdir -p "$HOME"/.cache/ags/user/generated/foot
+# cp -r "$HOME"/.config/ags/scripts/templates/foot "$HOME"/.cache/ags/user/generated/foot
 for i in "${!colorlist[@]}"; do
     sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/foot/colors.ini
 done
 cp "$HOME"/.cache/ags/user/generated/foot/colors.ini $HOME/.config/foot/colors.ini
 
+# cp -r "scripts/templates/rofi" "$HOME"/.cache/ags/user/generated/rofi
+for i in "${!colorlist[@]}"; do
+    sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/rofi/black.rasi
+done
+cp "$HOME"/.cache/ags/user/generated/rofi/black.rasi $HOME/.config/hypr/shared/black.rasi
 # mkdir -p "$HOME"/.cache/ags/user/generated/alacritty
 # cp "$HOME"/.config/ags/scripts/templates/alacritty/color.toml "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 # for i in "${!colorlist[@]}"; do
 #     sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 # done
 # cp "$HOME"/.cache/ags/user/generated/alacritty/color.toml $HOME/.config/alacritty/color.toml
+for i in "${!colorlist[@]}"; do
+   echo "{{ ${colorlist[$i]} }}: ${colorvalues[$i]}"
+done
 }
 apply_ags 
 sleep 0.1

@@ -16,7 +16,7 @@ import { Bar } from './modules/bar/main.js';
 // import Corner from './modules/screencorners/main.js';
 import Indicator from './modules/indicators/main.js';
 // import Osk from './modules/onscreenkeyboard/main.js';
-import Overview from './modules/overview/main.js';
+// import Overview from './modules/overview/main.js';
 import Session from './modules/session/main.js';
 import side_chat from './modules/sideleft/main.js';
 // import SideRight from './modules/sideright/main.js';
@@ -42,7 +42,7 @@ applyStyle().catch(print);
 
 const Windows = () => [
 	// Lockscreen(),
-	Overview(),
+	// Overview(),
 	forMonitors(Indicator),
 	side_chat(),
 	// side_utils(),
