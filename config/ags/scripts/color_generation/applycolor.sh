@@ -220,9 +220,9 @@ cp "$HOME"/.cache/ags/user/generated/rofi/black.rasi $HOME/.config/hypr/shared/b
 #     sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$HOME"/.cache/ags/user/generated/alacritty/color.toml
 # done
 # cp "$HOME"/.cache/ags/user/generated/alacritty/color.toml $HOME/.config/alacritty/color.toml
-for i in "${!colorlist[@]}"; do
-   echo "{{ ${colorlist[$i]} }}: ${colorvalues[$i]}"
-done
+# for i in "${!colorlist[@]}"; do
+#    echo "{{ ${colorlist[$i]} }}: ${colorvalues[$i]}"
+# done
 }
 apply_ags 
 sleep 0.1
