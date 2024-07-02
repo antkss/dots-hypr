@@ -110,7 +110,7 @@ export default () => {
 		child: musicStuff ,
 		onPrimaryClick: () => execAsync('playerctl play-pause').catch(print),
 		// onSecondaryClick: () => showMusicControls.setValue(!showMusicControls.value),
-		onHover: () => showMusicControls.setValue(!showMusicControls.value),
+		onSecondaryClick: () => showMusicControls.setValue(!showMusicControls.value),
 		// onHoverLost: () => showMusicControls.setValue(!showMusicControls.value),
 		onMiddleClick: () => execAsync(['bash', '-c', 'playerctl next']).catch(print),
 		// setup: (self) => self.on('button-press-event', (self, event) => {
