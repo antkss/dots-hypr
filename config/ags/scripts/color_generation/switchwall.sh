@@ -44,4 +44,5 @@ fi
 
 &>/dev/null
 # Generate colors for ags n stuff
-"$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply
+"$HOME"/.config/ags/scripts/color_generation/generate_colors_material.py --path ${imgpath} --scheme primary --apply 
+# "$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply

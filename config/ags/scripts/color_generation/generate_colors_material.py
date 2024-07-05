@@ -9,7 +9,10 @@ from materialyoucolor.hct import Hct
 from materialyoucolor.dynamiccolor.material_dynamic_colors import MaterialDynamicColors
 from materialyoucolor.utils.color_utils import (rgba_from_argb, argb_from_rgb, argb_from_rgba)
 from materialyoucolor.utils.math_utils import (sanitize_degrees_double, difference_degrees, rotation_direction)
+import os
+import fileinput
 
+home_dir = os.path.expanduser("~")
 parser = argparse.ArgumentParser(description='Color generation script')
 parser.add_argument('--path', type=str, default=None, help='generate colorscheme from image')
 parser.add_argument('--size', type=int , default=128 , help='bitmap image size')
@@ -17,6 +20,7 @@ parser.add_argument('--color', type=str, default=None, help='generate colorschem
 parser.add_argument('--mode', type=str, choices=['dark', 'light'], default='dark', help='dark or light mode')
 parser.add_argument('--scheme', type=str, default='vibrant', help='material scheme to use')
 parser.add_argument('--smart', action='store_true', default=False, help='decide scheme type based on image color')
+parser.add_argument('--apply', action='store_true', default=False, help='apply or not')
 parser.add_argument('--transparency', type=str, choices=['opaque', 'transparent'], default='opaque', help='enable transparency')
 parser.add_argument('--termscheme', type=str, default=None, help='JSON file containg the terminal scheme for generating term colors')
 parser.add_argument('--harmony', type=float , default=0.8, help='(0-1) Color hue shift towards accent')
@@ -31,7 +35,42 @@ rgba_to_hex = lambda rgba: "#{:02X}{:02X}{:02X}".format(rgba[0], rgba[1], rgba[2
 argb_to_hex = lambda argb: "#{:02X}{:02X}{:02X}".format(*map(round, rgba_from_argb(argb)))
 hex_to_argb = lambda hex_code: argb_from_rgb(int(hex_code[1:3], 16), int(hex_code[3:5], 16), int(hex_code[5:], 16))
 display_color = lambda rgba : "\x1B[38;2;{};{};{}m{}\x1B[0m".format(rgba[0], rgba[1], rgba[2], "\x1b[7m   \x1b[7m")
+def apply_ags(thing):
+    forags = f""
+    forags += f"$darkmode: {darkmode};\n"
+    forags += f"$transparent: {transparent};\n"
+    for color,code in thing:
+        forags += f"${color}: {code};\n"
+    with open(os.path.join(home_dir, ".config", "ags", "scss", "_material.scss"), "w") as f:
+        f.write(forags)
+    # os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.cache/ags/user/generated/style.css")
+    # os.system(f"ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
+    # os.system(f"ags run-js 'App.applyCss(\"{home_dir}/.cache/ags/user/generated/style.css\");'")
+def applygradience(thing):
+    a = 'adw-gtk3-dark'
+    b = '"prefer-dark"'
+    if args.mode == 'light':
+        a = 'adw-gtk3'
+        b = '"prefer-light"'
+    os.system(f"gradience-cli apply -p {home_dir}/.cache/ags/user/generated/gradience/preset.json --gtk both")
+    os.system(f"gsettings set org.gnome.desktop.interface gtk-theme {a}")
+    os.system(f"gsettings set org.gnome.desktop.interface color-scheme {b}")
+    
+def colorapply(path,thing):
+    file_path = os.path.expanduser(path)
+    with open(file_path, 'r') as file:
+        file_data = file.read()
+    # Replace placeholders with corresponding values
+    for color,code in thing:
+        placeholder = "{{ $" + color + " }}"
+        # print(placeholder)
+        value = code.strip("#")
+        file_data = file_data.replace(placeholder, value)
+        # print(file_data)
 
+    # Write the modified content back to the file
+    with open(file_path, 'w') as file:
+        file.write(file_data)
 def calculate_optimal_size (width: int, height: int, bitmap_size: int) -> (int, int):
     image_area = width * height;
     bitmap_area = bitmap_size ** 2
@@ -146,31 +185,53 @@ if args.termscheme is not None:
             harmonized = boost_chroma_tone(harmonized, 1, 1 + (args.term_fg_boost * (1 if darkmode else -1)))
         term_colors[color] = argb_to_hex(harmonized)
 
-if args.debug == False:
-    print(f"$darkmode: {darkmode};")
-    print(f"$transparent: {transparent};")
-    for color, code in material_colors.items():
-        print(f"${color}: {code};")
-    for color, code in term_colors.items():
-        print(f"${color}: {code};")
-else:
-    if args.path is not None:
-        print('\n--------------Image properties-----------------')
-        print(f"Image size: {wsize} x {hsize}")
-        print(f"Resized image: {wsize_new} x {hsize_new}")
-    print('\n---------------Selected color------------------')
-    print(f"Dark mode: {darkmode}")
-    print(f"Scheme: {args.scheme}")
-    print(f"Accent color: {display_color(rgba_from_argb(argb))} {argb_to_hex(argb)}")
-    print(f"HCT: {hct.hue:.2f}  {hct.chroma:.2f}  {hct.tone:.2f}")
-    print('\n---------------Material colors-----------------')
-    for color, code in material_colors.items():
-        rgba = rgba_from_argb(hex_to_argb(code))
-        print(f"{color.ljust(32)} : {display_color(rgba)}  {code}")
-    print('\n----------Harmonize terminal colors------------')
-    for color, code in term_colors.items():
-        rgba = rgba_from_argb(hex_to_argb(code))
-        code_source = term_source_colors[color]
-        rgba_source = rgba_from_argb(hex_to_argb(code_source))
-        print(f"{color.ljust(6)} : {display_color(rgba_source)} {code_source} --> {display_color(rgba)} {code}")
-    print('-----------------------------------------------')
+# if args.debug == False:
+#     print(f"$darkmode: {darkmode};")
+#     print(f"$transparent: {transparent};")
+#     for color, code in material_colors.items():
+#         print(f"${color}: {code};")
+#     for color, code in term_colors.items():
+#         print(f"${color}: {code};")
+# else:
+#     if args.path is not None:
+#         print('\n--------------Image properties-----------------')
+#         print(f"Image size: {wsize} x {hsize}")
+#         print(f"Resized image: {wsize_new} x {hsize_new}")
+#     print('\n---------------Selected color------------------')
+#     print(f"Dark mode: {darkmode}")
+#     print(f"Scheme: {args.scheme}")
+#     print(f"Accent color: {display_color(rgba_from_argb(argb))} {argb_to_hex(argb)}")
+#     print(f"HCT: {hct.hue:.2f}  {hct.chroma:.2f}  {hct.tone:.2f}")
+#     print('\n---------------Material colors-----------------')
+#     for color, code in material_colors.items():
+#         rgba = rgba_from_argb(hex_to_argb(code))
+#         print(f"{color.ljust(32)} : {display_color(rgba)}  {code}")
+#     print('\n----------Harmonize terminal colors------------')
+#     for color, code in term_colors.items():
+#         rgba = rgba_from_argb(hex_to_argb(code))
+#         code_source = term_source_colors[color]
+#         rgba_source = rgba_from_argb(hex_to_argb(code_source))
+#         print(f"{color.ljust(6)} : {display_color(rgba_source)} {code_source} --> {display_color(rgba)} {code}")
+#     print('-----------------------------------------------')
+#
+if args.apply:
+    os.system(f"cp -r {home_dir}/.config/ags/scripts/templates/.* {home_dir}")
+    # Define the target directory
+    target_dir = os.path.join(home_dir, ".config", "ags", "scripts", "templates")
+    # Walk through the directory
+    for root, dirs, files in os.walk(target_dir):
+        for file in files:
+            # Print the relative path
+            relative_path = os.path.relpath(os.path.join(root, file), target_dir)
+            colorapply(os.path.join(os.getenv("HOME"),relative_path),material_colors.items())
+    apply_ags(material_colors.items())
+    applygradience(material_colors.items())
+    datawrite = ""
+    datawrite += args.mode + "\n"
+    datawrite += args.transparency + "\n"
+    datawrite += args.scheme 
+    file_path = os.path.join(home_dir, ".cache", "ags", "user", "colormode.txt")
+    with open(file_path, 'w') as file:
+        file.write(datawrite)
+    os.system(f"killall ags&&ags")
+    

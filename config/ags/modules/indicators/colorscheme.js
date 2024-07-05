@@ -7,7 +7,7 @@ const { execAsync } = Utils;
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import { showColorScheme } from '../../variables.js';
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
-
+import { fileExists } from '../.miscutils/files.js';
 const ColorBox = ({
     name = 'Color',
     ...rest
@@ -111,10 +111,14 @@ const ColorSchemeSettings = () => Widget.Box({
                 name: 'Dark Mode',
                 initValue: initColorVal,
                 onChange: (self, newValue) => {
-                    let lightdark = newValue == 0 ? "light" : "dark";
-                    execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && sed -i "1s/.*/${lightdark}/"  ${GLib.get_user_cache_dir()}/ags/user/colormode.txt`])
-                        .then(execAsync(['bash', '-c', `${App.configDir}/scripts/color_generation/switchcolor.sh`]))
-                        .catch(print);
+		    if (fileExists(`${GLib.get_user_cache_dir()}/swww/eDP-1`)) {
+			var contents = Utils.readFile(`${GLib.get_user_cache_dir()}/swww/eDP-1`).trim();
+			let lightdark = newValue == 0 ? "light" : "dark";
+			execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${lightdark} --apply`]).catch(print);
+		    }else{
+			execAsync([`bash`,`-c`,`notify-send "no wallpaper found!!!"`]).catch(print);
+		    }
+                     
                 },
             }),
             ConfigToggle({
@@ -122,9 +126,12 @@ const ColorSchemeSettings = () => Widget.Box({
                 initValue: initTransparencyVal,
                 onChange: (self, newValue) => {
                     let transparency = newValue == 0 ? "opaque" : "transparent";
-                    execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && sed -i "2s/.*/${transparency}/"  ${GLib.get_user_cache_dir()}/ags/user/colormode.txt`])
-                        .then(execAsync(['bash', '-c', `${App.configDir}/scripts/color_generation/switchcolor.sh`]))
-                        .catch(print);
+		    if (fileExists(`${GLib.get_user_cache_dir()}/swww/eDP-1`)) {
+			var contents = Utils.readFile(`${GLib.get_user_cache_dir()}/swww/eDP-1`).trim();
+			execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${initColorMode} --transparency ${transparency} --apply`]).catch(print);
+		    }else{
+			execAsync([`bash`,`-c`,`notify-send "no wallpaper found!!!"`]).catch(print);
+		    }
                 },
             }),
         ]
@@ -135,9 +142,12 @@ const ColorSchemeSettings = () => Widget.Box({
         optionsArr: schemeOptionsArr,
         initIndex: initSchemeIndex,
         onChange: (value, name) => {
-            execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && sed -i "3s/.*/${value}/" ${GLib.get_user_cache_dir()}/ags/user/colormode.txt`])
-                .then(execAsync(['bash', '-c', `${App.configDir}/scripts/color_generation/switchcolor.sh`]))
-                .catch(print);
+		if (fileExists(`${GLib.get_user_cache_dir()}/swww/eDP-1`)) {
+		    var contents = Utils.readFile(`${GLib.get_user_cache_dir()}/swww/eDP-1`).trim();
+		    execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${initColorMode} --transparency ${initTransparency} --scheme ${value} --apply`]).catch(print);
+		}else{
+		    execAsync([`bash`,`-c`,`notify-send "no wallpaper found!!!"`]).catch(print);
+		}
         },
     }),
   ]
