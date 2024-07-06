@@ -130,7 +130,7 @@ export const ConfigMulipleSelection = ({
     onChange,
     ...rest
 }) => {
-    // let lastSelected = initIndex;
+    let lastSelected = initIndex;
     // let value = optionsArr[initIndex[0]][initIndex[1]].value;
     const widget = Box({
         tooltipText: desc,
