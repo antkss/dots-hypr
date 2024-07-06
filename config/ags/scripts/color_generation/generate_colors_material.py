@@ -43,7 +43,7 @@ def apply_ags(thing):
         forags += f"${color}: {code};\n"
     with open(os.path.join(home_dir, ".config", "ags", "scss", "_material.scss"), "w") as f:
         f.write(forags)
-    # os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.cache/ags/user/generated/style.css")
+    os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.config/ags/style.css")
     # os.system(f"ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
     # os.system(f"ags run-js 'App.applyCss(\"{home_dir}/.cache/ags/user/generated/style.css\");'")
 def applygradience(thing):
