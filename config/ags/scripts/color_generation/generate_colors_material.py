@@ -10,6 +10,7 @@ from materialyoucolor.dynamiccolor.material_dynamic_colors import MaterialDynami
 from materialyoucolor.utils.color_utils import (rgba_from_argb, argb_from_rgb, argb_from_rgba)
 from materialyoucolor.utils.math_utils import (sanitize_degrees_double, difference_degrees, rotation_direction)
 import os
+import sass
 import fileinput
 
 home_dir = os.path.expanduser("~")
@@ -43,7 +44,12 @@ def apply_ags(thing):
         forags += f"${color}: {code};\n"
     with open(os.path.join(home_dir, ".config", "ags", "scss", "_material.scss"), "w") as f:
         f.write(forags)
-    os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.config/ags/style.css")
+    sass_file = home_dir+"/.config/ags/scss/main.scss"
+    css_file = home_dir+"/.config/ags/style.css"
+    compiled_css = sass.compile(filename=sass_file)
+    with open(css_file, 'w') as file:
+        file.write(compiled_css)
+    # os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.config/ags/style.css")
     # os.system(f"ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
     # os.system(f"ags run-js 'App.applyCss(\"{home_dir}/.cache/ags/user/generated/style.css\");'")
 def applygradience(thing):
@@ -233,5 +239,5 @@ if args.apply:
     file_path = os.path.join(home_dir, ".cache", "ags", "user", "colormode.txt")
     with open(file_path, 'w') as file:
         file.write(datawrite)
-    os.system(f"killall ags&&ags")
+    os.system(f"killall ags;ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
     
