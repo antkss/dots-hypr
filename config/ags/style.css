@@ -2692,9 +2692,9 @@ widget {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   min-width: 29.659rem;
-  background-color: #1D1013;
+  background-color: #edfdfd;
   padding: 0rem 1.023rem;
-  background: linear-gradient(127deg, rgba(58, 41, 44, 0.7), rgba(58, 41, 44, 0.85) 70.71%), linear-gradient(217deg, rgba(86, 65, 69, 0.7), rgba(86, 65, 69, 0.85) 70.71%), radial-gradient(circle at 0% 100%, #693D3A 13%, rgba(0, 0, 0, 0) 100%), linear-gradient(336deg, rgba(105, 61, 58, 0.7), rgba(105, 61, 58, 0.85) 70.71%), linear-gradient(#1D1013, #1D1013); }
+  background: linear-gradient(127deg, rgba(202, 201, 141, 0.7), rgba(202, 201, 141, 0.85) 70.71%), linear-gradient(217deg, rgba(158, 199, 38, 0.7), rgba(158, 199, 38, 0.85) 70.71%), radial-gradient(circle at 0% 100%, #FBCA12 13%, rgba(0, 0, 0, 0) 100%), linear-gradient(336deg, rgba(96, 152, 150, 0.7), rgba(96, 152, 150, 0.85) 70.71%), linear-gradient(#edfdfd, #edfdfd); }
 
 .osd-music-cover-fallback {
   border-radius: 0.818rem;
@@ -2702,7 +2702,7 @@ widget {
   min-width: 7.5rem;
   min-height: 7.5rem;
   background-color: #26181B;
-  color: #e6cdd1; }
+  color: #162716; }
 
 .osd-music-cover {
   border-radius: 0.818rem;
@@ -2727,13 +2727,13 @@ widget {
   font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono";
   font-weight: 500;
   font-size: 1.364rem;
-  color: #e6cdd1; }
+  color: #162716; }
 
 .osd-music-artists {
   font-family: "Rubik", "Geist", "AR One Sans", "Reddit Sans", "Inter", "Roboto", "Ubuntu", "Noto Sans", sans-serif;
   font-weight: 600;
   font-size: 0.955rem;
-  color: rgba(217, 193, 197, 0.9); }
+  color: rgba(36, 52, 32, 0.9); }
 
 .osd-music-pill {
   border-radius: 9999px;
@@ -2742,8 +2742,8 @@ widget {
   font-weight: 500;
   min-width: 1.833rem;
   padding: 0.273rem 0.682rem;
-  background-color: rgba(67, 45, 47, 0.5);
-  color: #e6cdd1; }
+  background-color: rgba(201, 210, 152, 0.5);
+  color: #162716; }
 
 .osd-music-controls {
   border-radius: 9999px;
@@ -2752,8 +2752,8 @@ widget {
   font-weight: 500;
   min-width: 1.833rem;
   padding: 0.205rem;
-  background-color: rgba(67, 45, 47, 0.5);
-  color: #e6cdd1; }
+  background-color: rgba(201, 210, 152, 0.5);
+  color: #162716; }
 
 .osd-music-controlbtn {
   min-width: 2.045rem;
@@ -2763,10 +2763,10 @@ widget {
 
 .osd-music-controlbtn:hover,
 .osd-music-controlbtn:focus {
-  background-color: rgba(108, 85, 88, 0.55); }
+  background-color: rgba(156, 167, 120, 0.55); }
 
 .osd-music-controlbtn:active {
-  background-color: rgba(123, 100, 103, 0.575); }
+  background-color: rgba(139, 151, 107, 0.575); }
 
 .osd-music-controlbtn-txt {
   font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
@@ -2778,15 +2778,15 @@ widget {
   min-width: 0.409rem;
   min-height: 3.068rem;
   padding: 0.273rem;
-  color: #e6cdd1; }
+  color: #162716; }
 
 .osd-music-playstate {
   transition: 150ms cubic-bezier(0, 0.9, 0.1, 1);
   min-height: 3.068rem;
   min-width: 3.068rem;
   border-radius: 10rem;
-  background-color: rgba(67, 45, 47, 0.5);
-  color: #e6cdd1; }
+  background-color: rgba(201, 210, 152, 0.5);
+  color: #162716; }
 
 .osd-music-playstate-btn > label {
   font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
@@ -2794,7 +2794,7 @@ widget {
   margin: -0.1rem 0rem; }
 
 .osd-title-play {
-  background-color: #3a292c; }
+  background-color: #cac98d; }
 
 .sidebar-pinned {
   margin: 0rem;

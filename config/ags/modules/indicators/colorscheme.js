@@ -114,7 +114,7 @@ const ColorSchemeSettings = () => Widget.Box({
 		    if (fileExists(`${GLib.get_user_cache_dir()}/swww/eDP-1`)) {
 			var contents = Utils.readFile(`${GLib.get_user_cache_dir()}/swww/eDP-1`).trim();
 			let lightdark = newValue == 0 ? "light" : "dark";
-			execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${lightdark} --apply`]).catch(print);
+			execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${lightdark} --apply --ags`]).catch(print);
 		    }else{
 			execAsync([`bash`,`-c`,`notify-send "no wallpaper found!!!"`]).catch(print);
 		    }
@@ -128,7 +128,7 @@ const ColorSchemeSettings = () => Widget.Box({
                     let transparency = newValue == 0 ? "opaque" : "transparent";
 		    if (fileExists(`${GLib.get_user_cache_dir()}/swww/eDP-1`)) {
 			var contents = Utils.readFile(`${GLib.get_user_cache_dir()}/swww/eDP-1`).trim();
-			execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${initColorMode} --transparency ${transparency} --apply`]).catch(print);
+			execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${initColorMode} --transparency ${transparency} --apply --ags`]).catch(print);
 		    }else{
 			execAsync([`bash`,`-c`,`notify-send "no wallpaper found!!!"`]).catch(print);
 		    }
@@ -144,7 +144,7 @@ const ColorSchemeSettings = () => Widget.Box({
         onChange: (value, name) => {
 		if (fileExists(`${GLib.get_user_cache_dir()}/swww/eDP-1`)) {
 		    var contents = Utils.readFile(`${GLib.get_user_cache_dir()}/swww/eDP-1`).trim();
-		    execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${initColorMode} --transparency ${initTransparency} --scheme ${value} --apply`]).catch(print);
+		    execAsync([`bash`,`-c`, `${App.configDir}/scripts/color_generation/generate_colors_material.py --path ${contents} --mode ${initColorMode} --transparency ${initTransparency} --scheme ${value} --apply --ags`]).catch(print);
 		}else{
 		    execAsync([`bash`,`-c`,`notify-send "no wallpaper found!!!"`]).catch(print);
 		}

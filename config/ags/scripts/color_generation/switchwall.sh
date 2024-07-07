@@ -45,5 +45,5 @@ fi
 &>/dev/null
 # Generate colors for ags n stuff
 "$HOME"/.config/ags/scripts/color_generation/generate_colors_material.py --path ${imgpath} --scheme primary --apply 
-killall ags;ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
+ags -q;ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
 # "$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply

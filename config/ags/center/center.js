@@ -27,17 +27,17 @@ const centerWidget = Widget.Revealer({
     child: clientInfoWidget(),
   });
 	
-  const win = Widget.Window({
-	// keymode: 'exclusive',
-	  visible: false,
-	  // css:'background:transparent;',
-    monitor,
-    name: `center`,
-    // anchor: ['bottom'],
-    child: centerWidget,
-    margins:[5,0,2,0],
-    // exclusivity: "exclusive",
-  });
+    const win = Widget.Window({
+      // keymode: 'exclusive',
+      visible: false,
+	// css:'background:transparent;',
+      monitor,
+      name: `center`,
+      // anchor: ['bottom'],
+      child: centerWidget,
+      margins:[5,0,2,0],
+      // exclusivity: "exclusive",
+    });
   return win
 }
 

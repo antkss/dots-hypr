@@ -22,6 +22,7 @@ parser.add_argument('--mode', type=str, choices=['dark', 'light'], default='dark
 parser.add_argument('--scheme', type=str, default='vibrant', help='material scheme to use')
 parser.add_argument('--smart', action='store_true', default=False, help='decide scheme type based on image color')
 parser.add_argument('--apply', action='store_true', default=False, help='apply or not')
+parser.add_argument('--ags', action='store_true', default=False, help='ags restart')
 parser.add_argument('--transparency', type=str, choices=['opaque', 'transparent'], default='opaque', help='enable transparency')
 parser.add_argument('--termscheme', type=str, default=None, help='JSON file containg the terminal scheme for generating term colors')
 parser.add_argument('--harmony', type=float , default=0.8, help='(0-1) Color hue shift towards accent')
@@ -239,4 +240,5 @@ if args.apply:
     file_path = os.path.join(home_dir, ".cache", "ags", "user", "colormode.txt")
     with open(file_path, 'w') as file:
         file.write(datawrite)
-    
+if args.ags:
+    os.system("ags -q; ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")

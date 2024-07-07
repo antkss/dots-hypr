@@ -22,24 +22,12 @@ import side_chat from './modules/sideleft/main.js';
 // import SideRight from './modules/sideright/main.js';
 // import Lockscreen from './modules/lockscreen/main.js';
 
-const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
+// const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
 const range = (length, start = 1) => Array.from({ length }, (_, i) => i + start);
 function forMonitors(widget) {
     const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
     return range(n, 0).map(widget).flat(1);
 }
-// SCSS compilation
-Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicwal.scss'`); // reset music styles
-Utils.exec(`bash -c 'echo "" > ${App.configDir}/scss/_musicmaterial.scss'`); // reset music styles
-async function applyStyle() {
-    Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`);
-    // Utils.exec(`sass ${App.configDir}/scss/main.scss ${App.configDir}/style.css`);
-    // App.resetCss();
-    App.applyCss(`${App.configDir}/style.css`);
-    console.log('[LOG] Styles loaded')
-}
-applyStyle().catch(print);
-
 const Windows = () => [
 	// Lockscreen(),
 	// Overview(),
@@ -53,7 +41,7 @@ const Windows = () => [
 
 
 App.config({
-    css: `${COMPILED_STYLE_DIR}/style.css`,
+    style: `${App.configDir}/style.css`,
     // stackTraceOnError: true,
     windows: Windows().flat(1),
 });
