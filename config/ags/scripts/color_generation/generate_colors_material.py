@@ -239,5 +239,4 @@ if args.apply:
     file_path = os.path.join(home_dir, ".cache", "ags", "user", "colormode.txt")
     with open(file_path, 'w') as file:
         file.write(datawrite)
-    os.system(f"killall ags;ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
     
