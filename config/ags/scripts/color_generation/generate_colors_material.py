@@ -30,7 +30,7 @@ parser.add_argument('--harmonize_threshold', type=float , default=100, help='(0-
 parser.add_argument('--term_fg_boost', type=float , default=0.35, help='Make terminal foreground more different from the background')
 parser.add_argument('--blend_bg_fg', action='store_true', default=False, help='Shift terminal background or foreground towards accent')
 parser.add_argument('--cache', type=str, default=None, help='file path to store the generated color')
-parser.add_argument('--debug', action='store_true', default=False, help='debug mode')
+# parser.add_argument('--debug', action='store_true', default=False, help='debug mode')
 args = parser.parse_args()
 
 rgba_to_hex = lambda rgba: "#{:02X}{:02X}{:02X}".format(rgba[0], rgba[1], rgba[2])
@@ -128,6 +128,10 @@ if args.path is not None:
 elif args.color is not None:
     argb = hex_to_argb(args.color)
     hct = Hct.from_int(argb)
+else:
+    print("Please specify --path")
+    print("For example: ./generate_colors_material --path /path/wallpaper.png")
+    exit(1)
 
 if args.scheme == 'fruitsalad':
     from materialyoucolor.scheme.scheme_fruit_salad import SchemeFruitSalad as Scheme
@@ -145,8 +149,11 @@ elif args.scheme == 'fidelity':
     from materialyoucolor.scheme.scheme_fidelity import SchemeFidelity as Scheme
 elif args.scheme == 'content':
     from materialyoucolor.scheme.scheme_content import SchemeContent as Scheme
-else:
+elif args.scheme == 'vibrant':
     from materialyoucolor.scheme.scheme_vibrant import SchemeVibrant as Scheme
+else: 
+    print("Please specify --scheme [fruitsalad|expressive|monochrome|rainbow|tonalspot|neutral|fidelity|content|vibrant]")
+    exit(1)
 
 # Generate
 scheme = Scheme(hct, darkmode, 0.0)
