@@ -2,17 +2,20 @@
 import gdb
 import struct
 import re
+import os
+import json
+# import pwndbg
 
 class TISCommand(gdb.Command):
     """Display stack or heap in a custom format."""
 
     COLORS = [
-        '\033[93m',  # Yellow
-        '\033[92m',  # Green
-        '\033[94m',  # Blue
-        '\033[91m',  # Red
-        '\033[95m',  # Magenta
-        '\033[96m',  # Cyan
+        '\033[33m',  # Yellow
+        '\033[32m',  # Green
+        '\033[34m',  # Blue
+        '\033[31m',  # Red
+        '\033[35m',  # Magenta
+        '\033[36m',  # Cyan
     ]
     RESET = '\033[0m'
 
@@ -24,7 +27,7 @@ class TISCommand(gdb.Command):
             args = gdb.string_to_argv(arg)
             if len(args) == 1:
                 if args[0] == "heap":
-                    self.display_heap(50)  # Default to 40 lines if no number is provided
+                    self.display_heap()  # Default to 40 lines if no number is provided
                     return
                 else:
                     try:
@@ -66,11 +69,11 @@ class TISCommand(gdb.Command):
             lines = 12
         try:
             gdb.selected_inferior().read_memory(start_address-0x30, 0x10)
-            self.display_memory(start_address-0x30, lines,True)
+            self.display_memory(start_address-0x30, lines,False)
             return
         except gdb.MemoryError as e:
             gdb.selected_inferior().read_memory(start_address, 0x10)
-            self.display_memory(start_address, lines,True)
+            self.display_memory(start_address, lines,False)
             return
         except gdb.MemoryError as e:
             gdb.write(f"Error reading memory at 0x{start_address:016x}: {e}\n")
@@ -85,6 +88,7 @@ class TISCommand(gdb.Command):
             addr = start_address + i * 0x10
             data = gdb.selected_inferior().read_memory(addr, 0x10)
             values = struct.unpack("QQ", bytes(data))
+            # print(f"value: {hex(values[1])}")
             if values[1]:
                 headl.append(addr)
         for i in range(lines):
@@ -98,12 +102,13 @@ class TISCommand(gdb.Command):
                 register_name = self.get_register_name(addr)
                 if register_name:
                     address_str += f" -> {register_name}"
-                address_str = address_str.ljust(8)
+                # address_str = address_str.ljust(16)
+                if addr == start_address+0x30:
+                    address_str += f" <- here"
                 hex_str = f"0x{values[0]:016x}\t0x{values[1]:016x}{self.RESET}"
                 ascii_str = f"{ascii_rep}{self.RESET}"
                 offaddr = f"0x{offset:05x} | {hex(addr)}"
-                if addr == start_address+0x30:
-                    address_str += f" <- here"
+
                 if isheap:
                     gdb.write(f"{self.COLORS[heapcolor]}{offaddr} | {hex_str}\t{ascii_str}{self.RESET}{address_str}\n")
                     if values[1]:
@@ -127,7 +132,7 @@ class TISCommand(gdb.Command):
                 block_color_index = (block_color_index + 1) % len(self.COLORS)
 
 
-    def display_heap(self, lines=300):
+    def display_heap(self, lines=0):
         try:
             # Assume the heap boundaries can be determined from the heap segment in the memory mappings
             mappings = gdb.execute("info proc mappings", to_string=True)
@@ -136,31 +141,15 @@ class TISCommand(gdb.Command):
                     parts = line.split()
                     start_address = int(parts[0], 16)
                     end_address = int(parts[1], 16)
-                    actual_lines = min((end_address - start_address) // 0x10, lines)
-                    self.display_memory(start_address, actual_lines,True,True)
+                    # actual_lines = min((end_address - start_address) // 0x10, lines)
+                    if lines == 0:
+                        lines = 500
+                    self.display_memory(start_address, lines,True,True)
                     # self.count_heap_chunks(start_address, start_address + actual_lines * 0x10)
                     return
             gdb.write("Heap segment not found.\n")
         except gdb.error as e:
             gdb.write(f"Error retrieving heap segment: {e}\n")
-
-    # def count_heap_chunks(self, start_address, end_address):
-    #     chunk_count = 0
-    #     addr = start_address
-    #     try:
-    #         while addr < end_address:
-    #             data = gdb.selected_inferior().read_memory(addr, 0x8)
-    #             chunk_size = struct.unpack("Q", bytes(data))[0] & ~0x7  # Mask out flags in the size
-    #             if chunk_size == 0:
-    #                 break
-    #             chunk_count += 1
-    #             addr += chunk_size
-    #         gdb.write(f"Number of heap chunks: {chunk_count}\n")
-    #     except gdb.MemoryError as e:
-    #         gdb.write(f"Error reading memory at 0x{addr:016x}: {e}")
-    #     except Exception as e:
-    #         gdb.write(f"Unexpected error: {e}")
-    #
     def get_register_name(self, address):
         frame = gdb.selected_frame()
         arch = frame.architecture()
@@ -268,5 +257,79 @@ class NeCommand(gdb.Command):
 
 NeCommand()
 
-
-
+class breakoffset(gdb.Command):
+    def __init__(self):
+        super(breakoffset, self).__init__("bb", gdb.COMMAND_USER)
+    def invoke(self, arg, from_tty):
+        inferior = gdb.selected_inferior()
+        # Get the base address of the executable
+        a = gdb.execute("info proc",to_string=True)
+        b = gdb.execute("info proc map",to_string=True)
+        path = a.split("=")[1].split("\n")[0].strip()[1:-1]
+        maps = b.splitlines()
+        found = ""
+        for i in range(len(maps)):
+            if path in maps[i]:
+                found = maps[i]
+                break
+        base_address = int(found.split()[0],16)
+        offset = 0
+        if arg:
+            try:
+                offset = int(arg,16)
+            except ValueError:
+                offset = int(arg)
+            gdb.execute(f"b*{hex(base_address+offset)}")
+        else:
+            gdb.write(f"usage: bb <offset>\n")
+        # base_address = inferior.read_var('__executable_start').address
+        # print(hex(base_address))
+        
+        # if arg:
+        #     args = gdb.string_to_argv(arg)
+        #     if len(args) == 1:
+        #         start_address = self.parse_address(args[0])
+breakoffset()
+# class ListBreakpoints(gdb.Command):
+#     """List all breakpoints."""
+#
+#     def __init__(self):
+#         super(ListBreakpoints, self).__init__("bl", gdb.COMMAND_USER)
+#
+#     def invoke(self, arg, from_tty):
+#         self.list_breakpoints()
+#
+#     # Function to calculate offset for a breakpoint
+#     def calculate_offset(self,breakp):
+#         # Get the selected frame (current frame)
+#         frame = gdb.selected_frame()
+#         # Get the program counter (address of current instruction)
+#         pc = frame.pc()
+#         print(pc)
+#
+#         # Get the address of the breakpoint
+#         breakpoint_address = breakp.location
+#         # Calculate the offseself.t
+#         offset = int(pc) - int(breakpoint_address.split("*")[1],16)
+#         return offset
+#     def list_breakpoints(self):
+#         breakpoints = gdb.breakpoints()
+#         if not breakpoints:
+#             print("No breakpoints set.")
+#             return
+#         for breakp in gdb.breakpoints():
+#             offset = self.calculate_offset(breakp)
+#             print(f"Breakpoint {breakp.number} Offset: {offset}")
+#         # for bp in breakpoints:
+#         #     print(f"Breakpoint {bp.number}:")
+#         #     print(f"  Enabled: {bp.enabled}")
+#         #     print(f"  Location: {bp.location}")
+#             # print(f"  Address: {bp.address}")
+#             # print(f"  Function: {bp.function}")
+#             # print(f"  Original Location: {bp.original_location}")
+#             # print(f"  Thread: {bp.thread}")
+#             # print(f"  Hit Count: {bp.hit_count}")
+#             print()
+#
+# # Register the command with GDB
+# ListBreakpoints()
