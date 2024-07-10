@@ -36,11 +36,11 @@ call plug#begin('~/.local/share/nvim/lazy')
 call plug#end()
 "load config when insert mode is on
 set termguicolors
-augroup load_ultisnips
-  autocmd!
-  autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips 
-  autocmd InsertEnter * silent! Codeium Enable
-augroup END
+" augroup load_ultisnips
+"   autocmd!
+"   autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips 
+"   autocmd InsertEnter * silent! Codeium Enable
+" augroup END
 syntax enable
 " insert load lua
 autocmd InsertEnter * silent! execute "source" stdpath('config') . "/lua.vim" 
