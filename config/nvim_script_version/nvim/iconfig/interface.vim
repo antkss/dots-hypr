@@ -24,4 +24,5 @@ autocmd VimEnter * silent! hi cpp_keywords guifg=#00ff91
 autocmd VimEnter * silent! hi cpp_inout guifg=#ff006a
 
 
-colorscheme onedark
+" colorscheme onedark
+lua require("onedark").setup()

@@ -11,16 +11,16 @@ call plug#begin('~/.local/share/nvim/lazy')
 	"COC VIM, load on insert mode only 
 	Plug 'neoclide/coc.nvim', {'branch': 'release','on' : 'NonExistentCommandUltisnips'}
 	" lualine for statusline
-	Plug 'nvim-lualine/lualine.nvim'
+	" Plug 'nvim-lualine/lualine.nvim'
 	"vim translator 
 	Plug 'voldikss/vim-translator'
 	" Finder plugin
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
 	" debug plugin
-	Plug 'puremourning/vimspector',  { 'on': 'VimspectorInstall' }
+	" Plug 'puremourning/vimspector',  { 'on': 'VimspectorInstall' }
 	"code assistant plugin load on insert mode only 
-	Plug 'Exafunction/codeium.vim', { 'branch': 'main','on' : 'NonExistentCommandUltisnips'  }
+	" Plug 'Exafunction/codeium.vim', { 'branch': 'main','on' : 'NonExistentCommandUltisnips'  }
 	"theme plugin
 	Plug 'navarasu/onedark.nvim'
 	"auto pair load on insert mode only
@@ -35,6 +35,7 @@ call plug#begin('~/.local/share/nvim/lazy')
 	Plug 'kwkarlwang/bufresize.nvim'
 call plug#end()
 "load config when insert mode is on
+set termguicolors
 augroup load_ultisnips
   autocmd!
   autocmd InsertEnter * silent! NonExistentCommandUltisnips | autocmd! load_ultisnips 
@@ -51,9 +52,9 @@ for source_file in split(glob(stdpath('config').'/iconfig/*.vim'))
 endfor
 
 " load config when insert mode is on
-function! s:loadconfig()
-	for source_file in split(glob(stdpath('config').'/config/*.vim'))
-		execute 'source' source_file 
-	endfor
-endfunction
-autocmd InsertEnter * call s:loadconfig()
+" function! s:loadconfig()
+" 	for source_file in split(glob(stdpath('config').'/config/*.vim'))
+" 		execute 'source' source_file 
+" 	endfor
+" endfunction
+" autocmd InsertEnter * call s:loadconfig()

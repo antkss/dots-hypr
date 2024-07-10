@@ -1,4 +1,4 @@
-nmap <C-s> :w<CR>
+" nmap <C-s> :w<CR>
 " map the alt key to the esc key
 inoremap <C-c> <Esc>
 " " Copy to clipboard
