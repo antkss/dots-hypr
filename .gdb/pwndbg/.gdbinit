@@ -48,7 +48,7 @@ alias cs=checksec
 alias pds=pdisass pc
 # alias ls=!ls
 # alias ls=!ls --color=auto
-set context-sections code stack ghidra expressions threads disasm
+set context-sections regs code stack ghidra expressions threads disasm
 set context-register-color red
 set context-register-changed-color underline
 set enhance-comment-color green
@@ -58,9 +58,10 @@ set enhance-unknown-color green
 set telescope-skip-repeating-val off
 set memory-heap-color yellow
 set gcc-compiler-path /usr/bin/gcc
-set context-code-lines 6
+set context-code-lines 5
 set context-stack-lines 6
 set show-flags on
+set show-compact-regs on
 # set exec-wrapper env 'LD_PRELOAD=/home/as/Music/libc.so.6'
 # set exec-wrapper env 'LD_LIBRARY_PATH=/home/as/Music'
 # dir /home/as/cac/glibc-2.39/cac
