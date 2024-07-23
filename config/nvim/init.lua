@@ -54,5 +54,6 @@ vim.api.nvim_exec(
 )
 
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
+dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/coc.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/keymap.lua')

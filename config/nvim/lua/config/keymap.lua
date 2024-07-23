@@ -36,3 +36,10 @@ vim.api.nvim_set_keymap('v', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('n', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('i','<Tab>', 'codeium#Accept()', {silent = true, expr = true})
 vim.api.nvim_set_keymap('i','<C-c>','<Esc>', {noremap = true})
+
+function alias(from, to)
+  vim.cmd(string.format([[
+    cnoreabbrev <expr> %s ((getcmdtype() == ":" && getcmdline() == "%s") ? "%s" : "%s")
+  ]], from, from, to, from))
+end
+alias("rp","term python %")

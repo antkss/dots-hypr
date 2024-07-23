@@ -1,7 +1,7 @@
 {
     "coc.source.file.shortcut": "File",
     "coc.source.around.shortcut": "?",
-    //"suggest.disableKind": true,
+    "suggest.disableKind": true,
     "suggest.completionItemKindLabels": {
         "keyword": "\uf1de",
         "variable": "\ue79b",
@@ -43,5 +43,4 @@
     "snippets.ultisnips.pythonPrompt": true,
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/17.0.3/clangd_17.0.3/bin/clangd"
 }
-},
         
