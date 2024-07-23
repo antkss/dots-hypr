@@ -116,8 +116,10 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 		-- string.format('%%#StatuslineModeSeparator%s#',hl),
 		string.format('%%#StatuslineMode%s# %s ',hl,mode),
 		string.format('%%#StatuslineModeSeparator%s#',hl),
+		string.format('%s',""),
 		string.format("%%#StatuslineModeSeparator%s#%s",hl,"%= "),
 		string.format('%%#StatuslineMode%s# %s ',hl,"%.40t"),
+		string.format('%s',""),
 	}
 	if errors ~=0 then
 		string = string .. string.format('%s %d',error,errors)
