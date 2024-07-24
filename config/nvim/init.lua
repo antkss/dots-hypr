@@ -52,7 +52,7 @@ vim.api.nvim_exec(
 ]],
 	false
 )
-
+vim.lsp.set_log_level("off") 
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/coc.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
