@@ -61,7 +61,7 @@ return {
 	},
 
 	{
-		"Exafunction/codeium.vim",
+		"antkss/codeium",
 		event = "VeryLazy",
 		config = function ()
 		vim.cmd("CodeiumEnable")

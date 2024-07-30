@@ -1,5 +1,5 @@
 -- local dap = require('mason-nvim-dap')
-vim.opt.makeprg = 'clang -g -o %< % -fno-stack-protector'
+vim.opt.makeprg = 'gcc -g -o %< % -fno-stack-protector'
 -- always go to insert mode when go to terminal powered by gemini
 vim.api.nvim_create_augroup('insertonenter', {})
 

@@ -7,7 +7,7 @@ local Colors = {
   rbg		= '#E6B7E8',
   vbg		= '#544262',
   cmdbg         = '#CDBDFF',
-  cmdfg         = '#4F00D1',
+  cmdfg         = '#4F00D0',
 }
 local M = {
   normal = {

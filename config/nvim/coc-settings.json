@@ -3,7 +3,7 @@
 "dialog.floatBorderHighlight":10,
 "suggest.floatConfig.border":true,
 "suggest.disableKind": true, 
-"snippets.ultisnips.pythonPrompt": true,
+"snippets.ultisnips.pythonPrompt": false,
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/18.1.3/clangd_18.1.3/bin/clangd"
 }
        
