@@ -54,6 +54,6 @@ vim.api.nvim_exec(
 )
 vim.lsp.set_log_level("off") 
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/debug.lua')
-dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/coc.lua')
+dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/lsp.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/interface.lua')
 dofile(os.getenv('HOME') .. '/.config/nvim/lua/config/keymap.lua')

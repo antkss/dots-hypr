@@ -34,37 +34,61 @@ return {
 		config = function()
 		end,
 	},
+	-- {
+	-- 	'neoclide/coc.nvim',
+	-- 	branch =  "release",
+	-- 	event = "VeryLazy",
+	-- 	build = "npm install --prefix ~/.local/share/nvim/lazy/coc.nvim",
+	-- 	config = function()
+	-- 			local opts = {silent = true, noremap = true, expr = true, replace_keycodes = true}
+	-- 			require('mini.pairs').setup()
+	-- 			require("Comment").setup()
+	-- 			vim.keymap.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+	--
+	-- 			vim.keymap.set("i", "<c-e>",
+	-- 			    function()
+	-- 				if vim.fn['coc#pum#visible']() == 1 then
+	-- 				    return vim.fn['coc#pum#next'](1)
+	-- 				else
+	-- 				    return vim.fn['coc#refresh']()
+	-- 				end
+	-- 			    end
+	-- 			    , opts)
+	--
+	-- 		end,
+	--
+	--
+	-- },
 	{
-		'neoclide/coc.nvim',
-		branch =  "release",
-		event = "VeryLazy",
-		build = "npm install --prefix ~/.local/share/nvim/lazy/coc.nvim",
-		config = function()
-				local opts = {silent = true, noremap = true, expr = true, replace_keycodes = true}
-				require('mini.pairs').setup()
-				require("Comment").setup()
-				vim.keymap.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
-				vim.keymap.set("i", "<c-e>",
-				    function()
-					if vim.fn['coc#pum#visible']() == 1 then
-					    return vim.fn['coc#pum#next'](1)
-					else
-					    return vim.fn['coc#refresh']()
-					end
-				    end
-				    , opts)
-
-			end,
+	    "hrsh7th/nvim-cmp",
+	    event = "TextChanged",
+	    dependencies = {
+		"neovim/nvim-lspconfig",
+	    },
 
 
 	},
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		event = "VeryLazy",
 
+	},
+	{
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp",
+	event = "VeryLazy",
+	},
 	{
 		"antkss/codeium",
 		event = "VeryLazy",
 		config = function ()
+		require('mini.pairs').setup()
+		require("Comment").setup()
 		vim.cmd("CodeiumEnable")
+
 		end
 	}
 
