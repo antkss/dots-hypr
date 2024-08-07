@@ -12,6 +12,7 @@ from materialyoucolor.utils.math_utils import (sanitize_degrees_double, differen
 import os
 import sass
 import fileinput
+import colorsys
 
 home_dir = os.path.expanduser("~")
 parser = argparse.ArgumentParser(description='Color generation script')
@@ -199,6 +200,7 @@ if args.termscheme is not None:
             harmonized = boost_chroma_tone(harmonized, 1, 1 + (args.term_fg_boost * (1 if darkmode else -1)))
         term_colors[color] = argb_to_hex(harmonized)
 
+material_colors["crim"] = args.mode
 if args.debug == True:
     print(f"$darkmode: {darkmode};")
     print(f"$transparent: {transparent};")
@@ -228,6 +230,41 @@ if args.debug == True:
 #         print(f"{color.ljust(6)} : {display_color(rgba_source)} {code_source} --> {display_color(rgba)} {code}")
 #     print('-----------------------------------------------')
 #
+
+def boost_saturation(hex_color, factor=1.5):
+    """
+    Boosts the saturation of a given hex color by multiplying its saturation by the factor.
+    
+    Parameters:
+        hex_color (str): The hex color code (e.g., '#RRGGBB').
+        factor (float): The factor by which to boost the saturation (e.g., 1.5 means 50% more saturation).
+        
+    Returns:
+        str: The color with boosted saturation in hex format.
+    """
+    if hex_color.startswith('#'):
+        hex_color = hex_color[1:]
+    
+    # Convert hex to RGB
+    r = int(hex_color[0:2], 16) / 255.0
+    g = int(hex_color[2:4], 16) / 255.0
+    b = int(hex_color[4:6], 16) / 255.0
+    
+    # Convert RGB to HSV
+    h, s, v = colorsys.rgb_to_hsv(r, g, b)
+    
+    # Boost saturation
+    s = min(1.0, s * factor)
+    
+    # Convert HSV back to RGB
+    r, g, b = colorsys.hsv_to_rgb(h, s, v)
+    
+    # Convert RGB to hex
+    boosted_hex = f'#{int(r * 255):02X}{int(g * 255):02X}{int(b * 255):02X}'
+    
+    return boosted_hex
+# for color,code in material_colors.items():
+#     material_colors[color] = boost_saturation(code,1)
 if args.apply:
     os.system(f"cp -r {home_dir}/.config/ags/scripts/templates/.* {home_dir}")
     # Define the target directory
