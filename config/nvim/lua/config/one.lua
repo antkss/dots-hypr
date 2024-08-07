@@ -1,3 +1,4 @@
+vim.opt.background = "light"
 return {
 	dark = {
 		black = "#1a212e",

@@ -52,7 +52,7 @@ vim.api.nvim_exec(
 ]],
 	false
 )
-vim.lsp.set_log_level("off") 
+vim.lsp.set_log_level("off")
 local nvim_home = vim.fn.stdpath("config")
 dofile(nvim_home .. '/lua/config/debug.lua')
 dofile(nvim_home .. '/lua/config/lsp.lua')
