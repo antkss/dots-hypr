@@ -3,7 +3,7 @@ local Colors = {
   bbg		= '#{{ $background }}',
   nbg		= '#{{ $surfaceTint }}',
   vfg		= '#{{ $primaryFixed }}',
-  ifg		= '#{{ $inversePrimary }}',
+  ifg		= '#{{ $onPrimaryFixed }}',
   rbg		= '#{{ $tertiaryFixedDim }}',
   vbg		= '#{{ $secondaryContainer }}',
   cmdbg         = '#{{ $primary }}',
@@ -18,7 +18,7 @@ local M = {
     a = { fg = Colors.ifg, bg = Colors.ibg, gui = 'bold' },
     c = { fg = Colors.ifg, bg = Colors.bbg },
   },
-  visual = { a = { fg = Colors.vfg, bg = Colors.vbg, gui = 'bold' } },
+  visual = { a = { fg = Colors.nbg, bg = Colors.vbg, gui = 'bold' } },
   replace = { a = { fg = Colors.bbg, bg = Colors.rbg, gui = 'bold' } },
   -- inactive = {
   --   a = { fg = Colors.gray1, bg = Colors.gray5, gui = 'bold' },

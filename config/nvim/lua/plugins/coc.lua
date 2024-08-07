@@ -82,6 +82,10 @@ return {
 	event = "VeryLazy",
 	},
 	{
+	    "hrsh7th/cmp-buffer",
+	    event = "VeryLazy"
+	},
+	{
 		"antkss/codeium",
 		event = "VeryLazy",
 		config = function ()

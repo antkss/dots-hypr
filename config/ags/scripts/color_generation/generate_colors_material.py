@@ -30,7 +30,7 @@ parser.add_argument('--harmonize_threshold', type=float , default=100, help='(0-
 parser.add_argument('--term_fg_boost', type=float , default=0.35, help='Make terminal foreground more different from the background')
 parser.add_argument('--blend_bg_fg', action='store_true', default=False, help='Shift terminal background or foreground towards accent')
 parser.add_argument('--cache', type=str, default=None, help='file path to store the generated color')
-# parser.add_argument('--debug', action='store_true', default=False, help='debug mode')
+parser.add_argument('--debug', action='store_true', default=False, help='debug mode')
 args = parser.parse_args()
 
 rgba_to_hex = lambda rgba: "#{:02X}{:02X}{:02X}".format(rgba[0], rgba[1], rgba[2])
@@ -199,13 +199,13 @@ if args.termscheme is not None:
             harmonized = boost_chroma_tone(harmonized, 1, 1 + (args.term_fg_boost * (1 if darkmode else -1)))
         term_colors[color] = argb_to_hex(harmonized)
 
-# if args.debug == False:
-#     print(f"$darkmode: {darkmode};")
-#     print(f"$transparent: {transparent};")
-#     for color, code in material_colors.items():
-#         print(f"${color}: {code};")
-#     for color, code in term_colors.items():
-#         print(f"${color}: {code};")
+if args.debug == True:
+    print(f"$darkmode: {darkmode};")
+    print(f"$transparent: {transparent};")
+    for color, code in material_colors.items():
+        print(f"${color}: {code};")
+    for color, code in term_colors.items():
+        print(f"${color}: {code};")
 # else:
 #     if args.path is not None:
 #         print('\n--------------Image properties-----------------')

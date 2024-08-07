@@ -33,9 +33,9 @@ export default () => {
     const barStatusIcons = StatusIcons({
         className: 'bar-statusicons',
         setup: (self) => self.hook(App, (self, currentName, visible) => {
-            // if (currentName === 'sideright') {
+            if (currentName === 'sideright') {
                 self.toggleClassName('bar-statusicons-active', visible);
-            // }
+            }
         }),
     });
     const SpaceRightDefaultClicks = (child) => Widget.EventBox({

@@ -15,21 +15,29 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 local c = require('config.powerline')
--- normal group 
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeNormal",c.normal.a.fg,c.normal.a.bg))
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorNormal",c.normal.c.fg,"nil"))
+vim.api.nvim_set_hl(0, "StatuslineModeNormal", { fg = c.normal.a.fg, bg = c.normal.a.bg })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorNormal", { fg = c.normal.c.fg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "NobgNormal", { fg = c.normal.c.fg, bg = "NONE" })
 -- insert group
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeInsert",c.insert.a.fg,c.insert.a.bg))
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorInsert",c.normal.c.fg,"nil"))
+vim.api.nvim_set_hl(0, "StatuslineModeInsert", { fg = c.insert.a.fg, bg = c.insert.a.bg })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorInsert", { fg = c.insert.a.bg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "NobgInsert", { fg = c.insert.a.fg, bg = "NONE" })
+
 -- visual group
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeVisual",c.visual.a.fg,c.visual.a.bg))
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorVisual",c.visual.a.bg,"nil"))
+vim.api.nvim_set_hl(0, "StatuslineModeVisual", { fg = c.visual.a.fg, bg = c.visual.a.bg })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorVisual", { fg = c.visual.a.bg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "NobgVisual", { fg = c.visual.a.fg, bg = "NONE" })
+
 -- replace group
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeReplace",c.replace.a.fg,c.replace.a.bg))
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorReplace",c.replace.a.bg,"nil"))
+vim.api.nvim_set_hl(0, "StatuslineModeReplace", { fg = c.replace.a.fg, bg = c.replace.a.bg })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorReplace", { fg = c.replace.a.bg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "NobgReplace", { fg = c.replace.a.bg, bg = "NONE" })
+
 -- command group
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeCommand",c.command.a.fg,c.command.a.bg))
-vim.cmd(string.format("hi %s guifg=%s guibg=%s","StatuslineModeSeparatorCommand",c.command.a.bg,"nil"))
+vim.api.nvim_set_hl(0, "StatuslineModeCommand", { fg = c.command.a.fg, bg = c.command.a.bg })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorCommand", { fg = c.command.a.bg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "NobgCommand", { fg = c.command.a.bg, bg = "NONE" })
+
 local warn = ""
 local error = ""
 local warns = 0
@@ -113,11 +121,13 @@ vim.api.nvim_create_autocmd({'ModeChanged', 'VimEnter','CursorHold'} ,{
 		hl = 'Replace'
 	end
 	local string = table.concat {
-		-- string.format('%%#StatuslineModeSeparator%s#',hl),
 		string.format('%%#StatuslineMode%s# %s ',hl,mode),
-		string.format('%%#StatuslineModeSeparator%s#',hl),
-		string.format('%s',""),
-		string.format("%%#StatuslineModeSeparator%s#%s",hl,"%= "),
+		string.format('%%#StatuslineModeSeparator%s#',hl),
+		-- string.format('%%#StatuslineModeSeparator%s#',hl),
+		string.format('%s'," "),
+		'%=',
+		string.format('%%#Nobg%s#',hl),
+		string.format("%%#StatuslineModeSeparator%s#%s",hl," "),
 		string.format('%%#StatuslineMode%s# %s ',hl,"%.40t"),
 		string.format('%s',""),
 	}
