@@ -43,3 +43,4 @@ function alias(from, to)
   ]], from, from, to, from))
 end
 alias("rp","term python %")
+vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename() <CR>',{noremap = true,expr = false})
