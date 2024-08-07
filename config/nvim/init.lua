@@ -38,7 +38,6 @@ require("lazy").setup("plugins",{
 		},
 	    },
 })
-vim.opt.termguicolors=true
 vim.o.updatetime = 250
 vim.opt.shiftwidth = 4
 
