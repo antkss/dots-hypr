@@ -52,8 +52,15 @@ vim.api.nvim_exec(
 	false
 )
 vim.lsp.set_log_level("off")
-local nvim_home = vim.fn.stdpath("config")
-dofile(nvim_home .. '/lua/config/debug.lua')
-dofile(nvim_home .. '/lua/config/lsp.lua')
-dofile(nvim_home .. '/lua/config/interface.lua')
-dofile(nvim_home .. '/lua/config/keymap.lua')
+local keywords = {
+    "lsp",
+    "debug",
+    "interface",
+    "keymap",
+}
+
+-- Iterate through the list and require each module
+for _, keyword in ipairs(keywords) do
+    require("config." .. keyword)
+end
+

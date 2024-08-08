@@ -36,6 +36,10 @@ vim.api.nvim_set_keymap('v', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('n', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('i','<Tab>', 'codeium#Accept()', {silent = true, expr = true})
 vim.api.nvim_set_keymap('i','<C-c>','<Esc>', {noremap = true})
+vim.api.nvim_set_keymap('n','<leader>j',':lua vim.lsp.buf.definition({ loclist = true }) <CR>',{noremap = true,expr = false})
+vim.api.nvim_set_keymap('n','<leader>h',':lua vim.lsp.buf.hover() <CR>',{noremap = true,expr = false})
+vim.api.nvim_set_keymap('n','<leader>rf',':lua vim.lsp.buf.references(nil, { on_list = on_list }) <CR>',{noremap = true,expr = false})
+vim.api.nvim_set_keymap('n', '<leader>r', ':lua vim.lsp.buf.rename() <CR>',{noremap = true,expr = false})
 
 function alias(from, to)
   vim.cmd(string.format([[
@@ -43,4 +47,3 @@ function alias(from, to)
   ]], from, from, to, from))
 end
 alias("rp","term python %")
-vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename() <CR>',{noremap = true,expr = false})
