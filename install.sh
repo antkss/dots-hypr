@@ -24,8 +24,8 @@ case $p in "yes")sleep 0;; *)echo "Received \"$p\", aborting...";exit 1;;esac
 clear
 printf '\n'
 printf 'Do you want to install ?\n'
-printf '  y = Yes, continue\n'
-printf '  a = Abort. (DEFAULT)\n'
+printf "\e[32m y = Yes, continue:\n\e[0m"
+printf " \e[31mn = No\e[0m\n"
 read -p "====> " p
 case $p in
   y)ask=true;;
@@ -99,8 +99,8 @@ printf "please enter sudo password !!!!\n"
 chsh -s /usr/bin/fish
 clear
 printf "Your actions will overwrite all the existing configurations, do you want to continue?\n"
-printf " y = Yes, continue:\n"
-printf " n = No, skip:\n"
+printf "\e[32m y = Yes, continue:\n\e[0m"
+printf " \e[31mn = No, skip:\e[0m\n"
 printf " type anything else to abort:\n"
 overwrite(){
 read -p "====> " p
@@ -123,9 +123,9 @@ cp -r ./.local $HOME
 fi
 sleep 1
 clear
-printf "Do you want to fully setup packages for your desktop ?\n"
-printf " y = Yes, continue:\n"
-printf " n = No, skip:\n"
+printf "\e[36mDo you want to fully setup packages for your desktop ?\e[0m\n"
+printf "\e[32m y = Yes, continue:\n\e[0m"
+printf " \e[31mn = No, skip:\e[0m\n"
 printf " type anything else to abort:\n"
 installfull(){
 read -p "====> " p
