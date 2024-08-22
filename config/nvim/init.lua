@@ -58,7 +58,10 @@ local keywords = {
     "interface",
     "keymap",
 }
-
+vim.api.nvim_create_autocmd("WinNew", {
+    pattern = "*",
+    command = "wincmd L"
+})
 -- Iterate through the list and require each module
 for _, keyword in ipairs(keywords) do
     require("config." .. keyword)

@@ -14,6 +14,24 @@ return {
 	end,
 	},
 	{
+	    "lukas-reineke/indent-blankline.nvim",
+	    event = "VeryLazy",
+	    config = function()
+		-- local highlight = {
+		--     "CursorColumn",
+		--     "Whitespace",
+		-- }
+		require("ibl").setup {
+		    indent = {  char = "." },
+		    whitespace = {
+			-- highlight = highlight,
+			remove_blankline_trail = true,
+		    },
+		    scope = { enabled = false },
+		}
+	    end,
+	},
+	{
 		'echasnovski/mini.indentscope',
 		event = "VeryLazy",
 		config =  function ()
