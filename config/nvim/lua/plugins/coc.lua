@@ -2,15 +2,9 @@ return {
 
 	{
 	'voldikss/vim-translator',
-	autocmd = false,
-	keys = {
-		{ 't', ':Translate --engine=bing <CR>' ,silent = true},
-		-- { 't', ':\'<,\'>Translate --engine=bing<CR>', mode = visual}
-	},
+
 	config = function()
-	vim.g.translator_target_lang = 'vi'
-	-- vim.keymap.set("n", "t", ":Translate --engine=bing <CR>", {noremap = true})
-	vim.keymap.set("v", "t", ":Translate --engine=bing <CR>", {noremap = true})
+
 	end,
 	},
 	{
@@ -86,6 +80,7 @@ return {
 
 
 	},
+
 	{
 		"hrsh7th/cmp-nvim-lsp",
 		event = "VeryLazy",
@@ -97,11 +92,11 @@ return {
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
 	build = "make install_jsregexp",
-	event = "VeryLazy",
+	-- event = "VeryLazy",
 	},
 	{
 	    "hrsh7th/cmp-buffer",
-	    event = "VeryLazy"
+	    -- event = "VeryLazy"
 	},
 	{
 		"antkss/codeium",
@@ -112,7 +107,9 @@ return {
 		vim.cmd("CodeiumEnable")
 
 		end
-	}
+	},
+
+
 
 
 }

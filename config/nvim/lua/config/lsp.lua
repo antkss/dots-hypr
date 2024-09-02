@@ -86,7 +86,14 @@ cmp.setup({
 	  },
 })
 
+require"lspconfig".jedi_language_server.setup {
+	-- capabilities = capabilities,
+	-- 	workspace = {
+	-- 		maxPreload = 11,
+	-- 		preloadFileSize = 10,
+	-- 	},
 
+}
 require("lspconfig").clangd.setup{
 	capabilities = capabilities,
 		workspace = {
@@ -95,14 +102,7 @@ require("lspconfig").clangd.setup{
 		},
 
 }
-require("lspconfig")["pyright"].setup {
-	capabilities = capabilities,
-		workspace = {
-			maxPreload = 11,
-			preloadFileSize = 10,
-		},
 
-}
 require("lspconfig").lua_ls.setup {
 	capabilities = capabilities,
 		workspace = {
