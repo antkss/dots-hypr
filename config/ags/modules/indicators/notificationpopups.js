@@ -3,7 +3,8 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
 const { Box } = Widget;
 import Notification from '../.commonwidgets/notification.js';
-
+import App from 'resource:///com/github/Aylur/ags/app.js'
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 export default () => Box({
     vertical: true,
     hpack: 'center',
@@ -38,7 +39,11 @@ export default () => Box({
         },
     },
     setup: (self) => self
-        .hook(Notifications, (box, id) => box.attribute.notify(box, id), 'notified')
+        .hook(Notifications, (box, id) => {
+	    box.attribute.notify(box, id);
+	    Utils.execAsync(`${App.configDir}/play ${App.configDir}/notify.wav`).catch(print);
+	}
+	    , 'notified')
         .hook(Notifications, (box, id) => box.attribute.dismiss(box, id), 'dismissed')
         .hook(Notifications, (box, id) => box.attribute.dismiss(box, id, true), 'closed')
     ,
