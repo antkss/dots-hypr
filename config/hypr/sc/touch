@@ -1,6 +1,6 @@
 #!/bin/sh
 
-HYPRLAND_DEVICE="synps/2-synaptics-touchpad"
+HYPRLAND_DEVICE="ps/2-generic-mouse"
 
 if [ -z "$XDG_RUNTIME_DIR" ]; then
   export XDG_RUNTIME_DIR=/run/user/$(id -u)
