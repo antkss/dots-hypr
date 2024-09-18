@@ -1,4 +1,3 @@
-
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <stdio.h>
@@ -11,6 +10,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 #define BUFFER_SIZE 1024
+
 void play(char* path) {
     // Initialize SDL and SDL_mixer
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
@@ -30,57 +30,59 @@ void play(char* path) {
         printf("Failed to load audio: %s\n", Mix_GetError());
         Mix_CloseAudio();
         SDL_Quit();
-	return;
+        return;
     }
 
     // Play the audio file
     Mix_PlayMusic(music, 1);
 
     // Wait until the audio finishes playing
-    while(Mix_PlayingMusic()){
-
+    while(Mix_PlayingMusic()) {
+        // Keep waiting
     };
-    
 
     // Clean up
     Mix_FreeMusic(music);
     Mix_CloseAudio();
     SDL_Quit();
-    return;
+}
 
-}
-void playing(char* command){
-        char home[256] = {};
-        snprintf(home, sizeof(home), "%s/.config/hypr/sound/", getenv("HOME"));
-        if (command) {
-            if (strcmp(command, "openwindow") == 0) {
-                strcat(home, "add.wav");
-                play(home);
-            } else if (strcmp(command, "closewindow") == 0) {
-                strcat(home, "remove.wav");
-                play(home);
-            } else if (strcmp(command, "fullscreen") == 0) {
-                strcat(home, "fullscreen.wav");
-                play(home);
-            }else if (strcmp(command,"workspace")==0){
-		strcat(home,"change_workspace.wav");
-		play(home);
-	    }else if(strcmp(command,"changefloatingmode") ==0){
-		strcat(home,"popup.wav");
-		play(home);
-	    }
-	    kill(getpid(), SIGUSR1);
+void playing(char* command) {
+    char home[256] = {};
+    snprintf(home, sizeof(home), "%s/.config/hypr/sound/", getenv("HOME"));
+    if (command) {
+        if (strcmp(command, "openwindow") == 0) {
+            strcat(home, "add.wav");
+            play(home);
+        } else if (strcmp(command, "closewindow") == 0) {
+            strcat(home, "remove.wav");
+            play(home);
+        } else if (strcmp(command, "fullscreen") == 0) {
+            strcat(home, "fullscreen.wav");
+            play(home);
+        } else if (strcmp(command, "workspace") == 0) {
+            strcat(home, "change_workspace.wav");
+            play(home);
+        } else if (strcmp(command, "changefloatingmode") == 0) {
+            strcat(home, "popup.wav");
+            play(home);
         }
+        kill(getpid(), SIGUSR1);
+    }
 }
+
 void sigchld_handler(int signo) {
     // Reap all terminated children
     while (waitpid(-1, NULL, WNOHANG) > 0);
 }
+
 int main() {
     int sockfd;
     struct sockaddr_un addr;
     char buffer[BUFFER_SIZE];
     ssize_t bytes_received;
+    
+    // Set up the signal handler for SIGCHLD
     struct sigaction sa;
     sa.sa_handler = sigchld_handler;
     sigemptyset(&sa.sa_mask);
@@ -89,7 +91,7 @@ int main() {
         perror("sigaction");
         exit(EXIT_FAILURE);
     }
-    
+
     // Get the socket path from environment variables
     char *socket_path = getenv("XDG_RUNTIME_DIR");
     if (socket_path == NULL) {
@@ -123,16 +125,13 @@ int main() {
     while ((bytes_received = recv(sockfd, buffer, sizeof(buffer) - 1, 0)) > 0) {
         buffer[bytes_received] = '\0'; // Null-terminate the buffer
         char* command = strtok(buffer, ">>");
-	if(!fork())
-	{
-	    playing(command);
-	    exit(0);
-	}
-
-
+        if (!fork()) {
+            playing(command);
+            exit(0); // Ensure the child process exits after playing the sound
+        }
     }
+
     // Close the socket
     close(sockfd);
     return 0;
 }
-
