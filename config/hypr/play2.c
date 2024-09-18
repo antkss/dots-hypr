@@ -11,7 +11,58 @@
 #include <sys/wait.h>
 #define BUFFER_SIZE 1024
 
-void play(char* path) {
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include <stdio.h>
+
+int play(char* path) {
+    // Initialize SDL audio subsystem
+    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+        printf("SDL_Init Error: %s\n", SDL_GetError());
+        return 1;
+    }
+
+    // Open audio device with desired settings
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        printf("Mix_OpenAudio Error: %s\n", Mix_GetError());
+        SDL_Quit();
+        return 1;
+    }
+
+    // Load the sound effect
+    Mix_Chunk* sound = Mix_LoadWAV(path);
+    if (sound == NULL) {
+        printf("Mix_LoadWAV Error: %s\n", Mix_GetError());
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+
+    // Set volume to 50% (volume level is between 0 and 128)
+    Mix_Volume(-1, 64);  // Set volume to 50% for all channels (-1 for all channels)
+
+    // Play the sound effect on any available channel
+    // 
+    int channel = Mix_PlayChannel(-1, sound, 0);
+    if ( channel == -1) {
+        printf("Mix_PlayChannel Error: %s\n", Mix_GetError());
+        Mix_FreeChunk(sound);
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+    while(Mix_Playing(channel)){
+    };
+    // Clean up
+    Mix_FreeChunk(sound);  // Free the sound effect resource
+    Mix_CloseAudio();      // Close audio device
+    SDL_Quit();            // Quit SDL
+
+    return 0;
+}
+
+void play2(char* path) {
     // Initialize SDL and SDL_mixer
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
         printf("Failed to initialize SDL: %s\n", SDL_GetError());
