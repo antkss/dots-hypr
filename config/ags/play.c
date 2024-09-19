@@ -51,7 +51,8 @@ int main(int argc, char *argv[]) {
 	    printf("Usage: %s <audio_file>\n", argv[0]);
 	    return 1;
     }
-    play(argv[1]);
+    if(!fork())
+	play(argv[1]);
     return 0;
 }
 
