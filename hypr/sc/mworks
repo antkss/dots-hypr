@@ -1,0 +1,16 @@
+#!/bin/sh
+cur=$(hyprctl activeworkspace -j | jq -r '.id')
+
+ids=($(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tr '\n' ' ' ))
+las=$(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tail -1 )
+for i in $(hyprctl workspaces -j | jq -r '.[].id' | sort -g); do 
+	if [ $i -gt $cur ]; then 
+		hyprctl dispatch movetoworkspace $i
+		break
+	else if [ $cur -eq $las ];then
+		hyprctl dispatch movetoworkspace ${ids[0]}
+		break
+	fi
+	fi
+done
+
