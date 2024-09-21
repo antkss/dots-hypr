@@ -3,8 +3,8 @@ Description=randomdisservice
 
 [Service]
 User=root
-WorkingDirectory=/home/as/.bin/bin
-ExecStart=/home/as/.bin/bin/randomdis
+WorkingDirectory=/home/{whoami}/.bin/bin
+ExecStart=/home/{whoami}/.bin/bin/randomdis
 # optional items below
 Restart=no
 
