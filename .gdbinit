@@ -1,6 +1,8 @@
 set debuginfod enabled on
 # set auto-load safe-path /
 source /home/as/cac/pwndbg/gdbinit.py
+source /home/as/cac/tools/gdbinit
+# source /home/as/cac/pwn/gdbinit.py
 # source ~/gef/gef/gef.py
 # source ~/gef/gef.py
 # source /home/as/cac/pwndbg/.venv/lib/python3.12/site-packages/decomp2dbg/d2d.py
@@ -63,9 +65,11 @@ alias cs=checksec
 # alias ls=!ls
 # alias ls=!ls --color=auto
 
-set context-sections regs code stack ghidra expressions threads disasm
+set context-clear-screen on
+set context-sections regs  stack ghidra expressions threads disasm code
 set context-register-color red
 set context-register-changed-color underline
+set dereference-limit 5
 set enhance-comment-color green
 set enhance-integer-value-color green
 set enhance-string-value-color green
@@ -73,27 +77,29 @@ set enhance-unknown-color green
 set telescope-skip-repeating-val off
 set memory-heap-color yellow
 set gcc-compiler-path /usr/bin/gcc
-set context-code-lines 5
+set context-disasm-lines 5
+# set context-code-lines 5
 set context-stack-lines 6
 set show-flags on
 set show-compact-regs on
-# set context-clear-screen on
 set resolve-heap-via-heuristic force
-
+set disable-randomization off
+# set emulate-future-annotations False
+# set emulate-annotations off
 # gef config gef.bruteforce_main_arena True
 set history filename ~/.gdb_history
 set history size 1000000
 # gef config gef.extra_plugins_dir /home/as/gef/gef/scripts
 # gef config context.ignore_registers  "$cs $ss $ds $es $fs $gs"
-source ~/cac/splitmind/gdbinit.py
-python
-import splitmind
-(splitmind.Mind()
-  .above(display="regs")
-  .right(display="stack")
-  # .right(of="main", display="code")
-  .right(of="main", display="disasm")
-  .show("legend", on="disasm")
-).build()
-end
-
+# source ~/cac/splitmind/gdbinit.py
+# python
+# import splitmind
+# (splitmind.Mind()
+#   .above(display="regs")
+#   .right(display="stack")
+#   # .right(of="main", display="code")
+#   .right(of="main", display="disasm")
+#   .show("legend", on="disasm")
+# ).build()
+# end
+#
