@@ -62,7 +62,7 @@ void playing(char* command){
             } else if (strcmp(command, "fullscreen") == 0) {
                 strcat(home, "fullscreen.wav");
                 play(home);
-            }else if (strcmp(command,"workspace")==0){
+            }else if (strcmp(command,"workspace")==0 || strcmp(command,"workspacev2")==0){
 		strcat(home,"change_workspace.wav");
 		play(home);
 	    }else if(strcmp(command,"changefloatingmode") ==0){
