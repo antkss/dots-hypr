@@ -244,6 +244,7 @@ fi
 
 if [ "$ACTION" = "copy" ]; then
   takeScreenshot - "$GEOM" "$OUTPUT" | wl-copy --type image/png || die "Clipboard error"
+  ~/.config/ags/play ~/.config/hypr/sound/screenshot_notif.wav
   notifyOk "$WHAT copied to buffer"
 elif [ "$ACTION" = "save" ]; then
   if takeScreenshot "$FILE" "$GEOM" "$OUTPUT"; then
@@ -268,11 +269,11 @@ elif [ "$ACTION" = "edit" ]; then
 else
   if [ "$ACTION" = "copysave" ]; then
     takeScreenshot - "$GEOM" "$OUTPUT" | tee "$FILE" | wl-copy --type image/png || die "Clipboard error"
+    ~/.config/ags/play ~/.config/hypr/sound/screenshot_notif.wav
     notifyOk "$WHAT copied to buffer and saved to $FILE" -i "$FILE"
     echo "$FILE"
   else
     notifyError "Error taking screenshot with grim"
   fi
 fi
-
 killHyprpicker
