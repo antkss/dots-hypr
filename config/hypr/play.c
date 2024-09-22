@@ -49,28 +49,9 @@ void play(char* path) {
     return;
 
 }
-void playing(char* command){
-        char home[256] = {};
-        snprintf(home, sizeof(home), "%s/.config/hypr/sound/", getenv("HOME"));
-        if (command) {
-            if (strcmp(command, "openwindow") == 0) {
-                strcat(home, "add.wav");
-                play(home);
-            } else if (strcmp(command, "closewindow") == 0) {
-                strcat(home, "remove.wav");
-                play(home);
-            } else if (strcmp(command, "fullscreen") == 0) {
-                strcat(home, "fullscreen.wav");
-                play(home);
-            }else if (strcmp(command,"workspace")==0 || strcmp(command,"workspacev2")==0){
-		strcat(home,"change_workspace.wav");
-		play(home);
-	    }else if(strcmp(command,"changefloatingmode") ==0){
-		strcat(home,"popup.wav");
-		play(home);
-	    }
-	    kill(getpid(), SIGUSR1);
-        }
+void playing(char* path){
+    play(path);
+    kill(getpid(), SIGUSR1);
 }
 void sigchld_handler(int signo) {
     // Reap all terminated children
@@ -120,12 +101,32 @@ int main() {
     }
 
     // Receive data from the socket
-    while ((bytes_received = recv(sockfd, buffer, sizeof(buffer) - 1, 0)) > 0) {
+    while (1) {
+	bytes_received = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
         buffer[bytes_received] = '\0'; // Null-terminate the buffer
         char* command = strtok(buffer, ">>");
+        char home[256] = {};
+        snprintf(home, sizeof(home), "%s/.config/hypr/sound/", getenv("HOME"));
+	// printf("%s\n",command);
+	
+        // if (command) {
+	if (strcmp(command, "openwindow") == 0) {
+	    strcat(home, "add.wav");
+	} else if (strcmp(command, "closewindow") == 0) {
+	    strcat(home, "remove.wav");
+	} else if (strcmp(command, "fullscreen") == 0) {
+	    strcat(home, "fullscreen.wav");
+	}else if (strcmp(command,"workspace")==0 || strcmp(command,"workspacev2")==0){
+	    strcat(home,"change_workspace.wav");
+	}else if(strcmp(command,"changefloatingmode") ==0){
+	    strcat(home,"popup.wav");
+	}else{
+	    continue;
+	}
+        // }
 	if(!fork())
 	{
-	    playing(command);
+	    playing(home);
 	    exit(0);
 	}
 
