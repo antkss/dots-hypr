@@ -39,6 +39,9 @@ void play(char* path) {
     // Wait until the audio finishes playing
     while(Mix_PlayingMusic()){
 
+    //wating function in SDL
+	SDL_Delay(1000);
+
     };
     
 
@@ -116,7 +119,7 @@ int main() {
 	    strcat(home, "remove.wav");
 	} else if (strcmp(command, "fullscreen") == 0) {
 	    strcat(home, "fullscreen.wav");
-	}else if (strcmp(command,"workspace")==0 || strcmp(command,"workspacev2")==0){
+	}else if (strcmp(command,"workspace")==0 || strcmp(command,"workspacev2")==0) {
 	    strcat(home,"change_workspace.wav");
 	}else if(strcmp(command,"changefloatingmode") ==0){
 	    strcat(home,"popup.wav");
