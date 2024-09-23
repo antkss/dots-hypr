@@ -5,7 +5,7 @@
 ![image](https://github.com/user-attachments/assets/eab0f15b-49c7-48af-821b-20fc58925c2d)
 
 
-![image](https://github.com/antkss/dots-hypr/assets/88892713/cfbb4f62-0fa0-40aa-bffb-36e0e0b5e347)
+![image](https://github.com/user-attachments/assets/c5557591-f613-4bde-b472-a05a31e5e62d)
 
 
 ![image](https://github.com/antkss/dots-hypr/assets/88892713/da49a9b4-85ba-4f78-925f-dbe1e16b5d82)
