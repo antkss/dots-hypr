@@ -15,7 +15,8 @@
 - neovim lua base and foot terminal dynamic colors:
 
 
-![image](https://github.com/antkss/dots-hypr/assets/88892713/de76879c-242b-4b66-bf72-4627faeca8b5)
+![image](https://github.com/user-attachments/assets/5ecfa352-bd8f-4466-8daa-89dd624788b3)
+
 
 - super speed with handmade colorscheme and nvim statusline
 
