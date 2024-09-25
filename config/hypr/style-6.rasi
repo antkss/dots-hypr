@@ -20,6 +20,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
+@import                          "shared/common.rasi"	
 @import                          "shared/colors.rasi"
 @import                          "shared/fonts.rasi"
 
