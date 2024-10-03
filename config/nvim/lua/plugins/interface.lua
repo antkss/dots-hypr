@@ -2,7 +2,7 @@
 return {
 
 	{
-		"antkss/onedark.nvim",
+		"antkss/onedark",
 		-- event = "VeryLazy",
 		init = function ()
 			-- require("onedark").setup()
