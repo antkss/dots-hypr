@@ -75,7 +75,7 @@ configuration {
 
 	/*---------- Misc setting ----------*/
 	terminal: "rofi-sensible-terminal";
-	font: "JetBrains Mono 12";
+	font: "Ubuntu 11";
 	sort: false;
 	threads: 0;
 	click-to-exit: true;

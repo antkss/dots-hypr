@@ -8,5 +8,5 @@
  **/
 
 * {
-    font: "JetBrains Mono Font Bold 11";
+    font: "Ubuntu Bold 11";
 }
