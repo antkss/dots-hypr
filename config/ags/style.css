@@ -37,10 +37,10 @@
   font-size: 1.364rem; }
 
 .techfont {
-  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono NL", "SpaceMono", "SpaceMono Nerd Font", monospace; }
+  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono", "SpaceMono", "SpaceMono Nerd Font", monospace; }
 
 .txt-reading {
-  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code";
+  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code","JetBrains Mono";
   font-size: 14px;
   font-weight: 600; }
 
@@ -51,10 +51,10 @@
   color: #271812; }
 
 .txt-primary {
-  color: #A33E00; }
+  color: #A53C00; }
 
 .txt-onSecondaryContainer {
-  color: #2F1500; }
+  color: #2E1500; }
 
 .txt-onSurfaceVariant {
   color: #584239; }
@@ -145,7 +145,7 @@
 .btn-primary {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF;
   padding: 0.682rem 1.023rem; }
 
@@ -158,10 +158,10 @@
   font-weight: 600; }
 
 .icon-material {
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp"; }
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp"; }
 
 .icon-nerd {
-  font-family: "SpaceMono NF", "SpaceMono Nerd Font", "JetBrains Mono NF", "JetBrains Mono Nerd Font", monospace; }
+  font-family: "SpaceMono NF", "SpaceMono Nerd Font", "JetBrains Mono NF", "JetBrains Mono Nerd Font", monospace,"JetBrains Mono"; }
 
 .separator-line {
   background-color: #c4b4ae;
@@ -440,7 +440,7 @@
 * {
   caret-color: #271812; }
   * selection {
-    background-color: #7D5636;
+    background-color: #7D5635;
     color: #FFFFFF; }
 
 @keyframes appear {
@@ -491,7 +491,7 @@ radio:checked {
   min-width: 8px;
   min-height: 8px;
   background-color: #FFFFFF;
-  border: 0.477rem solid #A33E00; }
+  border: 0.477rem solid #A53C00; }
 
 tooltip {
   animation-name: appear;
@@ -524,8 +524,8 @@ popover {
   min-height: 1.637rem; }
 
 .switch-bg-true {
-  background-color: #A33E00;
-  border: 0.136rem solid #A33E00; }
+  background-color: #A53C00;
+  border: 0.136rem solid #A53C00; }
 
 .switch-fg {
   border-radius: 9999px;
@@ -538,7 +538,7 @@ popover {
 
 .switch-fg-true {
   background-color: #FFFFFF;
-  color: #A33E00;
+  color: #A53C00;
   min-width: 1.431rem;
   min-height: 1.431rem;
   margin-left: 1.431rem; }
@@ -573,13 +573,13 @@ popover {
   background-color: #dfd6d4; }
 
 .segment-btn-enabled {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .segment-btn-enabled:hover,
 .segment-btn-enabled:focus {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .multipleselection-btn {
   border-radius: 0.818rem;
@@ -594,13 +594,13 @@ popover {
   color: #271812; }
 
 .multipleselection-btn-enabled {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .multipleselection-btn-enabled:hover,
 .multipleselection-btn-enabled:focus {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .gap-v-5 {
   min-height: 0.341rem; }
@@ -633,13 +633,13 @@ popover {
   background-color: #FFF1EC; }
 
 .tab-btn-active > box > label {
-  color: #A33E00; }
+  color: #A53C00; }
 
 .tab-indicator {
   transition: 180ms ease-in-out;
   min-height: 0.205rem;
   padding: 0rem 1.023rem;
-  color: #A33E00; }
+  color: #A53C00; }
 
 .tab-icon {
   border-radius: 9999px;
@@ -660,14 +660,14 @@ popover {
   padding: 0rem; }
 
 .tab-icon-expandable-active {
-  background-color: #FFCAA3;
-  color: #2F1500;
+  background-color: #FECAA1;
+  color: #2E1500;
   padding: 0rem 0.545rem;
   min-width: 9.545rem; }
 
 .tab-icon-active {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 widget {
   border-radius: 0.818rem;
@@ -689,7 +689,7 @@ widget {
   min-width: 22rem;
   background: #FFF8F6;
   border-radius: 20px;
-  border: 2px solid #A33E00;
+  border: 2px solid #A53C00;
   min-height: 2.0rem;
   padding-left: 0.5rem;
   padding-right: 0.3rem; }
@@ -701,7 +701,7 @@ widget {
   font-size: 3px;
   min-height: 4px;
   min-width: 25px;
-  color: #A33E00; }
+  color: #A53C00; }
 
 .bar-bg {
   background-color: #FFF8F6;
@@ -728,14 +728,14 @@ widget {
   padding: 0.205rem;
   margin: 3px;
   border-radius: 9px;
-  min-width: 26rem; }
+  min-width: 20rem; }
 
 .clock-bar {
   background-color: #FFF1EC;
   padding-left: 25px;
   padding-right: 20px;
-  padding-bottom: 2px;
-  padding-top: 2px;
+  padding-bottom: 3px;
+  padding-top: 3px;
   margin: 3px;
   border-radius: 9px;
   min-width: 10rem; }
@@ -789,12 +789,12 @@ widget {
   color: #9e8f8a; }
 
 .bar-ws-active {
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF; }
 
 .bar-ws-occupied {
   background-color: #ffe6de;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-ws-focus {
   background-color: #ffe6de;
@@ -825,7 +825,7 @@ widget {
   min-height: 1.77rem;
   min-width: 1.77rem;
   border-radius: 10rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-batt-txt {
   color: #584239; }
@@ -835,8 +835,8 @@ widget {
   min-width: 0.068rem;
   min-height: 1.636rem;
   padding: 0rem;
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .bar-batt-circprog-low {
   background-color: #BA1A1A;
@@ -852,15 +852,15 @@ widget {
   min-height: 1.77rem;
   min-width: 1.77rem;
   border-radius: 10rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-ram-circprog {
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   min-width: 0.068rem;
   min-height: 1.636rem;
   padding: 0rem;
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .bar-ram-txt {
   color: #584239; }
@@ -871,15 +871,15 @@ widget {
   min-height: 1.77rem;
   min-width: 1.77rem;
   border-radius: 10rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-swap-circprog {
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   min-width: 0.068rem;
   min-height: 1.636rem;
   padding: 0rem;
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .bar-swap-txt {
   color: #584239; }
@@ -890,15 +890,15 @@ widget {
   min-height: 1.77rem;
   min-width: 1.77rem;
   border-radius: 10rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-cpu-circprog {
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   min-width: 0.068rem;
   min-height: 1.636rem;
   padding: 0rem;
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .bar-cpu-txt {
   color: #584239; }
@@ -907,24 +907,24 @@ widget {
   min-height: 1.77rem;
   min-width: 1.77rem;
   border-radius: 10rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-music-circprog {
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   min-width: 0.068rem;
   min-height: 1.636rem;
   padding: 0rem;
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .bar-music-playstate-playing {
   min-height: 1.77rem;
   min-width: 1.77rem;
   border-radius: 10rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bar-music-playstate-txt {
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp"; }
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp"; }
 
 .bar-music-txt {
   color: #584239; }
@@ -1047,19 +1047,19 @@ widget {
   padding: 1.364rem; }
 
 .cheatsheet-title {
-  color: #2F1500; }
+  color: #2E1500; }
 
 .cheatsheet-key {
-  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono NL", "SpaceMono", "SpaceMono Nerd Font", monospace;
+  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono", "SpaceMono", "SpaceMono Nerd Font", monospace;
   min-height: 1.364rem;
   min-width: 1.364rem;
   margin: 0.17rem;
   padding: 0.136rem 0.205rem;
   -gtk-outline-radius: 0.409rem;
-  color: #2F1500;
+  color: #2E1500;
   border-radius: 0.409rem;
-  border: 0.068rem solid #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  border: 0.068rem solid #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-key-notkey {
   min-height: 1.364rem;
@@ -1068,44 +1068,44 @@ widget {
   color: #271812; }
 
 .cheatsheet-color-1 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-2 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-3 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-4 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-5 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-6 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-7 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-color-8 {
-  color: #2F1500;
-  border-color: #2F1500;
-  box-shadow: 0rem 0.136rem 0rem #2F1500; }
+  color: #2E1500;
+  border-color: #2E1500;
+  box-shadow: 0rem 0.136rem 0rem #2E1500; }
 
 .cheatsheet-closebtn {
   transition: 300ms cubic-bezier(0, 0.55, 0.45, 1);
@@ -1164,7 +1164,7 @@ widget {
   font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono";
   font-weight: 500;
   font-size: 1.432rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .bg-graph {
   color: rgba(255, 255, 255, 0.5);
@@ -1181,7 +1181,7 @@ widget {
   font-weight: 600;
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  background-color: #FCDCCF;
+  background-color: #FDDCD0;
   color: #584239;
   border: 0.068rem solid #896F65;
   min-width: 4.432rem;
@@ -1190,10 +1190,10 @@ widget {
 
 .bg-quicklaunch-btn:hover,
 .bg-quicklaunch-btn:focus {
-  background-color: #f4d4c8; }
+  background-color: #f5d4c8; }
 
 .bg-quicklaunch-btn:active {
-  background-color: #eccdc0; }
+  background-color: #edcdc1; }
 
 .bg-system-bg {
   border-radius: 1.159rem;
@@ -1205,7 +1205,7 @@ widget {
   min-height: 4.091rem;
   font-size: 0px;
   padding: 0rem;
-  background-color: #FCDCCF; }
+  background-color: #FDDCD0; }
 
 .dock-bg {
   border-radius: 1.705rem;
@@ -1234,7 +1234,7 @@ widget {
 
 .dock-separator {
   min-width: 0.068rem;
-  background-color: #FCDCCF; }
+  background-color: #FDDCD0; }
 
 .osd-bg {
   min-width: 8.864rem;
@@ -1324,37 +1324,37 @@ widget {
     margin: 0.409rem; }
 
 .osd-color-primary {
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF; }
   .osd-color-primary box {
     background-color: #FFFFFF; }
 
 .osd-color-primaryContainer {
-  background-color: #FFDBCD;
-  color: #360F00; }
+  background-color: #FFDBCE;
+  color: #370E00; }
   .osd-color-primaryContainer box {
-    background-color: #360F00; }
+    background-color: #370E00; }
 
 .osd-color-secondary {
-  background-color: #7D5636;
+  background-color: #7D5635;
   color: #FFFFFF; }
   .osd-color-secondary box {
     background-color: #FFFFFF; }
 
 .osd-color-secondaryContainer {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
   .osd-color-secondaryContainer box {
-    background-color: #2F1500; }
+    background-color: #2E1500; }
 
 .osd-color-tertiary {
-  background-color: #976C32;
+  background-color: #956D30;
   color: #FFFFFF; }
   .osd-color-tertiary box {
     background-color: #FFFFFF; }
 
 .osd-color-tertiaryContainer {
-  background-color: #976C32;
+  background-color: #956D30;
   color: #FFFFFF; }
   .osd-color-tertiaryContainer box {
     background-color: #FFFFFF; }
@@ -1391,7 +1391,7 @@ widget {
     background-color: #584239; }
 
 .osd-color-surfaceVariant {
-  background-color: #FCDCCF;
+  background-color: #FDDCD0;
   color: #584239; }
   .osd-color-surfaceVariant box {
     background-color: #584239; }
@@ -1411,14 +1411,14 @@ widget {
 .osd-settings-btn-arrow {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp";
   min-width: 1.705rem;
   min-height: 1.705rem;
   color: #271812; }
   .osd-settings-btn-arrow:hover {
     background-color: #FEE2D8; }
   .osd-settings-btn-arrow:active {
-    background-color: #F8DDD2; }
+    background-color: #F9DDD3; }
 
 .osd-show {
   transition: 200ms cubic-bezier(0.1, 1, 0, 1); }
@@ -1446,12 +1446,12 @@ widget {
   color: #271812;
   caret-color: transparent; }
   .overview-search-box selection {
-    background-color: #7D5636;
+    background-color: #7D5635;
     color: #FFFFFF; }
 
 .overview-search-box-extended {
   min-width: 25.909rem;
-  caret-color: #2F1500; }
+  caret-color: #2E1500; }
 
 .overview-search-prompt {
   color: #896F65; }
@@ -1492,7 +1492,7 @@ widget {
 
 .overview-search-results-txt-cmd {
   margin-right: 0.682rem;
-  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono NL", "SpaceMono", "SpaceMono Nerd Font", monospace;
+  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono", "SpaceMono", "SpaceMono Nerd Font", monospace;
   font-size: 1.227rem; }
 
 .overview-search-result-btn {
@@ -1508,7 +1508,7 @@ widget {
   background-color: #FEE2D8; }
 
 .overview-search-result-btn:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .overview-tasks {
   border-radius: 1.705rem;
@@ -1539,19 +1539,19 @@ widget {
   -gtk-outline-radius: 1.159rem;
   background-color: #ffe6de;
   color: #271812;
-  border: 0.068rem solid #F8DDD2; }
+  border: 0.068rem solid #F9DDD3; }
 
 .overview-tasks-window:hover,
 .overview-tasks-window:focus {
-  background-color: #FFCAA3; }
+  background-color: #FECAA1; }
 
 .overview-tasks-window:active {
-  background-color: #976C32;
-  background-color: #ffd1b3; }
+  background-color: #956D30;
+  background-color: #fed1b2; }
 
 .overview-tasks-window-selected {
-  background-color: #976C32;
-  background-color: #ffd1b3; }
+  background-color: #956D30;
+  background-color: #fed1b2; }
 
 .overview-tasks-window-dragging {
   opacity: 0.2; }
@@ -1660,7 +1660,7 @@ widget {
   background: #FFF8F6;
   padding: 0.682rem;
   margin: 0.682rem;
-  border: 1.5px solid #A33E00;
+  border: 1.5px solid #A53C00;
   border-radius: 20px; }
 
 .chat_frame {
@@ -1696,13 +1696,13 @@ widget {
   border-radius: 0.477rem;
   min-height: 1.364rem;
   min-width: 1.364rem;
-  background-color: #FFCAA3; }
+  background-color: #FECAA1; }
 
 .sidebar-volmixer-stream-slider highlight {
   border-radius: 0.477rem;
   min-height: 1.364rem;
   min-width: 1.364rem;
-  background-color: #A33E00; }
+  background-color: #A53C00; }
 
 .sidebar-volmixer-stream-slider slider {
   border-radius: 0.477rem;
@@ -1770,7 +1770,7 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-iconbutton:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-button {
   padding: 0rem 0.818rem; }
@@ -1780,15 +1780,15 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-button:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-button-active {
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF; }
 
 .sidebar-button-active:hover,
 .sidebar-button-active:focus {
-  background-color: #be6f41; }
+  background-color: #c06e41; }
 
 .sidebar-button-active:active {
   background-color: #daa082; }
@@ -1811,16 +1811,16 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-navrail-btn:active > box > label:first-child {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-navrail-btn-active > box > label:first-child {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .sidebar-navrail-btn-active:hover > box > label:first-child,
 .sidebar-navrail-btn-active:focus > box > label:first-child {
-  background-color: #ffcca8;
-  color: #442a16; }
+  background-color: #fecca7;
+  color: #432a16; }
 
 .sidebar-sysinfo-grouppad {
   padding: 1.159rem; }
@@ -1830,8 +1830,8 @@ widget {
   min-width: 0.818rem;
   min-height: 4.091rem;
   padding: 0.409rem;
-  background-color: #FFCAA3;
-  color: #2F1500;
+  background-color: #FECAA1;
+  color: #2E1500;
   font-size: 0px; }
 
 .sidebar-memory-swap-circprog {
@@ -1840,16 +1840,16 @@ widget {
   min-height: 2.255rem;
   padding: 0.409rem;
   margin: 0.918rem;
-  background-color: #FFCAA3;
-  color: #2F1500;
+  background-color: #FECAA1;
+  color: #2E1500;
   font-size: 0px; }
 
 .sidebar-cpu-circprog {
   min-width: 0.818rem;
   min-height: 3.409rem;
   padding: 0.409rem;
-  background-color: #FFCAA3;
-  color: #2F1500;
+  background-color: #FECAA1;
+  color: #2E1500;
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   font-size: 0px; }
 
@@ -1885,19 +1885,19 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-calendar-btn:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-calendar-btn-txt {
   margin-left: -10.341rem;
   margin-right: -10.341rem; }
 
 .sidebar-calendar-btn-today {
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF; }
 
 .sidebar-calendar-btn-today:hover,
 .sidebar-calendar-btn-today:focus {
-  background-color: #be6f41; }
+  background-color: #c06e41; }
 
 .sidebar-calendar-btn-today:active {
   background-color: #daa082; }
@@ -1920,7 +1920,7 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-calendar-monthyear-btn:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-calendar-monthshift-btn {
   border-radius: 9999px;
@@ -1934,7 +1934,7 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-calendar-monthshift-btn:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-todo-item {
   padding-right: 0.545rem; }
@@ -1949,7 +1949,7 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-todo-item-action:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-todo-crosser {
   min-width: 0rem; }
@@ -1970,19 +1970,19 @@ widget {
 
 .sidebar-todo-new,
 .sidebar-todo-new:focus {
-  color: #2F1500;
-  background-color: #FFCAA3; }
+  color: #2E1500;
+  background-color: #FECAA1; }
 
 .sidebar-todo-new:active {
-  color: #360F00;
-  background-color: #FFDBCD; }
+  color: #370E00;
+  background-color: #FFDBCE; }
 
 .sidebar-todo-add {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
   min-width: 1.705rem;
   min-height: 1.705rem;
-  color: #2F1500;
+  color: #2E1500;
   border: 0.068rem solid #271812; }
 
 .sidebar-todo-add:hover,
@@ -1990,20 +1990,20 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-todo-add:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-todo-add-available {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
   min-width: 1.705rem;
   min-height: 1.705rem;
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF;
-  border: 0.068rem solid #A33E00; }
+  border: 0.068rem solid #A53C00; }
 
 .sidebar-todo-add-available:hover,
 .sidebar-todo-add-available:focus {
-  background-color: #be6f41; }
+  background-color: #c06e41; }
 
 .sidebar-todo-add-available:active {
   background-color: #daa082; }
@@ -2011,7 +2011,7 @@ widget {
 .sidebar-todo-entry {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
-  background-color: #FCDCCF;
+  background-color: #FDDCD0;
   color: #584239;
   caret-color: #584239;
   margin: 0rem 0.341rem;
@@ -2033,7 +2033,7 @@ widget {
 .sidebar-module-btn-arrow {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp";
   background-color: #FEE2D8;
   min-width: 1.705rem;
   min-height: 1.705rem; }
@@ -2043,14 +2043,14 @@ widget {
 .sidebar-module-scripts-button {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp";
   background-color: #FFF1EC;
   min-width: 1.705rem;
   min-height: 1.705rem; }
   .sidebar-module-scripts-button:hover {
     background-color: #FEE2D8; }
   .sidebar-module-scripts-button:active {
-    background-color: #F8DDD2; }
+    background-color: #F9DDD3; }
 
 .sidebar-module-colorpicker-wrapper {
   padding: 0.341rem; }
@@ -2116,8 +2116,8 @@ widget {
   color: #271812; }
 
 .sidebar-chat-apiswitcher-icon-enabled {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .sidebar-chat-providerswitcher {
   border-radius: 0.818rem;
@@ -2158,15 +2158,15 @@ widget {
   background-color: #FFF8F6; }
 
 .sidebar-chat-send:active {
-  background-color: #FCDCCF; }
+  background-color: #FDDCD0; }
 
 .sidebar-chat-send-available {
-  background-color: #A33E00;
+  background-color: #A53C00;
   color: #FFFFFF; }
 
 .sidebar-chat-send-available:hover,
 .sidebar-chat-send-available:focus {
-  background-color: #be6f41; }
+  background-color: #c06e41; }
 
 .sidebar-chat-send-available:active {
   background-color: #daa082; }
@@ -2204,12 +2204,12 @@ widget {
   color: #271812; }
 
 .sidebar-chat-name-bot {
-  background-color: #7D5636;
+  background-color: #7D5635;
   color: #FFFFFF; }
 
 .sidebar-chat-name-system {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .sidebar-chat-txtblock {
   margin-left: -0.136rem;
@@ -2217,7 +2217,7 @@ widget {
   padding-left: 0.818rem; }
 
 .sidebar-chat-txt {
-  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code";
+  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code","JetBrains Mono";
   font-size: 14px;
   font-weight: 600; }
 
@@ -2236,7 +2236,7 @@ widget {
   margin: 0rem 0.682rem; }
 
 .sidebar-chat-codeblock-topbar {
-  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code";
+  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code","JetBrains Mono";
   font-size: 14px;
   font-weight: 600;
   border-radius: 1.159rem;
@@ -2262,15 +2262,15 @@ widget {
   background-color: #FFF8F6; }
 
 .sidebar-chat-codeblock-topbar-btn:active {
-  background-color: #FCDCCF; }
+  background-color: #FDDCD0; }
 
 .sidebar-chat-codeblock-code {
-  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono NL", "SpaceMono", "SpaceMono Nerd Font", monospace;
+  font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font", "JetBrains Mono", "SpaceMono", "SpaceMono Nerd Font", monospace;
   padding: 0.682rem; }
 
 .sidebar-chat-divider {
   min-height: 1px;
-  background-color: #ba9e93;
+  background-color: #bb9e94;
   margin: 0rem 0.545rem; }
 
 .sidebar-chat-welcome-txt {
@@ -2287,12 +2287,12 @@ widget {
 .sidebar-chat-welcome-logo {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp";
   min-height: 4.773rem;
   min-width: 4.773rem;
   font-size: 3.076rem;
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .sidebar-chat-chip {
   border-radius: 0.818rem;
@@ -2308,11 +2308,11 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-chat-chip-action:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-chat-chip-action-active {
-  color: #ba9e93;
-  border: 0.068rem solid #ba9e93; }
+  color: #bb9e94;
+  border: 0.068rem solid #bb9e94; }
 
 .sidebar-chat-chip-toggle {
   border-radius: 0.818rem;
@@ -2326,7 +2326,7 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-chat-chip-toggle:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-pin {
   border-radius: 0.818rem;
@@ -2340,16 +2340,16 @@ widget {
   background-color: #FEE2D8; }
 
 .sidebar-pin:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .sidebar-pin-enabled {
-  background-color: #A33E00; }
+  background-color: #A53C00; }
   .sidebar-pin-enabled label {
     color: #FFFFFF; }
 
 .sidebar-pin-enabled:hover,
 .sidebar-pin-enabled:focus {
-  background-color: #be6f41; }
+  background-color: #c06e41; }
 
 .sidebar-pin-enabled:active {
   background-color: #daa082; }
@@ -2362,7 +2362,7 @@ widget {
   padding-left: 0.818rem; }
 
 .sidebar-waifu-txt {
-  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code";
+  font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code","JetBrains Mono";
   font-size: 14px;
   font-weight: 600; }
 
@@ -2483,8 +2483,8 @@ widget {
 .notif-critical {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
-  background-color: #FFCAA3;
-  color: #2F1500;
+  background-color: #FECAA1;
+  color: #2E1500;
   padding: 0.818rem;
   padding-right: 1.363rem; }
 
@@ -2496,7 +2496,7 @@ widget {
 
 .notif-clicked-critical {
   background-color: #FFFFFF;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .popup-notif-low {
   border-radius: 1.159rem;
@@ -2522,9 +2522,9 @@ widget {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   min-width: 30.682rem;
-  background-color: #FFCAA3;
-  border: 0.034rem solid #2F1500;
-  color: #2F1500;
+  background-color: #FECAA1;
+  border: 0.034rem solid #2E1500;
+  color: #2E1500;
   padding: 0.818rem;
   padding-right: 1.363rem; }
 
@@ -2536,7 +2536,7 @@ widget {
 
 .popup-notif-clicked-critical {
   background-color: #FFFFFF;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .notif-body-low {
   color: #896F65; }
@@ -2545,7 +2545,7 @@ widget {
   color: #896F65; }
 
 .notif-body-critical {
-  color: #745136; }
+  color: #735135; }
 
 .notif-icon {
   border-radius: 9999px;
@@ -2555,19 +2555,19 @@ widget {
   font-size: 2.182rem; }
 
 .notif-icon-material {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .notif-icon-material-low {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .notif-icon-material-normal {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .notif-icon-material-critical {
-  background-color: #7D5636;
+  background-color: #7D5635;
   color: #FFFFFF; }
 
 .notif-expand-btn {
@@ -2581,7 +2581,7 @@ widget {
   background: #FEE2D8; }
 
 .notif-expand-btn:active {
-  background: #F8DDD2; }
+  background: #F9DDD3; }
 
 .notif-listaction-btn {
   border-radius: 1.159rem;
@@ -2593,18 +2593,18 @@ widget {
   background-color: #FEE2D8; }
 
 .notif-listaction-btn:active {
-  background-color: #F8DDD2; }
+  background-color: #F9DDD3; }
 
 .notif-listaction-btn-enabled {
-  background-color: #FFCAA3;
-  color: #2F1500; }
+  background-color: #FECAA1;
+  color: #2E1500; }
 
 .notif-listaction-btn-enabled:hover,
 .notif-listaction-btn-enabled:focus {
-  background-color: #eab893; }
+  background-color: #e9b891; }
 
 .notif-listaction-btn-enabled:active {
-  background-color: #cb9d7a; }
+  background-color: #ca9d79; }
 
 .osd-notif {
   border-radius: 1.159rem;
@@ -2616,19 +2616,19 @@ widget {
   min-width: 0.136rem;
   min-height: 3.136rem;
   padding: 0rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .notif-circprog-normal {
   min-width: 0.136rem;
   min-height: 3.136rem;
   padding: 0rem;
-  color: #2F1500; }
+  color: #2E1500; }
 
 .notif-circprog-critical {
   min-width: 0.136rem;
   min-height: 3.136rem;
   padding: 0rem;
-  color: #FFCAA3; }
+  color: #FECAA1; }
 
 .notif-actions {
   min-height: 2.045rem; }
@@ -2638,7 +2638,7 @@ widget {
   -gtk-outline-radius: 0.818rem; }
 
 .notif-action-low {
-  background-color: #F8DDD2;
+  background-color: #F9DDD3;
   color: #584239; }
 
 .notif-action-low:focus,
@@ -2649,7 +2649,7 @@ widget {
   background-color: #FFF8F6; }
 
 .notif-action-normal {
-  background-color: #F8DDD2;
+  background-color: #F9DDD3;
   color: #584239; }
 
 .notif-action-normal:focus,
@@ -2660,7 +2660,7 @@ widget {
   background-color: #FFF8F6; }
 
 .notif-action-critical {
-  background-color: #d8ccc3;
+  background-color: #d8ccc2;
   color: #584239; }
 
 .notif-action-critical:focus,
@@ -2668,7 +2668,7 @@ widget {
   border: 0.04rem solid #896F65; }
 
 .notif-action-critical:active {
-  background-color: #cbbbaf; }
+  background-color: #cbbbae; }
 
 @keyframes flyin-top {
   from {
@@ -2692,9 +2692,9 @@ widget {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   min-width: 29.659rem;
-  background-color: #fdfdfd;
+  background-color: #f6f8f5;
   padding: 0rem 1.023rem;
-  background: linear-gradient(127deg, rgba(252, 221, 133, 0.7), rgba(252, 221, 133, 0.85) 70.71%), linear-gradient(217deg, rgba(217, 188, 67, 0.7), rgba(217, 188, 67, 0.85) 70.71%), radial-gradient(circle at 0% 100%, #1A73E8 13%, rgba(0, 0, 0, 0) 100%), linear-gradient(336deg, rgba(37, 122, 233, 0.7), rgba(37, 122, 233, 0.85) 70.71%), linear-gradient(#fdfdfd, #fdfdfd); }
+  background: linear-gradient(127deg, rgba(204, 197, 182, 0.7), rgba(204, 197, 182, 0.85) 70.71%), linear-gradient(217deg, rgba(171, 108, 214, 0.7), rgba(171, 108, 214, 0.85) 70.71%), radial-gradient(circle at 0% 100%, #60989C 13%, rgba(0, 0, 0, 0) 100%), linear-gradient(336deg, rgba(71, 181, 197, 0.7), rgba(71, 181, 197, 0.85) 70.71%), linear-gradient(#f6f8f5, #f6f8f5); }
 
 .osd-music-cover-fallback {
   border-radius: 0.818rem;
@@ -2702,7 +2702,7 @@ widget {
   min-width: 7.5rem;
   min-height: 7.5rem;
   background-color: #FFF1EC;
-  color: #5d4317; }
+  color: #0c151e; }
 
 .osd-music-cover {
   border-radius: 0.818rem;
@@ -2727,13 +2727,13 @@ widget {
   font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono";
   font-weight: 500;
   font-size: 1.364rem;
-  color: #5d4317; }
+  color: #0c151e; }
 
 .osd-music-artists {
   font-family: "Rubik", "Geist", "AR One Sans", "Reddit Sans", "Inter", "Roboto", "Ubuntu", "Noto Sans", sans-serif;
   font-weight: 600;
   font-size: 0.955rem;
-  color: rgba(103, 78, 33, 0.9); }
+  color: rgba(23, 33, 43, 0.9); }
 
 .osd-music-pill {
   border-radius: 9999px;
@@ -2742,8 +2742,8 @@ widget {
   font-weight: 500;
   min-width: 1.833rem;
   padding: 0.273rem 0.682rem;
-  background-color: rgba(220, 208, 149, 0.5);
-  color: #5d4317; }
+  background-color: rgba(159, 177, 197, 0.5);
+  color: #0c151e; }
 
 .osd-music-controls {
   border-radius: 9999px;
@@ -2752,8 +2752,8 @@ widget {
   font-weight: 500;
   min-width: 1.833rem;
   padding: 0.205rem;
-  background-color: rgba(220, 208, 149, 0.5);
-  color: #5d4317; }
+  background-color: rgba(159, 177, 197, 0.5);
+  color: #0c151e; }
 
 .osd-music-controlbtn {
   min-width: 2.045rem;
@@ -2763,13 +2763,13 @@ widget {
 
 .osd-music-controlbtn:hover,
 .osd-music-controlbtn:focus {
-  background-color: rgba(188, 173, 118, 0.55); }
+  background-color: rgba(122, 138, 155, 0.55); }
 
 .osd-music-controlbtn:active {
-  background-color: rgba(176, 159, 105, 0.575); }
+  background-color: rgba(108, 123, 139, 0.575); }
 
 .osd-music-controlbtn-txt {
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp";
   font-size: 1.364rem;
   margin: -0.1rem 0rem; }
 
@@ -2778,23 +2778,23 @@ widget {
   min-width: 0.409rem;
   min-height: 3.068rem;
   padding: 0.273rem;
-  color: #5d4317; }
+  color: #0c151e; }
 
 .osd-music-playstate {
   transition: 150ms cubic-bezier(0, 0.9, 0.1, 1);
   min-height: 3.068rem;
   min-width: 3.068rem;
   border-radius: 10rem;
-  background-color: rgba(220, 208, 149, 0.5);
-  color: #5d4317; }
+  background-color: rgba(159, 177, 197, 0.5);
+  color: #0c151e; }
 
 .osd-music-playstate-btn > label {
-  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined", "Material Symbols Sharp";
+  font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono", "Material Symbols Sharp";
   font-size: 1.364rem;
   margin: -0.1rem 0rem; }
 
 .osd-title-play {
-  background-color: #fcdd85; }
+  background-color: #ccc5b6; }
 
 .sidebar-pinned {
   margin: 0rem;

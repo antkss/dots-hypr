@@ -30,7 +30,7 @@ $rounding_verysmall: 0.477rem;
 
 @mixin titlefont {
     // Geometric sans-serif
-    font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono",;
+    font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono";
     // , "Poppins", "Lexend", sans-serif;
     font-weight: 500;
 }
@@ -44,26 +44,26 @@ $rounding_verysmall: 0.477rem;
 
 @mixin icon-material {
     // Material Design Icons
-    font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined",
+    font-family: "Material Symbols Rounded", "MaterialSymbolsRounded", "Material Symbols Outlined","JetBrains Mono",
         "Material Symbols Sharp";
 }
 
 @mixin icon-nerd {
     // Nerd Fonts
     font-family: "SpaceMono NF", "SpaceMono Nerd Font", "JetBrains Mono NF",
-        "JetBrains Mono Nerd Font", monospace;
+        "JetBrains Mono Nerd Font", monospace,"JetBrains Mono";
 }
 
 @mixin techfont {
     // Monospace for sys info n stuff. Doesn't have to be a nerd font, but it's cool.
     font-family: "JetBrains Mono NF", "JetBrains Mono Nerd Font",
-        "JetBrains Mono NL", "SpaceMono", "SpaceMono Nerd Font", monospace;
+        "JetBrains Mono", "SpaceMono", "SpaceMono Nerd Font", monospace;
 }
 
 @mixin readingfont {
     // The most readable fonts, for a comfortable reading experience
     // in stuff like AI chat on sidebar
-    font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code";
+    font-family: "Lexend", "Noto Sans", sans-serif, "Cascadia Code","JetBrains Mono";
     font-size: 14px;
     font-weight: 600;
 }

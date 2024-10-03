@@ -1,25 +1,20 @@
-// import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-// import Brightness from '../../../services/brightness.js';
 import Indicator from '../../../services/indicator.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-// const WindowTitle = async () => {
-//     try {
        const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
        export default () => Widget.EventBox({
 		hexpand: true, vexpand: true,
 		onScrollUp: () => {
-		Utils.execAsync([`bash`,`-c`,`brightnessctl set 1%+`])
+		Utils.execAsync([`bash`,`-c`,`brightnessctl set 2%+`])
 		Indicator.popup(1);
 		},
 		onScrollDown: () => {
-		Utils.execAsync([`bash`,`-c`,`brightnessctl set 1%-`])
+		Utils.execAsync([`bash`,`-c`,`brightnessctl set 2%-`])
 		Indicator.popup(1);
 
 	    },
-	// hscroll: 'automatic', vscroll: 'never',
 		child: Widget.Box({
-			css: `margin-left: 11px;margin-top:2px;`,
+		    css: `margin-left: 11px;margin-top:4px;`,
 		    vertical: true,
 		    children: [
 			Widget.Label({
@@ -43,37 +38,4 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
                 ]
             })
         });
-//     } catch {
-//         return null;
-//     }
-// }
 
-// const OptionalWindowTitleInstance = await WindowTitle();
-//
-// export default () => Widget.EventBox({
-// 	onScrollUp: () => {
-// 	Utils.execAsync([`bash`,`-c`,`brightnessctl set 1%+`])
-// 	Indicator.popup(1);
-// 	},
-// 	onScrollDown: () => {
-// 	Utils.execAsync([`bash`,`-c`,`brightnessctl set 1%-`])
-// 	Indicator.popup(1);
-//
-// 	},
-// 	child:OptionalWindowTitleInstance,
-//             // // Widget.Box({ className: 'bar-corner-spacing' }),
-//             // Widget.Overlay({
-//             //     overlays: [
-//             //         Widget.Box({
-//             //             className: 'bar-sidemodule', hexpand: true,
-//             //             children: [Widget.Box({
-//             //                 vertical: true,
-//             //                 className: 'bar-space-button',
-//             //                 children: [
-//             //                 ]
-//             //             })]
-//             //         }),
-//             //     ]
-//             // })
-//         // ]
-//     });

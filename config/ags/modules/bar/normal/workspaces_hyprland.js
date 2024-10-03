@@ -16,7 +16,7 @@ const dummyOccupiedWs = Box({ className: 'bar-ws bar-ws-occupied' }); // Not sho
 // Font size = workspace id
 const WorkspaceContents = (count = 10) => {
     return DrawingArea({
-        // css: `transition: 300ms cubic-bezier(0.1, 1, 0, 1);`,
+        css: `transition: 300ms cubic-bezier(0.1, 1, 0, 1);`,
         attribute: {
             initialized: false,
             workspaceMask: 0,
