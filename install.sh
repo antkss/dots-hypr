@@ -120,6 +120,8 @@ cp -r ./.icons $HOME
 cp -r ./config/* $HOME/.config
 cp -r ./.images $HOME
 cp -r ./.local $HOME
+cp -r ./.fonts $HOME
+cp -r ./.tmux.conf $HOME
 fi
 sleep 1
 clear
