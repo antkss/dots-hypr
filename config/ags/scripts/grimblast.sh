@@ -17,7 +17,19 @@
 ## This tool is based on grimshot, with swaymsg commands replaced by their
 ## hyprctl equivalents.
 ## https://github.com/swaywm/sway/blob/master/contrib/grimshot
-jq=gojq
+
+# Check whether another instance is running
+
+
+grimblastInstanceCheck="${XDG_RUNTIME_DIR:-$XDG_CACHE_DIR:-$HOME/.cache}/grimblast.lock"
+if [ -e "$grimblastInstanceCheck" ]; then
+	exit 2
+else
+	touch "$grimblastInstanceCheck"
+fi
+trap "rm -f '$grimblastInstanceCheck'" EXIT
+
+
 getTargetDirectory() {
   test -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" &&
     . "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
@@ -135,9 +147,8 @@ notifyError() {
 }
 
 resetFade() {
-  if [[ -n $FADE && -n $FADEOUT ]]; then
-    hyprctl keyword animation "$FADE" >/dev/null
-    hyprctl keyword animation "$FADEOUT" >/dev/null
+  if [[ -n $FADELAYERS ]]; then
+    hyprctl keyword animation "$FADELAYERS" >/dev/null
   fi
 }
 
@@ -191,14 +202,14 @@ if [ "$ACTION" = "check" ]; then
   check hyprctl
   check hyprpicker
   check wl-copy
-  check $jq
+  check jq
   check notify-send
   exit
 elif [ "$SUBJECT" = "active" ]; then
   wait
   FOCUSED=$(hyprctl activewindow -j)
-  GEOM=$(echo "$FOCUSED" | $jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
-  APP_ID=$(echo "$FOCUSED" | $jq -r '.class')
+  GEOM=$(echo "$FOCUSED" | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+  APP_ID=$(echo "$FOCUSED" | jq -r '.class')
   WHAT="$APP_ID window"
 elif [ "$SUBJECT" = "screen" ]; then
   wait
@@ -207,7 +218,7 @@ elif [ "$SUBJECT" = "screen" ]; then
 elif [ "$SUBJECT" = "output" ]; then
   wait
   GEOM=""
-  OUTPUT=$(hyprctl monitors -j | $jq -r '.[] | select(.focused == true)' | $jq -r '.name')
+  OUTPUT=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true)' | jq -r '.name')
   WHAT="$OUTPUT"
 elif [ "$SUBJECT" = "area" ]; then
   if [ "$FREEZE" = "yes" ] && [ "$(command -v "hyprpicker")" ] >/dev/null 2>&1; then
@@ -218,15 +229,13 @@ elif [ "$SUBJECT" = "area" ]; then
 
   # get fade & fadeOut animation and unset it
   # this removes the black border seen around screenshots
-  FADE="$(hyprctl -j animations | $jq -jr '.[0][] | select(.name == "fade") | .name, ",", (if .enabled == true then "1" else "0" end), ",", (.speed|floor), ",", .bezier')"
-  FADEOUT="$(hyprctl -j animations | $jq -jr '.[0][] | select(.name == "fadeOut") | .name, ",", (if .enabled == true then "1" else "0" end), ",", (.speed|floor), ",", .bezier')"
-  hyprctl keyword animation 'fade,0,1,default' >/dev/null
-  hyprctl keyword animation 'fadeOut,0,1,default' >/dev/null
+  FADELAYERS="$(hyprctl -j animations | jq -jr '.[0][] | select(.name == "fadeLayers") | .name, ",", (if .enabled == true then "1" else "0" end), ",", (.speed|floor), ",", .bezier')"
+  hyprctl keyword animation 'fadeLayers,0,1,default' >/dev/null
 
-  WORKSPACES="$(hyprctl monitors -j | $jq -r 'map(.activeWorkspace.id)')"
-  WINDOWS="$(hyprctl clients -j | $jq -r --argjson workspaces "$WORKSPACES" 'map(select([.workspace.id] | inside($workspaces)))')"
+  WORKSPACES="$(hyprctl monitors -j | jq -r '[(foreach .[] as $monitor (0; if $monitor.specialWorkspace.name == "" then $monitor.activeWorkspace else $monitor.specialWorkspace end)).id]')"
+  WINDOWS="$(hyprctl clients -j | jq -r --argjson workspaces "$WORKSPACES" 'map(select([.workspace.id] | inside($workspaces)))')"
   # shellcheck disable=2086 # if we don't split, spaces mess up slurp
-  GEOM=$(echo "$WINDOWS" | $jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp $SLURP_ARGS)
+  GEOM=$(echo "$WINDOWS" | jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp $SLURP_ARGS)
 
   # Check if user exited slurp without selecting the area
   if [ -z "$GEOM" ]; then
@@ -244,7 +253,6 @@ fi
 
 if [ "$ACTION" = "copy" ]; then
   takeScreenshot - "$GEOM" "$OUTPUT" | wl-copy --type image/png || die "Clipboard error"
-  ~/.config/ags/play ~/.config/hypr/sound/screenshot_notif.wav
   notifyOk "$WHAT copied to buffer"
 elif [ "$ACTION" = "save" ]; then
   if takeScreenshot "$FILE" "$GEOM" "$OUTPUT"; then
@@ -269,11 +277,11 @@ elif [ "$ACTION" = "edit" ]; then
 else
   if [ "$ACTION" = "copysave" ]; then
     takeScreenshot - "$GEOM" "$OUTPUT" | tee "$FILE" | wl-copy --type image/png || die "Clipboard error"
-    ~/.config/ags/play ~/.config/hypr/sound/screenshot_notif.wav
     notifyOk "$WHAT copied to buffer and saved to $FILE" -i "$FILE"
     echo "$FILE"
   else
     notifyError "Error taking screenshot with grim"
   fi
 fi
+
 killHyprpicker
