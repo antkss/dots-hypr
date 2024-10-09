@@ -3,17 +3,12 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 const {  Button, Label, Revealer, Scrollable, Stack } = Widget;
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 // APIs
-// import GPTService from '../../services/gpt.js';
 import Gemini from '../../services/gemini.js';
 import { geminiView, geminiCommands, sendMessage as geminiSendMessage, geminiTabIcon } from './apis/gemini.js';
 import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGPTTabIcon } from './apis/chatgpt.js';
-// import { waifuView, waifuCommands, sendMessage as waifuSendMessage, waifuTabIcon } from './apis/waifu.js';
-// import { booruView, booruCommands, sendMessage as booruSendMessage, booruTabIcon } from './apis/booru.js';
 import { enableClickthrough } from "../.widgetutils/clickthrough.js";
-// import { checkKeybind } from '../.widgetutils/keybind.js';
 const TextView = Widget.subclass(Gtk.TextView, "AgsTextView");
 
-// import { widgetContent } from './sideleft.js';
 import { IconTabContainer } from '../.commonwidgets/tabcontainer.js';
 
 const EXPAND_INPUT_THRESHOLD = 30;
@@ -200,18 +195,11 @@ export const apiContentStack = IconTabContainer({
     }
 });
 
-function switchToTab(id) {
-    apiContentStack.shown.value = id;
-}
+
 
 export const apiWidgets = Widget.Box({
-    // attribute: {
-    //     'nextTab': () => switchToTab(Math.min(currentApiId + 1, APIS.length - 1)),
-    //     'prevTab': () => switchToTab(Math.max(0, currentApiId - 1)),
-    // },
+
     vertical: true,
-    css: "min-width: 600px;",
-    // className: 'spacing-v-10',
     homogeneous: false,
     children: [
         apiContentStack,
@@ -219,9 +207,4 @@ export const apiWidgets = Widget.Box({
         textbox,
     ],
 })
-// .keybind(["SHIFT"],"Return", (self, event) => {
-// 	// textbox.set_position(1);
-// 	textbox.set_text(textbox.text + "\n");
-// 	textbox.set_position(-1)
-// });
-// export default apiWidgets;
+

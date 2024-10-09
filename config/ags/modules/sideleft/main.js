@@ -14,7 +14,8 @@ import {SCREEN_WIDTH,SCREEN_HEIGHT} from '../../variables.js';
 const toolbox =  Scrollable({
     hscroll: "never",
     vscroll: "automatic",
-    css: `min-width: ${SCREEN_WIDTH*0.4}px`,
+    hexpand: false,
+    css: `min-width: ${SCREEN_WIDTH*0.1}px`,
     child: Box({
         vertical: true,
         className: 'side_chat',
@@ -28,6 +29,7 @@ const toolbox =  Scrollable({
 });
 const widgetContent = Revealer({
 	revealChild: true,
+	css: `min-width: ${SCREEN_WIDTH*0.7}px;`,
 	child: apiWidgets,
 });
 
@@ -38,32 +40,15 @@ const side_chats = Box({
     hexpand: false,
     css: `min-width: ${SCREEN_WIDTH}px;`,
     children: [
+	toolbox,
+	Box({css:`min-width: ${SCREEN_WIDTH*0.2}px`}),
 	widgetContent,
-	Box({css:`min-width: ${SCREEN_WIDTH*0.12}px`}),
-	toolbox
     ],
-    // setup: (self) => self
-     //    .on('key-press-event', (widget, event) => { // Handle keybinds
-		   // if ((
-     //                !(event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
-     //                event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 &&
-     //                widget != textbox && event.get_keyval()[1] != Gdk.KEY_space)
-     //                ||
-     //                ((event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
-     //                    event.get_keyval()[1] === Gdk.KEY_V)
-     //            ) {
-     //                textbox.grab_focus();
-     //                const buffer = textbox.get_buffer();
-     //                buffer.set_text(String.fromCharCode(event.get_keyval()[1]), 1);
-		   //  textbox.set_position(1);
-					//
-     //            }
-					//
-     //    }),
+
 });
 export default () => Window({
 	// className:"side_chat",
-visible: false,
+    visible: false,
     keymode: 'exclusive',
     anchor: ['bottom','top','left'],
     name: 'side_chat',

@@ -14,7 +14,7 @@ export const Bar = async (monitor = 0) => {
         startWidget: WindowTitle(),
         centerWidget: Widget.Box({
             className: 'spacing-h-4',
-		css:`background:transparent;`,
+	    css:`background:transparent;`,
             children: [
                 Music(),
 		hyprspace(),

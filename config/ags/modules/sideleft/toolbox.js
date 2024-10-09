@@ -8,7 +8,6 @@ import notification from './notificationlist.js';
 export const toolbox =  Scrollable({
     hscroll: "never",
     vscroll: "automatic",
-    css: 'min-width: 600px',
     child: Box({
         vertical: true,
         className: 'side_chat',
