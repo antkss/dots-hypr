@@ -6,7 +6,7 @@
  * Available at: https://github.com/GTRONICK/QSS/blob/master/MacOS.qss
  */
 QMainWindow {
-    background-color:#ececec;
+    background-color:white;
 }
 QPushButton, QToolButton, QCommandLinkButton{
     padding: 0 5px 0 5px;
@@ -110,11 +110,11 @@ QSpinBox::down-arrow, QDoubleSpinBox::down-arrow, QTimeEdit::down-arrow, QDateEd
     image: url(/usr/share/icons/Adwaita/16x16/actions/go-down-symbolic.symbolic.png);
 }
 QProgressBar {
-    max-height: 8px;
+    max-height: 11px;
     text-align: center;
-    font: italic bold 11px;
+    font: italic bold 9px;
     color: #3d3d3d;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius:4px;
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #ddd5d5, stop:0.5 #dad3d3, stop:1 #ddd5d5);
 }
@@ -265,13 +265,13 @@ QLCDNumber {
     color: #616161;;
 }
 QMenuBar {
-    background-color: #ececec;
+    background-color: white;
 }
 QMenuBar::item {
     color: #616161;
     spacing: 3px;
     padding: 1px 4px;
-    background-color: #ececec;
+    background-color: white;
 }
 
 QMenuBar::item:selected {
@@ -279,7 +279,7 @@ QMenuBar::item:selected {
     color: #3d3d3d;
 }
 QMenu {
-    background-color: #ececec;
+    background-color: white;
 }
 QMenu::item:selected {
     background-color: #dadada;
@@ -295,7 +295,7 @@ QTabWidget {
 }
 QTabWidget::pane {
     border-color: #050a0e;
-    background-color: #e0e0e0;
+    background-color: white;
     border-width: 1px;
     border-radius: 4px;
     position: absolute;
@@ -329,7 +329,7 @@ QTabBar::tab:last {
 }
 QTabBar::tab:selected, QTabBar::tab:last:selected, QTabBar::tab:hover {
     color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);
+    background-color: #1168e4;
 }
 QRadioButton::indicator {
     height: 14px;
