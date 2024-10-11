@@ -51,7 +51,9 @@ QDateTimeEdit, QDateEdit, QDoubleSpinBox, QFontComboBox {
 }
 
 QDialog {
-	background-color:#f0f0f0;
+	border:1px solid rgb(255,255,255);
+	border-radius:10px;
+	background-color:#ffffff;
 }
 
 QLabel,QLineEdit {
@@ -62,7 +64,7 @@ QLineEdit {
 	selection-background-color:rgb(236,116,64);
 }
 QMenuBar {
-	color:rgb(223,219,210);
+	color:rgb(0,0,0);
 	background-color:rgb(255,255,255);
 }
 QMenuBar::item {
@@ -73,7 +75,6 @@ QMenuBar::item {
 	background-color:rgb(255,255,255);
 }
 QMenuBar::item:selected {
-	color:rgb(255,255,255);
 	padding-top:2px;
 	padding-left:2px;
 	padding-right:2px;
@@ -83,17 +84,15 @@ QMenuBar::item:selected {
 	border-top-right-radius:4px;
 	border-top-left-radius:4px;
 	border-style:solid;
-	background-color:rgb(65,64,59);
-	border-top-color: rgb(47,47,44);
-	border-right-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(90, 87, 78, 255), stop:1 rgba(47,47,44, 255));
-	border-left-color:  qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(90, 87, 78, 255), stop:1 rgba(47,47,44, 255));
 }
 QMenu {
-	color:rgb(223,219,210);
-	background-color:rgb(65,64,59);
+	color:rgb(0,0,0);
+	border:2px solid rgba(225, 108, 54, 255);
+	border-radius: 10px;
+	background-color:rgb(255,255,255);
 }
 QMenu::item {
-	color:rgb(223,219,210);
+	color:rgb(0,0,0);
 	padding:4px 10px 4px 20px;
 }
 QMenu::item:selected {
@@ -111,7 +110,7 @@ QPlainTextEdit {
 	border: 1px solid transparent;
 	color:rgb(17,17,17);
 	selection-background-color:rgb(236,116,64);
-    background-color: #FFFFFF;
+	background-color: #FFFFFF;
 }
 QProgressBar {
 	text-align: center;
@@ -491,6 +490,6 @@ QTextEdit {
 	selection-background-color:rgb(236,116,64);
 }
 QTimeEdit, QToolBox, QToolBox::tab, QToolBox::tab:selected {
-	color:rgb(81,72,65);
+	color:rgb(0,0,0);
 	background-color: #ffffff;
 }

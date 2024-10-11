@@ -103,14 +103,9 @@ QSpinBox::down-button:hover, QDoubleSpinBox::down-button:hover, QTimeEdit::down-
     border-bottom-right-radius: 5px;
     background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);
 }
-QSpinBox::up-arrow, QDoubleSpinBox::up-arrow, QTimeEdit::up-arrow, QDateEdit::up-arrow, QDateTimeEdit::up-arrow {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-up-symbolic.symbolic.png);
-}
-QSpinBox::down-arrow, QDoubleSpinBox::down-arrow, QTimeEdit::down-arrow, QDateEdit::down-arrow, QDateTimeEdit::down-arrow {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-down-symbolic.symbolic.png);
-}
+
 QProgressBar {
-    max-height: 11px;
+    max-height: 12px;
     text-align: center;
     font: italic bold 9px;
     color: #3d3d3d;
@@ -158,6 +153,7 @@ QSlider::handle:vertical {
     border-radius: 7px;
 }
 QSlider::add-page, QSlider::sub-page {
+
     border: 1px transparent;
     background-color: #52595d;
     border-radius: 4px;
@@ -175,11 +171,12 @@ QSlider::sub-page:vertical {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #ddd5d5, stop:0.5 #dad3d3, stop:1 #ddd5d5);
 }
 QSlider::add-page:horizontal:disabled, QSlider::sub-page:horizontal:disabled, QSlider::add-page:vertical:disabled, QSlider::sub-page:vertical:disabled {
-    background: #b9b9b9;
+    background: #ffffff;
 }
 QComboBox, QFontComboBox {
+    min-height: 25px;
     border-width: 2px;
-    border-radius: 8px;
+    border-radius: 7px;
     border-style: solid;
     border-top-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd);
     border-right-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd);
@@ -203,9 +200,7 @@ QComboBox::drop-down {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-QComboBox::down-arrow {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-down-symbolic.symbolic.png); /*Adawaita icon thene*/
-}
+
 
 QComboBox::down-arrow:on {
     top: 1px;
@@ -241,7 +236,6 @@ QCheckBox:hover {
     border-color: transparent;
 }
 QCheckBox::indicator:checked {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/object-select-symbolic.symbolic.png);
     height: 15px;
     width: 15px;
     border-style:solid;
@@ -250,6 +244,11 @@ QCheckBox::indicator:checked {
     color: #ffffff;
     border-radius: 3px;
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #48a5fd, stop:0.5 #329cfb, stop:1 #48a5fd);
+}
+QFrame{
+
+    border: 2px transparent blue;
+    background-color: #ffffff;
 }
 QCheckBox::indicator:unchecked {
     
@@ -275,7 +274,8 @@ QMenuBar::item {
 }
 
 QMenuBar::item:selected {
-    background-color: #dadada;
+    border: 1px transparent blue;
+    background-color: #ffffff;
     color: #3d3d3d;
 }
 QMenu {
@@ -420,15 +420,4 @@ QScrollBar::add-line:vertical:pressed, QScrollBar::add-line:horizontal:pressed, 
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none;
 }
-QScrollBar::up-arrow:vertical {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-up-symbolic.symbolic.png);
-}
-QScrollBar::down-arrow:vertical {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-down-symbolic.symbolic.png);
-}
-QScrollBar::left-arrow:horizontal {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-previous-symbolic.symbolic.png);
-}
-QScrollBar::right-arrow:horizontal {
-    image: url(/usr/share/icons/Adwaita/16x16/actions/go-next-symbolic.symbolic.png);
-}
+
