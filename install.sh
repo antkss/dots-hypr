@@ -96,7 +96,7 @@ if $ask_ags;then showfun install-ags;v install-ags;fi
 clear
 printf "changing shell to fish...\n"
 printf "please enter sudo password !!!!\n"
-chsh -s /usr/bin/fish
+# chsh -s /usr/bin/fish
 clear
 printf "Your actions will overwrite all the existing configurations, do you want to continue?\n"
 printf "\e[32m y = Yes, continue:\n\e[0m"

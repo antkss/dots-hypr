@@ -7,7 +7,7 @@ sudo usermod -aG seat $(whoami)
 sudo cp ./havefuns/randomdis.service /etc/systemd/system
 mkdir -p /home/$(whoami)/.bin/bin/
 cp ./havefuns/randomdis /home/$(whoami)/.bin/bin/
-sed -i "s/{whoami}/$(whoami)/g" /etc/systemd/system/randomdis.service
+sudo sed -i "s/{whoami}/$(whoami)/g" /etc/systemd/system/randomdis.service
 systemctl enable randomdis
 # mkdir /home/$(whoami)/.config
 # cp ./havefuns/google.dark /home/$(whoami)/.config
