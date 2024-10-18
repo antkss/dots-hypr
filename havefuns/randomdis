@@ -1,5 +1,6 @@
 #!/bin/bash
 echo 0 > /proc/sys/kernel/randomize_va_space
+echo 0 > /proc/sys/kernel/yama/ptrace_scope 
 intel_gpu_frequency -c min=500
 for i in /sys/devices/system/cpu/cpufreq/policy*;do
 	echo "schedutil" > $i/scaling_governor
