@@ -2,14 +2,16 @@
 cur=$(hyprctl activeworkspace -j | jq -r '.id')
 ids=($(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tr '\n' ' '))
 declare -r las=$(hyprctl workspaces -j | jq -r '.[].id' | sort -g | tail -1)
-# echo $cur
-echo $ids
 for i in ${!ids[@]}; do 
-	if [ ${ids[$i]} -gt $cur ]; then 
-		    echo ${ids[$i]}
+
+	    if [ ${ids[$i]} -gt $cur ]; then 
 		    hyprctl dispatch workspace ${ids[$i]}
 		    break
-	    else if [ $cur -eq  $las ];then
+	    else if [ $cur -eq  $las ] ;then
+		    if [ ${ids[$i]} -lt 0 ]; then
+			hyprctl dispatch workspace ${ids[$((i+1))]}
+			break
+		    fi
 		    hyprctl dispatch workspace ${ids[0]}
 		    break
 
