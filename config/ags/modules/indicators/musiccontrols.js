@@ -15,17 +15,17 @@ const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
 const COVER_COLORSCHEME_SUFFIX = '_colorscheme.css';
 var lastCoverPath = '';
 
-function isRealPlayer(player) {
-    return (
-        // Remove unecessary native buses from browsers if there's plasma integration
-        !(hasPlasmaIntegration && player.busName.startsWith('org.mpris.MediaPlayer2.firefox')) &&
-        !(hasPlasmaIntegration && player.busName.startsWith('org.mpris.MediaPlayer2.chromium')) &&
-        // playerctld just copies other buses and we don't need duplicates
-        !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') &&
-        // Non-instance mpd bus
-        !player.busName.endsWith('.mpd')
-    );
-}
+// function isRealPlayer(player) {
+//     return (
+//         // Remove unecessary native buses from browsers if there's plasma integration
+//         !(hasPlasmaIntegration && player.busName.startsWith('org.mpris.MediaPlayer2.firefox')) &&
+//         !(hasPlasmaIntegration && player.busName.startsWith('org.mpris.MediaPlayer2.chromium')) &&
+//         // playerctld just copies other buses and we don't need duplicates
+//         !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') &&
+//         // Non-instance mpd bus
+//         !player.busName.endsWith('.mpd')
+//     );
+// }
 
 export const getPlayer = (name = userOptions.music.preferredPlayer) => Mpris.getPlayer(name) || Mpris.players[0] || null;
 function lengthStr(length) {
@@ -311,24 +311,25 @@ const TrackTime = ({ player, ...rest }) => {
             children: [
                 Label({
                     setup: (self) => self.hook(player, (self) => {
-                        // const player = Mpris.getPlayer();
-                        if (!player) return;
-                        self.label = lengthStr(player.position);
+			self.label = lengthStr(player.position);
+                        if (!player && player.playBackStatus != 'Playing') return;
+			    function update() {
+				if (player.playBackStatus != 'Playing') return;
+				self.label = lengthStr(player.position);
+			    }
+			    self.hook(player, update)
+			    self.hook(player, update, "position")
+			    self.poll(1000, update)
                     }),
                 }),
                 Label({ label: '/' }),
                 Label({
                     setup: (self) => self.hook(Mpris, (self) => {
-                        // const player = Mpris.getPlayer();
                         if (!player) return;
                         self.label = lengthStr(player.length);
                     }),
                 }),
             ],
-        }),
-        setup: (self) => self.hook(Mpris, (self) => {
-            if (!player) self.revealChild = false;
-            else self.revealChild = true;
         }),
     })
 }
@@ -384,7 +385,7 @@ const MusicControlsWidget = (player) => Box({
                     setup: (box) => {
                         box.pack_start(TrackControls({ player: player }), false, false, 0);
                         box.pack_end(PlayState({ player: player }), false, false, 0);
-                        if(hasPlasmaIntegration || player.busName.startsWith('org.mpris.MediaPlayer2.chromium')) box.pack_end(TrackTime({ player: player }), false, false, 0)
+                        box.pack_end(TrackTime({ player: player }), false, false, 0)
                         // box.pack_end(TrackSource({ vpack: 'center', player: player }), false, false, 0);
                     }
                 })
@@ -399,7 +400,7 @@ export default () => Revealer({
     // revealChild: false,
     child: Box({
         children: Mpris.bind("players")
-            .as(players => players.map((player) => (isRealPlayer(player) ? MusicControlsWidget(player) : null)))
+            .as(players => players.map(player => MusicControlsWidget(player)))
     }),
     setup: (self) => self.hook(showMusicControls, (revealer) => {
         revealer.revealChild = showMusicControls.value;
