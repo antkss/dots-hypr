@@ -1,0 +1,33 @@
+# Maintainer: FabioLolix
+# Maintainer: éclairevoyant
+# Contributor: ThatOneCalculator <kainoa at t1c dot dev>
+
+pkgname=hyprclip
+pkgver=1
+pkgrel=1
+pkgdesc="nothing there"
+arch=(x86_64)
+license=(BSD)
+# conflicts=("")
+depends=(
+    wl-clipboard
+    cliphist
+    )
+
+
+options=(!docs !debug)
+
+prepare() {
+    echo lmao
+}
+
+build() {
+    cd $srcdir
+    echo "lmao"
+}
+
+package() {
+    cd $srcdir/..
+    mkdir -p $pkgdir/usr/bin
+    cp sc/hyprclip /home/as/.config/hypr/pkg/hyprclip/usr/bin
+}
