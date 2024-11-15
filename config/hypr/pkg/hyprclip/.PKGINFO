@@ -6,9 +6,9 @@ xdata = pkgtype=pkg
 pkgver = 1-1
 pkgdesc = nothing there
 url = 
-builddate = 1731247166
+builddate = 1731670966
 packager = Unknown Packager
-size = 833104
+size = 833496
 arch = x86_64
 license = BSD
 depend = wl-clipboard

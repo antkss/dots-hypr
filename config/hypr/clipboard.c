@@ -4,11 +4,57 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/file.h>
+#include <signal.h>
 
 #define SOCKET_PATH "$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
 // #define MESSAGE "Hello, Server!"
 
+#define LOCKFILE "/tmp/hyprclip.lock" 
+int lock_fd;  // File descriptor for the lock file
+struct flock lock;  // Lock structure
+
+// Signal handler to cleanup lock file when the program is killed
+void cleanup_lock(int signum) {
+    printf("Cleaning up lock and exiting...\n");
+    
+    // Release the lock before exiting
+    lock.l_type = F_UNLCK;
+    fcntl(lock_fd, F_SETLK, &lock);
+    
+    // Optionally, remove the lock file
+    unlink(LOCKFILE);
+    
+    close(lock_fd);  // Close the lock file descriptor
+    exit(0);
+}
 int main() {
+
+    // Open the lock file or create it if it doesn't exist
+    lock_fd = open(LOCKFILE, O_CREAT | O_RDWR, 0666);
+    if (lock_fd == -1) {
+        perror("Failed to open lock file");
+        exit(EXIT_FAILURE);
+    }
+
+    // Set up the lock structure for an exclusive lock
+    lock.l_type = F_WRLCK;  // Exclusive lock
+    lock.l_whence = SEEK_SET;
+    lock.l_start = 0;
+    lock.l_len = 0;  // Lock the entire file
+
+    // Set up the signal handler for cleanup
+    signal(SIGINT, cleanup_lock);  // Handle Ctrl+C (SIGINT)
+    signal(SIGTERM, cleanup_lock); // Handle kill (SIGTERM)
+    signal(SIGQUIT, cleanup_lock); // Handle quit (SIGQUIT)
+
+    // Try to acquire the lock
+    if (fcntl(lock_fd, F_SETLK, &lock) == -1) {
+        perror("Failed to acquire lock");
+        close(lock_fd);
+        exit(EXIT_FAILURE);
+    }
     int client_fd;
     struct sockaddr_un addr;
     char* env1 = getenv("XDG_RUNTIME_DIR");
@@ -63,6 +109,7 @@ int main() {
 
     // Close socket
     close(client_fd);
+    cleanup_lock(0);
 
     return 0;
 }
