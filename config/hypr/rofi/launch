@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+dir=$(dirname $0)
+rofi -show drun -theme $dir/launcher.rasi
