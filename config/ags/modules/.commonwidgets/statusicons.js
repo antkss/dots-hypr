@@ -27,7 +27,6 @@ function isLanguageMatch(abbreviation, word) {
 export const NotificationIndicator = (notifCenterName = 'sideright') => {
     const widget = Widget.Revealer({
         transition: 150,
-        transition: 'slide_left',
         revealChild: false,
         setup: (self) => self
             .hook(Notifications, (self, id) => {
@@ -221,7 +220,6 @@ const HyprlandXkbKeyboardLayout = async ({ useFlag } = {}) => {
         updateCurrentKeyboards();
         const widgetRevealer = Widget.Revealer({
             transition: 150,
-            transition: 'slide_left',
             revealChild: languageStackArray.length > 1,
         });
         const widgetKids = {

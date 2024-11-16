@@ -147,7 +147,6 @@ export default ({
         transitionDuration: userOptions.animations.durationSmall,
         revealChild: true,
         child: Label({
-            xalign: 0,
             className: `txt-smallie notif-body-${notifObject.urgency}`,
             useMarkup: true,
             xalign: 0,
@@ -169,7 +168,6 @@ export default ({
                     xalign: 0,
                     className: `txt-smallie notif-body-${notifObject.urgency}`,
                     useMarkup: true,
-                    xalign: 0,
                     justify: Gtk.Justification.LEFT,
                     maxWidthChars: 24,
                     wrap: true,

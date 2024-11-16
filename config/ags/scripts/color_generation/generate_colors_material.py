@@ -266,13 +266,12 @@ def boost_saturation(hex_color, factor=1.5):
 # for color,code in material_colors.items():
 #     material_colors[color] = boost_saturation(code,1)
 if args.apply:
-    os.system(f"cp -r {home_dir}/.config/ags/scripts/templates/.* {home_dir}")
-    # Define the target directory
     target_dir = os.path.join(home_dir, ".config", "ags", "scripts", "templates")
+    os.system(f"cp -r {target_dir}/.* {home_dir}")
+    # Define the target directory
     # Walk through the directory
     for root, dirs, files in os.walk(target_dir):
         for file in files:
-            # Print the relative path
             relative_path = os.path.relpath(os.path.join(root, file), target_dir)
             colorapply(os.path.join(os.getenv("HOME"),relative_path),material_colors.items())
     apply_ags(material_colors.items())

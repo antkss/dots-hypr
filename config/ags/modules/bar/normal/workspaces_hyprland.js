@@ -149,8 +149,8 @@ const WorkspaceContents = (count = 10) => {
 export default () => EventBox({
     onScrollUp: () => Hyprland.messageAsync(`dispatch workspace -1`).catch(print),
     onScrollDown: () => Hyprland.messageAsync(`dispatch workspace +1`).catch(print),
-    onMiddleClick: () => App.toggleWindow('osk'),
-    onSecondaryClick: () => App.toggleWindow('overview'),
+    // onMiddleClick: () => App.toggleWindow('osk'),
+    // onSecondaryClick: () => App.toggleWindow('overview'),
     attribute: {
         clicked: false,
         ws_group: 0,
@@ -174,19 +174,19 @@ export default () => EventBox({
             Utils.execAsync([`${App.configDir}/scripts/hyprland/workspace_action.sh`, 'workspace', `${wsId}`])
                 .catch(print);
         })
-        self.on('button-press-event', (self, event) => {
-            if (event.get_button()[1] === 1) {
-                self.attribute.clicked = true;
-                const [_, cursorX, cursorY] = event.get_coords();
-                const widgetWidth = self.get_allocation().width;
-                const wsId = Math.ceil(cursorX * userOptions.workspaces.shown / widgetWidth);
-                Utils.execAsync([`${App.configDir}/scripts/hyprland/workspace_action.sh`, 'workspace', `${wsId}`])
-                    .catch(print);
-            }
-            else if (event.get_button()[1] === 8) {
-                Hyprland.messageAsync(`dispatch togglespecialworkspace`).catch(print);
-            }
-        })
+        // self.on('button-press-event', (self, event) => {
+        //     if (event.get_button()[1] === 1) {
+        //         self.attribute.clicked = true;
+        //         const [_, cursorX, cursorY] = event.get_coords();
+        //         const widgetWidth = self.get_allocation().width;
+        //         const wsId = Math.ceil(cursorX * userOptions.workspaces.shown / widgetWidth);
+        //         Utils.execAsync([`${App.configDir}/scripts/hyprland/workspace_action.sh`, 'workspace', `${wsId}`])
+        //             .catch(print);
+        //     }
+        //     else if (event.get_button()[1] === 8) {
+        //         Hyprland.messageAsync(`dispatch togglespecialworkspace`).catch(print);
+        //     }
+        // })
         self.on('button-release-event', (self) => self.attribute.clicked = false);
     }
 })
