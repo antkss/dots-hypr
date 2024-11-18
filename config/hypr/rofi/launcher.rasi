@@ -25,7 +25,7 @@ configuration {
 /****@import                          "shared/fonts.rasi"***/
 
 * {
-    font: "Ubuntu Bold 11";
+    font: "Ubuntu Nerd Font Bold 11";
     border-colour:               var(selected);
     handle-colour:               var(selected);
     background-colour:           var(background);
