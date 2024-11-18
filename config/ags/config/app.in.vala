@@ -10,7 +10,6 @@ class App : Astal.Application {
 	string? home = Environment.get_variable("HOME");
         foreach (var mon in this.monitors)
             add_window(new Bar(mon));
-
         apply_css(home+"/.config/ags/style.css");
     }
 

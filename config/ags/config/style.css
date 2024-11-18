@@ -1,10 +1,14 @@
+* {
+  font-family: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono", sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
 .bar {
   /* margin-right: 0.273rem; */
   min-height: 25px;
   background: #ffffff;
-  font-family: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono";
   border-radius: 8px;
-  padding: 7px;
   /* min-width: $screen_width; */
   padding: 4px;
   background-color: #FFF8F7;
@@ -21,42 +25,25 @@
 
 .icon {
   background-color: transparent;
-  margin: 0px;
-  padding: 0px;
 }
 
 .panel {
   background-color: #FFE8EB;
   border-radius: 8px;
-  /* min-width: 100px; */
   padding: 3px;
-  /* padding-left: 7px; */
-  /* padding-right: 7px; */
-  /* padding-top:0px; */
-  /* padding-bottom:0px; */
-  margin-top: 0px;
-  margin-bottom: 0px;
   margin-left: 3px;
   margin-right: 3px;
-  /* margin-top: 5px; */
   min-height: 2.5px;
-  /* min-height: 10px; */
 }
 
 .play-pause {
   background-color: #FFE8EB;
   border: #26181B;
   border-radius: 100%;
-  padding: 0px;
-  margin: 0px;
-  /* min-width: 10px; */
-  /* min-height: 10px; */
 }
 
 .text {
   color: #26181B;
-  margin: 0px;
-  padding: 0px;
 }
 
 .button {
@@ -77,9 +64,6 @@
   background-color: transparent;
   min-height: 22.5px;
   min-width: 22.5px;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 .work:hover label {
   background-color: rgba(255, 232, 235, 0.2);
@@ -102,20 +86,15 @@
 .work-focused {
   background-color: #BB0056;
   color: #FFE8EB;
-  min-height: 21px;
+  min-height: 22.5px;
   min-width: 22.5px;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 
 .mediaBut {
   background-color: #BB0056;
   color: #FFE8EB;
-  min-height: 21px;
+  min-height: 22.5px;
   min-width: 22.5px;
-  padding: 0px;
-  margin: 0px;
 }
 
 .FocusedClient {
@@ -128,34 +107,27 @@
   border-radius: 8px;
   background-position: center;
   background-size: contain;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 
 .Time {
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .Wifi {
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .Battery {
-  margin-left: 3px;
-  margin-right: 3px;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 
 .AudioSlider * {
   all: unset;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 .AudioSlider icon {
   margin-right: 0.6em;
@@ -174,7 +146,8 @@
   border-radius: 8px;
   min-height: 1em;
   min-width: 1em;
-  margin: -0.2em;
+  margin: 0px;
+  /* margin: -.2em; */
   border-color: #BB0056;
 }
 

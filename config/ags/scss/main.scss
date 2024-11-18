@@ -1,20 +1,26 @@
-
-$radius: 8px;
-$font: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono";
-$bar-height: 25px;
 @use "sass:color";
 @import "./color";
+
+
+$radius: 8px;
+$font: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono", sans-serif;
+$bar-height: 25px;
 $bg: $background;
 $fg: $onBackground;
 $accent: $surfaceContainer ;
 $primary: $primary;
+
+*{
+  all: unset;
+  font-family: $font;
+  margin: 0px;
+  padding: 0px;
+}
 .bar{
   /* margin-right: 0.273rem; */
   min-height: $bar-height;
   background: #ffffff;
-  font-family: $font;
   border-radius: 8px;
-  padding: 7px;
   /* min-width: $screen_width; */
   padding: 4px;
   background-color: $bg;
@@ -31,39 +37,22 @@ $primary: $primary;
 }
 .icon{
   background-color: transparent;
-  margin:0px;
-  padding:0px;
 }
 .panel{
   background-color: $accent;
   border-radius:$radius;
-  /* min-width: 100px; */
   padding:3px;
-  /* padding-left: 7px; */
-  /* padding-right: 7px; */
-  /* padding-top:0px; */
-  /* padding-bottom:0px; */
-  margin-top:0px;
-  margin-bottom:0px;
   margin-left:3px;
   margin-right:3px;
-  /* margin-top: 5px; */
   min-height: $bar-height*calc(10/100);
-  /* min-height: 10px; */
 }
 .play-pause{
   background-color: $accent;
   border: $fg;
   border-radius: 100%;
-  padding:0px;
-  margin: 0px;
-  /* min-width: 10px; */
-  /* min-height: 10px; */
 }
 .text{
   color: $fg;
-  margin: 0px;
-  padding: 0px;
 }
 
 .button {
@@ -85,9 +74,6 @@ $primary: $primary;
   background-color: transparent;
   min-height:$bar-height * calc(90/100);
   min-width:$bar-height * calc(90/100);
-  padding: 0px;
-  margin-top:0px;
-  margin-bottom:0px;
   &:hover label {
       background-color: color.adjust($accent, $alpha: -0.8);
       border-color: color.adjust($fg, $alpha: -0.8);
@@ -109,19 +95,16 @@ $primary: $primary;
 .work-focused{
     background-color: $primary;
     color: $accent;
-    min-height:$bar-height * calc(84/100);
+    border-radius: $radius;
+    min-height:$bar-height * calc(90/100);
     min-width:$bar-height * calc(90/100);
-    padding: 0px;
-    margin-top:0px;
-    margin-bottom:0px;
 }
 .mediaBut{
     background-color: $primary;
     color: $accent;
-    min-height:$bar-height * calc(84/100);
+    border-radius: $radius;
+    min-height:$bar-height * calc(90/100);
     min-width:$bar-height * calc(90/100);
-    padding: 0px;
-    margin:0px;
 }
 
 .FocusedClient {
@@ -134,33 +117,25 @@ $primary: $primary;
     border-radius: $radius;
     background-position: center;
     background-size: contain;
-    padding: 0px;
-    margin-top:0px;
-    margin-bottom:0px;
 }
 
 .Time{
-  margin-left:3px;
-  margin-right:3px;
+  margin-left:5px;
+  margin-right:5px;
 }
 .Wifi{
-  margin-left:3px;
-  margin-right:3px;
+  margin-left:5px;
+  margin-right:5px;
 }
 .Battery {
-    margin-left: 3px;
-    margin-right:3px;
-    padding:0px;
-    margin-top:0px;
-    margin-bottom:0px;
+  margin-left:7px;
+  margin-right:7px; 
 }
 .AudioSlider {
     * {
         all: unset;
-        padding:0px;
-        margin-top:0px;
-        margin-bottom:0px;
-
+        /* margin-left:4px; */
+        margin-right:4px;
     }
 
     icon {
@@ -183,6 +158,7 @@ $primary: $primary;
         border-radius: $radius;
         min-height: 1em;
         min-width: 1em;
+        /* margin:0px; */
         margin: -.2em;
         border-color: $primary;
     }

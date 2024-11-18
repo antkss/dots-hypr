@@ -102,17 +102,17 @@ class Media : Gtk.Box {
     Gtk.Button buttonT(string? icon,AstalMpris.Player player) {
 	var btn = new Gtk.Button() {
 	    visible = true,
-	    label = player.playback_status == 1 ? "x": ">"
+	    label = player.playback_status == 1 ? "": ""
 	};
 
 	Astal.widget_set_class_names(btn, {"mediaBut"});
-	// btn.notify["clicked"].connect(() => {
-	//         Astal.widget_set_class_names(btn, {"work-focused"});
-	// });
+	btn.notify["clicked"].connect(() => {
+	        Astal.widget_set_class_names(btn, {"work-focused"});
+	});
 	btn.clicked.connect(() => {
 	    // AstalMpris.PlaybackStatus lmao = player.playback_status;
 	    player.play_pause();
-	    btn.label = player.playback_status == 0 ? "x": ">";
+	    btn.label = player.playback_status == 0 ? "": "";
 	 //    if (btn.label == "<")
 	 //    {
 		// btn.label = ">";
@@ -142,11 +142,13 @@ class Media : Gtk.Box {
             valign = Gtk.Align.CENTER
         };
 
+	var title = truncate_text(player.title,40);
         Astal.widget_set_class_names(cover, {"Cover"});
         player.bind_property("title", label, "label", BindingFlags.SYNC_CREATE, (_, src, ref trgt) => {
-            var title = truncate_text(player.title,20);
+	    player = mpris.players.nth_data(0);
+            title = truncate_text(player.title,20);
             var artist = player.artist;
-            trgt.set_string(@"♫ $artist-$title");
+            trgt.set_string(@"♫ $artist$title");
             return true;
         });
 
@@ -232,8 +234,10 @@ class SysTray : Gtk.Box {
 
     void remove_item(string id) {
         if (items.contains(id)) {
-            items.remove(id);
+	    items.lookup(id).destroy(); // destroy item first
+	    items.remove(id); // remove item from array 
         }
+
 
     }
 }
@@ -272,7 +276,6 @@ class Battery : Gtk.Box {
     public Battery() {
         add(icon);
         add(label);
-	add(new Circle());
         Astal.widget_set_class_names(this, {"Battery"});
 	Astal.widget_set_class_names(label, {"text"});
         var bat = AstalBattery.get_default();
@@ -328,14 +331,14 @@ class rightPart: Gtk.Box{
         add(new SysTray());
         add(new Wifi());
         add(new AudioSlider());
-        add(new Battery());
     }
 }
 class Right : Gtk.Box {
     public Right() {
         Object(hexpand: true, halign: Gtk.Align.END);
-        add(new Panel(new Time()));
 	add(new Panel(new rightPart()));
+        add(new Panel(new Battery()));
+        add(new Panel(new Time()));
     }
 }
 class Circle: Astal.Overlay{
