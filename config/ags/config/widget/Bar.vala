@@ -142,11 +142,9 @@ class Media : Gtk.Box {
             valign = Gtk.Align.CENTER
         };
 
-	var title = truncate_text(player.title,40);
         Astal.widget_set_class_names(cover, {"Cover"});
         player.bind_property("title", label, "label", BindingFlags.SYNC_CREATE, (_, src, ref trgt) => {
-	    player = mpris.players.nth_data(0);
-            title = truncate_text(player.title,20);
+            var title = truncate_text(player.title,20);
             var artist = player.artist;
             trgt.set_string(@"♫ $artist$title");
             return true;
@@ -298,7 +296,7 @@ class Time : Astal.Label {
 
     }
 
-    public Time(string format = "%H:%M - %A %b %e") {
+    public Time(string format = "%H:%M  %A %b %e") {
         this.format = format;
         interval = AstalIO.Time.interval(1000, null);
         interval.now.connect(sync);

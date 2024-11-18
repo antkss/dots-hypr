@@ -80,10 +80,11 @@ return {
 		config = function ()
 		require('mini.pairs').setup()
 		require("Comment").setup()
-		vim.cmd("CodeiumEnable")
+		vim.cmd("CodeiumDisable")
 
 		end
 	},
+
 
 
 

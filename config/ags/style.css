@@ -12,16 +12,16 @@
   border-radius: 8px;
   /* min-width: $screen_width; */
   padding: 4px;
-  background-color: #FFF8F6;
-  color: #271812;
+  background-color: #F6FAFF;
+  color: #141D23;
   font-size: 1em;
   font-weight: bold;
   border-radius: 8px;
 }
 
 .cir {
-  background-color: #FFE9E2;
-  color: #FFE9E2;
+  background-color: #E6EFF8;
+  color: #E6EFF8;
 }
 
 .icon {
@@ -29,7 +29,7 @@
 }
 
 .panel {
-  background-color: #FFE9E2;
+  background-color: #E6EFF8;
   border-radius: 8px;
   padding: 3px;
   margin-left: 3px;
@@ -38,13 +38,13 @@
 }
 
 .play-pause {
-  background-color: #FFE9E2;
-  border: #271812;
+  background-color: #E6EFF8;
+  border: #141D23;
   border-radius: 100%;
 }
 
 .text {
-  color: #271812;
+  color: #141D23;
 }
 
 .button {
@@ -52,27 +52,27 @@
   background-color: transparent;
 }
 .button:hover label {
-  background-color: rgba(39, 24, 18, 0.2);
-  border-color: rgba(255, 233, 226, 0.2);
+  background-color: rgba(20, 29, 35, 0.2);
+  border-color: rgba(230, 239, 248, 0.2);
 }
 .button:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(20, 29, 35, 0.2);
 }
 
 .work {
   /* all: unset; */
-  color: #271812;
+  color: #141D23;
   background-color: transparent;
   min-height: 22.5px;
   min-width: 22.5px;
 }
 .work:hover label {
-  background-color: rgba(255, 233, 226, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(230, 239, 248, 0.2);
+  border-color: rgba(20, 29, 35, 0.2);
   border-radius: 8px;
 }
 .work:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(20, 29, 35, 0.2);
   border-radius: 8px;
 }
 
@@ -85,23 +85,23 @@
 }
 
 .work-focused {
-  background-color: #A53C00;
-  color: #FFE9E2;
+  background-color: #006590;
+  color: #E6EFF8;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
 }
 
 .mediaBut {
-  background-color: #A53C00;
-  color: #FFE9E2;
+  background-color: #006590;
+  color: #E6EFF8;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
 }
 
 .FocusedClient {
-  color: #FFE9E2;
+  color: #E6EFF8;
 }
 
 .Cover {
@@ -136,26 +136,26 @@
   margin-right: 0.6em;
 }
 .AudioSlider trough {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(20, 29, 35, 0.2);
   border-radius: 8px;
 }
 .AudioSlider highlight {
-  background-color: #A53C00;
+  background-color: #006590;
   min-height: 0.8em;
   border-radius: 8px;
 }
 .AudioSlider slider {
-  background-color: #271812;
+  background-color: #141D23;
   border-radius: 8px;
   min-height: 1em;
   min-width: 1em;
   /* margin:0px; */
   margin: -0.2em;
-  border-color: #A53C00;
+  border-color: #006590;
 }
 
 .volumeIcon {
-  color: #271812;
+  color: #141D23;
 }
 
 /*# sourceMappingURL=style.css.map */

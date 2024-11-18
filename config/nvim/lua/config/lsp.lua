@@ -94,11 +94,11 @@ cmp.setup({
 })
 
 require"lspconfig".pyright.setup {
-	-- capabilities = capabilities,
-	-- 	workspace = {
-	-- 		maxPreload = 11,
-	-- 		preloadFileSize = 10,
-	-- 	},
+	capabilities = capabilities,
+		workspace = {
+			maxPreload = 11,
+			preloadFileSize = 10,
+		},
 
 }
 require("lspconfig").clangd.setup{
@@ -118,13 +118,18 @@ require("lspconfig").lua_ls.setup {
 		},
 
 }
-require("lspconfig").tsserver.setup {
+require("lspconfig").ts_ls.setup {
 	capabilities = capabilities,
 		workspace = {
 			maxPreload = 11,
 			preloadFileSize = 10,
 		},
-
+require'lspconfig'.vala_ls.setup {
+  -- defaults, no need to specify these
+  cmd = { "vala-language-server" },
+  filetypes = { "vala", "genie" },
+  single_file_support = true,
+}
 }
 vim.cmd("LspStart")
 
