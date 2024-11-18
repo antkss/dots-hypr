@@ -1,0 +1,9 @@
+* {
+    background:     #{{ $surfaceContainerLowest }};
+    background-alt: #{{ $background }};
+    foreground:     #{{ $onBackground }};
+    selected:       #{{ $primary }};
+    active:         #98C379FF;
+    urgent:         #E06B74FF;
+    border:         #{{ $primary }};
+}

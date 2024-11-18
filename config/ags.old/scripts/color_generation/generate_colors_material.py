@@ -44,14 +44,13 @@ def apply_ags(thing):
     forags += f"$transparent: {transparent};\n"
     for color,code in thing:
         forags += f"${color}: {code};\n"
-    with open(os.path.join(home_dir, ".config", "ags", "scss", "_color.scss"), "w") as f:
+    with open(os.path.join(home_dir, ".config", "ags", "scss", "_material.scss"), "w") as f:
         f.write(forags)
     sass_file = home_dir+"/.config/ags/scss/main.scss"
     css_file = home_dir+"/.config/ags/style.css"
-    os.system(f"sass {sass_file} {css_file}")
-    # compiled_css = sass.compile(filename=sass_file)
-    # with open(css_file, 'w') as file:
-    #     file.write(compiled_css)
+    compiled_css = sass.compile(filename=sass_file)
+    with open(css_file, 'w') as file:
+        file.write(compiled_css)
     # os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.config/ags/style.css")
     # os.system(f"ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
     # os.system(f"ags run-js 'App.applyCss(\"{home_dir}/.cache/ags/user/generated/style.css\");'")
@@ -285,4 +284,4 @@ if args.apply:
     with open(file_path, 'w') as file:
         file.write(datawrite)
 if args.ags:
-    os.system("killall simple-bar; ~/.config/ags/simple-bar")
+    os.system("ags -q; ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")

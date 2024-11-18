@@ -22,9 +22,10 @@ configuration {
 /*****----- Global Properties -----*****/
 @import                          "shared/common.rasi"	
 @import                          "shared/colors.rasi"
-@import                          "shared/fonts.rasi"
+/****@import                          "shared/fonts.rasi"***/
 
 * {
+    font: "Ubuntu Bold 11";
     border-colour:               var(selected);
     handle-colour:               var(selected);
     background-colour:           var(background);

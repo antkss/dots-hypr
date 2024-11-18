@@ -1,0 +1,14 @@
+.bar > * {
+  /* margin-right: 0.273rem; */
+  min-height: 25px;
+  background: #ffffff;
+  font-family: "Cascadia Code", "Fira Code", "Fira Mono", "Droid Sans Mono";
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  min-width: 1330px;
+}
+.txt-title{
+    color: #1D1A24;
+}
+
