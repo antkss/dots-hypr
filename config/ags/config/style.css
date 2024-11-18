@@ -2,7 +2,17 @@
   all: unset;
   font-family: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono", sans-serif;
   margin: 0px;
+  font-size: 1em;
   padding: 0px;
+  border-radius: 8px;
+  /* background-color: $bg; */
+  /* color: $fg; */
+  font-weight: bold;
+}
+
+.active-label {
+  background-color: transparent;
+  color: #FFF8F7;
 }
 
 .bar {
@@ -14,8 +24,6 @@
   padding: 4px;
   background-color: #FFF8F7;
   color: #26181B;
-  font-size: 1em;
-  font-weight: bold;
   border-radius: 8px;
 }
 
@@ -45,18 +53,48 @@
 
 .text {
   color: #26181B;
+  background-color: transparent;
+}
+
+.tray {
+  background-color: #FFF8F7;
+  color: #26181B;
+  border-radius: 8px;
+  padding: 7px;
 }
 
 .button {
   all: unset;
   background-color: transparent;
+  min-height: 22.5px;
+  min-width: 22.5px;
+  color: #26181B;
 }
 .button:hover label {
-  background-color: rgba(38, 24, 27, 0.2);
-  border-color: rgba(255, 232, 235, 0.2);
+  background-color: rgba(255, 248, 247, 0.2);
+  border-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
 }
 .button:active label {
   background-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+
+.button-active {
+  background-color: #BB0056;
+  border-radius: 8px;
+  min-height: 22.5px;
+  min-width: 22.5px;
+  color: #FFF8F7;
+}
+.button-active:hover label {
+  background-color: rgba(187, 0, 86, 0.2);
+  border-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+.button-active:active label {
+  background-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
 }
 
 .work {
@@ -78,18 +116,7 @@
 
 .label {
   transition: 200ms;
-  padding: 0 8px;
-  margin: 2px;
-  border-radius: 8px;
-  border: 1pt solid transparent;
-}
-
-.work-focused {
-  background-color: #BB0056;
-  color: #FFE8EB;
-  border-radius: 8px;
-  min-height: 22.5px;
-  min-width: 22.5px;
+  background-color: transparent;
 }
 
 .mediaBut {
@@ -104,6 +131,10 @@
   color: #FFE8EB;
 }
 
+.hide {
+  background: transparent;
+}
+
 .Cover {
   /* min-height: 1.2em; */
   /* min-width: 1.2em; */
@@ -115,6 +146,7 @@
 .Time {
   margin-left: 5px;
   margin-right: 5px;
+  background-color: transparent;
 }
 
 .Wifi {
@@ -125,6 +157,7 @@
 .Battery {
   margin-left: 7px;
   margin-right: 7px;
+  background-color: transparent;
 }
 
 .AudioSlider * {

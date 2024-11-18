@@ -20,7 +20,6 @@ public static string truncate_text(string text, int length) {
 class Workspaces : Gtk.Box {
     AstalHyprland.Hyprland hypr = AstalHyprland.get_default();
     public Workspaces() {
-        Astal.widget_set_class_names(this, {"Workspaces"});
         hypr.notify["workspaces"].connect(sync);
         sync();
     }
@@ -40,20 +39,20 @@ class Workspaces : Gtk.Box {
 	    }
         var btn = new Gtk.Button() {
             visible = true,
-            label = num
+	    label = num
         };
 	var focused = hypr.focused_workspace == ws;
 	if (focused) {
-	    Astal.widget_set_class_names(btn, {"work-focused"});
+	    Astal.widget_set_class_names(btn, {"button-active"});
 	} else {
-	    Astal.widget_set_class_names(btn, {"work"});
+	    Astal.widget_set_class_names(btn, {"button"});
 	}
         hypr.notify["focused-workspace"].connect(() => {
 	    focused = hypr.focused_workspace == ws;
             if (focused) {
-                Astal.widget_set_class_names(btn, {"work-focused"});
+                Astal.widget_set_class_names(btn, {"button-active"});
             } else {
-                Astal.widget_set_class_names(btn, {"work"});
+                Astal.widget_set_class_names(btn, {"button"});
             }
         });
 
@@ -105,20 +104,11 @@ class Media : Gtk.Box {
 	    label = player.playback_status == 1 ? "": ""
 	};
 
-	Astal.widget_set_class_names(btn, {"mediaBut"});
-	btn.notify["clicked"].connect(() => {
-	        Astal.widget_set_class_names(btn, {"work-focused"});
-	});
+	Astal.widget_set_class_names(btn, {"button-active"});
 	btn.clicked.connect(() => {
 	    // AstalMpris.PlaybackStatus lmao = player.playback_status;
 	    player.play_pause();
 	    btn.label = player.playback_status == 0 ? "": "";
-	 //    if (btn.label == "<")
-	 //    {
-		// btn.label = ">";
-		// return;
-	 //    }
-	 //    btn.label = "<";
 
 	});
 	return btn;
@@ -154,6 +144,7 @@ class Media : Gtk.Box {
             var art = player.cover_art;
             Astal.widget_set_css(cover, @"background-image: url('$art')");
         });
+	Astal.widget_set_class_names(label,{"text"});
         add(cover);
         add(label);
 	add(buttonT(">",player));
@@ -161,36 +152,7 @@ class Media : Gtk.Box {
 
     }
 }
-// class cirButton: Astal.CircularProgress{
-//     public cirButton(string? icon){
-// 	sync(icon);
-//     }
-//     Gtk.Button buttonT(string? icon) {
-// 	var btn = new Gtk.Button() {
-// 	    visible = true,
-// 	    label = icon
-// 	};
-// 	Astal.widget_set_class_names(btn, {"text"});
-//
-// 	btn.notify["clicked"].connect(() => {
-// 	        Astal.widget_set_class_names(btn, {"focused"});
-// 	});
-// 	string? stdout = null;
-// 	string? stderr = null;
-// 	int exit_status = 0;
-// 	btn.clicked.connect(() => {
-// 	    Process.spawn_command_line_sync("playerctl play-pause", out stdout, out stderr, out exit_status);
-// 	});
-// 	return btn;
-//     }
-//     public void sync(string? icon){
-// 	Astal.widget_set_class_names(this,{"play-pause"});
-// 	Astal.Label label = new Astal.Label();
-// 	add(label);
-//     }
-//
-// }
-//
+
 class SysTray : Gtk.Box {
     HashTable<string, Gtk.Widget> items = new HashTable<string, Gtk.Widget>(str_hash, str_equal);
     AstalTray.Tray tray = AstalTray.get_default();
@@ -210,7 +172,6 @@ class SysTray : Gtk.Box {
         var btn = new Astal.Button();
         var icon = new Astal.Icon();
 	// Astal.widget_set_css(icon, "background-color: transparent;");
-	Astal.widget_set_class_names(btn,{"icon"});
 
         btn.clicked.connect(() => {
             if (menu != null)
@@ -225,6 +186,7 @@ class SysTray : Gtk.Box {
         item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
         item.bind_property("gicon", icon, "g-icon", BindingFlags.SYNC_CREATE);
         btn.add(icon);
+	Astal.widget_set_class_names(btn,{"icon"});
         add(btn);
         items.set(id, btn);
         btn.show_all();
@@ -272,10 +234,11 @@ class Battery : Gtk.Box {
     Astal.Label label = new Astal.Label();
 
     public Battery() {
+        Astal.widget_set_class_names(this, {"Battery"});
+        Astal.widget_set_class_names(icon, {"text"});
+	Astal.widget_set_class_names(label, {"text"});
         add(icon);
         add(label);
-        Astal.widget_set_class_names(this, {"Battery"});
-	Astal.widget_set_class_names(label, {"text"});
         var bat = AstalBattery.get_default();
         bat.bind_property("is-present", this, "visible", BindingFlags.SYNC_CREATE);
         bat.bind_property("battery-icon-name", icon, "icon", BindingFlags.SYNC_CREATE);

@@ -1,20 +1,10 @@
-* {
+window.Bar {
+  all: unset;
   font-family: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono", sans-serif;
   margin: 0px;
   padding: 0px;
-  font-size: 1em;
-  border-radius: 8px;
-  /* background-color: $bg; */
-  /* color: $fg; */
-  font-weight: bold;
 }
-
-.active-label {
-  background-color: transparent;
-  color: #FFF8F6;
-}
-
-.bar {
+window.Bar .bar {
   /* margin-right: 0.273rem; */
   min-height: 25px;
   background: #ffffff;
@@ -23,21 +13,18 @@
   padding: 4px;
   background-color: #FFF8F6;
   color: #271812;
+  font-size: 1em;
+  font-weight: bold;
   border-radius: 8px;
 }
-
-.cir {
+window.Bar .cir {
   background-color: #FFE9E2;
   color: #FFE9E2;
 }
-
-.icon {
+window.Bar .icon {
   background-color: transparent;
-  padding-left: 4px;
-  padding-right: 4px;
 }
-
-.panel {
+window.Bar .panel {
   background-color: #FFE9E2;
   border-radius: 8px;
   padding: 3px;
@@ -45,138 +32,108 @@
   margin-right: 3px;
   min-height: 2.5px;
 }
-
-.play-pause {
+window.Bar .play-pause {
   background-color: #FFE9E2;
   border: #271812;
   border-radius: 100%;
 }
-
-.text {
+window.Bar .text {
   color: #271812;
-  background-color: transparent;
 }
-
-.tray {
+window.Bar .tray > * {
   background-color: #FFF8F6;
   color: #271812;
   border-radius: 8px;
   padding: 7px;
 }
-
-.button {
+window.Bar .button {
+  all: unset;
   background-color: transparent;
-  min-height: 22.5px;
-  min-width: 22.5px;
-  color: #271812;
 }
-.button:hover label {
-  background-color: rgba(255, 248, 246, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
-  border-radius: 8px;
-}
-.button:active label {
+window.Bar .button:hover label {
   background-color: rgba(39, 24, 18, 0.2);
-  border-radius: 8px;
+  border-color: rgba(255, 233, 226, 0.2);
 }
-
-.button-active {
-  background-color: #A53C00;
-  border-radius: 8px;
-  min-height: 22.5px;
-  min-width: 22.5px;
-  color: #FFF8F6;
-}
-.button-active:hover label {
-  background-color: rgba(165, 60, 0, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
-  border-radius: 8px;
-}
-.button-active:active label {
+window.Bar .button:active label {
   background-color: rgba(39, 24, 18, 0.2);
-  border-radius: 8px;
 }
-
-.work {
+window.Bar .work {
+  /* all: unset; */
   color: #271812;
   background-color: transparent;
   min-height: 22.5px;
   min-width: 22.5px;
 }
-.work:hover label {
+window.Bar .work:hover label {
   background-color: rgba(255, 233, 226, 0.2);
   border-color: rgba(39, 24, 18, 0.2);
   border-radius: 8px;
 }
-.work:active label {
+window.Bar .work:active label {
   background-color: rgba(39, 24, 18, 0.2);
   border-radius: 8px;
 }
-
-.label {
+window.Bar .label {
   transition: 200ms;
-  background-color: transparent;
+  padding: 0 8px;
+  margin: 2px;
+  border-radius: 8px;
+  border: 1pt solid transparent;
 }
-
-.mediaBut {
+window.Bar .work-focused {
   background-color: #A53C00;
   color: #FFE9E2;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
 }
-
-.FocusedClient {
+window.Bar .mediaBut {
+  background-color: #A53C00;
+  color: #FFE9E2;
+  border-radius: 8px;
+  min-height: 22.5px;
+  min-width: 22.5px;
+}
+window.Bar .FocusedClient {
   color: #FFE9E2;
 }
-
-.hide {
-  background: transparent;
-}
-
-.Cover {
+window.Bar .Cover {
   /* min-height: 1.2em; */
   /* min-width: 1.2em; */
   border-radius: 8px;
   background-position: center;
   background-size: contain;
 }
-
-.Time {
-  margin-left: 5px;
-  margin-right: 5px;
-  background-color: transparent;
-}
-
-.Wifi {
+window.Bar .Time {
   margin-left: 5px;
   margin-right: 5px;
 }
-
-.Battery {
+window.Bar .Wifi {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+window.Bar .Battery {
   margin-left: 7px;
   margin-right: 7px;
-  background-color: transparent;
 }
-
-.AudioSlider * {
+window.Bar .AudioSlider * {
   all: unset;
   /* margin-left:4px; */
   margin-right: 4px;
 }
-.AudioSlider icon {
+window.Bar .AudioSlider icon {
   margin-right: 0.6em;
 }
-.AudioSlider trough {
+window.Bar .AudioSlider trough {
   background-color: rgba(39, 24, 18, 0.2);
   border-radius: 8px;
 }
-.AudioSlider highlight {
+window.Bar .AudioSlider highlight {
   background-color: #A53C00;
   min-height: 0.8em;
   border-radius: 8px;
 }
-.AudioSlider slider {
+window.Bar .AudioSlider slider {
   background-color: #271812;
   border-radius: 8px;
   min-height: 1em;
@@ -185,9 +142,8 @@
   margin: -0.2em;
   border-color: #A53C00;
 }
-
-.volumeIcon {
+window.Bar .volumeIcon {
   color: #271812;
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=a.css.map */

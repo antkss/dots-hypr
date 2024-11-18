@@ -11,22 +11,28 @@ $accent: $surfaceContainer ;
 $primary: $primary;
 
 *{
-  all: unset;
   font-family: $font;
   margin: 0px;
   padding: 0px;
+  font-size: 1.0em;
+  border-radius: $radius;
+  /* background-color: $bg; */
+  /* color: $fg; */
+  font-weight: bold;
+}
+.active-label{
+  background-color:transparent;
+  color: $bg;
 }
 .bar{
   /* margin-right: 0.273rem; */
   min-height: $bar-height;
   background: #ffffff;
-  border-radius: 8px;
+  border-radius: $radius ;
   /* min-width: $screen_width; */
   padding: 4px;
   background-color: $bg;
   color: $fg;
-  font-size: 1.0em;
-  font-weight: bold;
   border-radius: $radius;
 
 }
@@ -35,8 +41,10 @@ $primary: $primary;
   color: $accent;
 
 }
-.icon{
+.icon {
   background-color: transparent;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 .panel{
   background-color: $accent;
@@ -53,23 +61,47 @@ $primary: $primary;
 }
 .text{
   color: $fg;
+  background-color: transparent;
+}
+.tray {
+  background-color: $bg;
+  color: $fg;
+  border-radius: $radius;
+  padding: 7px;
 }
 
 .button {
-    all: unset;
     background-color: transparent;
-
+    min-height:$bar-height * calc(90/100);
+    min-width:$bar-height * calc(90/100);
+    color: $fg;
     &:hover label {
-        background-color: color.adjust($fg, $alpha: -0.8);
-        border-color: color.adjust($accent, $alpha: -0.8);
+        background-color: color.adjust($bg, $alpha: -0.8);
+        border-color: color.adjust($fg, $alpha: -0.8);
+        border-radius: $radius;
     }
-
     &:active label {
         background-color: color.adjust($fg, $alpha: -0.8);
+        border-radius: $radius;
+    }
+}
+.button-active{
+    background-color: $primary;
+    border-radius: $radius;
+    min-height:$bar-height * calc(90/100);
+    min-width:$bar-height * calc(90/100);
+    color: $bg;
+    &:hover label {
+        background-color: color.adjust($primary, $alpha: -0.8);
+        border-color: color.adjust($fg, $alpha: -0.8);
+        border-radius: $radius;
+    }
+    &:active label {
+        background-color: color.adjust($fg, $alpha: -0.8);
+        border-radius: $radius;
     }
 }
 .work {
-  /* all: unset; */
   color: $fg;
   background-color: transparent;
   min-height:$bar-height * calc(90/100);
@@ -86,19 +118,9 @@ $primary: $primary;
 }
 .label {
     transition: 200ms;
-    padding: 0 8px;
-    margin: 2px;
-    border-radius: $radius;
-    border: 1pt solid transparent;
+    background-color: transparent;
 }
 
-.work-focused{
-    background-color: $primary;
-    color: $accent;
-    border-radius: $radius;
-    min-height:$bar-height * calc(90/100);
-    min-width:$bar-height * calc(90/100);
-}
 .mediaBut{
     background-color: $primary;
     color: $accent;
@@ -110,7 +132,9 @@ $primary: $primary;
 .FocusedClient {
     color: $accent;
 }
-
+.hide{
+  background: transparent;
+}
 .Cover {
     /* min-height: 1.2em; */
     /* min-width: 1.2em; */
@@ -122,6 +146,7 @@ $primary: $primary;
 .Time{
   margin-left:5px;
   margin-right:5px;
+  background-color: transparent;
 }
 .Wifi{
   margin-left:5px;
@@ -130,6 +155,7 @@ $primary: $primary;
 .Battery {
   margin-left:7px;
   margin-right:7px; 
+  background-color: transparent;
 }
 .AudioSlider {
     * {
