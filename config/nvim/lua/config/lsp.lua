@@ -124,12 +124,45 @@ require("lspconfig").ts_ls.setup {
 			maxPreload = 11,
 			preloadFileSize = 10,
 		},
+
+}
+
+-- local meson_matcher = function (path)
+--   local pattern = "meson.build"
+--   local f = vim.fn.glob(util.path.join(path, pattern))
+--   if f == '' then
+--     return nil
+--   end
+--   for line in io.lines(f) do
+--     -- skip meson comments
+--     if not line:match('^%s*#.*') then
+--       local str = line:gsub('%s+', '')
+--       if str ~= '' then
+--         if str:match('^project%(') then
+--           return path
+--         else
+--           break
+--         end
+--       end
+--     end
+--   end
+-- end
+--
+-- require'lspconfig'.vala_ls.setup({
+--   on_attach = mix_attach,
+--   capabilities = capabilities,
+--   cmd = {'vala-language-server'},
+--   root_dir = function (fname)
+--     local root = util.search_ancestors(fname, meson_matcher)
+--     return root or util.find_git_ancestor(fname)
+--   end,
+-- })
 require'lspconfig'.vala_ls.setup {
   -- defaults, no need to specify these
   cmd = { "vala-language-server" },
   filetypes = { "vala", "genie" },
+  -- root_dir = root_pattern("meson.build", ".git"),
   single_file_support = true,
 }
-}
-vim.cmd("LspStart")
+-- vim.cmd("LspStart")
 
