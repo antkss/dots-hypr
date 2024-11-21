@@ -1,0 +1,45 @@
+local kind_icons = {
+  Text = " text",
+  Method = "󰆧 method",
+  Function = "󰊕 function",
+  Constructor = " constructor",
+  Field = "󰇽 field",
+  Variable = "󰂡 variable",
+  Class = "󰠱 class",
+  Interface = " interface",
+  Module = " module",
+  Property = "󰜢 property",
+  Unit = " unit",
+  Value = "󰎠 value",
+  Enum = " enum",
+  Keyword = "󰌋 keyword",
+  Snippet = " snippet",
+  Color = "󰏘 color",
+  File = "󰈙 file",
+  Reference = " reference",
+  Folder = "󰉋 folder",
+  EnumMember = " enum member",
+  Constant = "󰏿 constant",
+  Struct = " struct",
+  Event = " event",
+  Operator = "󰆕 operator",
+  TypeParameter = "󰅲 type parameter",
+}
+local cmp = require('cmp')
+cmp.setup {
+  formatting = {
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+      -- Source
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+        latex_symbols = "[LaTeX]",
+      })[entry.source.name]
+      return vim_item
+    end
+  },
+}

@@ -54,6 +54,11 @@ $primary: $primary;
   margin-right:3px;
   min-height: $bar-height*calc(10/100);
 }
+.space{
+  background-color:transparent;
+  margin-left: 4px;
+  margin-right: 4px;
+}
 .play-pause{
   background-color: $accent;
   border: $fg;
@@ -101,48 +106,15 @@ $primary: $primary;
         border-radius: $radius;
     }
 }
-.work {
-  color: $fg;
-  background-color: transparent;
-  min-height:$bar-height * calc(90/100);
-  min-width:$bar-height * calc(90/100);
-  &:hover label {
-      background-color: color.adjust($accent, $alpha: -0.8);
-      border-color: color.adjust($fg, $alpha: -0.8);
-      border-radius: $radius;
-  }
-  &:active label {
-      background-color: color.adjust($fg, $alpha: -0.8);
-      border-radius: $radius;
-  }
-}
+
 .label {
     transition: 200ms;
     background-color: transparent;
 }
 
-.mediaBut{
-    background-color: $primary;
-    color: $accent;
-    border-radius: $radius;
-    min-height:$bar-height * calc(90/100);
-    min-width:$bar-height * calc(90/100);
-}
-
-.FocusedClient {
-    color: $accent;
-}
 .hide{
   background: transparent;
 }
-.Cover {
-    /* min-height: 1.2em; */
-    /* min-width: 1.2em; */
-    border-radius: $radius;
-    background-position: center;
-    background-size: contain;
-}
-
 .Time{
   margin-left:5px;
   margin-right:5px;

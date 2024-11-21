@@ -10,32 +10,32 @@ require('mini.pairs').setup()
 -- require('mini.surround').setup()
 local cmp = require'cmp'
 local kind_icons = {
-  Text = " text",
-  Method = "󰆧 method",
-  Function = "󰊕 function",
-  Constructor = " constructor",
-  Field = "󰇽 field",
-  Variable = "󰂡 variable",
-  Class = "󰠱 class",
-  Interface = " interface",
-  Module = " module",
-  Property = "󰜢 property",
-  Unit = " unit",
-  Value = "󰎠 value",
-  Enum = " enum",
-  Keyword = "󰌋 keyword",
-  Snippet = " snippet",
-  Color = "󰏘 color",
-  File = "󰈙 file",
-  Reference = " reference",
-  Folder = "󰉋 folder",
-  EnumMember = " enum member",
-  Constant = "󰏿 constant",
-  Struct = " struct",
-  Event = " event",
-  Operator = "󰆕 operator",
-  TypeParameter = "󰅲 type parameter",
-  Codeium = "󰫢 ai",
+  Text = "",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰇽",
+  Variable = "󰂡",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "󰅲",
+  Codeium = "󰫢 ",
 }
 cmp.setup({
 	snippet = {
@@ -103,7 +103,6 @@ require"lspconfig".pyright.setup {
 }
 require("lspconfig").clangd.setup{
 	capabilities = capabilities,
-	filetypes = { "c", "cpp","h","hpp" },
 		workspace = {
 			maxPreload = 5,
 			preloadFileSize = 10,
@@ -113,7 +112,6 @@ require("lspconfig").clangd.setup{
 
 require("lspconfig").lua_ls.setup {
 	capabilities = capabilities,
-	filetypes = { "lua" },
 		workspace = {
 			maxPreload = 11,
 			preloadFileSize = 10,
@@ -121,19 +119,49 @@ require("lspconfig").lua_ls.setup {
 
 }
 require("lspconfig").ts_ls.setup {
-    capabilities = capabilities,
-    workspace = {
-	    maxPreload = 11,
-	    preloadFileSize = 10,
-    },
+	capabilities = capabilities,
+		workspace = {
+			maxPreload = 11,
+			preloadFileSize = 10,
+		},
 
 }
 
-
+-- local meson_matcher = function (path)
+--   local pattern = "meson.build"
+--   local f = vim.fn.glob(util.path.join(path, pattern))
+--   if f == '' then
+--     return nil
+--   end
+--   for line in io.lines(f) do
+--     -- skip meson comments
+--     if not line:match('^%s*#.*') then
+--       local str = line:gsub('%s+', '')
+--       if str ~= '' then
+--         if str:match('^project%(') then
+--           return path
+--         else
+--           break
+--         end
+--       end
+--     end
+--   end
+-- end
+--
+-- require'lspconfig'.vala_ls.setup({
+--   on_attach = mix_attach,
+--   capabilities = capabilities,
+--   cmd = {'vala-language-server'},
+--   root_dir = function (fname)
+--     local root = util.search_ancestors(fname, meson_matcher)
+--     return root or util.find_git_ancestor(fname)
+--   end,
+-- })
 require'lspconfig'.vala_ls.setup {
   -- defaults, no need to specify these
   cmd = { "vala-language-server" },
   filetypes = { "vala", "genie" },
+  -- root_dir = root_pattern("meson.build", ".git"),
   single_file_support = true,
 }
 -- vim.cmd("LspStart")

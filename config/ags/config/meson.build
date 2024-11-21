@@ -16,7 +16,9 @@ pkgconfig_deps = [
   dependency('astal-tray-0.1'),
   dependency('astal-mpris-0.1'),
   dependency('astal-hyprland-0.1'),
+  dependency('astal-notifd-0.1'),
 ]
+# add_project_arguments(['-static'], language: 'vala')
 
 # needed for GLib.Math
 deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')

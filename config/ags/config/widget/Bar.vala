@@ -2,7 +2,7 @@
 public static string truncate_text(string text, int length) {
     // Truncate if the text is too long
     if (text.length > length) {
-        return text.substring(0, length)+"...  ";
+        return text.substring(0, length)+"...";
     }
     // Pad manually with spaces if the text is too short
     else if (text.length < length) {
@@ -63,7 +63,7 @@ class Workspaces : Gtk.Box {
 
 class FocusedClient : Gtk.Box {
     public FocusedClient() {
-        Astal.widget_set_class_names(this, {"Focused"});
+        Astal.widget_set_class_names(this, {"text"});
         AstalHyprland.get_default().notify["focused-client"].connect(sync);
         sync();
     }
@@ -78,9 +78,6 @@ class FocusedClient : Gtk.Box {
 
         var label = new Gtk.Label(truncate_text(client.title,30)) { visible = true };
 	Astal.widget_set_class_names(label,{"text"});
- //        // client.bind_property("title", label, "label", BindingFlags.SYNC_CREATE,()=>{
- //            var title = truncate_text(client.title,10);
-	// });
 	client.bind_property("title", label, "label", BindingFlags.SYNC_CREATE, (_, src, ref trgt) => {
             var title = truncate_text(client.title,30);
             trgt.set_string(title);
@@ -94,7 +91,6 @@ class Media : Gtk.Box {
     AstalMpris.Mpris mpris = AstalMpris.get_default();
 
     public Media() {
-        Astal.widget_set_class_names(this, {"Media"});
         mpris.notify["players"].connect(sync);
         sync();
     }
@@ -106,7 +102,6 @@ class Media : Gtk.Box {
 
 	Astal.widget_set_class_names(btn, {"button-active"});
 	btn.clicked.connect(() => {
-	    // AstalMpris.PlaybackStatus lmao = player.playback_status;
 	    player.play_pause();
 	    btn.label = player.playback_status == 0 ? "": "";
 
@@ -120,35 +115,21 @@ class Media : Gtk.Box {
 
         if (mpris.players.length() == 0) {
 	    var label = new Gtk.Label(" ♫ Nothing Playing ") {visible = true };
-	    Astal.widget_set_class_names(label, {"text"});
+	    Astal.widget_set_class_names(label, {"space"});
             add(label);
             return;
         }
 
         var player = mpris.players.nth_data(0);
         var label = new Gtk.Label(" - playing - "){ visible = true };
-	Astal.widget_set_class_names(label, {"text"});
-        var cover = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0) {
-            valign = Gtk.Align.CENTER
-        };
-
-        Astal.widget_set_class_names(cover, {"Cover"});
+	Astal.widget_set_class_names(label, {"space"});
         player.bind_property("title", label, "label", BindingFlags.SYNC_CREATE, (_, src, ref trgt) => {
-            var title = truncate_text(player.title,20);
-            var artist = player.artist;
-            trgt.set_string(@"♫ $artist$title");
+            var title = truncate_text(player.title,30);
+            trgt.set_string(@"♫ $title");
             return true;
         });
-
-        var id = player.notify["cover-art"].connect(() => {
-            var art = player.cover_art;
-            Astal.widget_set_css(cover, @"background-image: url('$art')");
-        });
-	Astal.widget_set_class_names(label,{"text"});
-        add(cover);
         add(label);
 	add(buttonT(">",player));
-        cover.destroy.connect(() => player.disconnect(id));
 
     }
 }
@@ -249,6 +230,18 @@ class Battery : Gtk.Box {
         });
     }
 }
+class Notification: Astal.EventBox{
+    AstalNotifd.Notifd notifd = AstalNotifd.get_default();
+    public Notification(){
+	Astal.widget_set_class_names(this, {"bar"});
+    }
+    public void noti(string lmao,int id){
+	var getNoti = notifd.get_notification(id);
+	print(getNoti.app_name);
+    }
+
+
+}
 
 class Time : Astal.Label {
     string format;
@@ -330,4 +323,70 @@ class Bar : Astal.Window {
 
         show_all();
     }
+}
+
+class Sidebox : Gtk.Box{
+    public Sidebox(){
+	sync();
+    }
+    public void sync(){
+	Gtk.Scale slider = new Astal.Slider();
+	try{
+	    File maxBn = File.new_for_path("/sys/class/backlight/intel_backlight/max_brightness");
+	    FileInputStream @ise = maxBn.read();
+	    DataInputStream maxBn_dis = new DataInputStream (@ise);
+	    slider.set_range(0.0,double.parse(maxBn_dis.read_line()));
+	    add(slider);
+	    slider.show_all();
+	    File file = File.new_for_path("/sys/class/backlight/intel_backlight/brightness");
+	    FileMonitor monitor = file.monitor(FileMonitorFlags.NONE,null);
+	    print("\nmonitoring %s\n",file.get_path());
+
+	    monitor.changed.connect ((src, dest, event) => {
+		    FileInputStream @is = file.read ();
+		    DataInputStream dis = new DataInputStream (@is);
+		    string line;
+						//
+		    if ((line = dis.read_line ()) != null) {
+			slider.set_value(double.parse(line));
+		    }
+
+	});
+
+	} catch( Error e){
+	    print("%s\n",e.message);
+	}
+
+	new MainLoop().run();
+    }
+
+
+}
+class SidePanel: Astal.Window{
+    public SidePanel(Gdk.Monitor monitor){
+        Object(
+            anchor: Astal.WindowAnchor.LEFT,
+            exclusivity: Astal.Exclusivity.NORMAL,
+            gdkmonitor: monitor
+        );
+	add(new Sidebox());
+    }
+
+}
+class Notify: Astal.Window{
+    public Notify(Gdk.Monitor monitor){
+        Object(
+            anchor: Astal.WindowAnchor.TOP,
+            exclusivity: Astal.Exclusivity.NORMAL,
+            gdkmonitor: monitor
+        );
+	set_visible(true);
+	add(new Notification());
+    }
+}
+class BrightnessService: GLib.Object{
+    public signal void value_changed (double old_value, double new_value);
+    public BrightnessService(){
+    }
+
 }

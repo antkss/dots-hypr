@@ -30,7 +30,7 @@ vim.api.nvim_set_keymap('v', 'x', '"+x', {noremap = true})
 vim.api.nvim_set_keymap('v', 'X', '"+X', {noremap = true})
 vim.api.nvim_set_keymap('n', 'X', '"+X', {noremap = true})
 --D things 
--- vim.api.nvim_set_keymap('v', 'd', '"+d', {noremap = true})
+vim.api.nvim_set_keymap('v', 'd', '"+d', {noremap = true})
 -- vim.api.nvim_set_keymap('n', 'd', '"+d', {noremap = true})
 vim.api.nvim_set_keymap('v', 'D', '"+D', {noremap = true})
 vim.api.nvim_set_keymap('n', 'D', '"+D', {noremap = true})
@@ -41,10 +41,8 @@ vim.api.nvim_set_keymap('n','<leader>h',':lua vim.lsp.buf.hover() <CR>',{noremap
 vim.api.nvim_set_keymap('n','<leader>rf',':lua vim.lsp.buf.references(nil, { on_list = on_list }) <CR>',{noremap = true,expr = false})
 vim.api.nvim_set_keymap('n', '<leader>r', ':lua vim.lsp.buf.rename() <CR>',{noremap = true,expr = false})
 vim.g.translator_target_lang = 'vi'
-vim.keymap.set({"n","v"}, "t", ":Translate --engine=bing <CR>", {noremap = true})
--- vim.keymap.set("v", ">", ">gv", {noremap = true})
--- vim.keymap.set("v", "<", "<gv", {noremap = true})
--- vim.keymap.set("v", "a", "<<gv", {noremap = true})
+vim.keymap.set("n", "t", ":Translate --engine=bing <CR>", {noremap = true})
+vim.keymap.set("v", "t", ":Translate --engine=bing <CR>", {noremap = true})
 function alias(from, to)
   vim.cmd(string.format([[
     cnoreabbrev <expr> %s ((getcmdtype() == ":" && getcmdline() == "%s") ? "%s" : "%s")

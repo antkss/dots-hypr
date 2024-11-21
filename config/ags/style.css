@@ -46,6 +46,12 @@
   min-height: 2.5px;
 }
 
+.space {
+  background-color: transparent;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
 .play-pause {
   background-color: #FFE9E2;
   border: #271812;
@@ -97,49 +103,13 @@
   border-radius: 8px;
 }
 
-.work {
-  color: #271812;
-  background-color: transparent;
-  min-height: 22.5px;
-  min-width: 22.5px;
-}
-.work:hover label {
-  background-color: rgba(255, 233, 226, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
-  border-radius: 8px;
-}
-.work:active label {
-  background-color: rgba(39, 24, 18, 0.2);
-  border-radius: 8px;
-}
-
 .label {
   transition: 200ms;
   background-color: transparent;
 }
 
-.mediaBut {
-  background-color: #A53C00;
-  color: #FFE9E2;
-  border-radius: 8px;
-  min-height: 22.5px;
-  min-width: 22.5px;
-}
-
-.FocusedClient {
-  color: #FFE9E2;
-}
-
 .hide {
   background: transparent;
-}
-
-.Cover {
-  /* min-height: 1.2em; */
-  /* min-width: 1.2em; */
-  border-radius: 8px;
-  background-position: center;
-  background-size: contain;
 }
 
 .Time {

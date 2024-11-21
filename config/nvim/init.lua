@@ -39,7 +39,7 @@ require("lazy").setup("plugins",{
 	    },
 })
 vim.o.updatetime = 250
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
 
 vim.api.nvim_exec(
 	[[
@@ -52,18 +52,7 @@ vim.api.nvim_exec(
 	false
 )
 vim.lsp.set_log_level("off")
-local keywords = {
-    "lsp",
-    "debug",
-    "interface",
-    "keymap",
-}
--- vim.api.nvim_create_autocmd("WinNew", {
---     pattern = "*",
---     command = "wincmd L"
--- })
--- Iterate through the list and require each module
-for _, keyword in ipairs(keywords) do
-    require("config." .. keyword)
-end
-vim.cmd([[autocmd FileType * set formatoptions-=ro]])
+
+require("config")
+
+

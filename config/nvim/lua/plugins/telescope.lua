@@ -8,8 +8,10 @@ return {
 		    theme = "ivy",
                 },
 		live_grep = {
-		    hidden = true,
 		    theme = "ivy",
+		},
+		buffers = {
+		  theme = "ivy",
 		}
             },
 	},

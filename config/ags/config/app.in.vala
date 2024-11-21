@@ -8,9 +8,12 @@ class App : Astal.Application {
 
     public override void activate() {
 	string? home = Environment.get_variable("HOME");
-        foreach (var mon in this.monitors)
-            add_window(new Bar(mon));
-        apply_css(home+"/.config/ags/style.css");
+
+        foreach (var mon in this.monitors){
+	    add_window(new Bar(mon));
+	    // add_window(new Notify(mon));
+	}
+	apply_css(home+"/.config/ags/"+"style.css");
     }
 
     public static int main(string[] args) {
@@ -19,7 +22,6 @@ class App : Astal.Application {
 	//     return 0;
 	// }
 	// path = args[1];
-
         var instance_name = "vala";
 
         App.instance = new App() {
