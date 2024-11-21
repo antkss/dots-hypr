@@ -42,8 +42,8 @@ vim.api.nvim_set_keymap('n','<leader>rf',':lua vim.lsp.buf.references(nil, { on_
 vim.api.nvim_set_keymap('n', '<leader>r', ':lua vim.lsp.buf.rename() <CR>',{noremap = true,expr = false})
 vim.g.translator_target_lang = 'vi'
 vim.keymap.set({"n","v"}, "t", ":Translate --engine=bing <CR>", {noremap = true})
--- vim.keymap.set("v", ">", ">gv", {noremap = true})
--- vim.keymap.set("v", "<", "<gv", {noremap = true})
+vim.keymap.set("v", ">", ">gv", {noremap = true})
+vim.keymap.set("v", "<", "<gv", {noremap = true})
 -- vim.keymap.set("v", "a", "<<gv", {noremap = true})
 function alias(from, to)
   vim.cmd(string.format([[
