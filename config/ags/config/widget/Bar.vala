@@ -1,6 +1,9 @@
 
 public static string truncate_text(string text, int length) {
     // Truncate if the text is too long
+    if(text == null){
+      return "";
+    }
     if (text.length > length) {
         return text.substring(0, length)+"...";
     }
@@ -15,6 +18,23 @@ public static string truncate_text(string text, int length) {
         return text + padding_builder.str;
     }
     return text; // Text is already the desired length
+}
+public string? run(string? cmd){
+  try{
+    string? stdout_output;
+    string? stderr_output;
+    int exit_status;
+    Process.spawn_command_line_sync(
+	cmd,
+	out stdout_output,
+	out stderr_output,
+	out exit_status
+    );
+    return stdout_output;
+  }catch(Error e){
+    print(e.message);
+  }
+  return "";
 }
 
 class Workspaces : Gtk.Box {
@@ -134,52 +154,109 @@ class Media : Gtk.Box {
     }
 }
 
+class Traylist: Gtk.Box{
+  public Traylist(){
+    Astal.widget_set_class_names(this, {"bar"});
+  }
+}
+class TrayWin: Astal.Window{
+  // public Traylist tray = new Traylist();
+  public TrayWin(Gdk.Monitor monitor){
+      Object(
+	  anchor: Astal.WindowAnchor.TOP,
+	  exclusivity: Astal.Exclusivity.NORMAL,
+	  gdkmonitor: monitor,
+	  hexpand: false
+      );
+    // add(new Traylist());
+  }
+}
 class SysTray : Gtk.Box {
-    HashTable<string, Gtk.Widget> items = new HashTable<string, Gtk.Widget>(str_hash, str_equal);
+    HashTable<string, Astal.Button> items = new HashTable<string, Astal.Button>(str_hash, str_equal);
     AstalTray.Tray tray = AstalTray.get_default();
-
-    public SysTray() {
+    public Traylist traylist = new Traylist();
+    // Array<Gtk.Widget> list = new Array<Gtk.Widget>();
+    // public Gtk.Button more = new Gtk.Button(){label= "", visible=true};
+    // public bool isBox = false;
+    // Gdk.Monitor monitor = null;
+    // TrayWin traywin = null;
+    public SysTray(Gdk.Monitor monitor) {
+	// this.monitor = monitor;
+	// TrayWin traywin = new TrayWin(monitor);
+	// traywin.add(traylist);
+	// this.traywin = traywin;
+	// more.clicked.connect(()=>{
+	//   print("more is clicked\n");
+	//   print("num of children: %u",traylist.get_children().length());
+	//   print("%b",traywin.is_visible());
+	//   if(!traywin.is_visible()){
+	//     traywin.show_all();
+	//     traywin.set_visible(true);
+	//   }else{
+	//     traywin.set_visible(false);
+	//   }
+	// });
         tray.item_added.connect(add_item);
         tray.item_removed.connect(remove_item);
+
     }
 
     void add_item(string id) {
-        if (items.contains(id))
-            return;
+      if (items.contains(id))
+	  return;
+      var item = tray.get_item(id);
 
-        var item = tray.get_item(id);
+      var menu = item.create_menu();
+      var btn = new Astal.Button();
+      var icon = new Astal.Icon();
+      // Astal.widget_set_css(icon, "background-color: transparent;");
 
-        var menu = item.create_menu();
-        var btn = new Astal.Button();
-        var icon = new Astal.Icon();
-	// Astal.widget_set_css(icon, "background-color: transparent;");
+      btn.clicked.connect(() => {
+	  if (menu != null)
+	      menu.popup_at_widget(this, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null);
+      });
 
-        btn.clicked.connect(() => {
-            if (menu != null)
-                menu.popup_at_widget(this, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null);
-        });
+      btn.destroy.connect(() => {
+	  if (menu != null)
+	      menu.destroy();
+      });
 
-        btn.destroy.connect(() => {
-            if (menu != null)
-                menu.destroy();
-        });
+      item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
+      item.bind_property("gicon", icon, "g-icon", BindingFlags.SYNC_CREATE);
+      btn.add(icon);
+      Astal.widget_set_class_names(btn,{"button"});
+      // Astal.widget_set_class_names(more, {"label"});
+ // //      if (!isBox && items.length >= 1){
+	//   add(more);
+	//   items.set("morebutton",more);
+	//   isBox = true;
+ // //      }
+ //      print("%b\n",isBox);
+ //      if(isBox){
+	// btn.name = "insidebox";
+	// traylist.add(btn);
+ //      }else{
+      items.set(id, btn);
+      add(btn); 
+      // }
+      btn.show_all();
 
-        item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
-        item.bind_property("gicon", icon, "g-icon", BindingFlags.SYNC_CREATE);
-        btn.add(icon);
-	Astal.widget_set_class_names(btn,{"icon"});
-        add(btn);
-        items.set(id, btn);
-        btn.show_all();
     }
 
     void remove_item(string id) {
         if (items.contains(id)) {
-	    items.lookup(id).destroy(); // destroy item first
-	    items.remove(id); // remove item from array 
+	  var item = items.lookup(id); // destroy item first
+	  item.destroy();
+	  items.remove(id); // remove item from array 
+	  traylist.remove(item);
         }
 
-
+	// if(items.length <=1 && isBox){
+	// remove(more);
+	// // traywin.set_visible(false);
+	// isBox = false;
+	// }
+	//
     }
 }
 
@@ -281,17 +358,43 @@ class Center : Gtk.Box {
     }
 }
 class rightPart: Gtk.Box{
-    public rightPart(){
-        add(new SysTray());
+    public rightPart(Gdk.Monitor monitor){
+        add(new SysTray(monitor));
         add(new Wifi());
         add(new AudioSlider());
     }
 }
+
+class Utils: Gtk.Box{
+  public Utils(Astal.Application app){
+    string? home = Environment.get_variable("HOME");
+    var colorswitch = new Gtk.Button(){
+	  visible = true,
+	  label = ""
+    };
+    colorswitch.clicked.connect(()=>{
+      run(home+"/.config/ags/scripts/color_generation/switchcolor.sh");
+      app.apply_css(home+"/.config/ags/style.css");
+    });
+    var screenshot = new Gtk.Button(){
+	  visible = true,
+	  label = ""
+    };
+    screenshot.clicked.connect(()=>{
+      run(home+"/.config/ags/scripts/grimblast.sh --freeze copy area");
+    });
+    Astal.widget_set_class_names(colorswitch,{"button-active","space"});
+    Astal.widget_set_class_names(screenshot,{"button-active"});
+    add(colorswitch);
+    add(screenshot);
+  }
+}
 class Right : Gtk.Box {
-    public Right() {
+    public Right(Astal.Application app,Gdk.Monitor monitor) {
         Object(hexpand: true, halign: Gtk.Align.END);
-	add(new Panel(new rightPart()));
+	add(new Panel(new rightPart(monitor)));
         add(new Panel(new Battery()));
+	add(new Panel(new Utils(app)));
         add(new Panel(new Time()));
     }
 }
@@ -304,7 +407,7 @@ class Circle: Astal.Overlay{
     }
 }
 class Bar : Astal.Window {
-    public Bar(Gdk.Monitor monitor) {
+    public Bar(Gdk.Monitor monitor,Astal.Application app) {
 	int width = (int)(monitor.get_geometry().width*(99.0/100.0)-3.0);
         Object(
             anchor: Astal.WindowAnchor.TOP,
@@ -316,7 +419,7 @@ class Bar : Astal.Window {
 	var centerbox = new Astal.CenterBox();
 	centerbox.start_widget = new Left();
 	centerbox.center_widget = new Center();
-	centerbox.end_widget = new Right();
+	centerbox.end_widget = new Right(app,monitor);
 	Astal.widget_set_css(centerbox,@"min-width: $width"+"px;");
 	Astal.widget_set_class_names(centerbox,{"bar"});
         add(centerbox);

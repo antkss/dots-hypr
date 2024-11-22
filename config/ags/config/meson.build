@@ -35,19 +35,20 @@ custom_target(
   install_dir: libdir,
 )
 
-main = configure_file(
-  input: 'app.in.vala',
-  output: 'app.vala',
-  configuration: {'STYLE': libdir / 'style.css'},
-)
+# main = configure_file(
+#   input: 'app.in.vala',
+#   output: 'app.vala',
+#   configuration: {'STYLE': libdir / 'style.css'},
+# )
 
 sources = files(
   'widget/Bar.vala',
+  'app.in.vala'
 )
 
 executable(
   'simple-bar',
-  [sources, main],
+  [sources],
   dependencies: deps,
   install: true,
   install_dir: bindir,
