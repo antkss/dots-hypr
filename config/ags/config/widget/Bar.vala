@@ -39,9 +39,20 @@ public string? run(string? cmd){
 
 class Workspaces : Gtk.Box {
     AstalHyprland.Hyprland hypr = AstalHyprland.get_default();
+    GLib.HashTable<int, string> icons = new GLib.HashTable<int,string>(GLib.direct_hash,GLib.direct_equal);
     public Workspaces() {
+	icons.set(1, ""); 
+	icons.set(2, ""); 
+	icons.set(3, ""); 
+	icons.set(4, ""); 
+	icons.set(5, ""); 
+	icons.set(6, ""); 
+	icons.set(7, ""); 
+	icons.set(8, ""); 
+	icons.set(9,"");
         hypr.notify["workspaces"].connect(sync);
         sync();
+
     }
 
     void sync() {
@@ -53,13 +64,16 @@ class Workspaces : Gtk.Box {
     }
 
     Gtk.Button button(AstalHyprland.Workspace ws) {
-	string num = ws.id.to_string();
-	    if(ws.id<0){
-		num = "s";
-	    }
+	string icon = icons.lookup(ws.id);
+	if (icon == null){
+	  icon = ws.id.to_string();
+	}
+	if (ws.id < 0){
+	  icon = "";
+	}
         var btn = new Gtk.Button() {
             visible = true,
-	    label = num
+	    label = icon
         };
 	var focused = hypr.focused_workspace == ws;
 	if (focused) {
@@ -383,7 +397,7 @@ class Utils: Gtk.Box{
     screenshot.clicked.connect(()=>{
       run(home+"/.config/ags/scripts/grimblast.sh --freeze copy area");
     });
-    Astal.widget_set_class_names(colorswitch,{"button-active","space"});
+    Astal.widget_set_class_names(colorswitch,{"button-active","space-right"});
     Astal.widget_set_class_names(screenshot,{"button-active"});
     add(colorswitch);
     add(screenshot);

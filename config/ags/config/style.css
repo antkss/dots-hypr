@@ -46,9 +46,24 @@
   min-height: 2.5px;
 }
 
+.scrollbar {
+  all: unset;
+  background-color: #FFE8EB;
+}
+
 .space {
   background-color: transparent;
   margin-left: 4px;
+  margin-right: 4px;
+}
+
+.space-left {
+  background-color: transparent;
+  margin-left: 4px;
+}
+
+.space-right {
+  background-color: transparent;
   margin-right: 4px;
 }
 
