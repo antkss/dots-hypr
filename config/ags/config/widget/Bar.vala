@@ -39,17 +39,17 @@ public string? run(string? cmd){
 
 class Workspaces : Gtk.Box {
     AstalHyprland.Hyprland hypr = AstalHyprland.get_default();
-    GLib.HashTable<int, string> icons = new GLib.HashTable<int,string>(GLib.direct_hash,GLib.direct_equal);
+    // GLib.HashTable<int, string> icons = new GLib.HashTable<int,string>(GLib.direct_hash,GLib.direct_equal);
     public Workspaces() {
-	icons.set(1, ""); 
-	icons.set(2, ""); 
-	icons.set(3, ""); 
-	icons.set(4, ""); 
-	icons.set(5, ""); 
-	icons.set(6, ""); 
-	icons.set(7, ""); 
-	icons.set(8, ""); 
-	icons.set(9,"");
+	// icons.set(1, ""); 
+	// icons.set(2, ""); 
+	// icons.set(3, ""); 
+	// icons.set(4, ""); 
+	// icons.set(5, ""); 
+	// icons.set(6, ""); 
+	// icons.set(7, ""); 
+	// icons.set(8, ""); 
+	// icons.set(9,"");
         hypr.notify["workspaces"].connect(sync);
         sync();
 
@@ -64,10 +64,11 @@ class Workspaces : Gtk.Box {
     }
 
     Gtk.Button button(AstalHyprland.Workspace ws) {
-	string icon = icons.lookup(ws.id);
-	if (icon == null){
-	  icon = ws.id.to_string();
-	}
+	// string icon = icons.lookup(ws.id);
+	string icon = ws.id.to_string("%d");
+	// if (icon == null){
+	//   icon = ws.id.to_string();
+	// }
 	if (ws.id < 0){
 	  icon = "";
 	}
@@ -76,7 +77,7 @@ class Workspaces : Gtk.Box {
 	    label = icon
         };
 	var focused = hypr.focused_workspace == ws;
-	if (focused) {
+	if (focused ) {
 	    Astal.widget_set_class_names(btn, {"button-active"});
 	} else {
 	    Astal.widget_set_class_names(btn, {"button"});
@@ -228,6 +229,18 @@ class SysTray : Gtk.Box {
       btn.clicked.connect(() => {
 	  if (menu != null)
 	      menu.popup_at_widget(this, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null);
+      });
+      btn.enter_notify_event.connect(()=>{
+	var display = Gdk.Display.get_default();
+	var cursor = new Gdk.Cursor.from_name(display, "grab");
+	btn.get_window().set_cursor(cursor);
+	return true;
+      });
+      btn.leave_notify_event.connect(()=>{
+	var display = Gdk.Display.get_default();
+	var cursor = new Gdk.Cursor.from_name(display, "default");
+	btn.get_window().set_cursor(cursor);
+	return true;
       });
 
       btn.destroy.connect(() => {

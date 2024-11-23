@@ -45,6 +45,7 @@ sources = files(
   'widget/Bar.vala',
   'app.in.vala'
 )
+source2 = files('test.vala')
 
 executable(
   'simple-bar',
@@ -53,3 +54,8 @@ executable(
   install: true,
   install_dir: bindir,
 )
+executable(
+  'tests',
+  [source2],
+  dependencies: deps,
+  )
