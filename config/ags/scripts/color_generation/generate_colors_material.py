@@ -202,6 +202,10 @@ if args.termscheme is not None:
         term_colors[color] = argb_to_hex(harmonized)
 
 material_colors["crim"] = args.mode
+if args.mode == 'light':
+    material_colors["onAny"] = "#000000"
+else:
+    material_colors["onAny"] = "#ffffff"
 if args.debug == True:
     print(f"$darkmode: {darkmode};")
     print(f"$transparent: {transparent};")

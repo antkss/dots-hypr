@@ -1,8 +1,9 @@
 vim.opt.background = "{{ $crim }}"
 return {
 	dark = {
-		black = "#1a212e",
+		black = "#000000",
 		bg0 = "#{{ $background }}",
+		pr = "#{{ $primary }}",
 		bg1 = "#31353f",
 		bg2 = "#393f4a",
 		bg3 = "#3b3f4c",
