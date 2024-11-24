@@ -1,4 +1,3 @@
-require("config.one")
 require("config.interface")
 require("config.lsp")
 require("config.keymap")

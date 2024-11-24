@@ -29,3 +29,9 @@ vim.api.nvim_clear_autocmds({ group = 'insertonenter' })
 vim.opt.swapfile = false
 -- yeah, just temporary 
 -- require("colorizer").setup()
+function alias(from, to)
+  vim.cmd(string.format([[
+    cnoreabbrev <expr> %s ((getcmdtype() == ":" && getcmdline() == "%s") ? "%s" : "%s")
+  ]], from, from, to, from))
+end
+alias("rp","term python % DEBUG")

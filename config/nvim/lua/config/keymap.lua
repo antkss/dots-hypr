@@ -45,9 +45,4 @@ vim.keymap.set({"n","v"}, "t", ":Translate --engine=bing <CR>", {noremap = true}
 vim.keymap.set("v", ">", ">gv", {noremap = true})
 vim.keymap.set("v", "<", "<gv", {noremap = true})
 -- vim.keymap.set("v", "a", "<<gv", {noremap = true})
-function alias(from, to)
-  vim.cmd(string.format([[
-    cnoreabbrev <expr> %s ((getcmdtype() == ":" && getcmdline() == "%s") ? "%s" : "%s")
-  ]], from, from, to, from))
-end
-alias("rp","term python %")
+
