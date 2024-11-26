@@ -13,14 +13,11 @@ else
 		ffmpeg -y -i target -filter_complex "[v:0]crop=iw:ih" -frames:v 1 -f image2 output%03d_swww.png
 		mv $HOME/.cache/target $imgpath  
 		if file --mime-type "$imgpath" | grep -q "image/gif"; then
-		notify-send "applying gif ..."
-		gifpath=$imgpath
+		  notify-send "applying gif ..."
+		  gifpath=$imgpath
 		fi
 		imgpath="$HOME/.cache/output001_swww.png"
-		# screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
-		# cursorposx=$(hyprctl cursorpos -j | gojq '.x' 2>/dev/null) || cursorposx=960
-		# cursorposy=$(hyprctl cursorpos -j | gojq '.y' 2>/dev/null) || cursorposy=540
-		# cursorposy_inverted=$(( screensizey - cursorposy ))
+		screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
 	fi
 
 	if [ "$imgpath" == '' ]; then
@@ -28,23 +25,17 @@ else
 	exit 0
 	fi
 	if [ -v gifpath ]; then
-		swww img $gifpath
-		notify-send "waiting for gif to finish..."
+	  swww img $gifpath
+	  notify-send "waiting for gif to finish..."
 	else
-		swww img "$imgpath" 
+		# swww img "$imgpath" 
+	  swww img "$imgpath" --transition-step 100 --transition-fps 120 \
+			  --transition-type grow --transition-angle 30 --transition-duration 1 \
+			  --transition-pos 0.854,0.977 
 	fi
-	screensizey=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1)
-	cursorposx=$(hyprctl cursorpos -j | gojq '.x' 2>/dev/null) || cursorposx=960
-	cursorposy=$(hyprctl cursorpos -j | gojq '.y' 2>/dev/null) || cursorposy=540
-	cursorposy_inverted=$(( screensizey - cursorposy ))
-	# --transition-step 100 
-	# --transition-type grow --transition-angle 30 --transition-duration 1 \
-	# --transition-pos "$cursorposx, $cursorposy_inverted"
 fi
 
 &>/dev/null
 # Generate colors for ags n stuff
 "$HOME"/.config/ags/scripts/color_generation/generate_colors_material.py --path ${imgpath} --scheme vibrant --apply --mode light
 killall simple-bar; ~/.config/ags/simple-bar
-# ags -q;ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
-# "$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply
