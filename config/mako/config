@@ -1,20 +1,19 @@
 anchor=top-center
 layer=overlay
 font=Ubuntu Nerd Font 10
-background-color=#11111b
+background-color=#FFF8F6
 height=400
-text-color=#eceff4
+text-color=#271812
 margin=4,4,20
 padding=15
 border-size=2
 border-radius=15
-border-color=#4c566a
+border-color=#A33E00
 default-timeout=2000
 group-by=summary
-on-notify=exec mpv ~/.config/mako/sounds/Tink.aiff
+on-notify=exec ~/.config/mako/play ~/.config/mako/sounds/Tink.aiff
 
 [grouped]
 format=<b>%s</b>\n%b
 [app-name="ibus"]
 invisible=1
-
