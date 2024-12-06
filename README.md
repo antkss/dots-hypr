@@ -1,8 +1,8 @@
 # My new things
 
 - images:
+![image](https://github.com/user-attachments/assets/c5bd7434-918a-486a-abc9-94149f12d7df)
 
-![image](https://github.com/user-attachments/assets/eab0f15b-49c7-48af-821b-20fc58925c2d)
 
 
 ![image](https://github.com/user-attachments/assets/c5557591-f613-4bde-b472-a05a31e5e62d)
