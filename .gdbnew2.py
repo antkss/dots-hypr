@@ -56,7 +56,7 @@ def tis(address=None, ranges=13):
         return
 
 
-def display_memory(start_address, lines ,isheap=True,head=False):
+def display_memory(start_address, lines ,isHeap=True,head=False):
     global last_address
     # block_color_index = 6
     # heapcolor = 0
@@ -69,6 +69,7 @@ def display_memory(start_address, lines ,isheap=True,head=False):
         addr = start_address + i * 0x10
         offset = addr - start_address
         address_str = ""
+        offaddr = f"{hex(offset)} | {hex(addr)}{RESET}"
         data = gdb.selected_inferior().read_memory(addr, 0x10)
         values = struct.unpack("QQ", bytes(data))
         ascii_rep = ''.join(chr(b) if 32 <= b <= 126 else '.' for b in bytes(data))
@@ -76,21 +77,18 @@ def display_memory(start_address, lines ,isheap=True,head=False):
         if register_name:
             address_str += f" -> {register_name}"
         if addr == start_address+0x30:
-            address_str += f" <- here"
-        hex_str = f"0x{values[0]:016x}\t0x{values[1]:016x}{RESET}"
+            offaddr = f"{COLORS[1]}{hex(offset)} | {hex(addr)}{RESET}"
+            address_str += f"{COLORS[1]} <- here{RESET}"
+        hex_str = f"{get_len(values[0])}\t{get_len(values[1])}{RESET}"
         ascii_str = f"{ascii_rep}{RESET}"
-        offaddr = f"0x{offset:05x} | {hex(addr)}"
 
-        if isheap:
-            gdb.write(f"{COLORS[0]}{offaddr} | {hex_str}\t{ascii_str}{RESET}{address_str}\n")
+        if isHeap:
+            gdb.write(f"{offaddr} | {hex_str}\t{ascii_str}{RESET}{address_str}\n")
                 
         else:
-            hex_str = f"{get_len(values[0])}\t{get_len(values[1])}{RESET}"
-            ascii_str = f"{ascii_rep}{RESET}"
-            offaddr = f"0x{offset:05x} | {hex(addr)}"
             gdb.write(f"{offaddr} | {hex_str}\t{ascii_str}{address_str}\n")
 
-def display_heap(lines=0):
+def display_heap(lines = 0):
     try:
         # Assume the heap boundaries can be determined from the heap segment in the memory mappings
         mappings = gdb.execute("info proc mappings", to_string=True)
@@ -98,8 +96,6 @@ def display_heap(lines=0):
             if "[heap]" in line:
                 parts = line.split()
                 start_address = int(parts[0], 16)
-                # end_address = int(parts[1], 16)
-                # actual_lines = min((end_address - start_address) // 0x10, lines)
                 if lines == 0:
                     lines = 500
                 display_memory(start_address, lines,False,True)
