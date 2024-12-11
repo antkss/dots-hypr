@@ -6,9 +6,9 @@ import os
 import json
 import pwndbg
 import argparse
-from pwndbg.commands import CommandCategory
-# from pwndbg.enhance import enhance
+from pwndbg.commands import CommandCategory, ArgparsedCommand
 from pwndbg.color.memory import get_len
+import pwndbg.aglib.arch as arch
 parser = argparse.ArgumentParser(description="show memory")
 parser.add_argument("address", nargs="?", type=str, default=None,help="entry address")
 parser.add_argument("ranges", nargs="?", type=int, default= 13,help="ranges")
@@ -23,20 +23,20 @@ COLORS = [
 ]
 RESET = '\033[0m'
 last_address = 0
-@pwndbg.commands.ArgparsedCommand(parser, category=CommandCategory.MEMORY)
+@ArgparsedCommand(parser, category=CommandCategory.MEMORY)
 def tis(address=None, ranges=13):
     start_address = 0
+    print(tis.repeat)
     if tis.repeat:
-        display_memory(last_address,ranges,False)
+        display_memory(last_address, ranges, False)
         return
     if address is not None:
         if address.strip() == "heap":
-            # try:
             display_heap(ranges)
             return
         else:
             lines = ranges
-            start_address = parse_address(address)
+            start_address = gdb.parse_and_eval(address)
             if start_address is None:
                 gdb.write("Invalid address format.\n")
                 return
@@ -50,7 +50,7 @@ def tis(address=None, ranges=13):
         gdb.selected_inferior().read_memory(start_address-0x30, 0x10)
         display_memory(start_address-0x30, lines,False)
         return
-    except gdb.MemoryError as e:
+    except gdb.MemoryError:
         gdb.selected_inferior().read_memory(start_address, 0x10)
         display_memory(start_address, lines, False)
         return
@@ -69,7 +69,7 @@ def display_memory(start_address, lines ,isHeap=True,head=False):
         addr = start_address + i * 0x10
         offset = addr - start_address
         address_str = ""
-        offaddr = f"{hex(offset)} | {hex(addr)}{RESET}"
+        offaddr = f"{hex(offset).ljust(4)} | {hex(addr)}{RESET}"
         data = gdb.selected_inferior().read_memory(addr, 0x10)
         values = struct.unpack("QQ", bytes(data))
         ascii_rep = ''.join(chr(b) if 32 <= b <= 126 else '.' for b in bytes(data))
@@ -77,7 +77,7 @@ def display_memory(start_address, lines ,isHeap=True,head=False):
         if register_name:
             address_str += f" -> {register_name}"
         if addr == start_address+0x30:
-            offaddr = f"{COLORS[1]}{hex(offset)} | {hex(addr)}{RESET}"
+            offaddr = f"{COLORS[1]}{hex(offset).ljust(4)} | {hex(addr)}{RESET}"
             address_str += f"{COLORS[1]} <- here{RESET}"
         hex_str = f"{get_len(values[0])}\t{get_len(values[1])}{RESET}"
         ascii_str = f"{ascii_rep}{RESET}"
@@ -117,20 +117,6 @@ def get_register_name(address):
         except gdb.error:
             continue
     return None
-
-def parse_address(arg):
-    try:
-        if '+' in arg:
-            base, offset = arg.split('+')
-            base_val = int(gdb.parse_and_eval(base))
-            offset_val = int(gdb.parse_and_eval(offset))
-            return base_val + offset_val
-        else:
-            return int(gdb.parse_and_eval(arg))
-    except gdb.error:
-        return None
-    except ValueError:
-        return None
 
 class NeCommand(gdb.Command):
     def __init__(self):
@@ -191,15 +177,6 @@ class NeCommand(gdb.Command):
             gdb.execute(f"ni")
         except:
             gdb.write("program is stopped !!\n")
-                
-
-
-        # for ins in instructions[1:count+1]:  # Start from the second instruction and limit to 'count' instructions
-        #     asm_parts = ins['asm'].split()
-        #     asm = asm_parts[0] if asm_parts else ""  # Extract the mnemonic instruction
-        #     marker = "=>" if ins['addr'] == pc else "  "
-        #     gdb.write(f"{marker} {asm}\n")
-
 
     def invoke(self, arg, from_tty):
         self.Nefunction()
@@ -242,7 +219,7 @@ class setr(gdb.Command):
                 print("usage: setr <address> <value> <range> <mode>")
                 print("mode: 32 or 64 bit")
                 return
-            addr = self.parse_address(args[0])
+            addr = gdb.parse_and_eval(args[0])
             value = args[1]
             n = eval(args[2])
             if int(args[3]) == 64:
@@ -265,19 +242,6 @@ class setr(gdb.Command):
         else:
             print("usage: setr <address> <value> <range> <mode>")
             print("mode: 64 or 32 bit")
-    def parse_address(self, arg):
-        try:
-            if '+' in arg:
-                base, offset = arg.split('+')
-                base_val = int(gdb.parse_and_eval(base))
-                offset_val = int(gdb.parse_and_eval(offset))
-                return base_val + offset_val
-            else:
-                return int(gdb.parse_and_eval(arg))
-        except gdb.error:
-            return None
-        except ValueError:
-            return None
 setr()
 
 class ripva(gdb.Command):
@@ -306,12 +270,6 @@ class ripva(gdb.Command):
             gdb.execute("context")
         else:
             gdb.write(f"usage: ripva <offset>\n")
-        # base_address = inferior.read_var('__executable_start').address
-        # print(hex(base_address))
-        
-        # if arg:
-        #     args = gdb.string_to_argv(arg)
-        #     if len(args) == 1:
-        #         start_address = self.parse_address(args[0])
+
 ripva()
 last_address = 0
