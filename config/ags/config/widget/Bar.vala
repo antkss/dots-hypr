@@ -186,107 +186,44 @@ class TrayWin: Astal.Window{
     // add(new Traylist());
   }
 }
+
 class SysTray : Gtk.Box {
-    HashTable<string, Astal.Button> items = new HashTable<string, Astal.Button>(str_hash, str_equal);
+    HashTable<string, Gtk.Widget> items = new HashTable<string, Gtk.Widget>(str_hash, str_equal);
     AstalTray.Tray tray = AstalTray.get_default();
-    public Traylist traylist = new Traylist();
-    // Array<Gtk.Widget> list = new Array<Gtk.Widget>();
-    // public Gtk.Button more = new Gtk.Button(){label= "", visible=true};
-    // public bool isBox = false;
-    // Gdk.Monitor monitor = null;
-    // TrayWin traywin = null;
-    public SysTray(Gdk.Monitor monitor) {
-	// this.monitor = monitor;
-	// TrayWin traywin = new TrayWin(monitor);
-	// traywin.add(traylist);
-	// this.traywin = traywin;
-	// more.clicked.connect(()=>{
-	//   print("more is clicked\n");
-	//   print("num of children: %u",traylist.get_children().length());
-	//   print("%b",traywin.is_visible());
-	//   if(!traywin.is_visible()){
-	//     traywin.show_all();
-	//     traywin.set_visible(true);
-	//   }else{
-	//     traywin.set_visible(false);
-	//   }
-	// });
+
+    public SysTray() {
+        Astal.widget_set_class_names(this, { "SysTray" });
         tray.item_added.connect(add_item);
         tray.item_removed.connect(remove_item);
-
     }
 
     void add_item(string id) {
-      if (items.contains(id))
-	  return;
-      var item = tray.get_item(id);
+        if (items.contains(id))
+            return;
 
-      var menu = item.create_menu();
-      var btn = new Astal.Button();
-      var icon = new Astal.Icon();
-      // Astal.widget_set_css(icon, "background-color: transparent;");
+        var item = tray.get_item(id);
+        var btn = new Gtk.MenuButton() { use_popover = false, visible = true };
+        var icon = new Astal.Icon() { visible = true };
 
-      btn.clicked.connect(() => {
-	  if (menu != null)
-	      menu.popup_at_widget(this, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null);
-      });
-      btn.enter_notify_event.connect(()=>{
-	var display = Gdk.Display.get_default();
-	var cursor = new Gdk.Cursor.from_name(display, "grab");
-	btn.get_window().set_cursor(cursor);
-	return true;
-      });
-      btn.leave_notify_event.connect(()=>{
-	var display = Gdk.Display.get_default();
-	var cursor = new Gdk.Cursor.from_name(display, "default");
-	btn.get_window().set_cursor(cursor);
-	return true;
-      });
+        item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
+        item.bind_property("gicon", icon, "gicon", BindingFlags.SYNC_CREATE);
+        item.bind_property("menu-model", btn, "menu-model", BindingFlags.SYNC_CREATE);
+        btn.insert_action_group("dbusmenu", item.action_group);
+        item.notify["action-group"].connect(() => {
+            btn.insert_action_group("dbusmenu", item.action_group);
+        });
 
-      btn.destroy.connect(() => {
-	  if (menu != null)
-	      menu.destroy();
-      });
-
-      item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
-      item.bind_property("gicon", icon, "g-icon", BindingFlags.SYNC_CREATE);
-      btn.add(icon);
-      Astal.widget_set_class_names(btn,{"button"});
-      // Astal.widget_set_class_names(more, {"label"});
- // //      if (!isBox && items.length >= 1){
-	//   add(more);
-	//   items.set("morebutton",more);
-	//   isBox = true;
- // //      }
- //      print("%b\n",isBox);
- //      if(isBox){
-	// btn.name = "insidebox";
-	// traylist.add(btn);
- //      }else{
-      items.set(id, btn);
-      add(btn); 
-      // }
-      btn.show_all();
-
+        btn.add(icon);
+        add(btn);
+        items.set(id, btn);
     }
 
     void remove_item(string id) {
         if (items.contains(id)) {
-	  var item = items.lookup(id); // destroy item first
-	  item.destroy();
-	  items.remove(id); // remove item from array 
-	  traylist.remove(item);
+            items.remove(id);
         }
-
-	// if(items.length <=1 && isBox){
-	// remove(more);
-	// // traywin.set_visible(false);
-	// isBox = false;
-	// }
-	//
     }
 }
-
 class Wifi : Astal.Icon {
     public Wifi() {
         Astal.widget_set_class_names(this, {"Wifi"});
@@ -386,7 +323,7 @@ class Center : Gtk.Box {
 }
 class rightPart: Gtk.Box{
     public rightPart(Gdk.Monitor monitor){
-        add(new SysTray(monitor));
+        add(new SysTray());
         add(new Wifi());
         add(new AudioSlider());
     }
