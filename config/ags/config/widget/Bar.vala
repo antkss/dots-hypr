@@ -208,6 +208,7 @@ class SysTray : Gtk.Box {
         item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
         item.bind_property("gicon", icon, "gicon", BindingFlags.SYNC_CREATE);
         item.bind_property("menu-model", btn, "menu-model", BindingFlags.SYNC_CREATE);
+	Astal.widget_set_class_names(btn, {"button"});
         btn.insert_action_group("dbusmenu", item.action_group);
         item.notify["action-group"].connect(() => {
             btn.insert_action_group("dbusmenu", item.action_group);
@@ -220,6 +221,7 @@ class SysTray : Gtk.Box {
 
     void remove_item(string id) {
         if (items.contains(id)) {
+	    items.lookup(id).destroy();
             items.remove(id);
         }
     }
