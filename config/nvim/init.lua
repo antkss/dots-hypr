@@ -39,8 +39,8 @@ require("lazy").setup("plugins",{
 	    },
 })
 vim.o.updatetime = 250
+vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-
 vim.api.nvim_exec(
 	[[
     augroup YankHighlight

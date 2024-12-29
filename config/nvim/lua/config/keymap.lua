@@ -7,7 +7,7 @@ vim.api.nvim_set_keymap('n','<c-j>','<nop>', {noremap = true})
 -- vim.api.nvim_set_keymap('v','<S-j>','<nop>', {noremap = true})
 -- vim.api.nvim_set_keymap('v','<c-j>','<C-d>', {noremap = true})
 -- vim.api.nvim_set_keymap('v','<c-k>','<C-u>', {noremap = true})
-vim.api.nvim_set_keymap('n','+',':jon <CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n','+',':jon <CR>', {noremap = true})
 
 -- Use Tab for trigger completion with characters ahead and navigate
 -- NOTE: There's always a completion item selected by default, you may want to enable
