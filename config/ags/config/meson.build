@@ -48,7 +48,7 @@ sources = files(
 source2 = files('test.vala')
 
 executable(
-  'simple-bar',
+  'mbar',
   [sources],
   dependencies: deps,
   install: true,
