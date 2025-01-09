@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <sys/file.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 #define SOCKET_PATH "$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
 // #define MESSAGE "Hello, Server!"
@@ -80,36 +81,40 @@ int main() {
         close(client_fd);
         exit(EXIT_FAILURE);
     }
-    if(!fork()){
-	system("killall wl-paste;wl-paste --type text --watch cliphist store | wl-paste --type image --watch cliphist store");
-    }else{
-	while(1){
-	    if (read(client_fd, message, 0x34) == -1) {
-		perror("read error");
-		close(client_fd);
-		exit(EXIT_FAILURE);
-	    }
-	    message = strtok(message,">>");
-	    if(!strcmp(message,"activewindow"))
-	    {
-		system("cliphist list | cliphist decode | wl-copy");
-	    }
-	    
-	}
+	int pid = fork();
+    if (pid == 0) {
+		execlp("sh", "sh", "-c",
+               "wl-paste --type text --watch cliphist store | wl-paste --type image --watch cliphist store",
+               (char *)NULL);
+        perror("execlp failed");
+        exit(1);
+    } else {
+		while(1) {
+			if (read(client_fd, message, 0x34) == -1) {
+				perror("read error");
+				close(client_fd);
+				exit(EXIT_FAILURE);
+			}
+			message = strtok(message,">>");
+			if (!strcmp(message,"activewindow")) {
+				system("cliphist list | cliphist decode | wl-copy");
+			}
+			
+		}
     }
 
-    // Send a message to the server
-    // if (write(client_fd, MESSAGE, strlen(MESSAGE)) == -1) {
-    //     perror("write error");
-    //     close(client_fd);
-    //     exit(EXIT_FAILURE);
-    // }
-
-    // printf("Message sent: %s\n", MESSAGE);
-
-    // Close socket
     close(client_fd);
     cleanup_lock(0);
+
+    if (kill(pid, SIGTERM) == 0) {
+        printf("Child process terminated.\n");
+    } else {
+        perror("Failed to terminate child process");
+    }
+
+    // Wait for the child process to exit
+    waitpid(pid, NULL, 0);
+
 
     return 0;
 }
