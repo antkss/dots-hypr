@@ -8,24 +8,6 @@ return {
 	end,
 	},
 	{
-	    "lukas-reineke/indent-blankline.nvim",
-	    event = "VeryLazy",
-	    config = function()
-		-- local highlight = {
-		--     "CursorColumn",
-		--     "Whitespace",
-		-- }
-		require("ibl").setup {
-		    indent = {  char = "." },
-		    whitespace = {
-			-- highlight = highlight,
-			remove_blankline_trail = true,
-		    },
-		    scope = { enabled = false },
-		}
-	    end,
-	},
-	{
 		'echasnovski/mini.indentscope',
 		event = "VeryLazy",
 		config =  function ()
@@ -50,11 +32,11 @@ return {
 	{
 	    "hrsh7th/nvim-cmp",
 	    event = "TextChanged",
-	    dependencies = {
+
+	},
+	{
 		"neovim/nvim-lspconfig",
-	    },
-
-
+		event = "VeryLazy",
 	},
 
 	{
@@ -68,6 +50,7 @@ return {
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
 	build = "make install_jsregexp",
+	opts = { history = true, updateevents = "TextChanged,TextChangedI" },
 	-- event = "VeryLazy",
 	},
 	{
@@ -84,9 +67,13 @@ return {
 
 		end
 	},
-
-
-
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
+	}
 
 
 }

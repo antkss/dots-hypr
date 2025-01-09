@@ -2,12 +2,14 @@
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-	client.server_capabilities.semanticTokensProvider = nil
+		client.server_capabilities.semanticTokensProvider = nil
     end,
 });
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+
 require('mini.pairs').setup()
--- require('mini.surround').setup()
 local cmp = require'cmp'
 local kind_icons = {
   Text = " text",
@@ -135,6 +137,18 @@ require'lspconfig'.vala_ls.setup {
   cmd = { "vala-language-server" },
   filetypes = { "vala", "genie" },
   single_file_support = true,
+}
+
+
+
+require("ibl").setup {
+    indent = { char = "·" },
+    -- whitespace = {
+    --     highlight = highlight,
+    --     remove_blankline_trail = false,
+    -- },
+    scope = { enabled = false },
+
 }
 -- vim.cmd("LspStart")
 

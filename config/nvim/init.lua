@@ -41,16 +41,16 @@ require("lazy").setup("plugins",{
 vim.o.updatetime = 250
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.api.nvim_exec(
-	[[
-    augroup YankHighlight
-	autocmd!
-	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-    augroup end
-
-]],
-	false
-)
+-- vim.api.nvim_exec(
+-- 	[[
+--     augroup YankHighlight
+-- 	autocmd!
+-- 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+--     augroup end
+--
+-- ]],
+-- 	false
+-- )
 vim.lsp.set_log_level("off")
 
 require("config")
