@@ -144,6 +144,7 @@ if [[ $ask == true ]];then
 ./packages.sh
 # try hyprctl reload
 fi
+sed -i -e "s/((username))/$(whoami)/g" ~/.config/chromium-flags.conf
 #####################################################################################
 printf "\e[36m[$0]: Finished. See the \"Import Manually\" folder and grab anything you need.\e[97m\n"
 printf "\e[36mPress \e[30m\e[46m Ctrl+Super+T \e[0m\e[36m to select a wallpaper\e[97m\n"

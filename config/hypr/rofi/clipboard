@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-cliphist list | rofi -dmenu -theme ~/.config/hypr/rofi/clipboard.rasi | cliphist decode | cliphist store
+cliphist list | rofi -dmenu -theme ~/.config/hypr/rofi/clipboard.rasi | cliphist decode | wl-copy
