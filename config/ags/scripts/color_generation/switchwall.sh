@@ -38,4 +38,4 @@ fi
 &>/dev/null
 # Generate colors for ags n stuff
 "$HOME"/.config/ags/scripts/color_generation/generate_colors_material.py --path ${imgpath} --scheme vibrant --apply --mode light
-killall simple-bar; ~/.config/ags/simple-bar
+killall mbar; ~/.config/ags/mbar
