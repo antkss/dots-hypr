@@ -2,8 +2,8 @@
     background:     #FFFFFF;
     background-alt: #FFF8F6;
     foreground:     #271812;
-    selected:       #A33E00;
+    selected:       #A53C00;
     active:         #98C379FF;
     urgent:         #E06B74FF;
-    border:         #A33E00;
+    border:         #A53C00;
 }
