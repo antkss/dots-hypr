@@ -115,13 +115,13 @@ esac
 overwrite
 
 if [[ $ask == true ]];then
-printf "\e[36m[$0]: 3. Copying\e[97m\n"
-cp -r ./.icons $HOME
-cp -r ./config/* $HOME/.config
-cp -r ./.images $HOME
-cp -r ./.local $HOME
-cp -r ./.fonts $HOME
-cp -r ./.tmux.conf $HOME
+	printf "\e[36m[$0]: 3. Copying\e[97m\n"
+	cp -r ./.icons $HOME
+	cp -r ./config/* $HOME/.config
+	cp -r ./.images $HOME
+	cp -r ./.local $HOME
+	cp -r ./.fonts $HOME
+	cp -r ./.tmux.conf $HOME
 fi
 sleep 1
 clear
@@ -130,19 +130,32 @@ printf "\e[32m y = Yes, continue:\n\e[0m"
 printf " \e[31mn = No, skip:\e[0m\n"
 printf " type anything else to abort:\n"
 installfull(){
-read -p "====> " p
-case $p in
-  y)ask=true;;
-  *)ask=false;;
-esac
+	read -p "====> " p
+	case $p in
+	  y)ask=true;;
+	  *)ask=false;;
+	esac
 
 }
 
 installfull
 
 if [[ $ask == true ]];then
-./packages.sh
-# try hyprctl reload
+	./packages.sh
+fi
+
+printf "\e[36mDo you want to setup legacy packages  ?\e[0m\n"
+legacy(){
+	read -p "====> " p
+	case $p in
+	  y)ask=true;;
+	  *)ask=false;;
+	esac
+
+}
+legacy
+if [[ $ask == true ]];then
+	yay -Sy $(cat /home/as/cac/dots-hypr/scriptdata/legacy)
 fi
 sed -i -e "s/((username))/$(whoami)/g" ~/.config/chromium-flags.conf
 #####################################################################################
