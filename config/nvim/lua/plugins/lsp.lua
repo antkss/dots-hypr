@@ -73,7 +73,15 @@ return {
 		---@module "ibl"
 		---@type ibl.config
 		opts = {},
-	}
-
+	},
+	-- { 'echasnovski/mini.animate', version = false },
+	{
+	  "karb94/neoscroll.nvim",
+	  opts = {},
+	},
+	-- {
+	--   "sphamba/smear-cursor.nvim",
+	--   opts = {},
+	-- }
 
 }

@@ -5,6 +5,7 @@
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
+
 font_family      Jetbrains Mono Bold
 bold_font        VictorMono-Bold
 italic_font       VictorMono-Italic
@@ -95,7 +96,7 @@ cursor_shape block
 cursor_trail 2
 
 cursor_blink_interval 0.2
-# cursor_trail_decay 0.1 0.1
+# cursor_trail_decay 0.1 0.5
 # cursor_trail_start_threshold 1
 shell_integration no-cursor
 
@@ -1085,7 +1086,4 @@ map control+down     change_font_size all -1.0
 #: }}}
 
 # }}}
-
-
-
 
