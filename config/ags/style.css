@@ -102,14 +102,14 @@
 }
 
 .button-active {
-  background-color: #A53C00;
+  background-color: #A33E00;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
   color: #FFF8F6;
 }
 .button-active:hover label {
-  background-color: rgba(165, 60, 0, 0.2);
+  background-color: rgba(163, 62, 0, 0.2);
   border-color: rgba(39, 24, 18, 0.2);
   border-radius: 8px;
 }
@@ -157,7 +157,7 @@
   border-radius: 8px;
 }
 .AudioSlider highlight {
-  background-color: #A53C00;
+  background-color: #A33E00;
   min-height: 0.8em;
   border-radius: 8px;
 }
@@ -168,7 +168,7 @@
   min-width: 1em;
   /* margin:0px; */
   margin: -0.2em;
-  border-color: #A53C00;
+  border-color: #A33E00;
 }
 
 .volumeIcon {
