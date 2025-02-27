@@ -1,19 +1,17 @@
-import = ["~/.config/alacritty/color.toml"]
-live_config_reload = false
 [colors]
 draw_bold_text_with_bright_colors = false 
 [env]
 TERM = "xterm-256color"
 
 [font]
-size = 12
+size = 14
 
 [font.normal]
 family = "Jetbrains Mono"
-style = "Regular"
-[font.italic]
-family = "Jetbrains Mono"	
 style = "normal"
+[font.italic]
+family = "victor mono"	
+style = "italic"
 
 [selection]
 save_to_clipboard = true
@@ -31,11 +29,17 @@ lines = 50
 x = 0
 y = 0
 [cursor]
-blink_interval = 200
+blink_interval = 20
 unfocused_hollow = true
 vi_mode_style = "Block"
 
 [cursor.style]
-blinking = "On"
+blinking = "off"
 shape = "Block"
+
+[general]
+live_config_reload =false
+import = ["~/.config/alacritty/color.toml"]
+# [features]
+# default = ["wayland"]
    

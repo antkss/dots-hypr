@@ -8,5 +8,5 @@ red = "0xf50202"
 white = "0xffffff"
 yellow = "0xdee600"
 [colors.primary]
-background = "0xFFF8F8"
-foreground = "0x000000"
+background = "0x{{ $background }}"
+foreground = "0x{{ $onAny }}"
