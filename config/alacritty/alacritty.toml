@@ -19,7 +19,7 @@ style = "italic"
 family = "victor mono"	
 style = "bold italic"
 [selection]
-save_to_clipboard = true
+save_to_clipboard = false
 
 [window]
 # dynamic_padding = true
