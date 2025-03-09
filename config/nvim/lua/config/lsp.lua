@@ -112,7 +112,16 @@ require("lspconfig").clangd.setup{
 		},
 
 }
-
+require('lspconfig').rust_analyzer.setup {
+  handlers = {
+	["textDocument/publishDiagnostics"] = vim.lsp.with(
+	  vim.lsp.diagnostic.on_publish_diagnostics, {
+		-- Disable virtual_text
+		virtual_text = false
+	  }
+	),
+  }
+}
 require("lspconfig").lua_ls.setup {
 	capabilities = capabilities,
 	filetypes = { "lua" },

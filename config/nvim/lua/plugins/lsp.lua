@@ -22,12 +22,12 @@ return {
 
 
 	},
-	{
-		'numToStr/Comment.nvim',
-		event = "VeryLazy",
-		config = function()
-		end,
-	},
+	-- {
+	-- 	'numToStr/Comment.nvim',
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 	end,
+	-- },
 
 	{
 	    "hrsh7th/nvim-cmp",
@@ -62,7 +62,7 @@ return {
 		event = "VeryLazy",
 		config = function ()
 		require('mini.pairs').setup()
-		require("Comment").setup()
+		-- require("Comment").setup()
 		vim.cmd("CodeiumDisable")
 
 		end
