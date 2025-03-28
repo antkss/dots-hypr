@@ -35,3 +35,4 @@ function alias(from, to)
   ]], from, from, to, from))
 end
 alias("rp","term python % DEBUG")
+vim.cmd("set commentstring=#\\ %s")

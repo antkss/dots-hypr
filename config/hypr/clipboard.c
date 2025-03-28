@@ -60,7 +60,7 @@ int main() {
     struct sockaddr_un addr;
     char* env1 = getenv("XDG_RUNTIME_DIR");
     char* env2 = getenv("HYPRLAND_INSTANCE_SIGNATURE");
-    char* socketpath = (char*)malloc(strlen(env1)+strlen(env2)+20+0x40);
+    char* socketpath = (char*)malloc(strlen(env1) + strlen(env2) + 20 + 0x40);
     sprintf(socketpath,"%s/hypr/%s/.socket2.sock",env1,env2);
     char* message = (char*)malloc(0x34);
     // Create a UNIX socket

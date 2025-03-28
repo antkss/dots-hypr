@@ -1,0 +1,3 @@
+-I/home/as/pwnable/v8/v8/include
+-I/home/as/pwnable/v8/v8
+-I/home/as/pwnable/v8/v8/x64.debug/gen

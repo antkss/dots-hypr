@@ -105,6 +105,7 @@ require"lspconfig".pyright.setup {
 }
 require("lspconfig").clangd.setup{
 	capabilities = capabilities,
+	cmd = { "/usr/bin/clangd", "--background-index-priority=low","-j=1", "--log=verbose", "--index=false"},
 	filetypes = { "c", "cpp","h","hpp" },
 		workspace = {
 			maxPreload = 5,

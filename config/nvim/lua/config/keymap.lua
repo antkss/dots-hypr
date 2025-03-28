@@ -30,6 +30,8 @@ map('n','<leader>j', vim.lsp.buf.definition ,{ noremap = true })
 map('n','<leader>h',vim.lsp.buf.hover,{ noremap = true })
 map('n','<leader>rf',vim.lsp.buf.references,{ noremap = true })
 map('n', '<leader>r', vim.lsp.buf.rename ,{ noremap = true })
+map('n', '<leader>p', ":bprevious <CR>" ,{ noremap = true })
+map('n', '<leader>n', ":bnext <CR>" ,{ noremap = true })
 vim.g.translator_target_lang = 'vi'
 map({"n","v"}, "t", ":Translate --engine=bing <CR>", { noremap = true })
 map("v", ">", ">gv", { noremap = true })
