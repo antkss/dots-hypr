@@ -1,10 +1,10 @@
 #!/bin/bash
 echo 0 > /proc/sys/kernel/randomize_va_space
 echo 0 > /proc/sys/kernel/yama/ptrace_scope 
-intel_gpu_frequency -c min=500
+#intel_gpu_frequency -c min=500
 for i in /sys/devices/system/cpu/cpufreq/policy*;do
-	echo "schedutil" > $i/scaling_governor
-	echo "2600000" > $i/scaling_max_freq
+	# echo "schedutil" > $i/scaling_governor
+	echo $(< /sys/devices/system/cpu/cpufreq/policy0/base_frequency) > $i/scaling_max_freq
 done
 # /home/as/.bin/bin/setcolors /home/as/.config/google.dark
 
