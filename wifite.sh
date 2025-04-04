@@ -1,1 +1,1 @@
-sudo pacman -S hcxtools hcxdumptool reaver wireshark-qt wifite
+sudo pacman -S hcxtools hcxdumptool reaver wireshark-qt wifite cowpatty
