@@ -1,4 +1,5 @@
-
+using GLib;
+using Posix;
 public static string truncate_text(string text, int length) {
     // Truncate if the text is too long
     if(text == null){
@@ -19,22 +20,33 @@ public static string truncate_text(string text, int length) {
     }
     return text; // Text is already the desired length
 }
-public string? run(string? cmd){
-  try{
-    string? stdout_output;
-    string? stderr_output;
-    int exit_status;
-    Process.spawn_command_line_sync(
-	cmd,
-	out stdout_output,
-	out stderr_output,
-	out exit_status
-    );
-    return stdout_output;
-  }catch(Error e){
-    print(e.message);
-  }
-  return "";
+public class Command : Object {
+    private string[] command;
+
+    public Command(string[] command) {
+        this.command = command;
+    }
+
+    public GLib.Pid spawn(
+    ) throws Error {
+		GLib.Pid async_pid;
+		Process.spawn_async_with_pipes(
+			null,                  // Working directory (null for current)
+			command, // Command and arguments
+			null,                  // Environment variables (null for current)
+			SpawnFlags.SEARCH_PATH, // Flags: Search for the executable in PATH
+			null,                  // Child setup function (no user data needed)
+			out async_pid,         // Output: Process ID of the spawned process
+			null,      // Input stream for the child
+			null,     // Output stream from the child (our input)
+			null      // Error stream from the child (our input)
+		);
+		return async_pid;
+
+    }
+	public void kill(GLib.Pid child) {
+		Posix.kill(child, Posix.Signal.KILL);
+	}
 }
 
 class Workspaces : Gtk.Box {
@@ -279,8 +291,8 @@ class Notification: Astal.EventBox{
 	Astal.widget_set_class_names(this, {"bar"});
     }
     public void noti(string lmao,int id){
-	var getNoti = notifd.get_notification(id);
-	print(getNoti.app_name);
+		var getNoti = notifd.get_notification(id);
+		print(getNoti.app_name);
     }
 
 
@@ -314,8 +326,8 @@ class Left : Gtk.Box {
 }
 class Panel: Gtk.Box {
     public Panel(Gtk.Widget widget){
-	Astal.widget_set_class_names(this, {"panel"});
-	add(widget);
+		Astal.widget_set_class_names(this, {"panel"});
+		add(widget);
     }
 }
 class Center : Gtk.Box {
@@ -332,35 +344,87 @@ class rightPart: Gtk.Box{
 }
 
 class Utils: Gtk.Box{
-  public Utils(Astal.Application app){
+  public Utils(Gdk.Monitor monitor, Astal.Application app){
     string? home = Environment.get_variable("HOME");
     var colorswitch = new Gtk.Button(){
 	  visible = true,
 	  label = ""
     };
+	Astal.widget_set_class_names(colorswitch,{"button-inactive","space-right"});
     colorswitch.clicked.connect(()=>{
-      run(home+"/.config/ags/scripts/color_generation/switchcolor.sh");
-      app.apply_css(home+"/.config/ags/style.css");
+		Command cmd = new Command({ home+"/.config/ags/scripts/color_generation/switchcolor.sh" });
+		GLib.Pid async_pid = -1;
+		try {
+			async_pid = cmd.spawn();
+		} catch (Error e) {
+			GLib.stderr.printf("error: %s \n", e.message);
+		}
+		if (async_pid >= 0) {
+			GLib.ChildWatch.add(async_pid, () => {
+				app.apply_css(home+"/.config/ags/style.css");
+				Astal.widget_set_class_names(colorswitch,{"button-inactive","space-right"});
+			});
+		}
     });
     var screenshot = new Gtk.Button(){
 	  visible = true,
 	  label = ""
     };
+	Astal.widget_set_class_names(screenshot,{"button-inactive","space-right"});
     screenshot.clicked.connect(()=>{
-      run(home+"/.config/ags/scripts/grimblast.sh --freeze copy area");
+		Command cmd = new Command({  home+"/.config/ags/scripts/grimblast.sh", "--freeze", "copy", "area" });
+		GLib.Pid async_pid = -1;
+		try {
+			async_pid = cmd.spawn();
+			Astal.widget_set_class_names(screenshot,{"button-active", "space-right"});
+		} catch (Error e){
+            GLib.stderr.printf("Error spawning: %s\n", e.message);
+		}
+		if (async_pid >= 0) {
+			GLib.ChildWatch.add(async_pid, () => {
+				Astal.widget_set_class_names(screenshot,{"button-inactive","space-right"});
+			});
+		}
     });
-    Astal.widget_set_class_names(colorswitch,{"button-active","space-right"});
-    Astal.widget_set_class_names(screenshot,{"button-active"});
+	Command k = new Command({"killall", "-9", "wlsunset"});
+	try {
+		k.spawn();
+	} catch {};
+	var reading = new Gtk.ToggleButton(){
+	  visible = true,
+	  label = ""
+    };
+    Astal.widget_set_class_names(reading,{"button-inactive"});
+	GLib.stdout.printf("please ensure that no wlsunset is running right now \n");
+	GLib.Pid child_pid = -1;
+    reading.toggled.connect(()=>{
+		Command cmd = new Command({"/usr/bin/wlsunset", "-T", "5000"});
+		if (reading.get_active() && child_pid < 0) {
+			Astal.widget_set_class_names(reading,{"button-active"});
+			GLib.stdout.printf("toggle on \n");
+			try {
+				child_pid = cmd.spawn();
+			} catch (Error e) {
+				GLib.stderr.printf("Error spawning: %s\n", e.message);
+			}
+		} else if (child_pid > 0){
+			GLib.stdout.printf("toggle off \n");
+			Astal.widget_set_class_names(reading,{"button-inactive"});
+			cmd.kill(child_pid);
+			child_pid = -1;
+		}
+    });
     add(colorswitch);
     add(screenshot);
+	add(reading);
   }
 }
 class Right : Gtk.Box {
-    public Right(Astal.Application app,Gdk.Monitor monitor) {
+    public Right(Astal.Application app, Gdk.Monitor monitor) {
         Object(hexpand: true, halign: Gtk.Align.END);
 	add(new Panel(new rightPart(monitor)));
         add(new Panel(new Battery()));
-	add(new Panel(new Utils(app)));
+	add(new Panel(new Utils(monitor, app)));
         add(new Panel(new Time()));
     }
 }
@@ -374,24 +438,31 @@ class Circle: Astal.Overlay{
 }
 class Bar : Astal.Window {
     public Bar(Gdk.Monitor monitor,Astal.Application app) {
-	int width = (int)(monitor.get_geometry().width*(99.0/100.0)-3.0);
+		int width = (int)(monitor.get_geometry().width*(99.0/100.0)-3.0);
         Object(
             anchor: Astal.WindowAnchor.TOP,
             exclusivity: Astal.Exclusivity.EXCLUSIVE,
             gdkmonitor: monitor
         );
-	print(@"screen width: $width"+"px");
+		print(@"screen width: $width"+"px \n");
         Astal.widget_set_class_names(this, {"bar"});
-	var centerbox = new Astal.CenterBox();
-	centerbox.start_widget = new Left();
-	centerbox.center_widget = new Center();
-	centerbox.end_widget = new Right(app,monitor);
-	Astal.widget_set_css(centerbox,@"min-width: $width"+"px;");
-	Astal.widget_set_class_names(centerbox,{"bar"});
-        add(centerbox);
-
-        show_all();
+		var centerbox = new Astal.CenterBox();
+		centerbox.start_widget = new Left();
+		centerbox.center_widget = new Center();
+		centerbox.end_widget = new Right(app,monitor);
+		Astal.widget_set_css(centerbox,@"min-width: $width"+"px;");
+		Astal.widget_set_class_names(centerbox,{"bar"});
+		add(centerbox);
+		show_all();
     }
+}
+class Overlay : Astal.Overlay {
+    public Overlay(Gdk.Monitor monitor) {
+		int width = monitor.get_geometry().width;
+		int height = monitor.get_geometry().height;
+		Astal.widget_set_css(this, @"min-width: $width" + "px;" + @"min-height: $height" + "px;" + "background: #000000;");
+		// Astal.widget_set_class_names(this, {"bar"});
+	}
 }
 
 class Sidebox : Gtk.Box{
@@ -412,13 +483,18 @@ class Sidebox : Gtk.Box{
 	    print("\nmonitoring %s\n",file.get_path());
 
 	    monitor.changed.connect ((src, dest, event) => {
+		try {
 		    FileInputStream @is = file.read ();
 		    DataInputStream dis = new DataInputStream (@is);
 		    string line;
 						//
 		    if ((line = dis.read_line ()) != null) {
-			slider.set_value(double.parse(line));
+				slider.set_value(double.parse(line));
 		    }
+		} catch (Error e) {
+			GLib.stderr.printf("error: %s \n", e.message);
+		}
+
 
 	});
 
@@ -438,7 +514,7 @@ class SidePanel: Astal.Window{
             exclusivity: Astal.Exclusivity.NORMAL,
             gdkmonitor: monitor
         );
-	add(new Sidebox());
+		add(new Sidebox());
     }
 
 }
@@ -449,8 +525,8 @@ class Notify: Astal.Window{
             exclusivity: Astal.Exclusivity.NORMAL,
             gdkmonitor: monitor
         );
-	set_visible(true);
-	add(new Notification());
+		set_visible(true);
+		add(new Notification());
     }
 }
 class BrightnessService: GLib.Object{

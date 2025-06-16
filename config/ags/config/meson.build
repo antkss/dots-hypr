@@ -8,8 +8,8 @@ pkgconfig_deps = [
   dependency('gobject-2.0'),
   dependency('gtk+-3.0'),
   dependency('libnm'),
-  dependency('astal-io-0.1'),
   dependency('astal-3.0'),
+  dependency('astal-io-0.1'),
   dependency('astal-battery-0.1'),
   dependency('astal-wireplumber-0.1'),
   dependency('astal-network-0.1'),
@@ -19,43 +19,19 @@ pkgconfig_deps = [
   dependency('astal-notifd-0.1'),
 ]
 # add_project_arguments(['-static'], language: 'vala')
-
-# needed for GLib.Math
 deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
 
-custom_target(
-  'style.css',
-  command: [
-    find_program('sass'),
-    meson.project_source_root() / 'style.scss',
-    '@OUTPUT@',
-  ],
-  output: 'style.css',
-  install: true,
-  install_dir: libdir,
-)
-
-# main = configure_file(
-#   input: 'app.in.vala',
-#   output: 'app.vala',
-#   configuration: {'STYLE': libdir / 'style.css'},
-# )
-
 sources = files(
-  'widget/Bar.vala',
+  'bar.vala',
   'app.in.vala'
 )
-source2 = files('test.vala')
 
 executable(
   'mbar',
   [sources],
   dependencies: deps,
   install: true,
+  vala_args: ['--pkg', 'posix'],
   install_dir: bindir,
 )
-executable(
-  'tests',
-  [source2],
-  dependencies: deps,
-  )
+

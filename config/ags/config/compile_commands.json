@@ -1,0 +1,14 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I/usr/include/wireplumber-0.5",
+      "-I/usr/include/glib-2.0",
+      "-I/usr/lib/glib-2.0/include",
+      "a.c"
+    ],
+    "directory": "/home/as/.config/ags/config",
+    "file": "/home/as/.config/ags/config/a.c"
+  }
+]

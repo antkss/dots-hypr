@@ -1,10 +1,16 @@
 #!/bin/bash
+_battery=60
+_cpufreq=$(cat /sys/devices/system/cpu/cpufreq/policy0/base_frequency)
 echo 0 > /proc/sys/kernel/randomize_va_space
 echo 0 > /proc/sys/kernel/yama/ptrace_scope 
 #intel_gpu_frequency -c min=500
 for i in /sys/devices/system/cpu/cpufreq/policy*;do
 	# echo "schedutil" > $i/scaling_governor
-	echo $(< /sys/devices/system/cpu/cpufreq/policy0/base_frequency) > $i/scaling_max_freq
+	echo $_cpufreq > $i/scaling_max_freq
+	# echo 2000000 > $i/scaling_max_freq
 done
-# /home/as/.bin/bin/setcolors /home/as/.config/google.dark
+if [ -f /sys/class/power_supply/BAT1/charge_control_end_threshold ]; then
+	echo $_battery > /sys/class/power_supply/BAT1/charge_control_end_threshold
+fi
+
 

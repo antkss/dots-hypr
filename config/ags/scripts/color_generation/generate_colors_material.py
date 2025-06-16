@@ -268,11 +268,26 @@ def boost_saturation(hex_color, factor=1.5):
     boosted_hex = f'#{int(r * 255):02X}{int(g * 255):02X}{int(b * 255):02X}'
     
     return boosted_hex
+
+def copy_everything(src_dir, dest_dir):
+    import shutil
+    os.makedirs(dest_dir, exist_ok=True)
+
+    for item in os.listdir(src_dir):
+        src_path = os.path.join(src_dir, item)
+        dest_path = os.path.join(dest_dir, item)
+
+        if os.path.isdir(src_path):
+            shutil.copytree(src_path, dest_path, dirs_exist_ok=True)
+        else:
+            shutil.copy2(src_path, dest_path)
+
 # for color,code in material_colors.items():
 #     material_colors[color] = boost_saturation(code,1)
 if args.apply:
     target_dir = os.path.join(home_dir, ".config", "ags", "scripts", "templates")
-    os.system(f"cp -r {target_dir}/.* {home_dir}")
+    copy_everything(target_dir, home_dir)
+    # os.system(f"cp -r {target_dir}/.* {home_dir}")
     # Define the target directory
     # Walk through the directory
     for root, dirs, files in os.walk(target_dir):
