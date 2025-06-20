@@ -1,4 +1,7 @@
 return {
+	{
+		"sindrets/diffview.nvim"
+	},
 
 	-- {
 	-- 	'puremourning/vimspector',

@@ -123,6 +123,20 @@ require('lspconfig').rust_analyzer.setup {
 	),
   }
 }
+vim.api.nvim_create_autocmd('FileType', {
+  -- This handler will fire when the buffer's 'filetype' is "python"
+  pattern = 'cs',
+  callback = function(ev)
+	vim.lsp.start({
+	  name = 'csharp',
+	  cmd = {'/usr/bin/csharp-ls'},
+
+	  -- Set the "root directory" to the parent directory of the file in the
+	  -- current buffer (`ev.buf`) that contains either a "setup.py" or a
+	  -- "pyproject.toml" file. Files that share a root directory will reuse
+	})
+  end,
+})
 require("lspconfig").lua_ls.setup {
 	capabilities = capabilities,
 	filetypes = { "lua" },

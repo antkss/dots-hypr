@@ -31,7 +31,10 @@ void cleanup_lock(int signum) {
     exit(0);
 }
 int main() {
-
+    // Set up the signal handler for cleanup
+    signal(SIGINT, cleanup_lock);  // Handle Ctrl+C (SIGINT)
+    signal(SIGTERM, cleanup_lock); // Handle kill (SIGTERM)
+    signal(SIGQUIT, cleanup_lock); // Handle quit (SIGQUIT)
     // Open the lock file or create it if it doesn't exist
     lock_fd = open(LOCKFILE, O_CREAT | O_RDWR, 0666);
     if (lock_fd == -1) {
@@ -45,10 +48,7 @@ int main() {
     lock.l_start = 0;
     lock.l_len = 0;  // Lock the entire file
 
-    // Set up the signal handler for cleanup
-    signal(SIGINT, cleanup_lock);  // Handle Ctrl+C (SIGINT)
-    signal(SIGTERM, cleanup_lock); // Handle kill (SIGTERM)
-    signal(SIGQUIT, cleanup_lock); // Handle quit (SIGQUIT)
+
 
     // Try to acquire the lock
     if (fcntl(lock_fd, F_SETLK, &lock) == -1) {

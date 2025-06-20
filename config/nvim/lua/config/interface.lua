@@ -16,27 +16,27 @@ for _, sign in ipairs(signs) do
 end
 local c = require('config.powerline')
 vim.api.nvim_set_hl(0, "StatuslineModeNormal", { fg = c.normal.a.fg, bg = c.normal.a.bg })
-vim.api.nvim_set_hl(0, "StatuslineModeSeparatorNormal", { fg = c.normal.c.fg, bg = "NONE" })
-vim.api.nvim_set_hl(0, "NobgNormal", { fg = c.normal.c.fg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorNormal", { fg = c.normal.c.fg, bg = c.normal.c.bg })
+vim.api.nvim_set_hl(0, "NobgNormal", { fg = c.normal.c.fg, bg = c.normal.c.bg })
 -- insert group
 vim.api.nvim_set_hl(0, "StatuslineModeInsert", { fg = c.insert.a.fg, bg = c.insert.a.bg })
-vim.api.nvim_set_hl(0, "StatuslineModeSeparatorInsert", { fg = c.insert.a.bg, bg = "NONE" })
-vim.api.nvim_set_hl(0, "NobgInsert", { fg = c.insert.a.fg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorInsert", { fg = c.insert.a.bg, bg = c.insert.a.fg })
+vim.api.nvim_set_hl(0, "NobgInsert", { fg = c.insert.a.bg, bg = c.insert.a.fg })
 
 -- visual group
 vim.api.nvim_set_hl(0, "StatuslineModeVisual", { fg = c.visual.a.fg, bg = c.visual.a.bg })
-vim.api.nvim_set_hl(0, "StatuslineModeSeparatorVisual", { fg = c.visual.a.bg, bg = "NONE" })
-vim.api.nvim_set_hl(0, "NobgVisual", { fg = c.visual.a.fg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorVisual", { fg = c.visual.a.bg, bg = c.visual.a.fg })
+vim.api.nvim_set_hl(0, "NobgVisual", { fg = c.visual.a.bg, bg = c.visual.a.fg })
 
 -- replace group
 vim.api.nvim_set_hl(0, "StatuslineModeReplace", { fg = c.replace.a.fg, bg = c.replace.a.bg })
-vim.api.nvim_set_hl(0, "StatuslineModeSeparatorReplace", { fg = c.replace.a.bg, bg = "NONE" })
-vim.api.nvim_set_hl(0, "NobgReplace", { fg = c.replace.a.bg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorReplace", { fg = c.replace.a.bg, bg = c.replace.a.fg })
+vim.api.nvim_set_hl(0, "NobgReplace", { fg = c.replace.a.bg, bg = c.replace.a.fg })
 
 -- command group
 vim.api.nvim_set_hl(0, "StatuslineModeCommand", { fg = c.command.a.fg, bg = c.command.a.bg })
-vim.api.nvim_set_hl(0, "StatuslineModeSeparatorCommand", { fg = c.command.a.bg, bg = "NONE" })
-vim.api.nvim_set_hl(0, "NobgCommand", { fg = c.command.a.bg, bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatuslineModeSeparatorCommand", { fg = c.command.a.bg, bg = c.command.a.fg })
+vim.api.nvim_set_hl(0, "NobgCommand", { fg = c.command.a.bg, bg = c.command.a.fg })
 
 local warn = ""
 local error = ""
