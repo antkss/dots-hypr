@@ -22,6 +22,7 @@ host=`hostname`
 shutdown='Shutdown'
 reboot='Reboot'
 lock='Lock'
+killmbar='Kill mbar'
 suspend='Suspend'
 logout='Logout'
 yes='Yes'
@@ -55,7 +56,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown\n$killmbar" | rofi_cmd
 }
 
 # Execute Command
@@ -63,15 +64,18 @@ run_cmd() {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
-			systemctl poweroff
+			loginctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
-			systemctl reboot
+			loginctl reboot
 		elif [[ $1 == '--suspend' ]]; then
-			mpc -q pause
-			amixer set Master mute
-			systemctl suspend
+			# mpc -q pause
+			# amixer set Master mute
+			# systemctl suspend
+			echo "not implemented"
 		elif [[ $1 == '--logout' ]]; then
 			hyprctl dispatch exit
+		elif [[ $1 == '--killmbar' ]]; then
+			killall -9 mbar
 			# if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
 			# 	openbox --exit
 			# elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
@@ -110,4 +114,7 @@ case ${chosen} in
     $logout)
 		run_cmd --logout
         ;;
+	$killmbar)
+		run_cmd --killmbar
+		;;
 esac

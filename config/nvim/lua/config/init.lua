@@ -1,6 +1,6 @@
 require("config.interface")
+-- require("config.mason")
 require("config.lsp")
--- require("config.lspconfig")
 require("config.keymap")
 require("config.debug")
 require("config.luasnip")

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=color_generator
+Exec=./generate_colors_material
+Icon=logo
+Categories=Documentation

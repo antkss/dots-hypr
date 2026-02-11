@@ -1,5 +1,5 @@
 [colors.primary]
-background = "#FFF8F6"
+background = "#FFF8F7"
 foreground = "#000000"
 dim_foreground = "#8c8fa1"
 bright_foreground = "#4c4f69"
@@ -37,7 +37,7 @@ text = "#eff1f5"
 background = "#dc8a78"
 
 [colors.normal]
-black = "#bcc0cc"
+black = "#000000"
 red = "#d20f39"
 green = "#40a02b"
 yellow = "#df8e1d"
@@ -47,7 +47,7 @@ cyan = "#179299"
 white = "#5c5f77"
 
 [colors.bright]
-black = "#acb0be"
+black = "#000000"
 red = "#d20f39"
 green = "#40a02b"
 yellow = "#df8e1d"

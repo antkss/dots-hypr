@@ -1,0 +1,5 @@
+#!/bin/sh
+killall wl-paste; killall mbar; killall mako
+~/.config/ags/mbar &
+/usr/bin/mako &
+wl-paste --type text --watch cliphist store | wl-paste --type image --watch cliphist store & 

@@ -37,7 +37,7 @@ text = "#eff1f5"
 background = "#dc8a78"
 
 [colors.normal]
-black = "#bcc0cc"
+black = "#{{ $onAny }}"
 red = "#d20f39"
 green = "#40a02b"
 yellow = "#df8e1d"
@@ -47,7 +47,7 @@ cyan = "#179299"
 white = "#5c5f77"
 
 [colors.bright]
-black = "#acb0be"
+black = "#{{ $onAny }}"
 red = "#d20f39"
 green = "#40a02b"
 yellow = "#df8e1d"

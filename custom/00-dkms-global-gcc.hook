@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Path
+Target = usr/src/*/dkms.conf
+
+[Action]
+Description = 🏹 Injecting custom GCC before DKMS build...
+When = PostTransaction
+Exec = /usr/local/bin/dkms-global-gcc

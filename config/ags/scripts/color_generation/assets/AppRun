@@ -1,0 +1,2 @@
+#!/bin/sh
+exec "$APPDIR/generate_colors_material" "$@" 

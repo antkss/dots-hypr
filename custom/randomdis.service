@@ -1,0 +1,12 @@
+[Unit]
+Description=randomdisservice
+
+[Service]
+User=root
+WorkingDirectory=/root
+ExecStart=/bin/randomdis
+# optional items below
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

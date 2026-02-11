@@ -1,0 +1,11 @@
+#!/bin/bash
+GCC_PATH="/usr/bin/gcc"
+NEW_MAKE='MAKE[0]="make -j$(nproc) KERNELRELEASE=$kernelver CC='${GCC_PATH}' CONFIG_GCC_PLUGINS=n"'
+
+for conf in /usr/src/*/dkms.conf; do
+    if [ -f "$conf" ]; then
+        # 🧹 This line is CRITICAL: it prevents duplicates
+        sed -i '/^MAKE\[0\]=/d' "$conf" 
+        sed -i "1i$NEW_MAKE" "$conf"
+    fi
+done

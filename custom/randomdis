@@ -1,0 +1,39 @@
+#!/bin/sh
+
+
+chmod +s $(which brightnessctl)
+
+_battery=60
+_cpufreq=$(cat /sys/devices/system/cpu/cpufreq/policy0/base_frequency)
+_cpumaxfreq=$(cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq)
+_maxpower=$(cat /sys/class/powercap/intel-rapl:0/constraint_0_max_power_uw)
+echo 0 > /proc/sys/kernel/randomize_va_space
+echo 0 > /proc/sys/kernel/yama/ptrace_scope
+cpu_freq_default=2000000
+#intel_gpu_frequency -c min=500
+for i in /sys/devices/system/cpu/cpufreq/policy*;do
+		echo "powersave" | tee $i/scaling_governor
+		echo $_cpufreq | tee $i/scaling_max_freq
+		# echo 2000000 > $i/scaling_max_freq
+done
+if [ -f /sys/class/power_supply/BAT1/charge_control_end_threshold ]; then
+		echo $_battery > /sys/class/power_supply/BAT1/charge_control_end_threshold
+fi
+echo 1 | tee /sys/devices/system/cpu/intel_pstate/no_turbo
+# Limit to 25W (Very cool, much slower)
+echo 25000000 | tee /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
+# modprobe zram
+#!/bin/bash
+
+# Check if /dev/zram0 is already registered as swap
+if ! grep -q "/dev/zram0" /proc/swaps; then
+	echo "zRAM not active. Initializing..."
+	modprobe zram
+	zramctl /dev/zram0 --size 8G
+	mkswap /dev/zram0
+	swapon /dev/zram0
+	
+	echo "✅ zRAM /dev/zram0 is now swapon."
+else
+	echo "ℹ️ zRAM /dev/zram0 is already active."
+fi

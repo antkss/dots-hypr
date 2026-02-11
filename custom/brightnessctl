@@ -1,0 +1,24 @@
+#!/sbin/openrc-run
+
+description="Save and restore display backlight settings"
+
+save_file="/var/lib/brightnessctl/state"
+
+start() {
+	ebegin "Setting brightness to saved value ..."
+	if [ ! -f "/var/lib/brightnessctl" ]; then
+		mkdir -p /var/lib/brightnessctl
+	fi
+	# fails to start first time if file does not exist
+	if [ -f "$save_file" ]; then
+		brightnessctl --quiet set "$(cat "$save_file")"
+	else
+		brightnessctl --quiet get > "$save_file"
+	fi
+	eend $?
+}
+stop() {
+	ebegin "Saving brightness value ..."
+	brightnessctl --quiet get > "$save_file"
+	eend $?
+}

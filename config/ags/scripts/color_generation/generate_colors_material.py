@@ -10,9 +10,8 @@ from materialyoucolor.dynamiccolor.material_dynamic_colors import MaterialDynami
 from materialyoucolor.utils.color_utils import (rgba_from_argb, argb_from_rgb, argb_from_rgba)
 from materialyoucolor.utils.math_utils import (sanitize_degrees_double, difference_degrees, rotation_direction)
 import os
-import sass
-import fileinput
 import colorsys
+import sys
 
 home_dir = os.path.expanduser("~")
 parser = argparse.ArgumentParser(description='Color generation script')
@@ -133,7 +132,7 @@ elif args.color is not None:
 else:
     print("Please specify --path")
     print("For example: ./generate_colors_material --path /path/wallpaper.png")
-    exit(1)
+    sys.exit(1)
 
 if args.scheme == 'fruitsalad':
     from materialyoucolor.scheme.scheme_fruit_salad import SchemeFruitSalad as Scheme
@@ -155,7 +154,7 @@ elif args.scheme == 'vibrant':
     from materialyoucolor.scheme.scheme_vibrant import SchemeVibrant as Scheme
 else: 
     print("Please specify --scheme [fruitsalad|expressive|monochrome|rainbow|tonalspot|neutral|fidelity|content|vibrant]")
-    exit(1)
+    sys.exit(1)
 
 # Generate
 scheme = Scheme(hct, darkmode, 0.0)

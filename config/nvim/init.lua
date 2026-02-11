@@ -11,7 +11,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
 -- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
@@ -41,18 +40,7 @@ require("lazy").setup("plugins",{
 vim.o.updatetime = 250
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
--- vim.api.nvim_exec(
--- 	[[
---     augroup YankHighlight
--- 	autocmd!
--- 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
---     augroup end
---
--- ]],
--- 	false
--- )
-vim.lsp.set_log_level("off")
-
+vim.lsp.log.set_level("off")
 require("config")
 
 

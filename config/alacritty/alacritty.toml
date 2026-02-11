@@ -7,7 +7,7 @@ TERM = "xterm-256color"
 size = 13
 
 [font.normal]
-family = "Jetbrains Mono"
+family = "Jetbrains Mono Nerd Font"
 style = "bold"
 [font.bold]
 family = "victor mono"
@@ -22,23 +22,31 @@ style = "bold italic"
 save_to_clipboard = false
 
 [window]
+fps = 40
 # dynamic_padding = true
 # dynamic_title = true
 opacity = 0.9
 
 [window.dimensions]
 columns = 100
-lines = 40
+lines = 30
 
 [window.padding]
 x = 0
 y = 0
 [cursor]
-blink_interval = 200
-unfocused_hollow = true
-smooth_motion_max_stretch_y = 8.0
-vi_mode_style = "Block"
-smooth_motion_spring = 0.8
+# Set to false to disable completely
+# smooth_motion = false
+# # 0.0 = cursor is not moving, 1.0 = cursor moves instantly
+# smooth_motion_factor = 0.2
+# # 0.0 = broken, 1.0 = cursor shape is unaffected by movement
+# smooth_motion_spring = 1.0
+# # Limits how the cursor size may change
+# smooth_motion_max_stretch_x = 1.1
+# smooth_motion_max_stretch_y = 1.1
+# # Override "block" cursor if you don't like how it looks in this fork
+# # I prefer "underline"
+# block_replace_shape = "block"
 
 [cursor.style]
 blinking = "off"
@@ -47,6 +55,8 @@ shape = "Block"
 [general]
 live_config_reload =false
 import = ["~/.config/alacritty/color.toml"]
+shader = "shaders/fire.glsl"
+# shader = "shaders/star.glsl"
 # [features]
 # default = ["wayland"]
 [keyboard]
@@ -54,6 +64,8 @@ bindings = [
 { key = "Enter", mods = "Shift", action = "CreateNewWindow" },
 { key = "L", mods = "Control|Shift", chars = "l" },
 ]
+[scrollbar]
+mode = "Fading"
 
 
    

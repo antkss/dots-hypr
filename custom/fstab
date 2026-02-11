@@ -1,0 +1,4 @@
+/dev/cdrom	/media/cdrom	iso9660	noauto,ro 0 0
+/dev/usbdisk	/media/usb	vfat	noauto,ro 0 0
+tmpfs   /tmp    tmpfs   defaults,size=1G,nosuid,nodev,noatime,mode=1777   0   0
+#/.swap swap swap defaults,nofail 0 0

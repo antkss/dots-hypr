@@ -1,14 +1,14 @@
 anchor=top-center
 layer=overlay
 font=Ubuntu Nerd Font 10
-background-color=#FFF8F6
+background-color=#FDF7FF
 height=400
-text-color=#271812
+text-color=#1D1A24
 margin=4,4,20
 padding=15
 border-size=2
 border-radius=15
-border-color=#A33E00
+border-color=#6821FF
 default-timeout=2000
 group-by=summary
 on-notify=exec ~/.config/mako/play ~/.config/mako/sounds/Tink.aiff

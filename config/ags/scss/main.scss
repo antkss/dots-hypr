@@ -10,21 +10,22 @@ $fg: $onBackground;
 $accent: $surfaceContainer ;
 $primary: $primary;
 
-*{
-  font-family: $font;
-  margin: 0px;
-  padding: 0px;
-  font-size: 1.0em;
-  border-radius: $radius;
-  /* background-color: $bg; */
-  /* color: $fg; */
-  font-weight: bold;
-}
+// *{
+//   font-family: $font;
+//   margin: 0px;
+//   padding: 0px;
+//   font-size: 1.0em;
+//   border-radius: $radius;
+//   /* background-color: $bg; */
+//   /* color: $fg; */
+//   font-weight: bold;
+// }
 .active-label{
   background-color:transparent;
   color: $bg;
 }
-.bar{
+.bar {
+  all: unset;
   /* margin-right: 0.273rem; */
   min-height: $bar-height;
   background: #ffffff;
@@ -37,50 +38,54 @@ $primary: $primary;
 
 }
 .cir{
+  all: unset;
   background-color: $accent;
   color: $accent;
 
 }
 .icon {
+  all: unset;
   background-color: transparent;
   padding-left: 4px;
   padding-right: 4px;
 }
 .panel{
+  all: unset;
   background-color: $accent;
   border-radius:$radius;
   padding:3px;
   margin-left:3px;
   margin-right:3px;
-  min-height: $bar-height*calc(10/100);
+  min-height: $bar-height*calc(90/100);
+  min-width: $bar-height*calc(90/100);
 }
 .scrollbar{
   all: unset;
   background-color: $accent;
 }
 .space{
+  all: unset;
   background-color:transparent;
   margin-left: 4px;
   margin-right: 4px;
 }
 .space-left{
+  all: unset;
   background-color:transparent;
   margin-left: 4px;
 }
-.space-right{
+.space_right{
+  all: unset;
   background-color:transparent;
   margin-right: 4px;
 }
-.play-pause{
-  background-color: $accent;
-  border: $fg;
-  border-radius: 100%;
-}
 .text{
+  all: unset;
   color: $fg;
   background-color: transparent;
 }
 .tray {
+  all: unset;
   background-color: $bg;
   color: $fg;
   border-radius: $radius;
@@ -88,6 +93,7 @@ $primary: $primary;
 }
 
 .button {
+  all: unset;
     background-color: transparent;
     min-height:$bar-height * calc(90/100);
     min-width:$bar-height * calc(90/100);
@@ -101,8 +107,38 @@ $primary: $primary;
         background-color: color.adjust($fg, $alpha: -0.8);
         border-radius: $radius;
     }
+    &:focus {
+        background-color: $primary;
+        color: $bg;
+        border-radius: $radius
+    }
 }
-.button-active{
+.button_big {
+    all: unset;
+    min-height:$bar-height;
+    min-width:$bar-height;
+    border-radius: $radius;
+}
+.button_active_big {
+  all: unset;
+  background-color: $primary;
+  border-radius: $radius;
+  min-height:$bar-height;
+  min-width:$bar-height;
+  color: $bg;
+  &:hover label {
+      background-color: color.adjust($bg, $alpha: -0.8);
+      border-color: color.adjust($fg, $alpha: -0.8);
+      border-radius: $radius;
+  }
+  &:active label {
+      background-color: color.adjust($fg, $alpha: -0.8);
+      border-radius: $radius;
+  }
+}
+
+.button_active {
+  all: unset;
     background-color: $primary;
     border-radius: $radius;
     min-height:$bar-height * calc(90/100);
@@ -118,7 +154,8 @@ $primary: $primary;
         border-radius: $radius;
     }
 }
-.button-inactive{
+.button_inactive {
+  all: unset;
     background-color: transparent;
     border-radius: $radius;
     min-height:$bar-height * calc(90/100);
@@ -126,25 +163,45 @@ $primary: $primary;
     border-color: $primary;
     color: $primary;
 }
-
+.button_inactive_big {
+    all: unset;
+    background-color: $bg;
+    border-radius: $radius;
+    min-height:$bar-height;
+    min-width:$bar-height;
+    border-color: $primary;
+    color: $primary;
+    &:hover label {
+        background-color: color.adjust($fg, $alpha: -0.8);
+        border-color: color.adjust($fg, $alpha: -0.8);
+        border-radius: $radius;
+    }
+}
 .label {
+  all: unset;
     transition: 200ms;
     background-color: transparent;
 }
 
 .hide{
+  all: unset;
   background: transparent;
 }
 .Time{
+  all: unset;
+  min-height:$bar-height * calc(90/100);
+  min-width:$bar-height*calc(90/100);
   margin-left:5px;
   margin-right:5px;
   background-color: transparent;
 }
 .Wifi{
+  all: unset;
   margin-left:5px;
   margin-right:5px;
 }
 .Battery {
+  all: unset;
   margin-left:7px;
   margin-right:7px; 
   background-color: transparent;
@@ -182,6 +239,84 @@ $primary: $primary;
     }
 }
 
+scrolledwindow.hidden-scroll {
+    // * {
+    //   all: unset;
+    // }
+    // 1. Target the scrollbar itself
+    scrollbar {
+        min-width: 0px;
+        min-height: 0px;
+        opacity: 0;
+
+        // 2. Target the internal parts (Trough & Slider)
+        // Since they are descendants of 'scrollbar', we nest them here.
+        trough,
+        slider {
+            background-color: transparent;
+            border: none;
+        }
+    }
+}
+.tray-menu {
+    background-color: $bg; /* Dark Background */
+    border-color: color.adjust($fg, $alpha: -0.8);
+    border-radius: $radius;
+    min-height: $bar-height*calc(90/100);
+    min-width: $bar-height*calc(90/100);
+    padding: 4px;
+}
+.button_panel {
+  all: unset;
+  background-color: $accent;
+  border-radius:$radius;
+  padding:3px;
+  margin-left:3px;
+  margin-right:3px;
+  min-height: $bar-height*calc(90/100);
+  min-width: $bar-height*calc(90/100);
+    &:hover label {
+        background-color: color.adjust($bg, $alpha: -0.8);
+        border-radius:$radius;
+    }
+    &:active label {
+        background-color: color.adjust($fg, $alpha: -0.8);
+        border-radius:$radius;
+    }
+    &:focus {
+        background-color: $primary;
+        color: $bg;
+        border-radius:$radius;
+    }
+}
+.music_icon {
+  all: unset;
+  min-height: $bar-height*4;
+  min-width: $bar-height*15;
+  border-radius:$radius;
+  background-color: $accent;
+  margin: 4px;
+    &:hover label {
+        background-color: color.adjust($bg, $alpha: -0.8);
+        border-radius:$radius;
+    }
+    &:active label {
+        background-color: color.adjust($fg, $alpha: -0.8);
+        border-radius:$radius;
+    }
+    &:focus {
+        background-color: $primary;
+        color: $bg;
+        border-radius:$radius;
+    }
+}
+// .wiggle_seekbar {
+//     color: $fg; 
+//     &:hover label {
+//       color: $primary;
+//     }
+// }
 .volumeIcon {
+  all: unset;
   color: $fg;
 }
