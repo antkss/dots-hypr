@@ -19,7 +19,7 @@ fi
 
 pacman-key --init
 pacman-key --populate
-pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+pacman-key --recv-key 3056513887B78AEB --keyserver hkp://keyserver.ubuntu.com:80
 pacman-key --lsign-key 3056513887B78AEB
 pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' --noconfirm
 pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
@@ -34,7 +34,7 @@ fi
 repo="\[chaotic-aur\]"
 repo_="[chaotic-aur]"
 server="Include = /etc/pacman.d/chaotic-mirrorlist"
-if [ ! -n "$(cat /etc/pacman.conf | grep $repo )"| grep "^[^#]" ]; then 
+if [ ! -n "$(cat /etc/pacman.conf | grep $repo | grep "^[^#]" )"  ]; then 
 	echo "applying :$repo_ ..."
 	echo -ne "\n$repo_\n$server" >> /etc/pacman.conf
 fi
